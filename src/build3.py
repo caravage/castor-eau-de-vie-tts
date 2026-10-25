@@ -39,7 +39,7 @@ def token(nick, img, wpx, pos=None, color=WHITE, h=0.5, desc=''):
                         'CustomToken': {'Thickness': 0.2, 'MergeDistancePixels': 15.0, 'StandUp': False, 'Stackable': True}}
     return o
 def bag(nick, wpx, pos, items, color, desc=''):
-    o = base('Bag', nick, wpx, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0
+    o = base('Bag', nick, wpx, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0; o['Bag'] = {'Order': 2}   # ordre de tirage : 0 LIFO, 1 FIFO, 2 aléatoire
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'rnd': True})
     for it in items: it['Transform'] = T(fz=it['Transform']['rotZ']); it['Locked'] = False
     random.shuffle(items); o['ContainedObjects'] = items; return o

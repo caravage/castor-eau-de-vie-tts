@@ -26,7 +26,7 @@
    "id": 0
   }
  },
- "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 75.075, 44.275000000000006     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local k = n.w * F / b.x\n  if n.y3 then o.setScale({s.x * k, s.y * k, s.z * k}) else o.setScale({s.x * k, s.y, s.z * k}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = 90, 60, 1.0\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      end\n    end\n  end\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nlocal function shuffleBags()\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.rnd then pcall(function() o.shuffle() end) end\n  end\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; shuffleBags(); return end\n  end\n  Wait.condition(function() layout(); shuffleBags() end, allLoaded, 30, function() layout(); shuffleBags() end)\nend\n\n-- Les sacs sont toujours mélangés : à chaque jeton remis dedans.\nfunction onObjectEnterContainer(c, o)\n  local n = notes(c)\n  if n and n.rnd then Wait.frames(function() pcall(function() c.shuffle() end) end, 2) end\nend\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n",
+ "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 75.075, 44.275000000000006     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local k = n.w * F / b.x\n  if n.y3 then o.setScale({s.x * k, s.y * k, s.z * k}) else o.setScale({s.x * k, s.y, s.z * k}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = 90, 60, 1.0\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      end\n    end\n  end\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; return end\n  end\n  Wait.condition(layout, allLoaded, 30, layout)\nend\n\n\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n",
  "LuaScriptState": "",
  "XmlUI": "",
  "ObjectStates": [
@@ -2840,6 +2840,9 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "MaterialIndex": 0,
+   "Bag": {
+    "Order": 2
+   },
    "ContainedObjects": [
     {
      "GUID": "286325",
@@ -3610,6 +3613,9 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "MaterialIndex": 0,
+   "Bag": {
+    "Order": 2
+   },
    "ContainedObjects": [
     {
      "GUID": "569150",
@@ -4134,6 +4140,9 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "MaterialIndex": 0,
+   "Bag": {
+    "Order": 2
+   },
    "ContainedObjects": [
     {
      "GUID": "83da9a",
@@ -11117,6 +11126,9 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "MaterialIndex": 0,
+   "Bag": {
+    "Order": 2
+   },
    "ContainedObjects": [
     {
      "GUID": "2c2970",

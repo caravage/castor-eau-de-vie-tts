@@ -69,26 +69,15 @@ local function allLoaded()
   return true
 end
 
-local function shuffleBags()
-  for _, o in ipairs(getObjects()) do
-    local n = notes(o)
-    if n and n.rnd then pcall(function() o.shuffle() end) end
-  end
-end
-
 function onLoad(state)
   if state and state ~= "" then
     local ok, d = pcall(JSON.decode, state)
-    if ok and d and d.done then DONE = true; F = d.F or 1; shuffleBags(); return end
+    if ok and d and d.done then DONE = true; F = d.F or 1; return end
   end
-  Wait.condition(function() layout(); shuffleBags() end, allLoaded, 30, function() layout(); shuffleBags() end)
+  Wait.condition(layout, allLoaded, 30, layout)
 end
 
--- Les sacs sont toujours mélangés : à chaque jeton remis dedans.
-function onObjectEnterContainer(c, o)
-  local n = notes(c)
-  if n and n.rnd then Wait.frames(function() pcall(function() c.shuffle() end) end, 2) end
-end
+
 
 function onSave()
   return JSON.encode({done = DONE, F = F})
