@@ -1,11 +1,11 @@
 # Sauvegarde TTS fidèle à l'artefact « Table du castor » : même plateau, mêmes zones, mêmes positions de départ (3 joueurs).
 import json, random
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v5/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v6/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
-X0, X1, Y1 = -150, 1995, 1625                # image exportée : x de -150 à 2000, y de 0 à 1660
+X0, X1, Y1 = -150, 1995, 1265                # image exportée : x de -150 à 1995, y de 0 à 1265
 def P(cx, cy): return round((cx - (X0 + X1) / 2) * U, 3), round(-(cy - Y1 / 2) * U, 3)
 used = set()
 def guid():
@@ -27,8 +27,9 @@ def base(name, nick, wpx, pos=None, color=WHITE, lock=False, h=0.5, fz=0, y3=Fal
     x, z = pos if pos else (0, 0)
     return {'GUID': guid(), 'Name': name, 'Transform': T(x, z, 2.0, s0 if s0 else w / 2, fz), 'Nickname': nick, 'Description': desc, 'GMNotes': json.dumps(n),
             'ColorDiffuse': color, 'Locked': bool(pos), 'Grid': False, 'Snap': False, 'Tooltip': True, 'Hands': False, 'HideWhenFaceDown': False}
-def tile(nick, front, wpx, pos=None, back=None, typ=3, thick=0.1, color=WHITE, lock=False, h=0.5, fz=0, desc=''):
+def tile(nick, front, wpx, pos=None, back=None, typ=3, thick=0.1, color=WHITE, lock=False, h=0.5, fz=0, desc='', face=None):
     o = base('Custom_Tile', nick, wpx, pos, color, lock, h, fz, desc=desc)
+    if face: o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'face': face})
     o['CustomImage'] = {'ImageURL': URL + front + '.png', 'ImageSecondaryURL': URL + (back or front) + '.png', 'ImageScalar': 1.0, 'WidthScale': 0.0,
                         'CustomTile': {'Type': typ, 'Thickness': thick, 'Stackable': False, 'Stretch': False}}
     return o
@@ -39,7 +40,8 @@ def token(nick, img, wpx, pos=None, color=WHITE, h=0.5, desc=''):
     return o
 def bag(nick, wpx, pos, items, color, desc=''):
     o = base('Bag', nick, wpx, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0
-    for it in items: it['Transform'] = T(); it['Locked'] = False
+    o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'rnd': True})
+    for it in items: it['Transform'] = T(fz=it['Transform']['rotZ']); it['Locked'] = False
     random.shuffle(items); o['ContainedObjects'] = items; return o
 
 DECK_ID = {'pers': 1, 'riv': 2, 'mat': 3, 'ev': 4, 'dem': 5, 'grand': 6}
@@ -66,7 +68,7 @@ CREW = {'rep': ('Représentant', 'voy_rep'), 'guide': ('Guide', 'voy_guide'), 'm
 SHIPS = ['L’Aigle d’Or', 'Le Saint-Sébastien', 'Le Jardin de Hollande', 'Le Saint-Jean-Baptiste', 'Le Chat de Hollande', 'Le Vieux Siméon']
 nship = 0
 for p in TP['pieces']:
-    if p.get('kind') == 'part': p = {**p, 'x': p['x'] + 100}                      # parts à droite du libellé
+    if p.get('kind') == 'part': continue                                          # parts : une pile à côté du plateau du joueur
     if p.get('kind') in ('baril', 'march') and p.get('c', -1) >= 0: p = {**p, 'x': p['x'] + 56}   # réserve à droite du libellé
     k = p['k']; kind = p.get('kind'); c = p.get('c', -1); color = GREY if c == -1 else PC[c]; who = '(comptoir)' if c == -1 else PN[c] if c >= 0 else ''
     if k == 'card': continue                                         # pas de mise en place : la rivière reste en paquet
@@ -78,14 +80,14 @@ for p in TP['pieces']:
     elif k == 'bag':
         pos = C(p, 'bag')
         if p['bag'] == 'classic':
-            OBJ.append(bag('Sac des Grands Lacs', 80, pos, [tile(f'Castor ×{n} (Grands Lacs)', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.')
+            OBJ.append(bag('Sac des Grands Lacs', 80, pos, [tile(f'Castor ×{n} (Grands Lacs)', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
                                                         for n, m in ((1, 9), (2, 6), (3, 3)) for _ in range(m)], col('#8A6A45'), '18 paquets : 9 × 1, 6 × 2, 3 × 3'))
         elif p['bag'] == 'premium':
-            OBJ.append(bag('Sac du lac Supérieur', 80, pos, [tile(f'Castor ×{n} (Supérieur)', f'tile_S{n}_sec', 30, back=f'tile_S{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.')
+            OBJ.append(bag('Sac du lac Supérieur', 80, pos, [tile(f'Castor ×{n} (Supérieur)', f'tile_S{n}_sec', 30, back=f'tile_S{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
                                                          for n, m in ((1, 3), (2, 5), (3, 4)) for _ in range(m)], col('#8A6418'), '12 paquets : 3 × 1, 5 × 2, 4 × 3'))
         else:
             HN = {'fur1': 'Traite : 1 castor', 'fur2': 'Traite : 2 castors', 'fur3': 'Traite : 3 castors', 'mission': 'Missionnaire', 'present': 'Présent', 'fievre': 'Fièvre', 'gatees': 'Peaux gâtées'}
-            OBJ.append(bag('Jetons cachés', 80, pos, [tile(HN[h], f'hid_{h}', 30, back='hid_back', fz=180) for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
+            OBJ.append(bag('Jetons cachés', 80, pos, [tile(HN[h], f'hid_{h}', 30, back='hid_back', fz=180, face='down') for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
                            col('#3A2618'), '23 jetons, posés face cachée (?) sur les lacs'))
     elif k == 'die':
         d = base('Die_6', 'Dé de traversée' if p.get('cross') else 'Dé', SIZE['die'][0], C(p, 'die'), col('#8E2F25') if p.get('cross') else WHITE, h=0.7, y3=True, s0=1.0); OBJ.append(d)
@@ -120,7 +122,7 @@ for p in TP['pieces']:
         else: raise SystemExit('pièce inconnue : ' + kind)
 
 # Ajouts propres à la version actuelle du jeu, posés dans des places libres de la table
-OBJ.append(deck('mat', P(1300 + 35, 1000 + 49)))
+OBJ.append(deck('mat', P(1740 + 35, 810 + 49)))
 OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4)})
 for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4)})
 # Comptoir de Québec : tout son stock rangé dans sa zone (rien n'est mis en vente d'avance)
@@ -131,12 +133,10 @@ OBJ.append(token('Navire du roi', 'navire_roi', 40, P(1450, 486 + 105))); OBJ.ap
 OBJ.append(bag('Sac des congés', 60, P(1760, 486 + 140), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
                col('#8E2F25'), '12 congés : 6 à 1 place, 4 à 2 places, 2 sans place. Une place = un voyageur au choix ; pas de canot.'))
 for i in range(3):
-    mx = -140 + i * 465
-    OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': P(mx + 225, 0)[0], 'posY': 3, 'posZ': P(0, Y1 + 90)[1], 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': 15, 'scaleY': 5, 'scaleZ': 4},
-                'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': P(mx + 225, 0)[0], 'z': P(0, Y1 + 90)[1], 'hw': 450 * U}),
-                'ColorDiffuse': {'r': 1, 'g': 1, 'b': 1}, 'Locked': True, 'FogColor': SEAT[i]})
-
-LUA = open('setup.lua').read().replace('@W@', str((X1 - X0) * U)).replace('@D@', str((Y1 + 200) * U))
+    mx, my = -140 + i * 490, 1080
+    for k in range(2): OBJ.append(token(f'Canot de coureur des bois {PN[i]}', 'canot_coureur', 32, P(mx + 252 + k * 42, my + 135), PC[i]))
+    for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, P(mx + 470, my + 90), PC[i], h=0.5 + k * 0.3))
+LUA = open('setup.lua').read().replace('@W@', str((X1 - X0) * U)).replace('@D@', str(Y1 * U))
 rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 livres de dette') for r in rules]
 intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; "

@@ -170,10 +170,10 @@ const LAKES=[
 ];
 
 /* ---------- Géométrie de la table ---------- */
-const TW=2000,TH=1900,BX=40,BY=40,MDY=140,MAT_Y=1180,MAT_W=450,MAT_H=430;
+const TW=2000,TH=1900,BX=40,BY=40,MDY=140,MAT_Y=1080,MAT_W=450,MAT_H=168;
 const B=(x,y)=>[BX+x,BY+y],M=(x,y)=>[BX+x,BY+MDY+y];
 const RAV_X0=120,RAV_MAX=6,RAV_EV=4,RAV_STEP=1040/7,YEARS=5,DEM_X=430,DEM_Y=104;
-const PT_Y=752,PT_W=216,PT_GAP=10,LIV_Y=968,DET_Y=1032,PARIS_X=614,PARIS_STEP=28;
+const PT_Y=752,PT_W=216,PT_GAP=10,LIV_Y=868,DET_Y=932,PARIS_X=614,PARIS_STEP=28;
 const RIV_Y=1700,RIV_X=176,RIV_STEP=118;
 const SUP={deckY:72,deck2Y:286,bankY:486,crewY:680,numY:2000,diceY:486,yardY:790};
 const SIZE={card:[100,140],deck:[104,162],bag:[110,122],chit:[30,30],baril:[24,22],march:[24,22],grand:[52,22],petit:[40,20],ship:[40,28],shipcard:[120,64],pas:[34,22],part:[14,14],alambic:[26,30],pawn:[28,28],disc:[18,18],cube:[20,20],conge:[30,20],crew:[36,36],num:[24,24],month:[36,24],paris:[22,22],year:[24,22],die:[38,38]};
@@ -231,7 +231,7 @@ function setup(n){
   for(let v=1;v<=8;v++)for(let k=0;k<4;k++)add({k:"tok",kind:"num",c:-1,label:String(v)},1300+(v-1)*80+(k%2)*28,SUP.numY+30+Math.floor(k/2)*28);
   // Plateaux des joueurs
   for(let i=0;i<n;i++){
-    const mx=-140+i*(MAT_W+15),my=MAT_Y;
+    const mx=-140+i*(MAT_W+40),my=MAT_Y;
     for(let k=0;k<8;k++){add({k:"tok",kind:"baril",c:i},mx+16+k*28,my+58);add({k:"tok",kind:"march",c:i},mx+16+k*28,my+88)}
     for(let k=0;k<2;k++){add({k:"tok",kind:"grand",c:i},mx+16+k*60,my+124);add({k:"tok",kind:"petit",c:i},mx+140+k*46,my+124);add({k:"tok",kind:"ship",c:i},mx+236+k*46,my+120);add({k:"tok",kind:"alambic",c:i},mx+332+k*32,my+118)}
     add({k:"tok",kind:"pawn",c:i},mx+404,my+120);
@@ -310,7 +310,7 @@ function mapSVG(){
   return h;
 }
 function printedSVG(){
-  const n=S.n;let h=`<rect x="${BX-12}" y="${BY-12}" width="1224" height="1124" rx="16" fill="#22332F"/><rect x="${BX}" y="${BY}" width="1200" height="1100" rx="8" fill="#E6DAB6"/>`;
+  const n=S.n;let h=`<rect x="${BX-12}" y="${BY-12}" width="1224" height="1024" rx="16" fill="#22332F"/><rect x="${BX}" y="${BY}" width="1200" height="1000" rx="8" fill="#E6DAB6"/>`;
   h+=`<g transform="translate(${BX},${BY})">`;
   // Calendrier et année
   h+=`<text class="pl" x="40" y="40" style="font-size:16px">Calendrier</text><text class="cq" x="148" y="38">Année</text>`;
@@ -327,7 +327,7 @@ function printedSVG(){
   h+=`<g transform="translate(0,${MDY})">${mapSVG()}</g>`;
   // Piste des prix
   h+=`<text class="pl" x="40" y="${PT_Y-10}" style="font-size:16px">Magasins de Québec · piste des prix</text>`;
-  for(let k=1;k<=5;k++){const x=40+(k-1)*(PT_W+PT_GAP);h+=`<rect x="${x}" y="${PT_Y}" width="${PT_W}" height="196" rx="6" fill="${PCARD}" stroke="${EDGE}"/><rect x="${x}" y="${PT_Y}" width="${PT_W}" height="24" rx="6" fill="#7A5232"/><rect x="${x}" y="${PT_Y+16}" width="${PT_W}" height="8" fill="#7A5232"/><text class="num" x="${x+PT_W/2}" y="${PT_Y+16}" text-anchor="middle" style="font-size:13px">${k} livre${k>1?"s":""}</text>`;
+  for(let k=1;k<=5;k++){const x=40+(k-1)*(PT_W+PT_GAP);h+=`<rect x="${x}" y="${PT_Y}" width="${PT_W}" height="96" rx="6" fill="${PCARD}" stroke="${EDGE}"/><rect x="${x}" y="${PT_Y}" width="${PT_W}" height="24" rx="6" fill="#7A5232"/><rect x="${x}" y="${PT_Y+16}" width="${PT_W}" height="8" fill="#7A5232"/><text class="num" x="${x+PT_W/2}" y="${PT_Y+16}" text-anchor="middle" style="font-size:13px">${k} livre${k>1?"s":""}</text>`;
     }
   // Livres et dette
   const track=(y0,label,max,danger)=>{const cw=(1120-90)/(max+1);let t=`<text class="pl" x="40" y="${y0+24}" style="font-size:16px">${label}</text>`;for(let v=0;v<=max;v++){const x=130+v*cw,mk=v%5===0;t+=`<rect x="${x}" y="${y0}" width="${cw-3}" height="38" rx="3" fill="${PCARD}" stroke="${mk?(danger?"#A3352A":"#7A5232"):EDGE}" stroke-width="${mk?1.4:1}"/>`;if(mk)t+=`<text class="cq" x="${x+(cw-3)/2}" y="${y0+52}" text-anchor="middle" style="font-weight:700;${danger?"fill:#A3352A":""}">${v===max?v+"+":v}</text>`}return t};
@@ -344,17 +344,17 @@ function printedSVG(){
   h+=lab(1300,SUP.crewY-6,"Équipiers","représentant 2 · guide, milicien, interprète 1");
   
   h+=`<text class="lab" x="-138" y="30">Rivière</text><rect x="-138" y="40" width="108" height="166" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/>`;
-  ["3 livres","2 livres","1 livre","1 livre"].forEach((t,k)=>{const y=226+k*178;h+=`<rect x="-138" y="${y}" width="108" height="148" rx="8" fill="#F2EAD3" stroke="#B7A675"/><text class="lab" x="-84" y="${y+168}" text-anchor="middle" style="font-size:14px">${t}</text>`});
-  h+=`<rect x="-138" y="${226+4*178}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="-84" y="${226+4*178+80}" text-anchor="middle">Défausse</text>`;
-  h+=lab(1300,990,"Matériel de départ");
+  ["3 livres","2 livres","1 livre","1 livre"].forEach((t,k)=>{const y=226+k*174;h+=`<rect x="-138" y="${y}" width="108" height="148" rx="8" fill="#F2EAD3" stroke="#B7A675"/><text class="lab" x="-84" y="${y+163}" text-anchor="middle" style="font-size:14px">${t}</text>`});
+  h+=`<rect x="-138" y="${226+4*174}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="-84" y="${226+4*174+80}" text-anchor="middle">Défausse</text>`;
+  h+=lab(1740,784,"Matériel de départ");
   h+=lab(1300,SUP.yardY-6,"Chantier de La Rochelle","cartes de navire · 5 parts de 1 livre, un disque de couleur par part");
   // Plateaux des joueurs
-  for(let i=0;i<n;i++){const mx=-140+i*(MAT_W+15),my=MAT_Y;
+  for(let i=0;i<n;i++){const mx=-140+i*(MAT_W+40),my=MAT_Y;
     h+=`<rect x="${mx}" y="${my}" width="${MAT_W}" height="${MAT_H}" rx="12" fill="${PCARD}" stroke="${EDGE}"/><rect x="${mx}" y="${my}" width="${MAT_W}" height="40" rx="12" fill="${COL[i]}"/><rect x="${mx}" y="${my+28}" width="${MAT_W}" height="12" fill="${COL[i]}"/>`;
     h+=`<text class="lab" x="${mx+14}" y="${my+27}">Joueur ${COLNAME[i]}</text><text class="num" x="${mx+232}" y="${my+25}" text-anchor="end" style="font-size:11px">Soupçon</text>`;
     for(let k=0;k<=6;k++)h+=`<rect x="${mx+242+k*26}" y="${my+6}" width="24" height="26" rx="3" fill="#F6EFDC" stroke="${COL_DARK[i]}"/><text class="cq" x="${mx+254+k*26}" y="${my+36}" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:9px">${k}</text>`;
     const zone=(x,y,w,hh,t)=>`<rect x="${mx+x}" y="${my+y}" width="${w}" height="${hh}" rx="6" fill="none" stroke="${EDGE}" stroke-dasharray="4 3"/><text class="cq" x="${mx+x+6}" y="${my+y+13}">${t}</text>`;
-    h+=zone(8,48,434,112,"Réserve")+zone(8,168,210,70,"À quai")+zone(226,168,216,70,"Peaux à Québec")+zone(8,246,434,138,"Situations, équipiers et cartes de navire")+zone(8,388,434,34,"Disques de parts");
+    h+=zone(8,48,434,112,"Réserve");
   }
   return h;
 }
