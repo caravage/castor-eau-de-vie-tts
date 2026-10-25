@@ -39,37 +39,33 @@ def reserve():
     W, H = 3600, 2000; g = [HATCH]
     g.append(f"<rect x='0' y='0' width='{W}' height='{H}' rx='40' fill='{FRAME}'/><rect x='30' y='30' width='{W-60}' height='{H-60}' rx='26' fill='#E6DAB6'/>")
     g.append(T(80, 110, "Québec · réserve générale", 52, fam=DISP))
-    # Rivière
-    g.append(T(80, 200, "Rivière de recrutement", 38, fam=DISP)); g.append(T(560, 200, "Recruter : payez le prix de la case · en fin de mois, la carte de droite part à la défausse, les autres glissent, une nouvelle entre à 3 livres", 24, fill=MUTED))
-    labs = [("pioche", None), ("3 livres", 3), ("2 livres", 2), ("1 livre", 1), ("1 livre", 1), ("défausse", None)]
+    g.append(T(80, 200, "Rivière de recrutement", 38, fam=DISP)); g.append(T(80, 236, "Recruter : payez le prix de la case · fin de mois : la carte de droite part à la défausse, les autres glissent, une nouvelle entre à 3 livres", 22, fill=MUTED))
+    labs = [("pioche", None), ("3", 3), ("2", 2), ("1", 1), ("1", 1), ("défausse", None)]
     for k, (lab, p) in enumerate(labs):
         x = 80 + k * 300
-        g.append(f"<rect x='{x}' y='230' width='270' height='380' rx='16' fill='{PAPER if p else PCARD}' stroke='{EDGE}' stroke-width='3' {'' if p else 'stroke-dasharray=\"14 9\"'}/>")
-        if p: g.append(f"<circle cx='{x+135}' cy='660' r='34' fill='{GOLD}'/>" + T(x + 135, 672, str(p), 34, 'middle', weight=700, fill='#fff') + T(x + 135, 720, 'livre' + ('s' if p > 1 else ''), 22, 'middle', fill=MUTED))
-        else: g.append(T(x + 135, 670, lab, 26, 'middle', fill=MUTED))
-    # Congés
-    g.append(zone(1950, 160, 1570, 560, "Congés de l’année", "joueurs − 1 · tirés du sac au début d’avril · révélés avant l’enchère secrète"))
-    for k in range(3): g.append(f"<rect x='{2000+k*330}' y='300' width='290' height='290' rx='18' fill='{PAPER}' stroke='{EDGE}' stroke-width='3' stroke-dasharray='12 8'/>")
-    g.append(T(3040, 340, "sac des congés", 26, fill=MUTED)); g.append(f"<rect x='3020' y='360' width='440' height='280' rx='18' fill='none' stroke='{EDGE}' stroke-width='3' stroke-dasharray='12 8'/>")
-    # Chantier
-    g.append(zone(80, 780, 1840, 640, "Chantier de La Rochelle", "cartes de navire · 5 parts de 1 livre · un disque de couleur par part · le plus de parts : armateur principal"))
+        g.append(f"<rect x='{x}' y='260' width='270' height='380' rx='16' fill='{PAPER if p else PCARD}' stroke='{EDGE}' stroke-width='3' {'' if p else 'stroke-dasharray=\"14 9\"'}/>")
+        if p: g.append(f"<circle cx='{x+135}' cy='680' r='30' fill='{GOLD}'/>" + T(x + 135, 691, str(p), 32, 'middle', weight=700, fill='#fff') + T(x + 135, 735, 'livre' + ('s' if p > 1 else ''), 22, 'middle', fill=MUTED))
+        else: g.append(T(x + 135, 690, lab, 26, 'middle', fill=MUTED))
+    g.append(zone(1950, 160, 1570, 600, "Sacs", "piochez sans regarder · remettez les jetons dans leur sac"))
+    for k, lab in enumerate(["congés", "Grands Lacs", "lac Supérieur", "jetons cachés", "peaux à l’unité"]):
+        x = 1985 + k * 305
+        g.append(f"<rect x='{x}' y='290' width='280' height='400' rx='18' fill='{PAPER}' stroke='{EDGE}' stroke-width='3' stroke-dasharray='12 8'/>" + T(x + 140, 730, lab, 24, 'middle', fill=MUTED))
+    g.append(zone(80, 800, 1840, 640, "Chantier de La Rochelle", "cartes de navire · 5 parts de 1 livre · un disque de couleur par part · le plus de parts : armateur principal"))
     for k in range(6):
-        x = 120 + (k % 3) * 600; y = 900 + (k // 3) * 250
+        x = 120 + (k % 3) * 600; y = 920 + (k // 3) * 250
         g.append(f"<rect x='{x}' y='{y}' width='560' height='230' rx='14' fill='{PAPER}' stroke='{EDGE}' stroke-width='2.5' stroke-dasharray='12 8'/>")
-    # Comptoir
-    g.append(zone(1950, 780, 1570, 640, "Comptoir de Québec", "ne vend que son stock · prix fixé à l’arrivée : milieu des prix des joueurs", fill='#E9E4D6'))
-    for k, lab in enumerate(["marchandises", "eau-de-vie", "grand canot à louer", "petit canot à louer"]):
-        x = 1990 + (k % 2) * 760; y = 900 + (k // 2) * 250
-        g.append(f"<rect x='{x}' y='{y}' width='730' height='230' rx='14' fill='{PAPER}' stroke='{EDGE}' stroke-width='2.5' stroke-dasharray='12 8'/>" + T(x + 20, y + 40, lab, 26, fill=MUTED))
-    # Événements et voyageurs
-    g.append(zone(80, 1480, 1840, 460, "Événements", "fin de mois · demande de Paris (en hiver) · grand événement (ravages 4)"))
-    for k, lab in enumerate(["fin de mois", "défausse", "demande de Paris", "grand événement"]):
-        x = 120 + k * 450
-        g.append(f"<rect x='{x}' y='1590' width='270' height='310' rx='16' fill='{PCARD}' stroke='{EDGE}' stroke-width='3' stroke-dasharray='14 9'/>" + T(x + 135, 1760, lab, 24, 'middle', fill=MUTED))
-    g.append(zone(1950, 1480, 1570, 460, "Voyageurs", "représentant 2 livres · guide, milicien, interprète 1 livre · un par place de congé"))
-    for k, lab in enumerate(["représentant", "guide", "milicien", "interprète"]):
-        x = 1990 + k * 380
-        g.append(f"<rect x='{x}' y='1600' width='350' height='300' rx='16' fill='{PAPER}' stroke='{EDGE}' stroke-width='2.5' stroke-dasharray='12 8'/>" + T(x + 175, 1870, lab, 24, 'middle', fill=MUTED))
+    g.append(zone(1950, 800, 1570, 640, "Comptoir de Québec · stock", "gris · mis en vente sur la piste des prix au milieu des prix des joueurs", fill='#E9E4D6'))
+    for k, lab in enumerate(["marchandises", "eau-de-vie"]):
+        x = 1990 + k * 760
+        g.append(f"<rect x='{x}' y='920' width='730' height='480' rx='14' fill='{PAPER}' stroke='{EDGE}' stroke-width='2.5' stroke-dasharray='12 8'/>" + T(x + 20, 960, lab, 26, fill=MUTED))
+    g.append(zone(80, 1480, 1840, 460, "Paquets", ""))
+    for k, lab in enumerate(["associés", "matériel", "fin de mois", "défausse", "demande de Paris", "grand événement"]):
+        x = 110 + k * 300
+        g.append(f"<rect x='{x}' y='1560' width='270' height='340' rx='16' fill='{PCARD}' stroke='{EDGE}' stroke-width='3' stroke-dasharray='14 9'/>" + T(x + 135, 1740, lab, 24, 'middle', fill=MUTED))
+    g.append(zone(1950, 1480, 1570, 460, "Voyageurs et dés", "représentant 2 livres · guide, milicien, interprète 1 livre · un par place de congé"))
+    for k, lab in enumerate(["représentant", "guide", "milicien", "interprète", "dés · 1er"]):
+        x = 1985 + k * 305
+        g.append(f"<rect x='{x}' y='1600' width='280' height='300' rx='16' fill='{PAPER}' stroke='{EDGE}' stroke-width='2.5' stroke-dasharray='12 8'/>" + T(x + 140, 1880, lab, 24, 'middle', fill=MUTED))
     svg('reserve', W, H, ''.join(g))
 
 # ------------------------------------------------------------ Cartes
@@ -205,7 +201,7 @@ def tiles():
 # ------------------------------------------------------------ Plateaux des marchands
 PCOL = {'rouge': ('#A8322A', '#6E1F19'), 'bleu': ('#2F5E8E', '#1B3B5C'), 'vert': ('#4E7A2C', '#2F4D19')}
 def mats():
-    W, H = 1800, 1320
+    W, H = 1800, 1000
     for name, (c, cd) in PCOL.items():
         g = [f"<rect x='0' y='0' width='{W}' height='{H}' rx='40' fill='{FRAME}'/><rect x='20' y='20' width='{W-40}' height='{H-40}' rx='28' fill='#E6DAB6'/>",
              f"<path d='M20 48 Q20 20 48 20 L{W-48} 20 Q{W-20} 20 {W-20} 48 L{W-20} 150 L20 150 Z' fill='{c}'/>",
@@ -213,21 +209,11 @@ def mats():
         for k in range(7):
             x = 1040 + k * 104
             g.append(f"<rect x='{x}' y='40' width='92' height='92' rx='12' fill='{PAPER}' stroke='{cd}' stroke-width='4'/>" + T(x + 46, 102, str(k), 42, 'middle', weight=700, fill=(INK if k < 3 else '#8E2F25')))
-        def track(y, lab, sub, vals, fill):
-            out = [T(60, y + 52, lab, 40, fam=DISP), T(60, y + 86, sub, 22, fill=MUTED)]
-            for i, v in enumerate(vals):
-                x = 340 + i * 142
-                out.append(f"<rect x='{x}' y='{y}' width='130' height='110' rx='14' fill='{fill}' stroke='{EDGE}' stroke-width='4'/>" + T(x + 65, y + 72, v, 46, 'middle', weight=700))
-            return ''.join(out)
-        g.append(track(190, "Livres", "argent", [str(i) for i in range(10)], PAPER))
-        g.append(track(316, "", "", [str(i) for i in range(10, 20)], PAPER))
-        g.append(T(60, 386, "au-delà de 19 :", 22, fill=MUTED) + T(60, 414, "un 2ᵉ marqueur vaut 20", 22, fill=MUTED))
-        g.append(track(470, "Dette", "envers La Rochelle", [str(i) for i in range(10)], '#EADFC2'))
-        g.append(T(340, 618, "La Rochelle avance jusqu’à 6 livres (9 avec le Négociant huguenot) · payer d’abord, s’endetter si besoin", 24, fill=MUTED))
-        g.append(zone(40, 660, 820, 280, "Peaux à Québec", "en attente d’un navire pour Paris"))
-        g.append(zone(900, 660, 860, 280, "Disques de parts", "un disque par part prise au chantier"))
-        g.append(zone(40, 980, 1720, 300, "Associé, recrues, alliances, charges, congés", "contrats : en main, deux au plus"))
+        g.append(zone(40, 180, 820, 300, "Peaux à Québec", "en attente d’un navire pour Paris"))
+        g.append(zone(900, 180, 860, 300, "Disques de parts", "un disque par part prise au chantier"))
+        g.append(zone(40, 510, 1720, 450, "Associé, recrues, alliances, charges, congés", "contrats : en main, deux au plus"))
         svg(f'mat_{name}', W, H, ''.join(g))
+
 
 reserve(); decks(); tiles(); mats()
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)

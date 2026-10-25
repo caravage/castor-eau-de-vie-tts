@@ -1,0 +1,136 @@
+# Sauvegarde TTS fidèle à l'artefact « Table du castor » : même plateau, mêmes zones, mêmes positions de départ (3 joueurs).
+import json, random
+random.seed(1670)
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/'
+DK = json.load(open('manifest.json'))['decks']
+TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
+U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
+def P(cx, cy): return round((cx - TW / 2) * U, 3), round(-(cy - TH / 2) * U, 3)
+used = set()
+def guid():
+    while True:
+        g = '%06x' % random.randrange(16 ** 6)
+        if g not in used: used.add(g); return g
+def col(h): h = h.lstrip('#'); return {'r': int(h[0:2], 16) / 255, 'g': int(h[2:4], 16) / 255, 'b': int(h[4:6], 16) / 255}
+WHITE = col('#FFFFFF'); GREY = col('#8C877E'); INKC = col('#2A2418')
+PC = [col('#C0392B'), col('#2F6FB0'), col('#4E8A2C')]; SEAT = ['Red', 'Blue', 'Green']; PN = ['rouge', 'bleu', 'vert']
+
+def T(x=0, z=0, y=2.0, s=1.0, fz=0):
+    return {'posX': x, 'posY': y, 'posZ': z, 'rotX': 0, 'rotY': 180, 'rotZ': fz, 'scaleX': s, 'scaleY': 1.0, 'scaleZ': s}
+def base(name, nick, wpx, pos=None, color=WHITE, lock=False, h=0.5, fz=0, y3=False, desc='', s0=None):
+    w = round(wpx * U, 4); n = {'w': w}
+    if pos: n.update({'x': pos[0], 'z': pos[1], 'h': h})
+    if lock: n['lock'] = True
+    if fz: n['fz'] = fz
+    if y3: n['y3'] = True
+    x, z = pos if pos else (0, 0)
+    return {'GUID': guid(), 'Name': name, 'Transform': T(x, z, 2.0, s0 if s0 else w / 2, fz), 'Nickname': nick, 'Description': desc, 'GMNotes': json.dumps(n),
+            'ColorDiffuse': color, 'Locked': bool(pos), 'Grid': False, 'Snap': False, 'Tooltip': True, 'Hands': False, 'HideWhenFaceDown': False}
+def tile(nick, front, wpx, pos=None, back=None, typ=3, thick=0.1, color=WHITE, lock=False, h=0.5, fz=0, desc=''):
+    o = base('Custom_Tile', nick, wpx, pos, color, lock, h, fz, desc=desc)
+    o['CustomImage'] = {'ImageURL': URL + front + '.png', 'ImageSecondaryURL': URL + (back or front) + '.png', 'ImageScalar': 1.0, 'WidthScale': 0.0,
+                        'CustomTile': {'Type': typ, 'Thickness': thick, 'Stackable': False, 'Stretch': False}}
+    return o
+def token(nick, img, wpx, pos=None, color=WHITE, h=0.5, desc=''):
+    o = base('Custom_Token', nick, wpx, pos, color, False, h, desc=desc, s0=0.1)
+    o['CustomImage'] = {'ImageURL': URL + img + '.png', 'ImageSecondaryURL': '', 'ImageScalar': 1.0, 'WidthScale': 0.0,
+                        'CustomToken': {'Thickness': 0.2, 'MergeDistancePixels': 15.0, 'StandUp': False, 'Stackable': True}}
+    return o
+def bag(nick, wpx, pos, items, color, desc=''):
+    o = base('Bag', nick, wpx, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0
+    for it in items: it['Transform'] = T(); it['Locked'] = False
+    random.shuffle(items); o['ContainedObjects'] = items; return o
+
+DECK_ID = {'pers': 1, 'riv': 2, 'mat': 3, 'ev': 4, 'dem': 5, 'grand': 6}
+DECK_NAME = {'pers': 'Associés', 'riv': 'Rivière de recrutement', 'mat': 'Matériel de départ', 'ev': 'Événements de fin de mois', 'dem': 'Demande de Paris', 'grand': 'Grands événements'}
+def cdeck(k):
+    d = DK[k]; return {str(DECK_ID[k]): {'FaceURL': URL + f'deck_{k}.png', 'BackURL': URL + f'deck_{k}_back.png', 'NumWidth': d['cols'], 'NumHeight': d['rows'],
+                                         'BackIsHidden': True, 'UniqueBack': False, 'Type': 0}}
+def card(k, i, pos=None, up=False):
+    c = base('Card', DK[k]['names'][i], SIZE['card'][0], pos, fz=0 if up else 180, s0=1.0)
+    c['CardID'] = DECK_ID[k] * 100 + i; c['CustomDeck'] = cdeck(k)
+    if not pos: c['Transform'] = T(s=1.0, fz=180); c['Locked'] = False
+    return c
+def deck(k, pos, skip=()):
+    cards = [card(k, i) for i in range(len(DK[k]['names'])) if i not in skip]; random.shuffle(cards)
+    o = base('Deck', DECK_NAME[k], SIZE['card'][0], pos, fz=180, s0=1.0)
+    o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
+    return o
+
+OBJ = [tile('Table du castor', 'table_full', TW, P(TW / 2, TH / 2), typ=0, thick=0.2, lock=True, h=0.1)]
+def C(p, kind):  # centre d'une pièce de l'artefact
+    w, h = SIZE[kind]; return P(p['x'] + w / 2, p['y'] + h / 2)
+
+CREW = {'rep': ('Représentant', 'voy_rep'), 'guide': ('Guide', 'voy_guide'), 'mil': ('Milicien', 'voy_mil'), 'int': ('Interprète', 'voy_int')}
+river = [p['ref'] for p in TP['pieces'] if p['k'] == 'card']
+for p in TP['pieces']:
+    k = p['k']; kind = p.get('kind'); c = p.get('c', -1); color = GREY if c == -1 else PC[c]; who = '(comptoir)' if c == -1 else PN[c] if c >= 0 else ''
+    if k == 'card': OBJ.append(card('riv', p['ref'], C(p, 'card'), up=True))
+    elif k == 'deck':
+        if p['deck'] == 'rec': OBJ.append(deck('riv', C(p, 'deck'), skip=river))
+        elif p['deck'] == 'sit': OBJ.append(deck('pers', C(p, 'deck')))
+        else: OBJ.append(deck({'ev': 'ev', 'dem': 'dem', 'grand': 'grand'}[p['deck']], C(p, 'deck')))
+    elif k == 'bag':
+        pos = C(p, 'bag')
+        if p['bag'] == 'classic':
+            OBJ.append(bag('Sac des Grands Lacs', 80, pos, [tile(f'Castor ×{n} (Grands Lacs)', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.')
+                                                        for n, m in ((1, 9), (2, 6), (3, 3)) for _ in range(m)], col('#8A6A45'), '18 paquets : 9 × 1, 6 × 2, 3 × 3'))
+        elif p['bag'] == 'premium':
+            OBJ.append(bag('Sac du lac Supérieur', 80, pos, [tile(f'Castor ×{n} (Supérieur)', f'tile_S{n}_sec', 30, back=f'tile_S{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.')
+                                                         for n, m in ((1, 3), (2, 5), (3, 4)) for _ in range(m)], col('#8A6418'), '12 paquets : 3 × 1, 5 × 2, 4 × 3'))
+        else:
+            HN = {'fur1': 'Traite : 1 castor', 'fur2': 'Traite : 2 castors', 'fur3': 'Traite : 3 castors', 'mission': 'Missionnaire', 'present': 'Présent', 'fievre': 'Fièvre', 'gatees': 'Peaux gâtées'}
+            OBJ.append(bag('Jetons cachés', 80, pos, [tile(HN[h], f'hid_{h}', 30, back='hid_back', fz=180) for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
+                           col('#3A2618'), '23 jetons, posés face cachée (?) sur les lacs'))
+    elif k == 'die':
+        d = base('Die_6', 'Dé de traversée' if p.get('cross') else 'Dé', SIZE['die'][0], C(p, 'die'), col('#8E2F25') if p.get('cross') else WHITE, h=0.7, y3=True, s0=1.0); OBJ.append(d)
+    elif k == 'tok':
+        pos = C(p, kind); w = SIZE[kind][0]
+        if kind in ('num', 'conge'): continue                       # pas de marqueurs de prix ; les congés viennent du sac
+        if kind == 'month': OBJ.append(token('Mois', 'tok_marker', 24, pos, INKC))
+        elif kind == 'year': OBJ.append(token('Année', 'tok_marker', 22, pos, INKC))
+        elif kind == 'cube': OBJ.append(token('Ravages', 'tok_marker', 20, pos, col('#8E2F25')))
+        elif kind == 'paris': OBJ.append(token('Prix de Paris', 'tok_marker', 20, pos, col('#C9952B')))
+        elif kind == 'disc':
+            if p.get('dem'): OBJ.append(token('Demande · ' + ('Grands Lacs' if p['dem'] == 'gl' else 'Supérieur'), 'tok_disc', 16, pos, INKC))
+            else: OBJ.append(token(f"{ {'livres': 'Livres', 'dette': 'Dette'}.get(p.get('track'), 'Soupçon') } {PN[c]}", 'tok_disc', 11 if p.get('track') else 18, pos, color))
+        elif kind == 'march': OBJ.append(token(f'Marchandise {who}', 'tok_caisse_w', w, pos, color))
+        elif kind == 'baril': OBJ.append(token(f'Eau-de-vie {who}', 'tok_bouteille_w', w, pos, color))
+        elif kind == 'grand': OBJ.append(token(f'Grand canot {who}', 'canot_grand', w, pos, color))
+        elif kind == 'petit': OBJ.append(token(f'Petit canot {who}', 'canot_petit', w, pos, color))
+        elif kind == 'ship':
+            if p.get('roi'): OBJ.append(token('Navire du roi', 'navire_roi', w, pos))
+            elif p.get('merch'): OBJ.append(token('Navire marchand', 'navire_marchand', w, pos))
+            else: OBJ.append(token(f'Navire {who}', 'navire', w, pos, color))
+        elif kind == 'alambic': OBJ.append(token(f'Alambic {who}', 'alambic', w, pos, color))
+        elif kind == 'part': OBJ.append(token(f'Part {who}', 'tok_disc', w, pos, color))
+        elif kind == 'shipcard': OBJ.append(tile('Carte de navire', 'carte_navire', w, pos, typ=3, thick=0.08))
+        elif kind == 'pas': OBJ.append(tile('Prendre le pas · 1er', 'tok_pas', w, pos))
+        elif kind == 'crew': lab, img = CREW[p['crew']]; OBJ.append(token(lab, img, 26, pos))
+        elif kind == 'pawn':
+            o = base('PlayerPawn', f'Pion {who}', w, pos, color, h=0.6, y3=True, s0=1.0); OBJ.append(o)
+        else: raise SystemExit('pièce inconnue : ' + kind)
+
+# Ajouts propres à la version actuelle du jeu, posés dans des places libres de la table
+OBJ.append(deck('mat', P(1000, 1781)))                                     # matériel de départ, à côté de la rivière
+OBJ.append(bag('Sac des congés', 60, P(1890, 640), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
+               col('#8E2F25'), '12 congés : 6 à 1 place, 4 à 2 places, 2 sans place. Une place = un voyageur au choix ; pas de canot.'))
+for i in range(3):
+    mx = 40 + i * 480
+    OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': P(mx + 225, 0)[0], 'posY': 3, 'posZ': round(-(TH + 120 - TH / 2) * U, 3), 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': 15, 'scaleY': 5, 'scaleZ': 4},
+                'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': P(mx + 225, 0)[0], 'z': round(-(TH + 120 - TH / 2) * U, 3), 'hw': 450 * U}),
+                'ColorDiffuse': {'r': 1, 'g': 1, 'b': 1}, 'Locked': True, 'FogColor': SEAT[i]})
+
+LUA = open('setup.lua').read().replace('@W@', str(TW * U)).replace('@D@', str((TH + 240) * U))
+rules = open('rules.txt').read().strip().split('\n\n')
+rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 livres de dette') for r in rules]
+intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; "
+         "ensuite il ne fait que remettre à la bonne taille une pièce qui sort d’un sac ou d’un paquet. Les pièces grises appartiennent au comptoir de Québec. "
+         "Tuiles visibles : paquets de 1 à 3 castors secs, retournés côté gras (★) s’ils ne sont pas troqués à la fin de l’année. "
+         "Congés : tirés du sac ; chaque place accueille un voyageur au choix ; un congé ne donne pas de canot. Marchandise : caisse. Eau-de-vie : bouteille.")
+SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'VersionNumber': 'v13.2.2', 'GameMode': 'Castor et eau-de-vie', 'GameType': '', 'GameComplexity': '', 'Tags': [],
+        'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_Custom', 'TableURL': URL + 'table.png', 'Sky': 'Sky_Museum', 'Note': '',
+        'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
+        'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
+json.dump(SAVE, open('Castor_et_eau-de-vie.json', 'w'), ensure_ascii=False, indent=1)
+print(len(OBJ), 'objets')
