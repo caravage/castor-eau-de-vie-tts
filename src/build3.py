@@ -5,7 +5,8 @@ URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
-def P(cx, cy): return round((cx - TW / 2) * U, 3), round(-(cy - TH / 2) * U, 3)
+X0, X1, Y1 = -150, 2000, 1660                # image exportée : x de -150 à 2000, y de 0 à 1660
+def P(cx, cy): return round((cx - (X0 + X1) / 2) * U, 3), round(-(cy - Y1 / 2) * U, 3)
 used = set()
 def guid():
     while True:
@@ -57,17 +58,21 @@ def deck(k, pos, skip=()):
     o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
     return o
 
-OBJ = [tile('Table du castor', 'table_full', TW, P(TW / 2, TH / 2), typ=0, thick=0.2, lock=True, h=0.1)]
+OBJ = [tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, Y1 / 2), typ=0, thick=0.2, lock=True, h=0.1)]
 def C(p, kind):  # centre d'une pièce de l'artefact
     w, h = SIZE[kind]; return P(p['x'] + w / 2, p['y'] + h / 2)
 
 CREW = {'rep': ('Représentant', 'voy_rep'), 'guide': ('Guide', 'voy_guide'), 'mil': ('Milicien', 'voy_mil'), 'int': ('Interprète', 'voy_int')}
-river = [p['ref'] for p in TP['pieces'] if p['k'] == 'card']
+SHIPS = ['L’Aigle d’Or', 'Le Saint-Sébastien', 'Le Jardin de Hollande', 'Le Saint-Jean-Baptiste', 'Le Chat de Hollande', 'Le Vieux Siméon']
+nship = 0
 for p in TP['pieces']:
+    if p.get('kind') == 'part': p = {**p, 'x': p['x'] + 100}                      # parts à droite du libellé
+    if p.get('kind') in ('baril', 'march') and p.get('c', -1) >= 0: p = {**p, 'x': p['x'] + 56}   # réserve à droite du libellé
     k = p['k']; kind = p.get('kind'); c = p.get('c', -1); color = GREY if c == -1 else PC[c]; who = '(comptoir)' if c == -1 else PN[c] if c >= 0 else ''
-    if k == 'card': OBJ.append(card('riv', p['ref'], C(p, 'card'), up=True))
+    if k == 'card': continue                                         # pas de mise en place : la rivière reste en paquet
+    if p.get('bank'): continue                                       # comptoir : rangé dans son stock, plus bas
     elif k == 'deck':
-        if p['deck'] == 'rec': OBJ.append(deck('riv', C(p, 'deck'), skip=river))
+        if p['deck'] == 'rec': OBJ.append(deck('riv', P(-138 + 52, 40 + 83)))
         elif p['deck'] == 'sit': OBJ.append(deck('pers', C(p, 'deck')))
         else: OBJ.append(deck({'ev': 'ev', 'dem': 'dem', 'grand': 'grand'}[p['deck']], C(p, 'deck')))
     elif k == 'bag':
@@ -101,10 +106,13 @@ for p in TP['pieces']:
         elif kind == 'ship':
             if p.get('roi'): OBJ.append(token('Navire du roi', 'navire_roi', w, pos))
             elif p.get('merch'): OBJ.append(token('Navire marchand', 'navire_marchand', w, pos))
-            else: OBJ.append(token(f'Navire {who}', 'navire', w, pos, color))
+            else: continue                                           # les navires viennent des cartes du chantier
         elif kind == 'alambic': OBJ.append(token(f'Alambic {who}', 'alambic', w, pos, color))
         elif kind == 'part': OBJ.append(token(f'Part {who}', 'tok_disc', w, pos, color))
-        elif kind == 'shipcard': OBJ.append(tile('Carte de navire', 'carte_navire', w, pos, typ=3, thick=0.08))
+        elif kind == 'shipcard':
+            nm = SHIPS[nship]; nship += 1
+            OBJ.append(tile(f'Carte de navire · {nm}', f'carte_navire_{nship}', w, pos, typ=3, thick=0.08, desc='Financez-la au chantier ; le propriétaire la pose devant lui et envoie le navire du même nom sur le plateau.'))
+            OBJ.append(token(f'Navire · {nm}', f'navire_{nship}', 40, P(p['x'] + 27, p['y'] + 37), h=0.7))
         elif kind == 'pas': OBJ.append(tile('Prendre le pas · 1er', 'tok_pas', w, pos))
         elif kind == 'crew': lab, img = CREW[p['crew']]; OBJ.append(token(lab, img, 26, pos))
         elif kind == 'pawn':
@@ -112,16 +120,23 @@ for p in TP['pieces']:
         else: raise SystemExit('pièce inconnue : ' + kind)
 
 # Ajouts propres à la version actuelle du jeu, posés dans des places libres de la table
-OBJ.append(deck('mat', P(1000, 1781)))                                     # matériel de départ, à côté de la rivière
-OBJ.append(bag('Sac des congés', 60, P(1890, 640), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
+OBJ.append(deck('mat', P(1500 + 35, 1200 + 49)))
+OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4)})
+for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4)})
+# Comptoir de Québec : tout son stock rangé dans sa zone (rien n'est mis en vente d'avance)
+for k in range(11): OBJ.append(token('Marchandise (comptoir)', 'tok_caisse_w', 24, P(1312 + k * 28, 541), GREY))
+for k in range(5): OBJ.append(token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, P(1312 + k * 28, 573), GREY))
+OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1326, 605), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1392, 605), GREY))
+OBJ.append(token('Navire du roi', 'navire_roi', 40, P(1450, 605))); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1500, 605)))
+OBJ.append(bag('Sac des congés', 60, P(1760, 640), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
                col('#8E2F25'), '12 congés : 6 à 1 place, 4 à 2 places, 2 sans place. Une place = un voyageur au choix ; pas de canot.'))
 for i in range(3):
     mx = 40 + i * 480
-    OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': P(mx + 225, 0)[0], 'posY': 3, 'posZ': round(-(TH + 120 - TH / 2) * U, 3), 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': 15, 'scaleY': 5, 'scaleZ': 4},
-                'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': P(mx + 225, 0)[0], 'z': round(-(TH + 120 - TH / 2) * U, 3), 'hw': 450 * U}),
+    OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': P(mx + 225, 0)[0], 'posY': 3, 'posZ': P(0, Y1 + 90)[1], 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': 15, 'scaleY': 5, 'scaleZ': 4},
+                'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': P(mx + 225, 0)[0], 'z': P(0, Y1 + 90)[1], 'hw': 450 * U}),
                 'ColorDiffuse': {'r': 1, 'g': 1, 'b': 1}, 'Locked': True, 'FogColor': SEAT[i]})
 
-LUA = open('setup.lua').read().replace('@W@', str(TW * U)).replace('@D@', str((TH + 240) * U))
+LUA = open('setup.lua').read().replace('@W@', str((X1 - X0) * U)).replace('@D@', str((Y1 + 200) * U))
 rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 livres de dette') for r in rules]
 intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; "

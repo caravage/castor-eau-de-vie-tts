@@ -88,9 +88,9 @@ def card_html(kind, title, fx, note='', star=0):
     return (f"<div class='c' style='--k:{k}'><div class='in'><div class='band'><span>{E(kind)}</span><span>{'★' * star}</span></div>"
             f"<div class='t'>{E(title)}</div><div class='rule'></div><div class='fx'>{E(fx)}</div>{f'<div class=nt>{E(note)}</div>' if note else ''}</div></div>")
 
-def sheet(name, kind, cards, back_title, back_sub):
+def sheet(name, kind, cards, back_title, back_sub, css=None):
     n = len(cards); cols = min(10, n); rows = math.ceil(n / cols)
-    page(name, cols * CW, rows * CH, f"<div class='grid' style='--n:{cols}'>{''.join(cards)}</div>", CARD_CSS)
+    page(name, cols * CW, rows * CH, f"<div class='grid' style='--n:{cols}'>{''.join(cards)}</div>", (css or CARD_CSS))
     k = KCOL.get(kind, INK)
     page(name + '_back', CW, CH, f"<div class='c back' style='--k:{k}'><div class='in'><div class='frame'></div><div class='bt'>{E(back_title)}</div><div class='bs'>{E(back_sub)}</div><div class='game'>Castor et eau-de-vie</div></div></div>", CARD_CSS)
     return {'cols': cols, 'rows': rows, 'n': n}
@@ -106,10 +106,10 @@ def decks():
     for c in rc:
         if c['id'] == 'c_ferme': c['effect'] = "Vendez à Québec jusqu’à 3 de vos peaux au prix de Paris moins 1, sans navire."
     DECKS['riv'] = sheet('deck_riv', 'Recrue', [card_html(rk[c['kind']], c['title'], c['effect'], c.get('note', ''), c.get('star', 0)) for c in rc], 'Rivière', 'recrutement'); DECKS['riv']['names'] = [c['title'] for c in rc]
-    mats = [("Navire", "1 navire armé, et 2 livres de dette envers La Rochelle."), ("Parts de navire", "2 parts payées sur une carte de navire au chantier, et 3 livres."),
+    mats = [("Navire", "Une carte de navire du chantier, entièrement payée, et 2 livres de dette envers La Rochelle."), ("Parts de navire", "2 parts payées sur une carte de navire au chantier, et 3 livres."),
             ("Bourse", "4 livres."), ("Ballots de marchandises", "4 marchandises."), ("Eau-de-vie", "2 bouteilles et 1 livre."), ("Assortiment", "2 marchandises et 1 bouteille."),
             ("Petit canot", "1 petit canot et 2 livres."), ("Grand canot", "1 grand canot et 1 livre."), ("Alambic", "1 alambic et 1 livre.")]
-    DECKS['mat'] = sheet('deck_mat', 'Matériel de départ', [card_html('Matériel de départ', t, fx) for t, fx in mats], 'Matériel', 'distribué en entier · 3 par marchand'); DECKS['mat']['names'] = [t for t, _ in mats]
+    DECKS['mat'] = sheet('deck_mat', 'Matériel de départ', [card_html('Matériel de départ', t, fx) for t, fx in mats], 'Matériel', 'distribué en entier · 3 par marchand', css=CARD_CSS.replace('.t{font-family:', '.t{font-size:60px!important;font-family:').replace('.fx{font-size:30px', '.fx{font-size:44px')); DECKS['mat']['names'] = [t for t, _ in mats]
     ev = [(e['title'], e['text']) for e in D['MONTH_EVENTS'] for _ in range(e['w'])]
     DECKS['ev'] = sheet('deck_ev', 'Fin de mois', [card_html('Fin de mois', t, x) for t, x in ev], 'Fin de mois', 'événement'); DECKS['ev']['names'] = [t for t, _ in ev]
     dm = [(d['title'], f"{d['text']} Prix de Paris {'+' if d['d']>0 else ''}{d['d']}.") for d in D['DEMANDE']]
@@ -216,5 +216,23 @@ def mats():
 
 
 reserve(); decks(); tiles(); mats()
+# ------------------------------------------------------------ Navires nommés (carte au chantier + jeton du même nom)
+SHIPS = ["L’Aigle d’Or", "Le Saint-Sébastien", "Le Jardin de Hollande", "Le Saint-Jean-Baptiste", "Le Chat de Hollande", "Le Vieux Siméon"]
+def ships():
+    for i, nm in enumerate(SHIPS):
+        W, H = 600, 320
+        circ = ''.join(f"<circle cx='{300+(k%3)*96}' cy='{150+(k//3)*92}' r='38' fill='#fff' stroke='{EDGE}' stroke-width='4' stroke-dasharray='10 7'/>" for k in range(5))
+        svg(f'carte_navire_{i+1}', W, H, f"<rect x='6' y='6' width='{W-12}' height='{H-12}' rx='22' fill='{PAPER}' stroke='{EDGE}' stroke-width='6'/>"
+            f"<path d='M6 28 Q6 6 28 6 L{W-28} 6 Q{W-6} 6 {W-6} 28 L{W-6} 76 L6 76 Z' fill='{FRAME}'/>" + T(W / 2, 56, nm, 38, 'middle', fam=DISP, fill='#F6EFDC')
+            + f"<rect x='26' y='100' width='220' height='170' rx='14' fill='none' stroke='{INK}' stroke-width='3' stroke-dasharray='10 7' opacity='.5'/>" + T(136, 196, 'navire', 26, 'middle', fill=MUTED)
+            + circ + T(492, 250, '5 parts', 24, 'middle', fill=MUTED))
+        short = nm.split(' ', 1)[1] if nm.startswith(('Le ', 'La ')) else nm.replace('L’', '')
+        svg(f'navire_{i+1}', 320, 280, f"<path d='M24 120 L296 120 L254 190 L66 190 Z' fill='#F4F4F4' stroke='#3A3A3A' stroke-width='8' stroke-linejoin='round'/><line x1='160' y1='10' x2='160' y2='120' stroke='#3A3A3A' stroke-width='8'/>"
+            f"<path d='M170 18 L264 92 L170 104 Z' fill='#FFFFFF' stroke='#3A3A3A' stroke-width='6'/><rect x='6' y='202' width='308' height='70' rx='16' fill='{FRAME}'/>"
+            + T(160, 250, short, 36 if len(short) < 14 else 28, 'middle', weight=700, fill='#F6EFDC'))
+ships()
+# Petites cartes de matériel : même contenu, texte plus grand
+MINI = CARD_CSS.replace(".t{font-family:", ".t{font-size:58px!important;font-family:").replace(".fx{font-size:30px", ".fx{font-size:42px")
+
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)
 print(len(MANIFEST), 'pages')

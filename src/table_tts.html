@@ -1,0 +1,538 @@
+<title>Table du castor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;500;700&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap">
+<style>
+/* Layout : une table de bois vue de dessus ; barre d'outils en haut, la table défile et zoome, un panneau à droite détaille la pièce choisie. Un seul univers visuel, comme le prototype. */
+:root{
+  color-scheme:dark;
+  --table:#2A211A; --table-2:#3A2E24; --t-ink:#EFE6D0; --t-muted:#BDB094;
+  --parch:#EFE5CB; --parch-2:#F6EFDC; --edge:#BFAE7F; --ink:#2A2418; --muted:#6B5F45;
+  --frame:#22332F; --brandy:#B86E12; --danger:#A3352A; --gold:#C9962E;
+  --k-maison:#22332F; --k-perso:#8A5A14; --k-atout:#3E5A7A; --k-event:#3F6D78; --k-grand:#8E2F25; --k-dem:#5A4A7A;
+  --display:"IM Fell English SC", Georgia, "Times New Roman", serif;
+  --serif:"IM Fell English", Georgia, "Times New Roman", serif;
+  --body:"Alegreya Sans", "Segoe UI", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--table);color:var(--t-ink);font-family:var(--body);font-size:15px;line-height:1.45}
+.app{height:100%;display:grid;grid-template-rows:auto 1fr;padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-block:10px;gap:10px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.bar h1{margin:0;font-family:var(--display);font-weight:400;font-size:1.6rem;line-height:1;margin-right:auto}
+.bar label{font-size:.88rem;color:var(--t-muted)}
+select,.tb{font:inherit;font-size:.9rem;padding:5px 10px;border-radius:6px;border:1px solid #5A4A3B;background:var(--table-2);color:var(--t-ink);cursor:pointer}
+.tb:disabled{opacity:.4;cursor:not-allowed}
+.tb.warn{border-color:#C26A5C;color:#F6D9D2}
+.zoom{display:flex;gap:4px;align-items:center}
+.zoom output{min-width:3.2em;text-align:center;font-variant-numeric:tabular-nums;font-size:.88rem;color:var(--t-muted)}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:12px;min-height:0}
+@media (max-width:860px){.main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}}
+.view{overflow:auto;border-radius:12px;background:#231B15 repeating-linear-gradient(90deg,rgba(255,255,255,.02) 0 2px,transparent 2px 13px);box-shadow:inset 0 0 0 1px #3F3227;min-height:300px}
+.sizer{position:relative}
+#table{position:absolute;left:0;top:0;transform-origin:0 0}
+#printed{position:absolute;left:0;top:0;pointer-events:none}
+#pieces{position:absolute;left:0;top:0}
+.side{background:var(--table-2);border:1px solid #4E3F31;border-radius:12px;padding:14px;overflow:auto;display:grid;align-content:start;gap:12px;min-height:0}
+.side h2{margin:0;font-family:var(--display);font-weight:400;font-size:1.3rem;line-height:1.15}
+.side p{margin:0}
+.side .muted{color:var(--t-muted);font-size:.9rem}
+.side .acts{display:flex;flex-wrap:wrap;gap:6px}
+.side ul{margin:0;padding-left:1.1em;display:grid;gap:4px;font-size:.9rem;color:var(--t-ink)}
+.side kbd{font-family:var(--body);font-size:.8rem;padding:0 5px;border:1px solid #6B5A49;border-radius:4px;background:#2A211A}
+.big{display:flex;justify-content:center}
+.big .card{position:relative;width:220px;height:308px;font-size:200%}
+.big .card .ct{font-size:1.6rem}
+.big .card .cf{font-size:1rem}
+.big .card .cn{font-size:.9rem}
+.big .card .cb{font-size:12px;padding:6px 12px}
+.big .card .ct{padding:10px 12px 4px}
+.big .card .cf{padding:0 12px}
+.big .card.back .bk{font-size:22px}
+.big .card.back .bk small{font-size:12px}
+.big .chit{position:relative;width:96px;height:96px;font-size:1.9rem}
+.big .chit .cl{font-size:.85rem}
+:focus-visible{outline:2px solid #E7C27A;outline-offset:2px}
+
+/* Pièces */
+.pc{position:absolute;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
+.pc.dragging{cursor:grabbing;filter:drop-shadow(0 8px 10px rgba(0,0,0,.45))}
+.pc.sel{outline:3px solid #E7C27A;outline-offset:2px}
+.card{width:100px;height:140px;border-radius:8px;overflow:hidden;box-shadow:0 2px 0 rgba(0,0,0,.35),0 4px 8px rgba(0,0,0,.3);display:grid;grid-template-rows:auto auto 1fr;background:var(--parch);color:var(--ink);border:1px solid var(--edge)}
+.card .cb{font-size:7px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#EFE6D0;background:var(--k);padding:3px 6px}
+.card .ct{font-family:var(--display);font-size:11.5px;line-height:1.1;padding:5px 6px 2px}
+.card .cf{font-size:8px;line-height:1.25;padding:0 6px}
+.card .cn{display:none}
+.card.back{display:grid;place-items:center;text-align:center;background:var(--kb,#3A2A1C) repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 3px,transparent 3px 9px);color:#EFE6D0;border-color:#1E1610}
+.card.back .bk{font-family:var(--display);font-size:12px;line-height:1.15;padding:6px}
+.card.back .bk small{display:block;font-family:var(--body);font-size:8px;letter-spacing:.1em;text-transform:uppercase;opacity:.85;margin-top:6px}
+.chit{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;color:var(--ink);border:2px solid #7A5232;background:#F6EFDC;box-shadow:0 2px 0 rgba(0,0,0,.35);text-align:center;line-height:1}
+.chit .cl{font-size:6.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+.chit.prem{background:#F1D58C;border-color:#A07418}
+.chit.hidf{background:#E9DCC0;border-color:#5A3B24}
+.chit.evt{background:#F3DCD8;border-color:#A3352A;color:#7A241B}
+.chit.down{color:#F6EFDC;border-color:#2B1D13}
+.chit.down.classic{background:#8A6A45}
+.chit.down.premium{background:#7A5A18;border-color:#4A360A}
+.chit.down.hidden{background:#3A2618}
+.chit.gras{box-shadow:0 0 0 3px #E9BE4A,0 2px 0 rgba(0,0,0,.35)}
+.tok{display:grid;place-items:center}
+.tok svg{display:block;width:100%;height:100%;overflow:visible}
+.deck,.bag{display:grid;grid-template-rows:18px 1fr;border-radius:9px;overflow:visible}
+.deck{width:104px;height:162px}
+.deck .stack{position:relative;margin-top:2px}
+.deck .stack .card{position:absolute;left:0;top:0}
+.deck .stack .card.s2{left:3px;top:3px;opacity:.85}
+.deck .stack .card.s1{left:1.5px;top:1.5px}
+.handle{font-size:9px;letter-spacing:.06em;text-transform:uppercase;font-weight:700;color:#EFE6D0;background:#4A3A2C;border-radius:6px 6px 0 0;padding:2px 6px;display:flex;justify-content:space-between;cursor:move}
+.count{position:absolute;right:-8px;bottom:-8px;min-width:26px;height:26px;padding:0 6px;border-radius:13px;background:#E7C27A;color:var(--ink);font-weight:700;font-size:13px;display:grid;place-items:center;box-shadow:0 2px 0 rgba(0,0,0,.4);z-index:2}
+.deck .empty{width:100px;height:140px;border:2px dashed #8A7A5A;border-radius:8px;display:grid;place-items:center;font-size:10px;color:#BDB094;text-align:center;padding:6px}
+.bag{width:110px;height:122px}
+.bag .pouch{position:relative;margin-top:2px;border-radius:20px 20px 40px 40px;display:grid;place-items:center;text-align:center;font-family:var(--display);font-size:13px;line-height:1.1;padding:10px;color:#EFE6D0;box-shadow:inset 0 -8px 0 rgba(0,0,0,.2),0 3px 6px rgba(0,0,0,.35)}
+.bag .pouch small{display:block;font-family:var(--body);font-size:9px;text-transform:uppercase;letter-spacing:.08em;margin-top:4px;opacity:.85}
+.die{width:38px;height:38px;border-radius:8px;background:#FBF7EC;border:2px solid var(--ink);display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);padding:6px;gap:3px;box-shadow:0 3px 0 rgba(0,0,0,.35)}
+.die span{display:block}
+.die.cross{background:#DCE9EC;border-color:#1B3B5C}
+.die .pip{background:var(--ink);border-radius:50%}
+@media (prefers-reduced-motion:no-preference){.die.roll{animation:tumble .45s ease-out}}
+@keyframes tumble{from{transform:rotate(-260deg) scale(.6)}to{transform:none}}
+#printed .pl{font-family:var(--display);fill:#2A2418;font-size:15px}
+#printed .ml{font-family:var(--serif);font-style:italic;fill:#6B5F45;font-size:13px}
+#printed .ct{font-family:var(--body);font-weight:700;font-size:12px;fill:#2A2418}
+#printed .cl{font-family:var(--body);font-size:11px;fill:#6B5F45}
+#printed .cm{font-family:var(--display);font-size:16px;fill:#2A2418}
+#printed .cq{font-family:var(--body);font-size:11px;fill:#6B5F45}
+#printed .gold{fill:#8A5A14;font-weight:700}
+#printed .ice{fill:#3F6D78;font-weight:700}
+#printed .lab{font-family:var(--display);font-size:18px;fill:#EFE6D0}
+#printed .labs{font-family:var(--body);font-size:12px;fill:#BDB094}
+#printed .num{font-family:var(--body);font-size:11px;font-weight:700;fill:#fff}
+</style>
+
+<div class="app">
+  <div class="bar">
+    <h1>Table du castor</h1>
+    <label for="nplayers">Marchands</label>
+    <select id="nplayers"><option value="2">2</option><option value="3" selected>3</option><option value="4">4</option></select>
+    <button class="tb warn" id="reset" data-cmd="reset">Nouvelle installation</button>
+    <button class="tb" data-cmd="undo" id="undo">Annuler</button>
+    <div class="zoom"><button class="tb" data-cmd="zout" aria-label="Dézoomer">−</button><output id="zv">50 %</output><button class="tb" data-cmd="zin" aria-label="Zoomer">+</button><button class="tb" data-cmd="fit">Ajuster</button></div>
+  </div>
+  <div class="main">
+    <div class="view" id="view"><div class="sizer" id="sizer"><div id="table"><svg id="printed"></svg><div id="pieces"></div></div></div></div>
+    <aside class="side" id="side" aria-live="polite"></aside>
+  </div>
+</div>
+
+<script>
+/* ---------- Données du jeu ---------- */
+const COL=["#A8322A","#2F5E8E","#4E7A2C","#D3A12A"],COL_DARK=["#6E1F19","#1B3B5C","#2F4D19","#8A6814"],COLNAME=["rouge","bleu","vert","jaune"];
+const GREY="#8E8A80",GREY_DARK="#5F5B53";
+const MCAP=["Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre"];
+const KIND={maison:"Maison",personnage:"Personnage",atout:"Atout",recrue:"Recrue",contrat:"Contrat",nation:"Alliance",charge:"Charge"};
+const RCARDS=[{"id":"r_garde","kind":"recrue","star":0,"title":"Garde-magasin","effect":"Quand vous jouez « Attendre », gagnez 1 livre.","note":"Il tient l’entrepôt de la basse-ville pendant que les canots sont au loin."},{"id":"r_teneur","kind":"recrue","star":0,"title":"Teneur de livres","effect":"Une fois par mois, « Changer les prix » ne vous coûte pas d’action.","note":"Ses registres suivent les cours mieux que personne."},{"id":"r_canotier","kind":"recrue","star":0,"title":"Canotier d’expérience","effect":"Une fois par an, un de vos canots qui arrive aux Grands Lacs ou au Supérieur est prêt tout de suite.","note":"Il connaît chaque portage de l’Outaouais."},{"id":"r_facteur","kind":"recrue","star":0,"title":"Facteur de La Rochelle","effect":"Les cales vides de vos commandes d’hiver ne coûtent rien.","note":"Votre homme sur les quais trouve toujours un complément de fret."},{"id":"r_calfat","kind":"recrue","star":0,"title":"Calfat","effect":"L’entretien d’hiver de vos navires est gratuit.","note":"Étoupe et brai : la coque passe l’hiver sans dommage."},{"id":"r_notaire","kind":"recrue","star":1,"title":"Notaire royal","effect":"Vos dettes non remboursées ne grossissent pas en hiver.","note":"Un acte bien tourné vaut un délai de grâce."},{"id":"r_cens","kind":"recrue","star":1,"title":"Censitaires","effect":"+1 livre chaque hiver.","note":"Quelques habitants vous doivent cens et rentes à la Saint-Martin."},{"id":"r_barque","kind":"recrue","star":0,"title":"Maître de barque","effect":"Vos canots redescendent du lac Supérieur en 1 mois au lieu de 2.","note":"Il sait passer le Sault et les rapides sans décharger."},{"id":"r_aubergiste","kind":"recrue","star":0,"title":"Aubergiste de Montréal","effect":"Vos canots qui rentrent sont déchargés tout de suite.","note":"Ses hangars ouvrent à toute heure, même la nuit du retour."},{"id":"r_associe","kind":"recrue","star":0,"title":"Armateur associé","effect":"Quand un navire qui n’est pas à vous part avec vos peaux, vous payez 1 livre de fret en moins.","note":"Un vieil associé vous fait un prix d’ami."},{"id":"r_jesuite","kind":"recrue","star":1,"title":"Père jésuite","effect":"Quand une de vos expéditions rentre sans avoir échangé de baril : ravages −1 et soupçon −1.","note":"Les jésuites combattent la traite de l’eau-de-vie."},{"id":"r_huguenot","kind":"recrue","star":0,"title":"Négociant huguenot","effect":"La Rochelle vous avance jusqu’à 9 livres de dette au lieu de 6.","note":"Interdits d’établissement au Canada, les marchands protestants de La Rochelle y financent pourtant la traite."},{"id":"c_commission","kind":"contrat","star":0,"title":"Commission en France","effect":"Jusqu’en août : commandez jusqu’à 4 charges. Elles traversent sur votre navire libre à La Rochelle, sinon sur un navire marchand (2 livres de fret par charge), et arrivent dans 1 ou 2 mois selon le dé.","note":"Un commissionnaire de La Rochelle expédie un complément en pleine saison."},{"id":"c_foire","kind":"contrat","star":0,"title":"Foire de Montréal","effect":"En juin, juillet ou août : échangez jusqu’à 2 de vos charges de la piste contre des jetons du sac classique, sans canot. Chaque baril fait monter les ravages.","note":"Chaque été, les flottilles outaouaises descendent vendre leurs fourrures à Montréal."},{"id":"c_lettre","kind":"contrat","star":0,"title":"Lettre de change","effect":"Recevez 3 livres ; votre dette envers La Rochelle augmente de 4.","note":"Payable à la prochaine flotte."},{"id":"c_conge","kind":"contrat","star":0,"title":"Congé de faveur","effect":"Recevez un congé tout de suite, hors enchère.","note":"Signé de la main de l’intendant, sans passer par l’enchère."},{"id":"c_ferme","kind":"contrat","star":0,"title":"Contrat de la Ferme","effect":"Vendez à Québec jusqu’à 3 de vos peaux au prix de Paris moins 1 par point, sans navire.","note":"Le commis du fermier achète sur place, à bas prix."},{"id":"c_portage","kind":"contrat","star":0,"title":"Portage rapide","effect":"Un de vos canots en route avance tout de suite d’une case.","note":"Des porteurs connus gagnent une journée à chaque portage."},{"id":"c_rens","kind":"contrat","star":0,"title":"Renseignement de traite","effect":"Regardez les jetons cachés d’un lac.","note":"Un coureur des bois revenu de l’Ouest parle trop au cabaret."},{"id":"c_devants","kind":"contrat","star":0,"title":"Prendre les devants","effect":"Vous jouerez en premier le mois prochain, sans dépenser d’action.","note":"Vous êtes déjà dans l’antichambre de l’intendant."},{"id":"c_part","kind":"contrat","star":0,"title":"Part offerte","effect":"Prenez gratuitement 1 part d’une carte de navire au chantier.","note":"Un armateur vous cède une part pour sceller une alliance."},{"id":"c_denonce","kind":"contrat","star":0,"title":"Dénonciation à l’intendant","effect":"Un adversaire qui a 3 soupçon ou plus paie 2 livres.","note":"Une lettre anonyme sur l’eau-de-vie de vos rivaux."},{"id":"n_outaouais","kind":"nation","star":1,"title":"Les Outaouais","effect":"Aux lacs Huron et Michigan, vous voyez les jetons cachés avant de choisir. Perdue si vous y échangez un baril (ravages +1).","note":"Les Odawa sont les grands intermédiaires de la traite des Grands Lacs."},{"id":"n_poteo","kind":"nation","star":1,"title":"Les Potéouatamis de la baie des Puants","effect":"Au lac Michigan, vos marchandises ne comptent pas dans la demande de la zone. Perdue si vous y échangez un baril (ravages +1).","note":"Les Potawatomi accueillent la mission de la baie des Puants en 1669."},{"id":"n_anish","kind":"nation","star":1,"title":"Les Anishinaabeg du Sault","effect":"Vos canots qui arrivent au lac Supérieur sont prêts tout de suite. Perdue si vous y échangez un baril (ravages +1).","note":"Au Sault, les Anishinaabeg tiennent le passage vers le Supérieur."},{"id":"n_cinq","kind":"nation","star":1,"title":"Les Cinq-Nations","effect":"Au lac Ontario, un jeton caché qui n’est pas une peau vous rend votre charge, sans autre effet. Perdue si vous y échangez un baril (ravages +1).","note":"La paix de 1667 avec les Haudenosaunee rouvre le lac Ontario."},{"id":"n_wendat","kind":"nation","star":1,"title":"Les Wendat de Lorette","effect":"Vos guides sont gratuits. Perdue si une de vos expéditions échange un baril (ravages +1).","note":"Réfugiés près de Québec, les Wendat chrétiens refusent l’eau-de-vie."},{"id":"o_marg","kind":"charge","star":2,"title":"Marguillier de la paroisse","effect":"Si plusieurs marchands prennent le pas, vous passez devant.","note":"Un banc d’honneur à Notre-Dame de Québec."},{"id":"o_cons","kind":"charge","star":3,"title":"Conseiller au Conseil souverain","effect":"Vous gagnez les égalités de l’enchère des congés.","note":"Le Conseil souverain juge et réglemente la colonie."},{"id":"o_fief","kind":"charge","star":3,"title":"Fief sur le Richelieu","effect":"+1 livre chaque hiver (et noblesse, à venir).","note":"Les officiers du régiment de Carignan reçoivent des seigneuries le long du Richelieu."}];
+const RKCOL={recrue:"#6B4A2A",contrat:"#3E5A7A",nation:"#2F5E4A",charge:"#7A2E3A"};
+const CARDS=[{"id": "m_roch", "kind": "maison", "title": "Armateurs de La Rochelle", "effect": "Commencez avec 1 navire (fret 2), 3 livres, 2 marchandises et 1 baril. Vos navires ont +1 au dé de traversée depuis La Rochelle.", "note": "Les négociants rochelais arment les navires et avancent les cargaisons à crédit."}, {"id": "m_queb", "kind": "maison", "title": "Grand marchand de Québec", "effect": "Commencez avec 7 livres et 3 marchandises.", "note": "Agent de compagnie, prêteur, armateur : il touche à tout."}, {"id": "m_mtl", "kind": "maison", "title": "Équipeurs de Montréal", "effect": "Commencez avec 1 grand canot, 3 livres et 2 marchandises.", "note": "Au contact des convois, ils équipent les canots et engagent les hommes."}, {"id": "m_off", "kind": "maison", "title": "Officier de la Marine", "effect": "Commencez avec 5 livres et 2 barils.", "note": "Commandant de poste, il vend l’eau-de-vie à l’abri de son grade."}, {"id": "m_seig", "kind": "maison", "title": "Seigneurie de Beaupré", "effect": "Commencez avec 4 livres et 2 marchandises. Touchez 2 livres à chaque hiver.", "note": "Cens et rentes des censitaires : peu, mais chaque année."}, {"id": "m_cog", "kind": "maison", "title": "Bouilleurs de Cognac", "effect": "Commencez avec 1 alambic, 2 livres et 3 barils.", "note": "Les bouilleurs charentais vendent leur eau-de-vie aux négociants de La Rochelle."}, {"id": "interprete", "kind": "personnage", "title": "Interprète wendat", "effect": "Un interprète offert dans chaque expédition, sans prendre de place.", "note": "Parler la langue, c’est désamorcer les querelles."}, {"id": "voyageur", "kind": "personnage", "title": "Commis-voyageur", "effect": "Un représentant offert dans chaque expédition, sans prendre de place.", "note": "Un homme de confiance qui décide au nom de la maison."}, {"id": "sergent", "kind": "personnage", "title": "Sergent de la Compagnie franche", "effect": "Un milicien offert dans chaque expédition, sans prendre de place.", "note": "Un soldat de la Marine en congé, qui loue son fusil."}, {"id": "aguerri", "kind": "personnage", "title": "Coureur des bois aguerri", "effect": "Vos canots de coureur des bois portent 3 charges, et vos retours d’octobre sont sans risque.", "note": "Il connaît chaque rapide de l’Outaouais."}, {"id": "engages", "kind": "personnage", "title": "Engagés de Lachine", "effect": "Vos grands et petits canots ont 1 place de plus.", "note": "Des hommes robustes, engagés devant notaire."}, {"id": "pilote", "kind": "personnage", "title": "Pilote du Saint-Laurent", "effect": "Vos navires ignorent le gros temps, ne paient pas de faux fret au départ de Québec et ont +2 au dé de traversée depuis La Rochelle.", "note": "Il connaît chaque batture du fleuve."}, {"id": "gouverneur", "kind": "personnage", "title": "Ami du gouverneur", "effect": "Vous recevez un congé en avril, sans enchère et hors de la réserve.", "note": "Un souper au château Saint-Louis vaut bien un permis."}, {"id": "confesseur", "kind": "personnage", "title": "Confesseur récollet", "effect": "Chaque hiver, soupçon −1.", "note": "Les Récollets sont moins sévères que les Jésuites."}, {"id": "passeurs", "kind": "personnage", "title": "Passeurs de Kahnawake", "effect": "Albany vous paie en 1 mois au lieu de 2 et ne donne que +1 soupçon.", "note": "La route du lac Champlain n’a pas de secret pour eux."}, {"id": "guide", "kind": "personnage", "title": "Guide ojibwé", "effect": "Vos expéditions peuvent pousser jusqu’au lac Supérieur sans représentant.", "note": "Il connaît les portages du Sault et la route de Chagouamigon."}, {"id": "bouilleur", "kind": "personnage", "title": "Bouilleur associé", "effect": "Commencez avec 1 baril de plus, et 1 baril offert à chaque commande.", "note": "Un cousin en Charente, et l’eau-de-vie à prix coûtant."}, {"id": "cabaretier", "kind": "personnage", "title": "Cabaretier de la basse-ville", "effect": "Commencez avec 2 barils. Le comptoir vous vend l’eau-de-vie 1 livre moins cher.", "note": "Son cabaret, près du quai de Québec, ne désemplit pas."}, {"id": "mercier", "kind": "personnage", "title": "Mercier de la rue Saint-Paul", "effect": "Commencez avec 2 marchandises. Le comptoir vous vend les marchandises 1 livre moins cher.", "note": "Couvertures, chaudrons et rassades : sa boutique fournit les canots de Montréal."}, {"id": "commis", "kind": "personnage", "title": "Commis du fermier", "effect": "+1 livre chaque fois qu’un navire qui part emporte vos peaux.", "note": "Une pesée généreuse au bureau du castor."}, {"id": "alliance", "kind": "atout", "title": "Alliance iroquoise", "effect": "Quand un raid vous frappe, payez 1 livre pour l’éviter. (Sans effet : raids retirés pour l’instant.)", "note": "Présents et colliers de wampum achètent la paix sur l’Outaouais."}, {"id": "chantier", "kind": "atout", "title": "Chantier naval de Québec", "effect": "Vos navires coûtent 4 livres au lieu de 5 (une part offerte).", "note": "Talon voulait une colonie qui construise ses propres navires."}, {"id": "credit", "kind": "atout", "title": "Lettre de crédit", "effect": "Commencez avec 3 livres de plus.", "note": "Signée par une maison de banque parisienne."}, {"id": "castorgras", "kind": "atout", "title": "Castor gras", "effect": "À chaque départ de navire, votre meilleure peau à bord vaut 1 livre de plus par point.", "note": "Les peaux portées un hiver valent bien plus à Paris."}];
+const EVENTS=[{"title": "Mois calme", "text": "Le fleuve est tranquille.", "n": 3}, {"title": "Gros temps sur l’Atlantique", "text": "Chaque navire qui part maintenant de Québec, ou qui y arrive au début du mois prochain, lance le dé de traversée : sur 1, il est perdu avec sa cargaison. Le pilote du Saint-Laurent connaît le fleuve et l’ignore.", "n": 1}, {"title": "Magasins pleins à Paris", "text": "Les chapeliers ont trop de stock : le prix de Paris baisse de 1.", "n": 1}, {"title": "Castor rare à Paris", "text": "Les chapeliers manquent de peaux : le prix de Paris monte de 1.", "n": 1}, {"title": "Fièvre aux Pays d’en Haut", "text": "Chaque expédition sur les lacs perd un équipier engagé.", "n": 1}];
+const DEMANDE=[{"title": "Commande de la Cour", "d": "+2", "text": "Le roi veut des chapeaux pour toute sa maison."}, {"title": "Mode des chapeaux de castor", "d": "+1", "text": "Les chapeliers de Paris s’arrachent les peaux."}, {"title": "Paix en Europe", "d": "0", "text": "Le commerce suit son cours."}, {"title": "Paix en Europe", "d": "0", "text": "Le commerce suit son cours."}, {"title": "Guerre en Europe", "d": "−1", "text": "Les corsaires anglais rôdent : jusqu’à l’hiver, chaque navire qui arrive ou qui part lance le dé de traversée."}, {"title": "Peaux de la Baie d’Hudson", "d": "−1", "text": "Les Anglais inondent le marché de leurs peaux."}];
+const GRAND=[{"title": "Refus des sacrements", "text": "L’évêque fait refuser l’absolution aux vendeurs d’eau-de-vie. Tous les marchands prennent +1 soupçon."}, {"title": "Une nation refuse l’alcool", "text": "Les chefs interdisent l’eau-de-vie dans leurs villages. Jusqu’à l’hiver, les barils ne s’échangent plus."}, {"title": "Ordonnance royale", "text": "Désormais, les canots de coureurs des bois ne peuvent plus transporter d’eau-de-vie."}];
+const CREW=[
+  {id:"rep",label:"Représentant",short:"Rep.",text:"2 livres. Choisit le lac au lieu du dé, peut ensuite changer de lac (1 action) et mener l’expédition au lac Supérieur."},
+  {id:"guide",label:"Guide",short:"Guide",text:"1 livre. Regarde les jetons cachés avant d’échanger."},
+  {id:"mil",label:"Milicien",short:"Mil.",text:"1 livre. Protège l’expédition des raids (sans effet : raids retirés pour l’instant)."},
+  {id:"int",label:"Interprète",short:"Int.",text:"1 livre. Le premier baril échangé à chaque lac ne fait pas de ravage."}
+];
+const BAGS={
+  classic:{name:"Sac classique",sub:"Grands Lacs",color:"#8A6A45",items:[{q:1,n:8},{q:2,n:6},{q:3,n:4}]},
+  premium:{name:"Sac premium",sub:"Lac Supérieur",color:"#8A6418",items:[{q:2,n:3},{q:3,n:4},{q:4,n:3},{q:5,n:2}]},
+  hidden:{name:"Jetons cachés",sub:"Tous les lacs",color:"#3A2618",items:[{k:"fur",q:1,n:6},{k:"fur",q:2,n:6},{k:"fur",q:3,n:3},{k:"mission",n:2},{k:"present",n:2},{k:"fievre",n:2},{k:"sec",n:2}]}
+};
+const HID={
+  raid:{t:"Raid",s:"Raid",x:"Des guerriers attaquent le camp : l’expédition perd la moitié de sa cargaison, sauf avec un milicien."},
+  mission:{t:"Missionnaire jésuite",s:"Jésuite",x:"Si vous transportez de l’eau-de-vie : +1 soupçon."},
+  present:{t:"Présent de bienvenue",s:"Don",x:"Une peau de qualité 2, et la charge échangée vous est rendue."},
+  fievre:{t:"Fièvre",s:"Fièvre",x:"Un équipier reste au village. Sans équipier, une charge est perdue."},
+  sec:{t:"Castor sec",s:"Sec",x:"Des peaux invendables : la charge est perdue pour rien."}
+};
+const DECKS={
+  sit:{name:"Situations",back:"#2B241C"},
+  ev:{name:"Événements du mois",back:"#2C4A52"},
+  dem:{name:"Demande de Paris",back:"#3F3459"},
+  grand:{name:"Grands événements",back:"#5E241C"},
+  rec:{name:"Recrutement",back:"#4A3A22"}
+};
+const LAKES=[
+  {id:"huron",chits:[[262,404],[290,404],[318,404]]},
+  {id:"michigan",chits:[[112,420],[112,448],[112,476]]},
+  {id:"erie",chits:[[330,474],[356,466],[382,458]]},
+  {id:"ontario",chits:[[396,404],[422,398],[448,392]]},
+  {id:"sup",chits:[[170,172],[196,172],[222,172]]}
+];
+
+/* ---------- Géométrie de la table ---------- */
+const TW=2000,TH=1900,BX=40,BY=40,MDY=140,MAT_Y=1200,MAT_W=450,MAT_H=430;
+const B=(x,y)=>[BX+x,BY+y],M=(x,y)=>[BX+x,BY+MDY+y];
+const RAV_X0=120,RAV_MAX=6,RAV_EV=4,RAV_STEP=1040/7,YEARS=5,DEM_X=430,DEM_Y=104;
+const PT_Y=752,PT_W=216,PT_GAP=10,LIV_Y=968,DET_Y=1032,PARIS_X=614,PARIS_STEP=28;
+const RIV_Y=1700,RIV_X=176,RIV_STEP=118;
+const SUP={deckY:72,deck2Y:300,bankY:500,crewY:672,numY:830,diceY:500,yardY:960};
+const SIZE={card:[100,140],deck:[104,162],bag:[110,122],chit:[30,30],baril:[24,22],march:[24,22],grand:[52,22],petit:[40,20],ship:[40,28],shipcard:[120,64],pas:[34,22],part:[14,14],alambic:[26,30],pawn:[28,28],disc:[18,18],cube:[20,20],conge:[30,20],crew:[36,36],num:[24,24],month:[36,24],paris:[22,22],year:[24,22],die:[38,38]};
+
+/* ---------- État ---------- */
+const KEY="table-du-castor-v6";
+let S=null,hist=[],zoom=.5,sel=null,peek=null,drag=null,lastClick={id:null,t:0};
+const $=id=>document.getElementById(id);
+const sizeOf=p=>p.k==="card"?SIZE.card:p.k==="chit"?SIZE.chit:p.k==="deck"?SIZE.deck:p.k==="bag"?SIZE.bag:p.k==="die"?SIZE.die:SIZE[p.kind]||[24,24];
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function load(){try{const v=JSON.parse(localStorage.getItem(KEY));if(v&&v.pieces&&v.decks&&v.bags)return v}catch(e){}return null}
+function snap(){hist.push(JSON.stringify(S));if(hist.length>60)hist.shift();$("undo").disabled=false}
+function undo(){if(!hist.length)return;S=JSON.parse(hist.pop());sel=null;peek=null;$("undo").disabled=!hist.length;save();renderPrinted();render()}
+
+/* ---------- Installation ---------- */
+function setup(n){
+  S={n,z:10,id:1,pieces:{},decks:{sit:[],ev:[],dem:[],grand:[],rec:[]},bags:{classic:[],premium:[],hidden:[]}};
+  const add=(o,x,y)=>{const id="p"+(S.id++);S.pieces[id]={id,x,y,z:S.z++,up:true,...o};return id};
+  CARDS.forEach((c,i)=>S.decks.sit.push(add({k:"card",deck:"sit",ref:i,up:false,in:"deck"},0,0)));
+  EVENTS.forEach((c,i)=>{for(let k=0;k<c.n;k++)S.decks.ev.push(add({k:"card",deck:"ev",ref:i,up:false,in:"deck"},0,0))});
+  DEMANDE.forEach((c,i)=>S.decks.dem.push(add({k:"card",deck:"dem",ref:i,up:false,in:"deck"},0,0)));
+  GRAND.forEach((c,i)=>S.decks.grand.push(add({k:"card",deck:"grand",ref:i,up:false,in:"deck"},0,0)));
+  RCARDS.forEach((c,i)=>S.decks.rec.push(add({k:"card",deck:"rec",ref:i,up:false,in:"deck"},0,0)));
+  Object.keys(S.decks).forEach(d=>shuffle(S.decks[d]));
+  // Rivière de recrutement : paquet et cartes visibles (4, ou 5 à 4 joueurs)
+  add({k:"deck",deck:"rec"},40,RIV_Y);
+  for(let k=0;k<(n>=4?5:4);k++){const id=S.decks.rec.pop(),c=S.pieces[id];c.in=null;c.up=true;c.x=RIV_X+k*RIV_STEP+4;c.y=RIV_Y+22;c.z=S.z++}
+  Object.keys(BAGS).forEach(b=>BAGS[b].items.forEach(it=>{for(let k=0;k<it.n;k++)S.bags[b].push(add({k:"chit",bag:b,q:it.q||0,e:it.k&&it.k!=="fur"?it.k:null,up:false,gras:false,in:"bag"},0,0))}));
+  // Paquets et sacs dans la réserve générale
+  add({k:"deck",deck:"sit"},1300,SUP.deckY);add({k:"deck",deck:"ev"},1450,SUP.deckY);add({k:"deck",deck:"dem"},1720,SUP.deckY);add({k:"deck",deck:"grand"},1300,SUP.deck2Y);
+  add({k:"bag",bag:"classic"},1580,SUP.deck2Y);add({k:"bag",bag:"premium"},1710,SUP.deck2Y);add({k:"bag",bag:"hidden"},1840,SUP.deck2Y);
+  // Marqueurs communs sur le plateau
+  add({k:"tok",kind:"month",c:-1},...B(40+62,54+72));
+  add({k:"tok",kind:"year",c:-1,label:"I"},...B(190,22));
+  add({k:"tok",kind:"cube",c:-1},...B(RAV_X0+(RAV_STEP-4)/2-10,172+5));
+  add({k:"tok",kind:"paris",c:-1},...M(PARIS_X+3*PARIS_STEP+2,132));
+  add({k:"tok",kind:"disc",c:-1,dem:"gl"},...M(DEM_X+52,DEM_Y+25));add({k:"tok",kind:"disc",c:-1,dem:"sup"},...M(DEM_X+52,DEM_Y+49));
+  for(let k=0;k<4;k++){const xy=k<n-1?M(612+k*36,214):[1860,SUP.bankY+120+k*26];add({k:"tok",kind:"conge",c:-1},...xy)}
+  // Comptoir de Québec (gris) : il ne vend que son stock. Départ : cargaison du navire du roi (3 marchandises, 1 baril), 1 grand et 1 petit canot.
+  const ptx=k=>BX+40+(k-1)*(PT_W+PT_GAP),bankRow=BY+PT_Y+40+4*30;
+  for(let k=0;k<3;k++)add({k:"tok",kind:"march",c:-1,bank:true},ptx(2)+12+k*26,bankRow);add({k:"tok",kind:"baril",c:-1,bank:true},ptx(3)+12,bankRow);
+  add({k:"tok",kind:"grand",c:-1,bank:true},ptx(2)+124,bankRow);add({k:"tok",kind:"petit",c:-1,bank:true},ptx(1)+12,bankRow);
+  for(let k=0;k<8;k++)add({k:"tok",kind:"march",c:-1,bank:true},1300+k*28,SUP.bankY+30);for(let k=0;k<4;k++)add({k:"tok",kind:"baril",c:-1,bank:true},1300+k*28,SUP.bankY+62);
+  // Le navire du roi est déjà en rade au premier tour
+  add({k:"tok",kind:"ship",c:-1,bank:true,roi:true},...M(864,128));
+  // Navire marchand générique, en chargement à La Rochelle
+  add({k:"tok",kind:"ship",c:-1,bank:true,merch:true},...M(948,424));
+  // Chantier : cartes de navire à 5 parts
+  for(let k=0;k<6;k++)add({k:"tok",kind:"shipcard",c:-1},1300+(k%3)*140,SUP.yardY+20+Math.floor(k/3)*76);
+  for(let k=0;k<3;k++)add({k:"tok",kind:"pas",c:-1},1860+k*40,SUP.bankY+20);
+  // Dés, équipiers, jetons de prix
+  add({k:"die",v:3},1700,SUP.diceY+30);add({k:"die",v:5},1750,SUP.diceY+30);add({k:"die",v:1,cross:true},1800,SUP.diceY+30);
+  CREW.forEach((c,ci)=>{for(let k=0;k<4;k++)add({k:"tok",kind:"crew",c:-1,crew:c.id},1300+ci*170+k*40,SUP.crewY+30)});
+  for(let v=1;v<=8;v++)for(let k=0;k<4;k++)add({k:"tok",kind:"num",c:-1,label:String(v)},1300+(v-1)*80+(k%2)*28,SUP.numY+30+Math.floor(k/2)*28);
+  // Plateaux des joueurs
+  for(let i=0;i<n;i++){
+    const mx=40+i*(MAT_W+30),my=MAT_Y;
+    for(let k=0;k<8;k++){add({k:"tok",kind:"baril",c:i},mx+16+k*28,my+58);add({k:"tok",kind:"march",c:i},mx+16+k*28,my+88)}
+    for(let k=0;k<2;k++){add({k:"tok",kind:"grand",c:i},mx+16+k*60,my+124);add({k:"tok",kind:"petit",c:i},mx+140+k*46,my+124);add({k:"tok",kind:"ship",c:i},mx+236+k*46,my+120);add({k:"tok",kind:"alambic",c:i},mx+332+k*32,my+118)}
+    add({k:"tok",kind:"pawn",c:i},mx+404,my+120);
+    for(let k=0;k<8;k++)add({k:"tok",kind:"part",c:i},mx+16+k*20,my+400);
+    add({k:"tok",kind:"disc",c:i},mx+246+0*26+4,my+10);
+    const lx=BX+40+90+(1120-90)/31*0,dx=BX+40+90;
+    add({k:"tok",kind:"disc",c:i,track:"livres"},lx+4+(i%2)*12,BY+LIV_Y+4+Math.floor(i/2)*14);
+    add({k:"tok",kind:"disc",c:i,track:"dette"},dx+4+(i%2)*12,BY+DET_Y+4+Math.floor(i/2)*14);
+  }
+  hist=[];$("undo").disabled=true;sel=null;peek=null;save();renderPrinted();render();fit();
+}
+
+/* ---------- Plateau imprimé ---------- */
+const W="#9DBDC2",WD="#7FA6AD",LAND="#D6C89C",EDGE="#B7A675",INK="#2A2418",PCARD="#F2EAD3";
+function mapSVG(){
+  let h=`<rect x="36" y="96" width="1128" height="474" rx="4" fill="${LAND}" stroke="${EDGE}"/>
+<path d="M836 96 L1164 96 L1164 570 L905 570 C885 520 858 470 866 410 C874 352 836 312 806 276 C784 248 808 160 836 96 Z" fill="${W}"/>
+<path d="M1164 300 C1132 314 1120 344 1126 372 C1131 398 1114 420 1122 444 C1128 460 1146 468 1164 472 Z" fill="${LAND}" stroke="${EDGE}"/>
+<ellipse cx="196" cy="150" rx="128" ry="34" fill="${W}" stroke="${WD}"/>
+<ellipse cx="112" cy="392" rx="28" ry="110" fill="${W}" stroke="${WD}"/>
+<ellipse cx="282" cy="372" rx="52" ry="82" transform="rotate(18 282 372)" fill="${W}" stroke="${WD}"/>
+<ellipse cx="300" cy="488" rx="90" ry="20" transform="rotate(-18 300 488)" fill="${W}" stroke="${WD}"/>
+<ellipse cx="430" cy="430" rx="75" ry="24" transform="rotate(-12 430 430)" fill="${W}" stroke="${WD}"/>
+<ellipse cx="640" cy="440" rx="9" ry="46" fill="${W}" stroke="${WD}"/>
+<path d="M812 262 C770 270 735 288 690 300 C650 312 610 330 575 345 C545 360 515 385 490 410" fill="none" stroke="${W}" stroke-width="12" stroke-linecap="round"/>
+<path d="M575 345 C530 330 480 300 420 292 C370 285 330 288 306 304" fill="none" stroke="${W}" stroke-width="6" stroke-linecap="round"/>
+<path d="M630 330 C634 350 640 370 640 394" fill="none" stroke="${W}" stroke-width="4"/>
+<path d="M640 486 L640 528" fill="none" stroke="${W}" stroke-width="4"/>
+<path d="M812 270 C860 292 900 306 930 314 L1050 334 L1126 352" fill="none" stroke="${INK}" stroke-width="1.2" stroke-dasharray="5 5" opacity=".55"/>
+<circle cx="930" cy="314" r="19" fill="#E9F0EF" stroke="${INK}" opacity=".9"/><text class="cq" x="930" y="350" text-anchor="middle">dans 1 mois</text>
+<circle cx="1050" cy="334" r="19" fill="#E9F0EF" stroke="${INK}" opacity=".9"/><text class="cq" x="1050" y="370" text-anchor="middle">dans 2 mois</text>
+<text class="ml" x="990" y="300" text-anchor="middle">Traversée · 2 mois</text>
+<rect x="880" y="392" width="114" height="54" rx="5" fill="#E9F0EF" stroke="${INK}" stroke-dasharray="3 3" opacity=".9"/><text class="cq" x="888" y="407">À La Rochelle</text>
+<text class="ml" x="196" y="146" text-anchor="middle">Lac Supérieur · qualité 2 à 5</text>
+<text class="ml" x="112" y="532" text-anchor="middle">Lac Michigan</text>
+<text class="ml" x="284" y="378" text-anchor="middle">Lac Huron</text>
+<text class="ml" x="270" y="500" text-anchor="middle">Lac Érié</text>
+<text class="ml" x="420" y="440" text-anchor="middle">Lac Ontario</text>
+<text class="ml" x="664" y="474"></text>
+<defs><pattern id="hatchz" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" fill="#EFE7D2"/><line x1="0" y1="0" x2="0" y2="7" stroke="${INK}" stroke-width="1.3" opacity=".28"/></pattern></defs>
+<path d="M568 340 C560 330 554 320 547 306" fill="none" stroke="${INK}" stroke-width="1.2" stroke-dasharray="5 5" opacity=".55"/>
+<path d="M513 293 L508 292" fill="none" stroke="${INK}" stroke-width="1.2" stroke-dasharray="5 5" opacity=".55"/>
+<path d="M352 236 L352 217" fill="none" stroke="${INK}" stroke-width="1.2" stroke-dasharray="5 5" opacity=".55"/>
+<path d="M352 179 C346 172 336 166 322 160" fill="none" stroke="${INK}" stroke-width="1.2" stroke-dasharray="5 5" opacity=".55"/>
+<circle cx="532" cy="296" r="19" fill="#E9F0EF" stroke="${INK}" opacity=".9"/><text class="cq" x="532" y="270" text-anchor="middle">1 mois</text>
+<circle cx="352" cy="198" r="19" fill="#E9F0EF" stroke="${INK}" opacity=".9"/><text class="cq" x="378" y="202">1 mois</text>
+<rect x="316" y="238" width="126" height="84" fill="#E9F0EF" opacity=".92"/><rect x="442" y="238" width="64" height="84" fill="url(#hatchz)"/>
+<line x1="442" y1="238" x2="442" y2="322" stroke="${INK}" stroke-opacity=".4"/>
+<rect x="316" y="238" width="190" height="84" rx="6" fill="none" stroke="${INK}" stroke-opacity=".55" stroke-dasharray="4 4"/>
+<text class="cq" x="318" y="233">Grands Lacs</text><text class="cq" x="320" y="249" opacity=".75">prêts</text><text class="cq" x="446" y="249" opacity=".75">arrivée</text>
+<rect x="146" y="192" width="110" height="42" fill="#E9F0EF" opacity=".92"/><rect x="256" y="192" width="54" height="42" fill="url(#hatchz)"/>
+<line x1="256" y1="192" x2="256" y2="234" stroke="${INK}" stroke-opacity=".4"/>
+<rect x="146" y="192" width="164" height="42" rx="6" fill="none" stroke="${INK}" stroke-opacity=".55" stroke-dasharray="4 4"/>
+<text class="cq" x="150" y="203" opacity=".75">prêts · Supérieur</text><text class="cq" x="260" y="203" opacity=".75">arrivée</text>
+<circle cx="690" cy="300" r="5" fill="${INK}"/><text class="pl" x="700" y="322">Québec</text>
+<circle cx="575" cy="345" r="5" fill="${INK}"/><text class="pl" x="575" y="324" text-anchor="middle">Montréal</text>
+<circle cx="640" cy="530" r="5" fill="${INK}"/><text class="pl" x="630" y="535" text-anchor="end">Albany</text>
+<circle cx="1126" cy="352" r="5" fill="${INK}"/><text class="pl" x="1118" y="384" text-anchor="end">La Rochelle</text>
+<rect x="652" y="346" width="150" height="62" rx="8" fill="none" stroke="${INK}" stroke-dasharray="4 4" opacity=".55"/><text class="cq" x="660" y="361">Comptoirs du fleuve</text><rect x="652" y="412" width="150" height="28" rx="4" fill="url(#hatchz)" stroke="${INK}" stroke-opacity=".45" stroke-dasharray="3 3"/><text class="cq" x="656" y="452">retour</text>
+<rect x="1004" y="456" width="152" height="108" rx="6" fill="${LAND}" stroke="${EDGE}"/><text class="pl" x="1014" y="474" style="font-size:13px">Charente · alambics</text>
+<rect x="${DEM_X}" y="${DEM_Y}" width="164" height="80" rx="5" fill="${PCARD}" stroke="${EDGE}"/><text class="ct" x="${DEM_X+8}" y="${DEM_Y+16}">Demande de marchandises</text>
+<text class="cq" x="${DEM_X+8}" y="${DEM_Y+38}">Gr. Lacs</text><text class="cq" x="${DEM_X+8}" y="${DEM_Y+62}">Supérieur</text>`;
+  for(let v=0;v<=6;v++)h+=`<rect x="${DEM_X+54+v*15}" y="${DEM_Y+26}" width="13" height="16" rx="2" fill="#F6EFDC" stroke="${v===6?"#A3352A":EDGE}"/><text class="cq" x="${DEM_X+60+v*15}" y="${DEM_Y+38}" text-anchor="middle" style="font-size:8px">${v}</text>`;
+  for(let v=0;v<=2;v++)h+=`<rect x="${DEM_X+54+v*15}" y="${DEM_Y+50}" width="13" height="16" rx="2" fill="#F6EFDC" stroke="${v===2?"#A3352A":EDGE}"/><text class="cq" x="${DEM_X+60+v*15}" y="${DEM_Y+62}" text-anchor="middle" style="font-size:8px">${v}</text>`;
+  
+  LAKES.forEach(L=>L.chits.forEach(([x,y])=>{h+=`<circle cx="${x}" cy="${y}" r="15" fill="none" stroke="${INK}" stroke-dasharray="2 3" opacity=".35"/>`}));
+  // Prix de Paris
+  h+=`<rect x="604" y="104" width="240" height="64" rx="5" fill="${PCARD}" stroke="${EDGE}"/><text class="ct" x="614" y="122">Prix de Paris · plafond par point</text>`;
+  for(let k=1;k<=8;k++){const x=PARIS_X+(k-1)*PARIS_STEP;h+=`<rect x="${x}" y="130" width="26" height="26" rx="3" fill="#F6EFDC" stroke="${EDGE}"/><text class="cq" x="${x+13}" y="164" text-anchor="middle" style="font-weight:700">${k}</text>`}
+  h+=`<rect x="604" y="180" width="160" height="64" rx="5" fill="${PCARD}" stroke="${EDGE}"/><text class="ct" x="614" y="197">Congés</text>`;
+  // Rade de Québec
+  h+=`<rect x="852" y="100" width="306" height="182" rx="6" fill="${PCARD}" stroke="${EDGE}"/><text class="ct" x="862" y="117">Rade de Québec</text>`;
+  for(let r=0;r<4;r++){const y=126+r*38;h+=`<rect x="860" y="${y}" width="48" height="32" rx="4" fill="none" stroke="${INK}" stroke-dasharray="3 3" opacity=".5"/>`;for(let k=0;k<3;k++)h+=`<rect x="${914+k*40}" y="${y}" width="36" height="32" rx="4" fill="#F6EFDC" stroke="${EDGE}" stroke-dasharray="2 2"/>`;
+    h+=`<rect x="${1040}" y="${y}" width="36" height="32" rx="4" fill="#F6EFDC" stroke="#7A5232" stroke-width="2"/><text class="cq" x="1058" y="${y+20}" text-anchor="middle" style="font-size:8px">réservée</text>`}
+  
+  return h;
+}
+function printedSVG(){
+  const n=S.n;let h=`<rect x="${BX-12}" y="${BY-12}" width="1224" height="1124" rx="16" fill="#22332F"/><rect x="${BX}" y="${BY}" width="1200" height="1100" rx="8" fill="#E6DAB6"/>`;
+  h+=`<g transform="translate(${BX},${BY})">`;
+  // Calendrier et année
+  h+=`<text class="pl" x="40" y="40" style="font-size:16px">Calendrier</text><text class="cq" x="148" y="38">Année</text>`;
+  ["I","II","III","IV","V"].forEach((r,k)=>{h+=`<rect x="${186+k*34}" y="20" width="30" height="26" rx="3" fill="${PCARD}" stroke="${EDGE}"/><text class="cq" x="${201+k*34}" y="58" text-anchor="middle" style="font-weight:700">${r}</text>`});
+  const notes=[["Comptoir","Congés sur 3+"],["Congés sur 2+"],["Congés assurés"],[],["Commission :","dernier mois"],["Départ ou","hivernage"],["Retour :","glaces 1"],["Retour :","glaces 1–2"]];
+  h+=`<rect x="40" y="54" width="100" height="100" rx="6" fill="#E3EBD6" stroke="#8FA67A"/><text class="cm" x="50" y="78">Printemps</text><text class="cq gold" x="50" y="95">Départ de</text><text class="cq gold" x="50" y="109">La Rochelle</text><text class="cq gold" x="50" y="123">Roi en rade (I–II)</text>`;
+  for(let i=0;i<8;i++){const x=146+i*108,ic=i>=6;h+=`<rect x="${x}" y="54" width="102" height="100" rx="6" fill="${i===7?"#DCE9EC":i===6?"#E7EFEC":PCARD}" stroke="${ic?"#8FB0B7":EDGE}"/><text class="cm" x="${x+10}" y="78">${MCAP[i]}</text>`;notes[i].forEach((t,k)=>{h+=`<text class="cq ${ic?"ice":"gold"}" x="${x+10}" y="${95+k*14}">${t}</text>`})}
+  h+=`<rect x="1012" y="54" width="148" height="100" rx="6" fill="#22332F"/><text class="cm" x="1024" y="78" style="fill:#EFE6D0">Hiver</text><text class="cq" x="1024" y="96" style="fill:#C9D6D2">Dettes · commande</text><text class="cq" x="1024" y="152" style="fill:#E7C27A">+ 1 investissement gratuit</text><text class="cq" x="1024" y="110" style="fill:#C9D6D2">Paris +2 · demande</text><text class="cq" x="1024" y="124" style="fill:#C9D6D2">Ravages −1</text><text class="cq" x="1024" y="138" style="fill:#C9D6D2">Entretien 1 / navire</text>`;
+  // Ravages
+  h+=`<text class="pl" x="40" y="192" style="font-size:17px">Ravages</text>`;
+  for(let v=0;v<=RAV_MAX;v++){const x=RAV_X0+v*RAV_STEP,mk=v===RAV_EV||v===RAV_MAX,col=v===RAV_MAX?"#A3352A":"#B86E12";h+=`<rect x="${x}" y="172" width="${RAV_STEP-4}" height="30" rx="3" fill="${PCARD}" stroke="${mk?col:EDGE}" stroke-width="${mk?1.6:1}"/><text class="cq" x="${x+(RAV_STEP-4)/2}" y="192" text-anchor="middle" style="font-weight:700;${mk?`fill:${col}`:""}">${v}</text>`;}
+  
+  // Carte
+  h+=`<g transform="translate(0,${MDY})">${mapSVG()}</g>`;
+  // Piste des prix
+  h+=`<text class="pl" x="40" y="${PT_Y-10}" style="font-size:16px">Magasins de Québec · piste des prix</text>`;
+  for(let k=1;k<=5;k++){const x=40+(k-1)*(PT_W+PT_GAP);h+=`<rect x="${x}" y="${PT_Y}" width="${PT_W}" height="196" rx="6" fill="${PCARD}" stroke="${EDGE}"/><rect x="${x}" y="${PT_Y}" width="${PT_W}" height="24" rx="6" fill="#7A5232"/><rect x="${x}" y="${PT_Y+16}" width="${PT_W}" height="8" fill="#7A5232"/><text class="num" x="${x+PT_W/2}" y="${PT_Y+16}" text-anchor="middle" style="font-size:13px">${k} livre${k>1?"s":""}</text>`;
+    }
+  // Livres et dette
+  const track=(y0,label,max,danger)=>{const cw=(1120-90)/(max+1);let t=`<text class="pl" x="40" y="${y0+24}" style="font-size:16px">${label}</text>`;for(let v=0;v<=max;v++){const x=130+v*cw,mk=v%5===0;t+=`<rect x="${x}" y="${y0}" width="${cw-3}" height="38" rx="3" fill="${PCARD}" stroke="${mk?(danger?"#A3352A":"#7A5232"):EDGE}" stroke-width="${mk?1.4:1}"/>`;if(mk)t+=`<text class="cq" x="${x+(cw-3)/2}" y="${y0+52}" text-anchor="middle" style="font-weight:700;${danger?"fill:#A3352A":""}">${v===max?v+"+":v}</text>`}return t};
+  h+=track(LIV_Y,"Livres",30,false)+track(DET_Y,"Dette",20,true);
+  h+=`</g>`;
+  // Réserve générale
+  const lab=(x,y,t,s)=>`<text class="lab" x="${x}" y="${y}">${t}</text>`;
+  h+=lab(1300,SUP.deckY-24,"Paquets","glisser pour piocher · déposer dessus pour remettre");
+  h+=`<rect x="1572" y="${SUP.deckY+18}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="1626" y="${SUP.deckY+96}" text-anchor="middle">Fin de mois</text>`;
+  h+=`<rect x="1842" y="${SUP.deckY+18}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="1896" y="${SUP.deckY+96}" text-anchor="middle">Demande</text>`;
+  h+=`<rect x="1422" y="${SUP.deck2Y+18}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="1476" y="${SUP.deck2Y+96}" text-anchor="middle">Grand événement</text>`;
+  h+=lab(1580,SUP.deck2Y-24,"Sacs de jetons","cliquer pour piocher · déposer un jeton dessus pour le remettre");
+  h+=lab(1300,SUP.bankY-6,"Comptoir de Québec","gris · ne vend que son stock · prix fixé à l’arrivée : milieu entre le plus bas et le plus haut des joueurs, arrondi en bas")+lab(1700,SUP.diceY-6,"Dés","le 3ᵉ : dé de traversée")+lab(1700,SUP.bankY+104,"Congés","");
+  h+=lab(1300,SUP.crewY-6,"Équipiers","représentant 2 · guide, milicien, interprète 1");
+  
+  h+=`<text class="lab" x="-138" y="30">Rivière</text><rect x="-138" y="40" width="108" height="166" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/>`;
+  ["3 livres","2 livres","1 livre","1 livre"].forEach((t,k)=>{const y=226+k*178;h+=`<rect x="-138" y="${y}" width="108" height="148" rx="8" fill="#F2EAD3" stroke="#B7A675"/><text class="lab" x="-84" y="${y+168}" text-anchor="middle" style="font-size:14px">${t}</text>`});
+  h+=`<rect x="-138" y="${226+4*178}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="-84" y="${226+4*178+80}" text-anchor="middle">Défausse</text>`;
+  h+=lab(1500,1190,"Matériel de départ");
+  h+=lab(1300,SUP.yardY-6,"Chantier de La Rochelle","cartes de navire · 5 parts de 1 livre, un disque de couleur par part");
+  // Plateaux des joueurs
+  for(let i=0;i<n;i++){const mx=40+i*(MAT_W+30),my=MAT_Y;
+    h+=`<rect x="${mx}" y="${my}" width="${MAT_W}" height="${MAT_H}" rx="12" fill="${PCARD}" stroke="${EDGE}"/><rect x="${mx}" y="${my}" width="${MAT_W}" height="40" rx="12" fill="${COL[i]}"/><rect x="${mx}" y="${my+28}" width="${MAT_W}" height="12" fill="${COL[i]}"/>`;
+    h+=`<text class="lab" x="${mx+14}" y="${my+27}">Joueur ${COLNAME[i]}</text><text class="num" x="${mx+232}" y="${my+25}" text-anchor="end" style="font-size:11px">Soupçon</text>`;
+    for(let k=0;k<=6;k++)h+=`<rect x="${mx+242+k*26}" y="${my+6}" width="24" height="26" rx="3" fill="#F6EFDC" stroke="${COL_DARK[i]}"/><text class="cq" x="${mx+254+k*26}" y="${my+36}" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:9px">${k}</text>`;
+    const zone=(x,y,w,hh,t)=>`<rect x="${mx+x}" y="${my+y}" width="${w}" height="${hh}" rx="6" fill="none" stroke="${EDGE}" stroke-dasharray="4 3"/><text class="cq" x="${mx+x+6}" y="${my+y+13}">${t}</text>`;
+    h+=zone(8,48,434,112,"Réserve")+zone(8,168,210,70,"À quai")+zone(226,168,216,70,"Peaux à Québec")+zone(8,246,434,138,"Situations, équipiers et cartes de navire")+zone(8,388,434,34,"Disques de parts");
+  }
+  return h;
+}
+function renderPrinted(){const sv=$("printed");sv.setAttribute("width",TW);sv.setAttribute("height",TH);sv.setAttribute("viewBox",`0 0 ${TW} ${TH}`);sv.innerHTML=printedSVG()}
+
+/* ---------- Rendu des pièces ---------- */
+const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+const cardInfo=p=>{const d=p.deck;if(d==="sit"){const c=CARDS[p.ref];return{band:KIND[c.kind],k:c.kind==="maison"?"var(--k-maison)":c.kind==="personnage"?"var(--k-perso)":"var(--k-atout)",title:c.title,text:c.effect,note:c.note}}
+  if(d==="ev"){const c=EVENTS[p.ref];return{band:"Événement de fin de mois",k:"var(--k-event)",title:c.title,text:c.text}}
+  if(d==="dem"){const c=DEMANDE[p.ref];return{band:`Demande de Paris · ${c.d}`,k:"var(--k-dem)",title:c.title,text:`${c.text} Prix de Paris ${c.d}.`}}
+  if(d==="rec"){const c=RCARDS[p.ref];return{band:KIND[c.kind],k:RKCOL[c.kind],title:c.title,text:c.effect+(c.star?` ★${c.star}`:""),note:c.note}}
+  const c=GRAND[p.ref];return{band:"Grand événement",k:"var(--k-grand)",title:c.title,text:c.text}};
+function cardHTML(p,forceUp){const up=forceUp||p.up;if(!up)return `<div class="card back" style="--kb:${DECKS[p.deck].back}"><div class="bk">Castor et eau-de-vie<small>${DECKS[p.deck].name}</small></div></div>`;
+  const c=cardInfo(p);return `<div class="card" style="--k:${c.k}"><div class="cb">${c.band}</div><div class="ct">${c.title}</div><div><div class="cf">${c.text}</div>${c.note?`<div class="cn">${c.note}</div>`:""}</div></div>`}
+function chitHTML(p,forceUp){const up=forceUp||p.up;
+  if(!up)return `<div class="chit down ${p.bag}${p.gras?" gras":""}">${p.bag==="classic"?"G":p.bag==="premium"?"S":"?"}</div>`;
+  if(p.e)return `<div class="chit evt"><span class="cl">${HID[p.e].s}</span></div>`;
+  return `<div class="chit ${p.bag==="premium"?"prem":p.bag==="hidden"?"hidf":""}${p.gras?" gras":""}">${p.q}</div>`}
+function tokSVG(p){
+  const c=p.c<0?GREY:COL[p.c],d=p.c<0?GREY_DARK:COL_DARK[p.c];
+  switch(p.kind){
+    case"baril":return `<svg viewBox="0 0 24 22"><rect x="1" y="1" width="22" height="20" rx="4" fill="${c}" stroke="${d}" stroke-width="1.5"/><rect x="8" y="4" width="8" height="14" rx="3" fill="#fff" opacity=".92"/><line x1="8" y1="8" x2="16" y2="8" stroke="${c}" stroke-width="1.3"/><line x1="8" y1="14" x2="16" y2="14" stroke="${c}" stroke-width="1.3"/></svg>`;
+    case"march":return `<svg viewBox="0 0 24 22"><rect x="1" y="1" width="22" height="20" rx="4" fill="${c}" stroke="${d}" stroke-width="1.5"/><rect x="6" y="5" width="12" height="12" rx="1" fill="#fff" opacity=".92"/><line x1="6" y1="11" x2="18" y2="11" stroke="${c}" stroke-width="1.3"/></svg>`;
+    case"grand":return `<svg viewBox="0 0 52 22"><path d="M2 6 Q26 26 50 6 L46 4 Q26 16 6 4 Z" fill="${c}" stroke="${d}" stroke-width="1.5"/><text x="26" y="12" text-anchor="middle" font-size="8" font-weight="700" fill="#fff" font-family="sans-serif">5</text></svg>`;
+    case"petit":return `<svg viewBox="0 0 40 20"><path d="M2 5 Q20 22 38 5 L34 3 Q20 13 6 3 Z" fill="${c}" stroke="${d}" stroke-width="1.5"/><text x="20" y="11" text-anchor="middle" font-size="7.5" font-weight="700" fill="#fff" font-family="sans-serif">3</text></svg>`;
+    case"ship":return `<svg viewBox="0 0 40 28"><path d="M3 16 L37 16 L31 26 L9 26 Z" fill="${c}" stroke="${d}" stroke-width="1.5"/><line x1="20" y1="2" x2="20" y2="16" stroke="${d}" stroke-width="1.6"/><path d="M21 3 L33 10 L21 12 Z" fill="#fff" stroke="${d}"/>${p.roi?`<text x="20" y="24" text-anchor="middle" font-size="6.5" font-weight="700" fill="#fff" font-family="sans-serif">ROI</text>`:p.merch?`<text x="20" y="24" text-anchor="middle" font-size="6" font-weight="700" fill="#fff" font-family="sans-serif">MARCH.</text>`:""}</svg>`;
+    case"shipcard":return `<svg viewBox="0 0 120 64"><rect x="1" y="1" width="118" height="62" rx="5" fill="#F2EAD3" stroke="#7A5232" stroke-width="1.5"/><rect x="1" y="1" width="118" height="16" rx="5" fill="#22332F"/><rect x="1" y="11" width="118" height="6" fill="#22332F"/><text x="8" y="12.5" font-size="8.5" font-weight="700" fill="#EFE6D0" font-family="sans-serif">NAVIRE · 4 CALES</text>${[0,1,2,3,4].map(k=>`<circle cx="${14+k*23}" cy="34" r="8.5" fill="#F6EFDC" stroke="#7A5232" stroke-dasharray="2 2"/><text x="${14+k*23}" y="37" text-anchor="middle" font-size="8" fill="#6B5F45" font-family="sans-serif">1 l.</text>`).join("")}<text x="60" y="56" text-anchor="middle" font-size="7" fill="#6B5F45" font-family="sans-serif">le plus de parts : armateur principal</text></svg>`;
+    case"pas":return `<svg viewBox="0 0 34 22"><rect x="1" y="2" width="32" height="19" rx="4" fill="#5E241C"/><rect x="1" y="1" width="32" height="18" rx="4" fill="#A3352A" stroke="#5E241C"/><text x="17" y="14" text-anchor="middle" font-size="8.5" font-weight="700" fill="#fff" font-family="sans-serif">1ᵉʳ</text></svg>`;
+    case"part":return `<svg viewBox="0 0 14 14"><circle cx="7" cy="7.6" r="6" fill="rgba(0,0,0,.3)"/><circle cx="7" cy="6.6" r="6" fill="${c}" stroke="${d}" stroke-width="1.2"/></svg>`;
+    case"alambic":return `<svg viewBox="0 0 26 30"><ellipse cx="11" cy="20" rx="9" ry="8" fill="${c}" stroke="${d}" stroke-width="1.5"/><rect x="8" y="5" width="6" height="8" fill="${c}" stroke="${d}" stroke-width="1.2"/><path d="M14 7 Q24 7 23 18" fill="none" stroke="${d}" stroke-width="2"/></svg>`;
+    case"pawn":return `<svg viewBox="0 0 28 28"><circle cx="14" cy="15" r="12" fill="rgba(0,0,0,.3)"/><circle cx="14" cy="13" r="12" fill="${c}" stroke="${d}" stroke-width="2"/><circle cx="10" cy="9" r="3.5" fill="rgba(255,255,255,.35)"/></svg>`;
+    case"disc":return `<svg viewBox="0 0 18 18"><circle cx="9" cy="10" r="8" fill="rgba(0,0,0,.3)"/><circle cx="9" cy="8.5" r="8" fill="${c}" stroke="${d}" stroke-width="1.5"/></svg>`;
+    case"cube":return `<svg viewBox="0 0 20 20"><rect x="1" y="2" width="18" height="17" rx="2" fill="#5E241C"/><rect x="1" y="1" width="18" height="16" rx="2" fill="#A3352A" stroke="#5E241C"/></svg>`;
+    case"conge":return `<svg viewBox="0 0 30 20"><rect x="1" y="1" width="28" height="18" rx="2" fill="#F6EFDC" stroke="${INK}"/><line x1="6" y1="7" x2="24" y2="7" stroke="#6B5F45"/><line x1="6" y1="11" x2="20" y2="11" stroke="#6B5F45"/><circle cx="22" cy="14" r="3" fill="#A3352A"/></svg>`;
+    case"crew":{const cr=CREW.find(x=>x.id===p.crew);return `<svg viewBox="0 0 36 36"><rect x="1" y="1" width="34" height="34" rx="5" fill="#5A4A7A" stroke="#3A2E52" stroke-width="1.5"/><text x="18" y="22" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="sans-serif">${cr.short}</text></svg>`}
+    case"num":return `<svg viewBox="0 0 24 24"><circle cx="12" cy="12.5" r="11" fill="rgba(0,0,0,.25)"/><circle cx="12" cy="11.5" r="11" fill="#F6EFDC" stroke="#7A5232" stroke-width="1.5"/><text x="12" y="15.5" text-anchor="middle" font-size="11" font-weight="700" fill="${INK}" font-family="sans-serif">${p.label}</text></svg>`;
+    case"month":return `<svg viewBox="0 0 36 24"><rect x="1" y="2" width="34" height="21" rx="3" fill="#4A2E17"/><rect x="1" y="1" width="34" height="20" rx="3" fill="#7A4E2A" stroke="#4A2E17" stroke-width="1.5"/><text x="18" y="15" text-anchor="middle" font-size="8" font-weight="700" fill="#fff" font-family="sans-serif">MOIS</text></svg>`;
+    case"year":return `<svg viewBox="0 0 24 22"><rect x="1" y="1" width="22" height="20" rx="3" fill="#22332F" stroke="#111"/><text x="12" y="15" text-anchor="middle" font-size="8" font-weight="700" fill="#EFE6D0" font-family="sans-serif">AN</text></svg>`;
+    case"paris":return `<svg viewBox="0 0 22 22"><circle cx="11" cy="12" r="10" fill="rgba(0,0,0,.3)"/><circle cx="11" cy="10.5" r="10" fill="#7A5232" stroke="#4A2E17" stroke-width="1.5"/><text x="11" y="14" text-anchor="middle" font-size="7.5" font-weight="700" fill="#fff" font-family="sans-serif">PARIS</text></svg>`;
+  }
+  return "";
+}
+function pieceInner(p){
+  if(p.k==="card")return cardHTML(p);
+  if(p.k==="chit")return chitHTML(p);
+  if(p.k==="die"){let c="";for(let i=0;i<9;i++)c+=`<span class="${PIPS[p.v].includes(i)?"pip":""}"></span>`;return `<div class="die${p.rolled?" roll":""}${p.cross?" cross":""}">${c}</div>`}
+  if(p.k==="deck"){const n=S.decks[p.deck].length;return `<div class="deck"><div class="handle" data-handle="1"><span>${DECKS[p.deck].name}</span><span>⠿</span></div><div class="stack">${n?`${n>2?`<div class="card back s2" style="--kb:${DECKS[p.deck].back}"></div>`:""}${n>1?`<div class="card back s1" style="--kb:${DECKS[p.deck].back}"></div>`:""}${cardHTML({deck:p.deck,up:false})}`:`<div class="empty">Paquet vide</div>`}<span class="count">${n}</span></div></div>`}
+  if(p.k==="bag"){const n=S.bags[p.bag].length,b=BAGS[p.bag];return `<div class="bag"><div class="handle" data-handle="1"><span>Sac</span><span>⠿</span></div><div class="pouch" style="background:${b.color}">${b.name}<small>${b.sub}</small><span class="count">${n}</span></div></div>`}
+  return `<div class="tok" style="width:${sizeOf(p)[0]}px;height:${sizeOf(p)[1]}px">${tokSVG(p)}</div>`;
+}
+function render(){
+  const list=Object.values(S.pieces).filter(p=>!p.in).sort((a,b)=>a.z-b.z);
+  $("pieces").innerHTML=list.map(p=>`<div class="pc${sel===p.id?" sel":""}" data-pid="${p.id}" style="left:${p.x}px;top:${p.y}px;z-index:${p.z}">${pieceInner(p)}</div>`).join("");
+  Object.values(S.pieces).forEach(p=>{if(p.rolled)p.rolled=false});
+  renderSide();
+}
+function setZoom(z){zoom=Math.max(.2,Math.min(1.6,Math.round(z*100)/100));$("table").style.transform=`scale(${zoom})`;$("sizer").style.width=TW*zoom+"px";$("sizer").style.height=TH*zoom+"px";$("zv").textContent=Math.round(zoom*100)+" %"}
+function fit(){const v=$("view");setZoom(Math.min((v.clientWidth-8)/TW,1))}
+
+/* ---------- Panneau latéral ---------- */
+function describe(p){
+  if(p.k==="card"){const c=cardInfo(p);return{title:p.up||peek===p.id?c.title:`Carte · ${DECKS[p.deck].name}`,body:p.up||peek===p.id?`<div class="big">${cardHTML(p,true)}</div>${c.note?`<p class="muted"><i>${c.note}</i></p>`:""}`:`<div class="big">${cardHTML(p)}</div><p class="muted">Face cachée. « Regarder » montre la carte ici seulement : les autres détournent les yeux.</p>`,acts:["flip","peek","back","front"]}}
+  if(p.k==="chit"){const b=BAGS[p.bag],shown=p.up||peek===p.id;const txt=!shown?`Jeton face cachée, du ${b.name.toLowerCase()}.`:p.e?`${HID[p.e].t} : ${HID[p.e].x}`:`Peau de qualité ${p.q}${p.bag==="hidden"?" (jeton caché ; +1 au lac Supérieur)":""}.${p.gras?" Castor gras : 1 livre de plus par point à la vente.":""}`;
+    return{title:shown?(p.e?HID[p.e].t:`Peau de qualité ${p.q}`):"Jeton de fourrure",body:`<div class="big">${chitHTML(p,shown)}</div><p>${txt}</p>`,acts:["flip","peek","gras","back","front"]}}
+  if(p.k==="deck")return{title:DECKS[p.deck].name,body:`<p>${S.decks[p.deck].length} carte${S.decks[p.deck].length>1?"s":""} dans le paquet. Glissez le paquet pour en tirer la carte du dessus, ou utilisez les boutons. Déposez une carte dessus pour la remettre.</p>`,acts:["draw","drawup","shuffle"]};
+  if(p.k==="bag"){const b=BAGS[p.bag];return{title:b.name,body:`<p>${S.bags[p.bag].length} jeton${S.bags[p.bag].length>1?"s":""} dans le sac (${b.sub.toLowerCase()}). Cliquez pour en piocher un au hasard ; déposez un jeton de ce sac dessus pour le remettre.</p>`,acts:["drawbag","drawbagup"]}}
+  if(p.k==="die")return{title:p.cross?"Dé de traversée":"Dé",body:`<p>Résultat : <b>${p.v}</b>. Cliquez sur le dé pour le relancer.</p>${p.cross?`<p class="muted">Seulement quand un événement le met en jeu (Gros temps sur l’Atlantique, Guerre en Europe) : chaque navire qui arrive ou qui part le lance, sur 1 il est perdu avec sa cargaison.</p>`:""}`,acts:["roll","front"]};
+  const names={baril:"Baril d’eau-de-vie",march:"Marchandise",grand:"Grand canot (5 places)",petit:"Petit canot (3 places)",ship:"Navire (4 cales)",shipcard:"Carte de navire",pas:"Jeton « Prendre le pas »",part:"Disque de part",alambic:"Alambic",pawn:"Pion d’expédition",disc:"Marqueur",cube:"Marqueur des ravages",conge:"Congé",crew:"Équipier",num:"Jeton de prix",month:"Marqueur du mois",year:"Marqueur de l’année",paris:"Marqueur du prix de Paris"};
+  let t=names[p.kind]||"Pièce";if(p.kind==="crew"){const c=CREW.find(x=>x.id===p.crew);t=c.label}
+  const owner=p.c>=0?` · joueur ${COLNAME[p.c]}`:p.bank?" · banque":"";
+  const more=p.kind==="crew"?CREW.find(x=>x.id===p.crew).text:p.kind==="ship"&&p.merch?"Navire marchand : il ne sert qu’avec la carte « Commission en France » : il emporte la commande (2 livres de fret par charge), lance le dé de traversée, puis reste en rade à Québec avec 4 places pour des peaux.":p.kind==="ship"&&p.roi?"Le navire du roi est en rade dès avril les années I et II, avec 3 marchandises et 1 baril pour le comptoir. 4 places publiques, fret fixé à son arrivée (milieu entre le plus bas et le plus haut fret des joueurs, arrondi en bas ; 2 sans navire de joueur), pas de faux fret. Réquisitionné à partir de l’année III.":p.kind==="pas"?"Pris avec l’action « Prendre le pas » : vous jouerez en premier le mois prochain. S’il y en a plusieurs, l’ordre de prise compte (posez-les dans l’ordre).":p.kind==="shipcard"?"5 parts de 1 livre (4 avec le Chantier naval, une part offerte). Posez un disque de votre couleur sur chaque part que vous financez ; à 5 parts, le navire est armé. Le joueur qui a le plus de parts (le fondateur en cas d’égalité) est l’armateur principal : il fixe le fret, tient la place réservée et paie le lest, le faux fret d’un départ anticipé et l’entretien d’hiver. Le fret encaissé se partage selon les parts.":p.kind==="disc"&&p.dem?(p.dem==="gl"?"Marchandises acceptées cette année aux Grands Lacs (6 au plus).":"Marchandises acceptées cette année au lac Supérieur (2 au plus)."):p.kind==="num"?`Valeur ${p.label}.`:"";
+  return{title:t+owner,body:`<div class="big"><div class="tok" style="width:${sizeOf(p)[0]*2.4}px;height:${sizeOf(p)[1]*2.4}px">${tokSVG(p)}</div></div>${more?`<p>${more}</p>`:""}`,acts:["front"]};
+}
+const ACT={flip:"Retourner",peek:"Regarder en secret",gras:"Castor gras",back:"Remettre au paquet ou au sac",front:"Premier plan",draw:"Piocher face cachée",drawup:"Piocher face visible",shuffle:"Mélanger",drawbag:"Piocher face cachée",drawbagup:"Piocher face visible",roll:"Lancer"};
+function renderSide(){
+  const p=sel&&S.pieces[sel];
+  if(!p||p.in){$("side").innerHTML=`<h2>Bac à sable</h2><p class="muted">Rien n’est automatique : déplacez les pièces et appliquez les règles vous-mêmes.</p><ul>
+    <li>Glissez une pièce pour la déplacer.</li><li>Double-cliquez, ou appuyez sur <kbd>F</kbd>, pour retourner une carte ou un jeton.</li><li>Glissez un paquet pour tirer la carte du dessus ; déposez une carte dessus pour la remettre.</li><li>Cliquez sur un sac pour piocher un jeton au hasard ; déposez un jeton dessus pour le remettre.</li><li>Cliquez sur un dé pour le lancer.</li><li>« Regarder en secret » montre une carte ou un jeton ici, sans le retourner.</li><li><kbd>Ctrl</kbd>+<kbd>Z</kbd> annule.</li></ul>
+    <p class="muted">Installation : chaque joueur commence avec sa réserve, ses marqueurs à 0 sur les pistes et son pion. Le draft se fait en piochant 4 situations chacun. Le navire du roi est déjà en rade, et sa cargaison au comptoir (gris). Chaque joueur affiche un seul prix par ressource : tous ses barils au même prix, toutes ses marchandises, tous ses grands canots, tous ses petits canots, et un seul fret pour tous ses navires. Une nouvelle pièce rejoint ce prix, ou déplace tout le lot si vous en choisissez un autre ; un navire armé prend le fret des autres navires de son armateur principal. Tout produit générique (marchandise ou baril du comptoir, canot du comptoir, fret du navire du roi ou du navire marchand) reçoit son prix quand il arrive sur le plateau : le milieu entre le prix le plus bas et le plus haut affichés par les joueurs pour ce produit, arrondi à l’inférieur (sans offre : marchandise 2, baril 3, grand canot 2, petit canot 1, fret 2). Il ne bouge plus ensuite. Au départ, posez les jetons gris une fois que tous les joueurs ont placé leurs produits. Dès le draft fini, chacun pose ses produits, canots et navires sur la piste des prix. Pas d’événement avant la fin du premier mois ; la demande de Paris se tire en hiver. Partie en 5 ans. Congés : il y en a autant que de joueurs moins un par an. Ils sont délivrés sur un dé de 3+ en avril, 2+ en mai, et sûrement en juin, puis mis aux enchères secrètes. Égalité : noblesse (à venir), puis le moins de soupçon, puis l’ordre du tour. Un congé par expédition hors coureur des bois ; l’Ami du gouverneur en reçoit un gratuit. En hiver, chacun prépare ses navires à La Rochelle (commande, lest) et fait un investissement gratuit, sans action. L’ordre du tour tourne d’un cran chaque mois ; l’action « Prendre le pas » fait jouer en premier le mois suivant. Canots : un canot qui arrive aux Grands Lacs (ou au Supérieur) se pose dans la partie rayée ; il ne visite pas de lac ce mois-là. Au début du mois suivant, il glisse dans la partie pleine : il est prêt et peut aller à un lac. Au retour, il se pose dans la zone rayée de Montréal et n’est déchargé (peaux à Québec, charges à quai) qu’au début du mois suivant ; en hiver, déchargez tout de suite. Début de mois : faites d’abord glisser les canots des zones rayées, puis avancez les canots en route. Pendant l’année, « Commander en France » et « Investir » restent des actions. Il n’y a plus de commande en saison : seule la carte « Commission en France » le permet (jusqu’à 4 charges, sur votre navire libre ou le navire marchand à 2 livres de fret par charge ; dé de traversée, 4+ arrive le mois suivant, sinon un mois plus tard). Recruter : une action, prenez une carte de la rivière au prix de sa case. Recrues, alliances et charges se posent devant vous ; un contrat se garde en main (deux au plus) et se joue pendant votre tour, sans action. Une alliance avec une nation est perdue dès que vous échangez un baril chez elle (ravages +1). À Québec, faire partir un navire avant qu’il soit plein coûte 1 livre de faux fret par place vide. « Changer les prix » repose tout ce que vous avez sur la piste des prix. Prix : navire 5, alambic 4, grand canot 3, petit canot 2, représentant 2, guide, milicien et interprète 1, canot de coureur des bois 1 par départ ; la location d’un canot se fait au prix que fixe son propriétaire.</p>`;return}
+  const D=describe(p);
+  $("side").innerHTML=`<h2>${D.title}</h2>${D.body}<div class="acts">${D.acts.filter(a=>!(a==="peek"&&p.up)&&!(a==="gras"&&(!p.up||p.e))).map(a=>`<button class="tb" data-cmd="${a}">${a==="gras"&&p.gras?"Retirer le castor gras":ACT[a]}</button>`).join("")}</div>`;
+}
+
+/* ---------- Actions ---------- */
+function topZ(p){p.z=++S.z}
+function flip(p){if(p.k!=="card"&&p.k!=="chit")return;snap();p.up=!p.up;peek=null;save();render()}
+function drawFrom(deckPiece,up,at){const arr=S.decks[deckPiece.deck];if(!arr.length)return null;const id=arr.pop(),c=S.pieces[id];c.in=null;c.up=!!up;
+  const [x,y]=at||[deckPiece.x+118+(S.drawn=(S.drawn||0)+1)%5*10,deckPiece.y+18+(S.drawn%5)*10];c.x=x;c.y=y;topZ(c);return c}
+function drawBag(bagPiece,up){const arr=S.bags[bagPiece.bag];if(!arr.length)return null;const id=arr.splice(Math.floor(Math.random()*arr.length),1)[0],c=S.pieces[id];c.in=null;c.up=!!up;c.gras=false;
+  const k=(S.bagDrawn=(S.bagDrawn||0)+1)%6;c.x=bagPiece.x+8+k*16;c.y=bagPiece.y+130+(k%2)*8;topZ(c);return c}
+function putBack(p){
+  if(p.k==="card"){snap();p.in="deck";p.up=false;S.decks[p.deck].push(p.id)}
+  else if(p.k==="chit"){snap();p.in="bag";p.up=false;p.gras=false;S.bags[p.bag].push(p.id)}
+  else return;
+  if(sel===p.id)sel=null;peek=null;save();render();
+}
+function command(cmd){
+  const p=sel&&S.pieces[sel];
+  switch(cmd){
+    case"reset":{const b=$("reset");if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent="Confirmer ?";setTimeout(()=>{b.dataset.confirm="";b.textContent="Nouvelle installation"},3000);return}b.dataset.confirm="";b.textContent="Nouvelle installation";setup(+$("nplayers").value);return}
+    case"undo":return undo();
+    case"zin":return setZoom(zoom*1.2);
+    case"zout":return setZoom(zoom/1.2);
+    case"fit":return fit();
+  }
+  if(!p)return;
+  switch(cmd){
+    case"flip":return flip(p);
+    case"peek":peek=peek===p.id?null:p.id;return renderSide();
+    case"gras":snap();p.gras=!p.gras;save();return render();
+    case"back":return putBack(p);
+    case"front":snap();topZ(p);save();return render();
+    case"draw":case"drawup":{snap();const c=drawFrom(p,cmd==="drawup");if(c)sel=c.id;save();return render()}
+    case"shuffle":snap();shuffle(S.decks[p.deck]);save();return render();
+    case"drawbag":case"drawbagup":{snap();const c=drawBag(p,cmd==="drawbagup");if(c)sel=c.id;save();return render()}
+    case"roll":return roll(p);
+  }
+}
+function roll(p){snap();p.v=1+Math.floor(Math.random()*6);p.rolled=true;save();render()}
+
+/* ---------- Glisser-déposer ---------- */
+function tablePoint(e){const r=$("table").getBoundingClientRect();return[(e.clientX-r.left)/zoom,(e.clientY-r.top)/zoom]}
+function hitContainer(p,px,py){
+  return Object.values(S.pieces).find(q=>!q.in&&q!==p&&((p.k==="card"&&q.k==="deck"&&q.deck===p.deck)||(p.k==="chit"&&q.k==="bag"&&q.bag===p.bag))&&px>=q.x&&px<=q.x+sizeOf(q)[0]&&py>=q.y&&py<=q.y+sizeOf(q)[1]);
+}
+$("pieces").addEventListener("pointerdown",e=>{
+  const el=e.target.closest("[data-pid]");if(!el)return;
+  const p=S.pieces[el.dataset.pid],[px,py]=tablePoint(e);
+  drag={id:p.id,el,sx:e.clientX,sy:e.clientY,ox:p.x,oy:p.y,px,py,moved:false,handle:!!e.target.closest("[data-handle]"),pre:JSON.stringify(S)};
+  el.setPointerCapture(e.pointerId);e.preventDefault();
+});
+window.addEventListener("pointermove",e=>{
+  if(!drag)return;const dx=(e.clientX-drag.sx)/zoom,dy=(e.clientY-drag.sy)/zoom;
+  if(!drag.moved&&Math.abs(dx)+Math.abs(dy)<4)return;
+  if(!drag.moved){drag.moved=true;const p=S.pieces[drag.id];
+    if((p.k==="deck"||p.k==="bag")&&!drag.handle){
+      const c=p.k==="deck"?drawFrom(p,false,[drag.px-50,drag.py-70]):drawBag(p,false);
+      if(!c){drag=null;return}
+      if(p.k==="bag"){c.x=drag.px-15;c.y=drag.py-15}
+      render();const el=$("pieces").querySelector(`[data-pid="${c.id}"]`);try{el.setPointerCapture(e.pointerId)}catch(err){}drag.id=c.id;drag.el=el;drag.ox=c.x;drag.oy=c.y;drag.drawn=true;
+    }else{topZ(p);drag.el.style.zIndex=p.z}
+    drag.el.classList.add("dragging");
+  }
+  const p=S.pieces[drag.id];p.x=Math.round(drag.ox+dx);p.y=Math.round(drag.oy+dy);drag.el.style.left=p.x+"px";drag.el.style.top=p.y+"px";
+});
+function endDrag(e){
+  if(!drag)return;const d=drag;drag=null;const p=S.pieces[d.id];
+  if(!d.moved){
+    const now=Date.now();
+    if(p.k==="die"){sel=p.id;return roll(p)}
+    if(p.k==="bag"&&!d.handle){hist.push(d.pre);$("undo").disabled=false;const c=drawBag(p,false);sel=c?c.id:p.id;save();return render()}
+    if(lastClick.id===p.id&&now-lastClick.t<350){lastClick={id:null,t:0};return flip(p)}
+    lastClick={id:p.id,t:now};sel=p.id;peek=null;return render();
+  }
+  hist.push(d.pre);if(hist.length>60)hist.shift();$("undo").disabled=false;
+  const [px,py]=tablePoint(e),box=hitContainer(p,px,py);
+  sel=p.id;
+  if(box){p.in=p.k==="card"?"deck":"bag";p.up=false;if(p.k==="card")S.decks[p.deck].push(p.id);else{p.gras=false;S.bags[p.bag].push(p.id)}sel=null}
+  save();render();
+}
+window.addEventListener("pointerup",endDrag);
+window.addEventListener("pointercancel",endDrag);
+$("view").addEventListener("pointerdown",e=>{if(!e.target.closest("[data-pid]")&&sel){sel=null;peek=null;render()}});
+document.addEventListener("click",e=>{const b=e.target.closest("[data-cmd]");if(b&&!b.disabled)command(b.dataset.cmd)});
+document.addEventListener("keydown",e=>{
+  if(e.target.closest("select,input,textarea"))return;
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="z"){e.preventDefault();return undo()}
+  if(e.key==="f"||e.key==="F"){const p=sel&&S.pieces[sel];if(p)flip(p)}
+  if(e.key==="Escape"&&sel){sel=null;peek=null;render()}
+});
+$("view").addEventListener("wheel",e=>{if(!(e.ctrlKey||e.metaKey))return;e.preventDefault();setZoom(zoom*(e.deltaY<0?1.1:1/1.1))},{passive:false});
+window.addEventListener("resize",()=>{if(zoom<.21)fit()});
+
+/* ---------- Démarrage ---------- */
+function start(data){
+  S=(data&&data.state)||load();
+  if(S){$("nplayers").value=String(S.n);renderPrinted();render();fit()}else setup(3);
+}
+window.claude?.hot?.snapshot?.(()=>({state:S}));
+window.claude?.hot?.ready?window.claude.hot.ready(start):start(window.claude?.hot?.data??{});
+</script>
