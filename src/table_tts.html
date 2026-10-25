@@ -170,7 +170,7 @@ const LAKES=[
 ];
 
 /* ---------- Géométrie de la table ---------- */
-const TW=2000,TH=1900,BX=40,BY=40,MDY=140,MAT_Y=1080,MAT_W=450,MAT_H=168;
+const TW=2000,TH=1900,BX=40,BY=40,MDY=140,MAT_Y=1270,MAT_W=450,MAT_H=168;
 const B=(x,y)=>[BX+x,BY+y],M=(x,y)=>[BX+x,BY+MDY+y];
 const RAV_X0=120,RAV_MAX=6,RAV_EV=4,RAV_STEP=1040/7,YEARS=5,DEM_X=430,DEM_Y=104;
 const PT_Y=752,PT_W=216,PT_GAP=10,LIV_Y=868,DET_Y=932,PARIS_X=614,PARIS_STEP=28;
@@ -264,7 +264,7 @@ function mapSVG(){
 <circle cx="930" cy="314" r="19" fill="#E9F0EF" stroke="${INK}" opacity=".9"/><text class="cq" x="930" y="350" text-anchor="middle">dans 1 mois</text>
 <circle cx="1050" cy="334" r="19" fill="#E9F0EF" stroke="${INK}" opacity=".9"/><text class="cq" x="1050" y="370" text-anchor="middle">dans 2 mois</text>
 <text class="ml" x="990" y="300" text-anchor="middle">Traversée · 2 mois</text>
-<rect x="880" y="392" width="114" height="54" rx="5" fill="#E9F0EF" stroke="${INK}" stroke-dasharray="3 3" opacity=".9"/><text class="cq" x="888" y="407">À La Rochelle</text>
+<rect x="822" y="378" width="176" height="170" rx="6" fill="${PCARD}" stroke="${EDGE}"/><text class="ct" x="830" y="394">Rade de La Rochelle</text>${[0,1,2,3].map(r=>{const y=402+r*36;return `<rect x="830" y="${y}" width="44" height="30" rx="4" fill="none" stroke="${INK}" stroke-dasharray="3 3" opacity=".5"/>`+[0,1,2].map(k=>`<rect x="${880+k*38}" y="${y}" width="34" height="30" rx="4" fill="#F6EFDC" stroke="${EDGE}" stroke-dasharray="2 2"/>`).join("")}).join("")}
 <text class="ml" x="196" y="146" text-anchor="middle">Lac Supérieur · qualité 2 à 5</text>
 <text class="ml" x="112" y="532" text-anchor="middle">Lac Michigan</text>
 <text class="ml" x="284" y="378" text-anchor="middle">Lac Huron</text>
@@ -291,7 +291,7 @@ function mapSVG(){
 <circle cx="640" cy="530" r="5" fill="${INK}"/><text class="pl" x="630" y="535" text-anchor="end">Albany</text>
 <circle cx="1126" cy="352" r="5" fill="${INK}"/><text class="pl" x="1118" y="384" text-anchor="end">La Rochelle</text>
 <rect x="652" y="346" width="150" height="62" rx="8" fill="none" stroke="${INK}" stroke-dasharray="4 4" opacity=".55"/><text class="cq" x="660" y="361">Comptoirs du fleuve</text><rect x="652" y="412" width="150" height="28" rx="4" fill="url(#hatchz)" stroke="${INK}" stroke-opacity=".45" stroke-dasharray="3 3"/><text class="cq" x="656" y="452">retour</text>
-<rect x="1004" y="456" width="152" height="108" rx="6" fill="${LAND}" stroke="${EDGE}"/><text class="pl" x="1014" y="474" style="font-size:13px">Charente · alambics</text>
+<rect x="1004" y="510" width="152" height="54" rx="6" fill="${LAND}" stroke="${EDGE}"/><text class="pl" x="1014" y="527" style="font-size:13px">Charente · alambics</text>
 <rect x="${DEM_X}" y="${DEM_Y}" width="164" height="80" rx="5" fill="${PCARD}" stroke="${EDGE}"/><text class="ct" x="${DEM_X+8}" y="${DEM_Y+16}">Demande de marchandises</text>
 <text class="cq" x="${DEM_X+8}" y="${DEM_Y+38}">Gr. Lacs</text><text class="cq" x="${DEM_X+8}" y="${DEM_Y+62}">Supérieur</text>`;
   for(let v=0;v<=6;v++)h+=`<rect x="${DEM_X+54+v*15}" y="${DEM_Y+26}" width="13" height="16" rx="2" fill="#F6EFDC" stroke="${v===6?"#A3352A":EDGE}"/><text class="cq" x="${DEM_X+60+v*15}" y="${DEM_Y+38}" text-anchor="middle" style="font-size:8px">${v}</text>`;
@@ -344,8 +344,8 @@ function printedSVG(){
   h+=lab(1300,SUP.crewY-6,"Équipiers","représentant 2 · guide, milicien, interprète 1");
   
   h+=`<text class="lab" x="-138" y="30">Rivière</text><rect x="-138" y="40" width="108" height="166" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/>`;
-  ["3 livres","2 livres","1 livre","1 livre"].forEach((t,k)=>{const y=226+k*174;h+=`<rect x="-138" y="${y}" width="108" height="148" rx="8" fill="#F2EAD3" stroke="#B7A675"/><text class="lab" x="-84" y="${y+163}" text-anchor="middle" style="font-size:14px">${t}</text>`});
-  h+=`<rect x="-138" y="${226+4*174}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="-84" y="${226+4*174+80}" text-anchor="middle">Défausse</text>`;
+  ["3 livres","2 livres","1 livre"].forEach((t,k)=>{const y=226+k*174;h+=`<rect x="-138" y="${y}" width="108" height="148" rx="8" fill="#F2EAD3" stroke="#B7A675"/><text class="lab" x="-84" y="${y+163}" text-anchor="middle" style="font-size:14px">${t}</text>`});
+  h+=`<rect x="-138" y="${226+3*174}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="-84" y="${226+3*174+80}" text-anchor="middle">Défausse</text>`;
   h+=lab(1740,784,"Matériel de départ");
   h+=lab(1300,SUP.yardY-6,"Chantier de La Rochelle","cartes de navire · 5 parts de 1 livre, un disque de couleur par part");
   // Plateaux des joueurs

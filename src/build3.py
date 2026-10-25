@@ -6,11 +6,11 @@ def aspect(img):
     if img not in ASP: w, h = Image.open(f'img/{img}.png').size; ASP[img] = h / w
     return ASP[img]
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v7/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v8/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
-X0, X1, Y1 = -150, 1995, 1265                # image exportée : x de -150 à 1995, y de 0 à 1265
+X0, X1, Y1 = -150, 1995, 1450                # image exportée : x de -150 à 1995, y de 0 à 1265
 def P(cx, cy): return round((cx - (X0 + X1) / 2) * U, 3), round(-(cy - Y1 / 2) * U, 3)
 used = set()
 def guid():
@@ -141,8 +141,10 @@ OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1326, 486 + 105)
 OBJ.append(token('Navire du roi', 'navire_roi', 40, P(1450, 486 + 105))); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1500, 486 + 105)))
 OBJ.append(bag('Sac des congés', 40, P(1760, 486 + 140), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
                col('#8E2F25'), '12 congés : 6 à 1 place, 4 à 2 places, 2 sans place. Une place = un voyageur au choix ; pas de canot.'))
+# Aide de jeu : une par joueur, empilées sous le matériel de départ
+for k in range(3): OBJ.append(tile('Aide de jeu', 'aide_a', 430, P(1515, 1120), back='aide_b', typ=3, thick=0.05, h=0.5 + k * 0.3))
 for i in range(3):
-    mx, my = -140 + i * 490, 1080
+    mx, my = -140 + i * 490, 1270
     for k in range(2): OBJ.append(token(f'Canot de coureur des bois {PN[i]}', 'canot_coureur', 32, P(mx + 252 + k * 42, my + 135), PC[i]))
     for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, P(mx + 470, my + 90), PC[i], h=0.5 + k * 0.3))
 LUA = open('setup.lua').read().replace('@W@', str((X1 - X0) * U)).replace('@D@', str(Y1 * U))

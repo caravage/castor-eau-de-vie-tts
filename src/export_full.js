@@ -14,7 +14,7 @@ const svg=await pg.evaluate(()=>{let s=document.getElementById('printed').outerH
   s=s.replace(/Situations, équipiers et cartes de navire/g,'Associé, recrues, congés et cartes de navire');
   return s});
 const css=await pg.evaluate(()=>[...document.styleSheets].map(ss=>{try{return [...ss.cssRules].map(r=>r.cssText).join('\n')}catch(e){return ''}}).join('\n'));
-const shots=[['table_full',-150,0,2145,1265,2]];
+const shots=[['table_full',-150,0,2145,1450,2]];
 for(const [n,x,y,w,h,k] of shots){
   const html='<!doctype html><html><head><meta charset="utf-8"><style>'+FF+css+'html,body{margin:0;background:#231B15}#printed{display:block}</style></head><body>'+svg.replace(/<svg([^>]*)id="printed"([^>]*)>/,(m)=>m.replace(/width="[^"]*"/,'').replace(/height="[^"]*"/,'').replace(/viewBox="[^"]*"/,''))+'</body></html>';
   await pg.setViewportSize({width:Math.round(w*k),height:Math.round(h*k)});await pg.setContent(html);
