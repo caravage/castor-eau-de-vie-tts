@@ -1,11 +1,11 @@
 # Sauvegarde TTS fidèle à l'artefact « Table du castor » : même plateau, mêmes zones, mêmes positions de départ (3 joueurs).
 import json, random
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v5/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
-X0, X1, Y1 = -150, 2000, 1660                # image exportée : x de -150 à 2000, y de 0 à 1660
+X0, X1, Y1 = -150, 1995, 1625                # image exportée : x de -150 à 2000, y de 0 à 1660
 def P(cx, cy): return round((cx - (X0 + X1) / 2) * U, 3), round(-(cy - Y1 / 2) * U, 3)
 used = set()
 def guid():
@@ -120,18 +120,18 @@ for p in TP['pieces']:
         else: raise SystemExit('pièce inconnue : ' + kind)
 
 # Ajouts propres à la version actuelle du jeu, posés dans des places libres de la table
-OBJ.append(deck('mat', P(1500 + 35, 1200 + 49)))
+OBJ.append(deck('mat', P(1300 + 35, 1000 + 49)))
 OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4)})
 for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4)})
 # Comptoir de Québec : tout son stock rangé dans sa zone (rien n'est mis en vente d'avance)
-for k in range(11): OBJ.append(token('Marchandise (comptoir)', 'tok_caisse_w', 24, P(1312 + k * 28, 541), GREY))
-for k in range(5): OBJ.append(token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, P(1312 + k * 28, 573), GREY))
-OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1326, 605), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1392, 605), GREY))
-OBJ.append(token('Navire du roi', 'navire_roi', 40, P(1450, 605))); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1500, 605)))
-OBJ.append(bag('Sac des congés', 60, P(1760, 640), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
+for k in range(11): OBJ.append(token('Marchandise (comptoir)', 'tok_caisse_w', 24, P(1312 + k * 28, 486 + 41), GREY))
+for k in range(5): OBJ.append(token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, P(1312 + k * 28, 486 + 73), GREY))
+OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1326, 486 + 105), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1392, 486 + 105), GREY))
+OBJ.append(token('Navire du roi', 'navire_roi', 40, P(1450, 486 + 105))); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1500, 486 + 105)))
+OBJ.append(bag('Sac des congés', 60, P(1760, 486 + 140), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
                col('#8E2F25'), '12 congés : 6 à 1 place, 4 à 2 places, 2 sans place. Une place = un voyageur au choix ; pas de canot.'))
 for i in range(3):
-    mx = 40 + i * 480
+    mx = -140 + i * 465
     OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': P(mx + 225, 0)[0], 'posY': 3, 'posZ': P(0, Y1 + 90)[1], 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': 15, 'scaleY': 5, 'scaleZ': 4},
                 'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': P(mx + 225, 0)[0], 'z': P(0, Y1 + 90)[1], 'hw': 450 * U}),
                 'ColorDiffuse': {'r': 1, 'g': 1, 'b': 1}, 'Locked': True, 'FogColor': SEAT[i]})
