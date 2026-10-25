@@ -14,8 +14,10 @@ local function fit(o, n)
   local b = o.getBoundsNormalized().size
   if b.x <= 0.001 then return end
   local s = o.getScale()
-  local k = n.w * F / b.x
-  if n.y3 then o.setScale({s.x * k, s.y * k, s.z * k}) else o.setScale({s.x * k, s.y, s.z * k}) end
+  local kx = n.w * F / b.x
+  local kz = kx
+  if n.d and b.z > 0.001 then kz = n.d * F / b.z end   -- profondeur mesurée et corrigée : aucune pièce étirée
+  if n.y3 then o.setScale({s.x * kx, s.y * kx, s.z * kx}) else o.setScale({s.x * kx, s.y, s.z * kz}) end
 end
 
 local function tableInfo()

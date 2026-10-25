@@ -1,7 +1,12 @@
 # Sauvegarde TTS fidèle à l'artefact « Table du castor » : même plateau, mêmes zones, mêmes positions de départ (3 joueurs).
 import json, random
+from PIL import Image
+ASP = {}
+def aspect(img):
+    if img not in ASP: w, h = Image.open(f'img/{img}.png').size; ASP[img] = h / w
+    return ASP[img]
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v6/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v7/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
@@ -29,12 +34,14 @@ def base(name, nick, wpx, pos=None, color=WHITE, lock=False, h=0.5, fz=0, y3=Fal
             'ColorDiffuse': color, 'Locked': bool(pos), 'Grid': False, 'Snap': False, 'Tooltip': True, 'Hands': False, 'HideWhenFaceDown': False}
 def tile(nick, front, wpx, pos=None, back=None, typ=3, thick=0.1, color=WHITE, lock=False, h=0.5, fz=0, desc='', face=None):
     o = base('Custom_Tile', nick, wpx, pos, color, lock, h, fz, desc=desc)
+    o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * aspect(front) * U, 4)})
     if face: o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'face': face})
     o['CustomImage'] = {'ImageURL': URL + front + '.png', 'ImageSecondaryURL': URL + (back or front) + '.png', 'ImageScalar': 1.0, 'WidthScale': 0.0,
                         'CustomTile': {'Type': typ, 'Thickness': thick, 'Stackable': False, 'Stretch': False}}
     return o
 def token(nick, img, wpx, pos=None, color=WHITE, h=0.5, desc=''):
     o = base('Custom_Token', nick, wpx, pos, color, False, h, desc=desc, s0=0.1)
+    o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * aspect(img) * U, 4)})
     o['CustomImage'] = {'ImageURL': URL + img + '.png', 'ImageSecondaryURL': '', 'ImageScalar': 1.0, 'WidthScale': 0.0,
                         'CustomToken': {'Thickness': 0.2, 'MergeDistancePixels': 15.0, 'StandUp': False, 'Stackable': True}}
     return o
@@ -51,12 +58,14 @@ def cdeck(k):
                                          'BackIsHidden': True, 'UniqueBack': False, 'Type': 0}}
 def card(k, i, pos=None, up=False):
     c = base('Card', DK[k]['names'][i], SIZE['card'][0], pos, fz=0 if up else 180, s0=1.0)
+    c['GMNotes'] = json.dumps({**json.loads(c['GMNotes']), 'd': round(SIZE['card'][0] * 1.4 * U, 4)})
     c['CardID'] = DECK_ID[k] * 100 + i; c['CustomDeck'] = cdeck(k)
     if not pos: c['Transform'] = T(s=1.0, fz=180); c['Locked'] = False
     return c
 def deck(k, pos, skip=()):
     cards = [card(k, i) for i in range(len(DK[k]['names'])) if i not in skip]; random.shuffle(cards)
     o = base('Deck', DECK_NAME[k], SIZE['card'][0], pos, fz=180, s0=1.0)
+    o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(SIZE['card'][0] * 1.4 * U, 4)})
     o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
     return o
 
@@ -80,17 +89,17 @@ for p in TP['pieces']:
     elif k == 'bag':
         pos = C(p, 'bag')
         if p['bag'] == 'classic':
-            OBJ.append(bag('Sac des Grands Lacs', 80, pos, [tile(f'Castor ×{n} (Grands Lacs)', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
+            OBJ.append(bag('Sac des Grands Lacs', 46, pos, [tile(f'Castor ×{n} (Grands Lacs)', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
                                                         for n, m in ((1, 9), (2, 6), (3, 3)) for _ in range(m)], col('#8A6A45'), '18 paquets : 9 × 1, 6 × 2, 3 × 3'))
         elif p['bag'] == 'premium':
-            OBJ.append(bag('Sac du lac Supérieur', 80, pos, [tile(f'Castor ×{n} (Supérieur)', f'tile_S{n}_sec', 30, back=f'tile_S{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
+            OBJ.append(bag('Sac du lac Supérieur', 46, pos, [tile(f'Castor ×{n} (Supérieur)', f'tile_S{n}_sec', 30, back=f'tile_S{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
                                                          for n, m in ((1, 3), (2, 5), (3, 4)) for _ in range(m)], col('#8A6418'), '12 paquets : 3 × 1, 5 × 2, 4 × 3'))
         else:
             HN = {'fur1': 'Traite : 1 castor', 'fur2': 'Traite : 2 castors', 'fur3': 'Traite : 3 castors', 'mission': 'Missionnaire', 'present': 'Présent', 'fievre': 'Fièvre', 'gatees': 'Peaux gâtées'}
-            OBJ.append(bag('Jetons cachés', 80, pos, [tile(HN[h], f'hid_{h}', 30, back='hid_back', fz=180, face='down') for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
+            OBJ.append(bag('Jetons cachés', 46, pos, [tile(HN[h], f'hid_{h}', 30, back='hid_back', fz=180, face='down') for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
                            col('#3A2618'), '23 jetons, posés face cachée (?) sur les lacs'))
     elif k == 'die':
-        d = base('Die_6', 'Dé de traversée' if p.get('cross') else 'Dé', SIZE['die'][0], C(p, 'die'), col('#8E2F25') if p.get('cross') else WHITE, h=0.7, y3=True, s0=1.0); OBJ.append(d)
+        d = base('Die_6', 'Dé de traversée' if p.get('cross') else 'Dé', 24, C(p, 'die'), col('#8E2F25') if p.get('cross') else WHITE, h=0.7, y3=True, s0=1.0); OBJ.append(d)
     elif k == 'tok':
         pos = C(p, kind); w = SIZE[kind][0]
         if kind in ('num', 'conge'): continue                       # pas de marqueurs de prix ; les congés viennent du sac
@@ -118,19 +127,19 @@ for p in TP['pieces']:
         elif kind == 'pas': OBJ.append(tile('Prendre le pas · 1er', 'tok_pas', w, pos))
         elif kind == 'crew': lab, img = CREW[p['crew']]; OBJ.append(token(lab, img, 26, pos))
         elif kind == 'pawn':
-            o = base('PlayerPawn', f'Pion {who}', w, pos, color, h=0.6, y3=True, s0=1.0); OBJ.append(o)
+            o = base('PlayerPawn', f'Pion {who}', 18, pos, color, h=0.6, y3=True, s0=1.0); OBJ.append(o)
         else: raise SystemExit('pièce inconnue : ' + kind)
 
 # Ajouts propres à la version actuelle du jeu, posés dans des places libres de la table
 OBJ.append(deck('mat', P(1740 + 35, 810 + 49)))
-OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4)})
-for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4)})
+OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4), 'd': round(98 * U, 4)})
+for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4), 'd': round(98 * U, 4)})
 # Comptoir de Québec : tout son stock rangé dans sa zone (rien n'est mis en vente d'avance)
 for k in range(11): OBJ.append(token('Marchandise (comptoir)', 'tok_caisse_w', 24, P(1312 + k * 28, 486 + 41), GREY))
 for k in range(5): OBJ.append(token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, P(1312 + k * 28, 486 + 73), GREY))
 OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1326, 486 + 105), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1392, 486 + 105), GREY))
 OBJ.append(token('Navire du roi', 'navire_roi', 40, P(1450, 486 + 105))); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1500, 486 + 105)))
-OBJ.append(bag('Sac des congés', 60, P(1760, 486 + 140), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
+OBJ.append(bag('Sac des congés', 40, P(1760, 486 + 140), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
                col('#8E2F25'), '12 congés : 6 à 1 place, 4 à 2 places, 2 sans place. Une place = un voyageur au choix ; pas de canot.'))
 for i in range(3):
     mx, my = -140 + i * 490, 1080
