@@ -1,0 +1,863 @@
+{
+ "CARDS": [
+  {
+   "id": "m_roch",
+   "kind": "maison",
+   "title": "Armateurs de La Rochelle",
+   "effect": "Commencez avec 1 navire (fret 2), 3 livres, 2 marchandises et 1 baril. Vos navires ont +1 au dé de traversée depuis La Rochelle.",
+   "note": "Les négociants rochelais arment les navires et avancent les cargaisons à crédit."
+  },
+  {
+   "id": "m_queb",
+   "kind": "maison",
+   "title": "Grand marchand de Québec",
+   "effect": "Commencez avec 7 livres et 3 marchandises.",
+   "note": "Agent de compagnie, prêteur, armateur : il touche à tout."
+  },
+  {
+   "id": "m_mtl",
+   "kind": "maison",
+   "title": "Équipeurs de Montréal",
+   "effect": "Commencez avec 1 grand canot, 3 livres et 2 marchandises.",
+   "note": "Au contact des convois, ils équipent les canots et engagent les hommes."
+  },
+  {
+   "id": "m_off",
+   "kind": "maison",
+   "title": "Officier de la Marine",
+   "effect": "Commencez avec 5 livres et 2 barils.",
+   "note": "Commandant de poste, il vend l’eau-de-vie à l’abri de son grade."
+  },
+  {
+   "id": "m_seig",
+   "kind": "maison",
+   "title": "Seigneurie de Beaupré",
+   "effect": "Commencez avec 4 livres et 2 marchandises. Touchez 2 livres à chaque hiver.",
+   "note": "Cens et rentes des censitaires : peu, mais chaque année."
+  },
+  {
+   "id": "m_cog",
+   "kind": "maison",
+   "title": "Bouilleurs de Cognac",
+   "effect": "Commencez avec 1 alambic, 2 livres et 3 barils.",
+   "note": "Les bouilleurs charentais vendent leur eau-de-vie aux négociants de La Rochelle."
+  },
+  {
+   "id": "interprete",
+   "kind": "personnage",
+   "title": "Interprète wendat",
+   "effect": "Un interprète offert dans chaque expédition.",
+   "note": "Parler la langue, c’est désamorcer les querelles."
+  },
+  {
+   "id": "voyageur",
+   "kind": "personnage",
+   "title": "Commis-voyageur",
+   "effect": "Un représentant offert dans chaque expédition.",
+   "note": "Un homme de confiance qui décide au nom de la maison."
+  },
+  {
+   "id": "sergent",
+   "kind": "personnage",
+   "title": "Sergent de la Compagnie franche",
+   "effect": "Un milicien offert dans chaque expédition.",
+   "note": "Un soldat de la Marine en congé, qui loue son fusil."
+  },
+  {
+   "id": "aguerri",
+   "kind": "personnage",
+   "title": "Coureur des bois aguerri",
+   "effect": "Vos canots de coureur des bois portent 3 charges, et vos retours d’octobre sont sans risque.",
+   "note": "Il connaît chaque rapide de l’Outaouais."
+  },
+  {
+   "id": "engages",
+   "kind": "personnage",
+   "title": "Engagés de Lachine",
+   "effect": "Vos grands et petits canots ont 1 place de plus.",
+   "note": "Des hommes robustes, engagés devant notaire."
+  },
+  {
+   "id": "pilote",
+   "kind": "personnage",
+   "title": "Pilote du Saint-Laurent",
+   "effect": "Vos navires ignorent le gros temps, ne paient pas de faux fret au départ de Québec et ont +2 au dé de traversée depuis La Rochelle.",
+   "note": "Il connaît chaque batture du fleuve."
+  },
+  {
+   "id": "gouverneur",
+   "kind": "personnage",
+   "title": "Ami du gouverneur",
+   "effect": "Vous recevez un congé gratuit en avril, hors de l’enchère.",
+   "note": "Un souper au château Saint-Louis vaut bien un permis."
+  },
+  {
+   "id": "confesseur",
+   "kind": "personnage",
+   "title": "Confesseur récollet",
+   "effect": "Chaque hiver, soupçon −1.",
+   "note": "Les Récollets sont moins sévères que les Jésuites."
+  },
+  {
+   "id": "passeurs",
+   "kind": "personnage",
+   "title": "Passeurs de Kahnawake",
+   "effect": "Albany vous paie en 1 mois au lieu de 2 et ne donne que +1 soupçon.",
+   "note": "La route du lac Champlain n’a pas de secret pour eux."
+  },
+  {
+   "id": "guide",
+   "kind": "personnage",
+   "title": "Guide ojibwé",
+   "effect": "Vos expéditions peuvent pousser jusqu’au lac Supérieur sans représentant.",
+   "note": "Il connaît les portages du Sault et la route de Chagouamigon."
+  },
+  {
+   "id": "bouilleur",
+   "kind": "personnage",
+   "title": "Bouilleur associé",
+   "effect": "1 baril offert à chaque commande.",
+   "note": "Un cousin en Charente, et l’eau-de-vie à prix coûtant."
+  },
+  {
+   "id": "cabaretier",
+   "kind": "personnage",
+   "title": "Cabaretier de la basse-ville",
+   "effect": "Le comptoir vous vend l’eau-de-vie 1 livre moins cher.",
+   "note": "Son cabaret, près du quai de Québec, ne désemplit pas."
+  },
+  {
+   "id": "mercier",
+   "kind": "personnage",
+   "title": "Mercier de la rue Saint-Paul",
+   "effect": "Le comptoir vous vend les marchandises 1 livre moins cher.",
+   "note": "Couvertures, chaudrons et rassades : sa boutique fournit les canots de Montréal."
+  },
+  {
+   "id": "commis",
+   "kind": "personnage",
+   "title": "Commis du fermier",
+   "effect": "+1 livre chaque fois qu’un navire qui part emporte vos peaux.",
+   "note": "Une pesée généreuse au bureau du castor."
+  },
+  {
+   "id": "alliance",
+   "kind": "atout",
+   "title": "Alliance iroquoise",
+   "effect": "Quand un raid vous frappe, payez 1 livre pour l’éviter. (Sans effet : raids retirés pour l’instant.)",
+   "note": "Présents et colliers de wampum achètent la paix sur l’Outaouais."
+  },
+  {
+   "id": "chantier",
+   "kind": "atout",
+   "title": "Chantier naval de Québec",
+   "effect": "Vos navires coûtent 4 livres au lieu de 5 (une part offerte).",
+   "note": "Talon voulait une colonie qui construise ses propres navires."
+  },
+  {
+   "id": "credit",
+   "kind": "atout",
+   "title": "Lettre de crédit",
+   "effect": "Commencez avec 3 livres de plus.",
+   "note": "Signée par une maison de banque parisienne."
+  },
+  {
+   "id": "castorgras",
+   "kind": "atout",
+   "title": "Castor gras",
+   "effect": "À chaque départ de navire, votre meilleure peau à bord vaut 1 livre de plus par point.",
+   "note": "Les peaux portées un hiver valent bien plus à Paris."
+  }
+ ],
+ "RCARDS": [
+  {
+   "id": "r_garde",
+   "kind": "recrue",
+   "star": 0,
+   "title": "Garde-magasin",
+   "effect": "Quand vous jouez « Attendre », gagnez 1 livre.",
+   "note": "Il tient l’entrepôt de la basse-ville pendant que les canots sont au loin."
+  },
+  {
+   "id": "r_teneur",
+   "kind": "recrue",
+   "star": 0,
+   "title": "Teneur de livres",
+   "effect": "Une fois par mois, « Changer les prix » ne vous coûte pas d’action.",
+   "note": "Ses registres suivent les cours mieux que personne."
+  },
+  {
+   "id": "r_canotier",
+   "kind": "recrue",
+   "star": 0,
+   "title": "Canotier d’expérience",
+   "effect": "Une fois par an, un de vos canots qui arrive aux Grands Lacs ou au Supérieur est prêt tout de suite.",
+   "note": "Il connaît chaque portage de l’Outaouais."
+  },
+  {
+   "id": "r_facteur",
+   "kind": "recrue",
+   "star": 0,
+   "title": "Facteur de La Rochelle",
+   "effect": "Les cales vides de vos commandes d’hiver ne coûtent rien.",
+   "note": "Votre homme sur les quais trouve toujours un complément de fret."
+  },
+  {
+   "id": "r_calfat",
+   "kind": "recrue",
+   "star": 0,
+   "title": "Calfat",
+   "effect": "L’entretien d’hiver de vos navires est gratuit.",
+   "note": "Étoupe et brai : la coque passe l’hiver sans dommage."
+  },
+  {
+   "id": "r_notaire",
+   "kind": "recrue",
+   "star": 1,
+   "title": "Notaire royal",
+   "effect": "Vos dettes non remboursées ne grossissent pas en hiver.",
+   "note": "Un acte bien tourné vaut un délai de grâce."
+  },
+  {
+   "id": "r_cens",
+   "kind": "recrue",
+   "star": 1,
+   "title": "Censitaires",
+   "effect": "+1 livre chaque hiver.",
+   "note": "Quelques habitants vous doivent cens et rentes à la Saint-Martin."
+  },
+  {
+   "id": "r_barque",
+   "kind": "recrue",
+   "star": 0,
+   "title": "Maître de barque",
+   "effect": "Vos canots redescendent du lac Supérieur en 1 mois au lieu de 2.",
+   "note": "Il sait passer le Sault et les rapides sans décharger."
+  },
+  {
+   "id": "r_aubergiste",
+   "kind": "recrue",
+   "star": 0,
+   "title": "Aubergiste de Montréal",
+   "effect": "Vos canots qui rentrent sont déchargés tout de suite.",
+   "note": "Ses hangars ouvrent à toute heure, même la nuit du retour."
+  },
+  {
+   "id": "r_associe",
+   "kind": "recrue",
+   "star": 0,
+   "title": "Armateur associé",
+   "effect": "Quand un navire qui n’est pas à vous part avec vos peaux, vous payez 1 livre de fret en moins.",
+   "note": "Un vieil associé vous fait un prix d’ami."
+  },
+  {
+   "id": "r_jesuite",
+   "kind": "recrue",
+   "star": 1,
+   "title": "Père jésuite",
+   "effect": "Quand une de vos expéditions rentre sans avoir échangé de baril : ravages −1 et soupçon −1.",
+   "note": "Les jésuites combattent la traite de l’eau-de-vie."
+  },
+  {
+   "id": "r_huguenot",
+   "kind": "recrue",
+   "star": 0,
+   "title": "Négociant huguenot",
+   "effect": "La Rochelle vous avance jusqu’à 9 livres de dette au lieu de 6.",
+   "note": "Interdits d’établissement au Canada, les marchands protestants de La Rochelle y financent pourtant la traite."
+  },
+  {
+   "id": "c_commission",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Commission en France",
+   "effect": "Jusqu’en août : commandez jusqu’à 4 charges. Elles traversent sur votre navire libre à La Rochelle, sinon sur un navire marchand (2 livres de fret par charge), et arrivent dans 1 ou 2 mois selon le dé.",
+   "note": "Un commissionnaire de La Rochelle expédie un complément en pleine saison."
+  },
+  {
+   "id": "c_foire",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Foire de Montréal",
+   "effect": "En juin, juillet ou août : échangez jusqu’à 2 de vos charges de la piste contre des jetons du sac classique, sans canot. Chaque baril fait monter les ravages.",
+   "note": "Chaque été, les flottilles outaouaises descendent vendre leurs fourrures à Montréal."
+  },
+  {
+   "id": "c_lettre",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Lettre de change",
+   "effect": "Recevez 3 livres ; votre dette envers La Rochelle augmente de 4.",
+   "note": "Payable à la prochaine flotte."
+  },
+  {
+   "id": "c_conge",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Congé de faveur",
+   "effect": "Recevez un congé tout de suite, hors enchère.",
+   "note": "Signé de la main de l’intendant, sans passer par l’enchère."
+  },
+  {
+   "id": "c_ferme",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Contrat de la Ferme",
+   "effect": "Vendez à Québec jusqu’à 3 de vos peaux au prix de Paris moins 1 par point, sans navire.",
+   "note": "Le commis du fermier achète sur place, à bas prix."
+  },
+  {
+   "id": "c_portage",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Portage rapide",
+   "effect": "Un de vos canots en route avance tout de suite d’une case.",
+   "note": "Des porteurs connus gagnent une journée à chaque portage."
+  },
+  {
+   "id": "c_rens",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Renseignement de traite",
+   "effect": "Regardez les jetons cachés d’un lac.",
+   "note": "Un coureur des bois revenu de l’Ouest parle trop au cabaret."
+  },
+  {
+   "id": "c_devants",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Prendre les devants",
+   "effect": "Vous jouerez en premier le mois prochain, sans dépenser d’action.",
+   "note": "Vous êtes déjà dans l’antichambre de l’intendant."
+  },
+  {
+   "id": "c_part",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Part offerte",
+   "effect": "Prenez gratuitement 1 part d’une carte de navire au chantier.",
+   "note": "Un armateur vous cède une part pour sceller une alliance."
+  },
+  {
+   "id": "c_denonce",
+   "kind": "contrat",
+   "star": 0,
+   "title": "Dénonciation à l’intendant",
+   "effect": "Un adversaire qui a 3 soupçon ou plus paie 2 livres.",
+   "note": "Une lettre anonyme sur l’eau-de-vie de vos rivaux."
+  },
+  {
+   "id": "n_outaouais",
+   "kind": "nation",
+   "star": 1,
+   "title": "Les Outaouais",
+   "effect": "Aux lacs Huron et Michigan, vous voyez les jetons cachés avant de choisir. Perdue si vous y échangez un baril (ravages +1).",
+   "note": "Les Odawa sont les grands intermédiaires de la traite des Grands Lacs."
+  },
+  {
+   "id": "n_poteo",
+   "kind": "nation",
+   "star": 1,
+   "title": "Les Potéouatamis de la baie des Puants",
+   "effect": "Au lac Michigan, vos marchandises ne comptent pas dans la demande de la zone. Perdue si vous y échangez un baril (ravages +1).",
+   "note": "Les Potawatomi accueillent la mission de la baie des Puants en 1669."
+  },
+  {
+   "id": "n_anish",
+   "kind": "nation",
+   "star": 1,
+   "title": "Les Anishinaabeg du Sault",
+   "effect": "Vos canots qui arrivent au lac Supérieur sont prêts tout de suite. Perdue si vous y échangez un baril (ravages +1).",
+   "note": "Au Sault, les Anishinaabeg tiennent le passage vers le Supérieur."
+  },
+  {
+   "id": "n_cinq",
+   "kind": "nation",
+   "star": 1,
+   "title": "Les Cinq-Nations",
+   "effect": "Au lac Ontario, un jeton caché qui n’est pas une peau vous rend votre charge, sans autre effet. Perdue si vous y échangez un baril (ravages +1).",
+   "note": "La paix de 1667 avec les Haudenosaunee rouvre le lac Ontario."
+  },
+  {
+   "id": "n_wendat",
+   "kind": "nation",
+   "star": 1,
+   "title": "Les Wendat de Lorette",
+   "effect": "Vos guides sont gratuits. Perdue si une de vos expéditions échange un baril (ravages +1).",
+   "note": "Réfugiés près de Québec, les Wendat chrétiens refusent l’eau-de-vie."
+  },
+  {
+   "id": "o_marg",
+   "kind": "charge",
+   "star": 2,
+   "title": "Marguillier de la paroisse",
+   "effect": "Si plusieurs marchands prennent le pas, vous passez devant.",
+   "note": "Un banc d’honneur à Notre-Dame de Québec."
+  },
+  {
+   "id": "o_cons",
+   "kind": "charge",
+   "star": 3,
+   "title": "Conseiller au Conseil souverain",
+   "effect": "Vous gagnez les égalités de l’enchère des congés.",
+   "note": "Le Conseil souverain juge et réglemente la colonie."
+  },
+  {
+   "id": "o_fief",
+   "kind": "charge",
+   "star": 3,
+   "title": "Fief sur le Richelieu",
+   "effect": "+1 livre chaque hiver (et noblesse, à venir).",
+   "note": "Les officiers du régiment de Carignan reçoivent des seigneuries le long du Richelieu."
+  }
+ ],
+ "MATS": [
+  {
+   "id": "x_navire",
+   "title": "Navire",
+   "text": "1 navire armé, et 1 livre de dette envers La Rochelle.",
+   "ship": 1,
+   "dette": 1
+  },
+  {
+   "id": "x_parts",
+   "title": "Parts de navire",
+   "text": "2 parts payées sur une carte de navire au chantier, et 2 livres.",
+   "parts": 2,
+   "cash": 2
+  },
+  {
+   "id": "x_bourse",
+   "title": "Bourse",
+   "text": "4 livres.",
+   "cash": 4
+  },
+  {
+   "id": "x_ballots",
+   "title": "Ballots de marchandises",
+   "text": "4 marchandises.",
+   "m": 4
+  },
+  {
+   "id": "x_barils",
+   "title": "Barils d’eau-de-vie",
+   "text": "2 barils.",
+   "b": 2
+  },
+  {
+   "id": "x_assort",
+   "title": "Assortiment",
+   "text": "2 marchandises et 1 baril.",
+   "m": 2,
+   "b": 1
+  },
+  {
+   "id": "x_petit",
+   "title": "Petit canot",
+   "text": "1 petit canot et 2 livres.",
+   "petit": 1,
+   "cash": 2
+  },
+  {
+   "id": "x_grand",
+   "title": "Grand canot",
+   "text": "1 grand canot et 1 livre.",
+   "grand": 1,
+   "cash": 1
+  },
+  {
+   "id": "x_alambic",
+   "title": "Alambic",
+   "text": "1 alambic.",
+   "alambic": 1
+  }
+ ],
+ "MONTH_EVENTS": [
+  {
+   "id": "calme",
+   "title": "Mois calme",
+   "text": "Le fleuve est tranquille.",
+   "w": 3
+  },
+  {
+   "id": "grostemps",
+   "title": "Gros temps sur l’Atlantique",
+   "text": "Chaque navire qui part maintenant de Québec, ou qui y arrive au début du mois prochain, lance le dé de traversée : sur 1, il est perdu avec sa cargaison. Le pilote du Saint-Laurent connaît le fleuve et l’ignore.",
+   "w": 1
+  },
+  {
+   "id": "plein",
+   "title": "Magasins pleins à Paris",
+   "text": "Les chapeliers ont trop de stock : le prix de Paris baisse de 1.",
+   "w": 1
+  },
+  {
+   "id": "rare",
+   "title": "Castor rare à Paris",
+   "text": "Les chapeliers manquent de peaux : le prix de Paris monte de 1.",
+   "w": 1
+  },
+  {
+   "id": "fievre",
+   "title": "Fièvre aux Pays d’en Haut",
+   "text": "Chaque expédition sur les lacs perd un équipier engagé.",
+   "w": 1
+  }
+ ],
+ "DEMANDE": [
+  {
+   "title": "Commande de la Cour",
+   "d": 2,
+   "text": "Le roi veut des chapeaux pour toute sa maison."
+  },
+  {
+   "title": "Mode des chapeaux de castor",
+   "d": 1,
+   "text": "Les chapeliers de Paris s’arrachent les peaux."
+  },
+  {
+   "title": "Paix en Europe",
+   "d": 0,
+   "text": "Le commerce suit son cours."
+  },
+  {
+   "title": "Paix en Europe",
+   "d": 0,
+   "text": "Le commerce suit son cours."
+  },
+  {
+   "title": "Guerre en Europe",
+   "d": -1,
+   "corsaires": true,
+   "text": "Les corsaires anglais rôdent : jusqu’à l’hiver, chaque navire qui arrive ou qui part lance le dé de traversée."
+  },
+  {
+   "title": "Peaux de la Baie d’Hudson",
+   "d": -1,
+   "text": "Les Anglais inondent le marché de leurs peaux."
+  }
+ ],
+ "GRAND": [
+  {
+   "name": "Refus des sacrements",
+   "text": "L’évêque fait refuser l’absolution aux vendeurs d’eau-de-vie. Tous les marchands prennent +1 soupçon."
+  },
+  {
+   "name": "Une nation refuse l’alcool",
+   "text": "Les chefs interdisent l’eau-de-vie dans leurs villages. Jusqu’à l’hiver, les barils ne s’échangent plus."
+  },
+  {
+   "name": "Ordonnance royale",
+   "text": "Désormais, les canots de coureurs des bois ne peuvent plus transporter d’eau-de-vie."
+  }
+ ],
+ "CREW": [
+  {
+   "id": "rep",
+   "label": "Représentant",
+   "cost": 2,
+   "text": "Choisit le lac au lieu du dé, peut ensuite changer de lac (1 action) et mener l’expédition au lac Supérieur.",
+   "note": "Il parle au nom de la maison et décide sur place."
+  },
+  {
+   "id": "guide",
+   "label": "Guide",
+   "cost": 1,
+   "text": "Regarde les jetons cachés avant d’échanger.",
+   "note": "Il sait qui chasse quoi, et où."
+  },
+  {
+   "id": "mil",
+   "label": "Milicien",
+   "cost": 1,
+   "text": "Protège l’expédition des raids (sans effet : raids retirés pour l’instant).",
+   "note": "Un habitant armé, enrôlé pour la saison."
+  },
+  {
+   "id": "int",
+   "label": "Interprète",
+   "cost": 1,
+   "text": "Le premier baril échangé à chaque lac ne fait pas de ravage.",
+   "note": "Il apaise les tensions que l’eau-de-vie fait naître."
+  }
+ ],
+ "HIDDEN_INFO": {
+  "fur": {
+   "title": "Peau",
+   "text": "Une peau de la qualité indiquée."
+  },
+  "raid": {
+   "title": "Raid",
+   "text": "Des guerriers attaquent le camp : l’expédition perd la moitié de sa cargaison, sauf avec un milicien."
+  },
+  "mission": {
+   "title": "Missionnaire jésuite",
+   "text": "Un père jésuite est au village. Si vous transportez de l’eau-de-vie : +1 soupçon."
+  },
+  "present": {
+   "title": "Présent de bienvenue",
+   "text": "On vous offre une peau de qualité 2, et la charge échangée vous est rendue."
+  },
+  "fievre": {
+   "title": "Fièvre",
+   "text": "Un équipier tombe malade et reste au village. Sans équipier, une charge est perdue."
+  },
+  "sec": {
+   "title": "Castor sec",
+   "text": "Des peaux mal préparées, invendables : la charge est perdue pour rien."
+  }
+ },
+ "BAG_HIDDEN": [
+  {
+   "k": "fur",
+   "q": 1,
+   "n": 6
+  },
+  {
+   "k": "fur",
+   "q": 2,
+   "n": 6
+  },
+  {
+   "k": "fur",
+   "q": 3,
+   "n": 3
+  },
+  {
+   "k": "mission",
+   "n": 2
+  },
+  {
+   "k": "present",
+   "n": 2
+  },
+  {
+   "k": "fievre",
+   "n": 2
+  },
+  {
+   "k": "sec",
+   "n": 2
+  }
+ ],
+ "LAKES": [
+  {
+   "id": "huron",
+   "name": "Lac Huron",
+   "chits": [
+    [
+     262,
+     404
+    ],
+    [
+     290,
+     404
+    ],
+    [
+     318,
+     404
+    ]
+   ],
+   "pawn": [
+    236,
+    318
+   ],
+   "hidden": 1,
+   "cap": 1
+  },
+  {
+   "id": "michigan",
+   "name": "Lac Michigan",
+   "chits": [
+    [
+     112,
+     420
+    ],
+    [
+     112,
+     448
+    ],
+    [
+     112,
+     476
+    ]
+   ],
+   "pawn": [
+    156,
+    340
+   ],
+   "hidden": 1,
+   "cap": 1
+  },
+  {
+   "id": "erie",
+   "name": "Lac Érié",
+   "chits": [
+    [
+     330,
+     474
+    ],
+    [
+     356,
+     466
+    ],
+    [
+     382,
+     458
+    ]
+   ],
+   "pawn": [
+    236,
+    536
+   ],
+   "hidden": 1,
+   "cap": 1
+  },
+  {
+   "id": "ontario",
+   "name": "Lac Ontario",
+   "chits": [
+    [
+     396,
+     404
+    ],
+    [
+     422,
+     398
+    ],
+    [
+     448,
+     392
+    ]
+   ],
+   "pawn": [
+    476,
+    464
+   ],
+   "hidden": 2,
+   "cap": 1
+  },
+  {
+   "id": "sup",
+   "name": "Lac Supérieur",
+   "chits": [
+    [
+     170,
+     172
+    ],
+    [
+     196,
+     172
+    ],
+    [
+     222,
+     172
+    ]
+   ],
+   "pawn": [
+    70,
+    222
+   ],
+   "hidden": 1,
+   "cap": 2,
+   "premium": true
+  }
+ ],
+ "P": {
+  "march": 1,
+  "baril": 2,
+  "navire": 5,
+  "grand": 3,
+  "petit": 2,
+  "alambic": 4,
+  "orderBank": 2,
+  "orderMarchand": 1,
+  "grandBank": 2,
+  "petitBank": 1,
+  "alambicBarils": 2,
+  "albany": 2,
+  "bankMarch": 2,
+  "bankBaril": 3,
+  "fretBank": 2,
+  "parisStart": 4,
+  "parisMax": 8,
+  "parisDrop": 3,
+  "parisWinter": 2
+ },
+ "ACTIONS": [
+  {
+   "id": "commander",
+   "hidden": true,
+   "title": "Commander en France",
+   "text": "Commande de complément, jusqu’en août : le navire traverse en 1 ou 2 mois selon le dé."
+  },
+  {
+   "id": "monter",
+   "title": "Partir en expédition",
+   "text": "Composer le canot à Montréal. Il remonte l’Outaouais pendant un mois."
+  },
+  {
+   "id": "allerlac",
+   "title": "Commercer à un lac",
+   "text": "Échanger sur le lac du canot, ou en choisir un : le représentant choisit et peut changer de lac, sinon le dé décide."
+  },
+  {
+   "id": "commercer",
+   "hidden": true,
+   "title": "Commercer ici",
+   "text": "Échanger à nouveau sur le lac où se trouve votre canot."
+  },
+  {
+   "id": "redescendre",
+   "title": "Redescendre",
+   "text": "Le canot repart vers Montréal : une case de voyage par mois."
+  },
+  {
+   "id": "embarquer",
+   "title": "Vendre des peaux",
+   "text": "Sur un navire en rade, pour la Ferme du castor, ou en contrebande à Albany (2 par point, payé plus tard, +2 soupçon)."
+  },
+  {
+   "id": "lever",
+   "hidden": true,
+   "title": "Faire partir votre navire",
+   "text": "Lever l’ancre avant d’être plein, pour vendre avant que Paris baisse."
+  },
+  {
+   "id": "albany",
+   "hidden": true,
+   "title": "Expédition à Albany",
+   "text": "2 livres par point de qualité, payées plus tard, mais +2 soupçon."
+  },
+  {
+   "id": "investir",
+   "title": "Investir",
+   "text": "Acheter un navire, un canot ou un alambic."
+  },
+  {
+   "id": "recruter",
+   "title": "Recruter",
+   "text": "Prendre une carte de la rivière, au prix de sa position (3 · 2 · 1 · 1 livre)."
+  },
+  {
+   "id": "contrat",
+   "title": "Jouer un contrat",
+   "text": "Sans action : jouer un contrat de votre main, puis jouer votre tour."
+  },
+  {
+   "id": "prix",
+   "title": "Changer les prix",
+   "text": "Reposer sur la piste tous vos produits, canots et navires au prix de votre choix."
+  },
+  {
+   "id": "pas",
+   "title": "Prendre le pas",
+   "text": "Se présenter le premier chez l’intendant : vous jouerez en premier le mois prochain."
+  },
+  {
+   "id": "attendre",
+   "title": "Attendre",
+   "text": "Laisser passer le mois."
+  }
+ ]
+}

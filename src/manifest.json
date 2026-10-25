@@ -1,0 +1,427 @@
+{
+ "manifest": [
+  [
+   "reserve",
+   3600,
+   2000
+  ],
+  [
+   "deck_pers",
+   5000,
+   1400
+  ],
+  [
+   "deck_pers_back",
+   500,
+   700
+  ],
+  [
+   "deck_riv",
+   5000,
+   2100
+  ],
+  [
+   "deck_riv_back",
+   500,
+   700
+  ],
+  [
+   "deck_mat",
+   4500,
+   700
+  ],
+  [
+   "deck_mat_back",
+   500,
+   700
+  ],
+  [
+   "deck_ev",
+   3500,
+   700
+  ],
+  [
+   "deck_ev_back",
+   500,
+   700
+  ],
+  [
+   "deck_dem",
+   3000,
+   700
+  ],
+  [
+   "deck_dem_back",
+   500,
+   700
+  ],
+  [
+   "deck_grand",
+   1500,
+   700
+  ],
+  [
+   "deck_grand_back",
+   500,
+   700
+  ],
+  [
+   "tile_G1_sec",
+   400,
+   400
+  ],
+  [
+   "tile_G1_gras",
+   400,
+   400
+  ],
+  [
+   "tile_S1_sec",
+   400,
+   400
+  ],
+  [
+   "tile_S1_gras",
+   400,
+   400
+  ],
+  [
+   "tile_G2_sec",
+   400,
+   400
+  ],
+  [
+   "tile_G2_gras",
+   400,
+   400
+  ],
+  [
+   "tile_S2_sec",
+   400,
+   400
+  ],
+  [
+   "tile_S2_gras",
+   400,
+   400
+  ],
+  [
+   "tile_G3_sec",
+   400,
+   400
+  ],
+  [
+   "tile_G3_gras",
+   400,
+   400
+  ],
+  [
+   "tile_S3_sec",
+   400,
+   400
+  ],
+  [
+   "tile_S3_gras",
+   400,
+   400
+  ],
+  [
+   "hid_back",
+   400,
+   400
+  ],
+  [
+   "hid_fur1",
+   400,
+   400
+  ],
+  [
+   "hid_fur2",
+   400,
+   400
+  ],
+  [
+   "hid_fur3",
+   400,
+   400
+  ],
+  [
+   "hid_mission",
+   400,
+   400
+  ],
+  [
+   "hid_present",
+   400,
+   400
+  ],
+  [
+   "hid_fievre",
+   400,
+   400
+  ],
+  [
+   "hid_gatees",
+   400,
+   400
+  ],
+  [
+   "conge_0",
+   400,
+   400
+  ],
+  [
+   "conge_1",
+   400,
+   400
+  ],
+  [
+   "conge_2",
+   400,
+   400
+  ],
+  [
+   "conge_back",
+   400,
+   400
+  ],
+  [
+   "voy_rep",
+   240,
+   240
+  ],
+  [
+   "voy_guide",
+   240,
+   240
+  ],
+  [
+   "voy_mil",
+   240,
+   240
+  ],
+  [
+   "voy_int",
+   240,
+   240
+  ],
+  [
+   "tok_caisse",
+   200,
+   200
+  ],
+  [
+   "tok_bouteille",
+   200,
+   200
+  ],
+  [
+   "tok_caisse_w",
+   200,
+   200
+  ],
+  [
+   "tok_bouteille_w",
+   200,
+   200
+  ],
+  [
+   "tok_peau_sec",
+   200,
+   200
+  ],
+  [
+   "tok_peau_gras",
+   200,
+   200
+  ],
+  [
+   "canot_grand",
+   720,
+   210
+  ],
+  [
+   "canot_petit",
+   480,
+   210
+  ],
+  [
+   "canot_coureur",
+   360,
+   210
+  ],
+  [
+   "navire",
+   300,
+   214
+  ],
+  [
+   "navire_roi",
+   300,
+   214
+  ],
+  [
+   "navire_marchand",
+   300,
+   214
+  ],
+  [
+   "alambic",
+   220,
+   240
+  ],
+  [
+   "tok_disc",
+   200,
+   200
+  ],
+  [
+   "tok_marker",
+   200,
+   200
+  ],
+  [
+   "tok_noir",
+   200,
+   200
+  ],
+  [
+   "tok_pas",
+   260,
+   170
+  ],
+  [
+   "carte_navire",
+   560,
+   280
+  ],
+  [
+   "mat_rouge",
+   1800,
+   1320
+  ],
+  [
+   "mat_bleu",
+   1800,
+   1320
+  ],
+  [
+   "mat_vert",
+   1800,
+   1320
+  ]
+ ],
+ "decks": {
+  "pers": {
+   "cols": 10,
+   "rows": 2,
+   "n": 14,
+   "names": [
+    "Interprète wendat",
+    "Commis-voyageur",
+    "Sergent de la Compagnie franche",
+    "Coureur des bois aguerri",
+    "Engagés de Lachine",
+    "Pilote du Saint-Laurent",
+    "Ami du gouverneur",
+    "Confesseur récollet",
+    "Passeurs de Kahnawake",
+    "Guide ojibwé",
+    "Bouilleur associé",
+    "Cabaretier de la basse-ville",
+    "Mercier de la rue Saint-Paul",
+    "Commis du fermier"
+   ]
+  },
+  "riv": {
+   "cols": 10,
+   "rows": 3,
+   "n": 30,
+   "names": [
+    "Garde-magasin",
+    "Teneur de livres",
+    "Canotier d’expérience",
+    "Facteur de La Rochelle",
+    "Calfat",
+    "Notaire royal",
+    "Censitaires",
+    "Maître de barque",
+    "Aubergiste de Montréal",
+    "Armateur associé",
+    "Père jésuite",
+    "Négociant huguenot",
+    "Commission en France",
+    "Foire de Montréal",
+    "Lettre de change",
+    "Congé de faveur",
+    "Contrat de la Ferme",
+    "Portage rapide",
+    "Renseignement de traite",
+    "Prendre les devants",
+    "Part offerte",
+    "Dénonciation à l’intendant",
+    "Les Outaouais",
+    "Les Potéouatamis de la baie des Puants",
+    "Les Anishinaabeg du Sault",
+    "Les Cinq-Nations",
+    "Les Wendat de Lorette",
+    "Marguillier de la paroisse",
+    "Conseiller au Conseil souverain",
+    "Fief sur le Richelieu"
+   ]
+  },
+  "mat": {
+   "cols": 9,
+   "rows": 1,
+   "n": 9,
+   "names": [
+    "Navire",
+    "Parts de navire",
+    "Bourse",
+    "Ballots de marchandises",
+    "Eau-de-vie",
+    "Assortiment",
+    "Petit canot",
+    "Grand canot",
+    "Alambic"
+   ]
+  },
+  "ev": {
+   "cols": 7,
+   "rows": 1,
+   "n": 7,
+   "names": [
+    "Mois calme",
+    "Mois calme",
+    "Mois calme",
+    "Gros temps sur l’Atlantique",
+    "Magasins pleins à Paris",
+    "Castor rare à Paris",
+    "Fièvre aux Pays d’en Haut"
+   ]
+  },
+  "dem": {
+   "cols": 6,
+   "rows": 1,
+   "n": 6,
+   "names": [
+    "Commande de la Cour",
+    "Mode des chapeaux de castor",
+    "Paix en Europe",
+    "Paix en Europe",
+    "Guerre en Europe",
+    "Peaux de la Baie d’Hudson"
+   ]
+  },
+  "grand": {
+   "cols": 3,
+   "rows": 1,
+   "n": 3,
+   "names": [
+    "Refus des sacrements",
+    "Une nation refuse l’alcool",
+    "Ordonnance royale"
+   ]
+  }
+ }
+}
