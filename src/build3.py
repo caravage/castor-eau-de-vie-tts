@@ -6,7 +6,7 @@ def aspect(img):
     if img not in ASP: w, h = Image.open(f'img/{img}.png').size; ASP[img] = h / w
     return ASP[img]
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v8/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v9/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
@@ -92,7 +92,7 @@ for p in TP['pieces']:
             OBJ.append(bag('Sac des Grands Lacs', 46, pos, [tile(f'Castor ×{n} (Grands Lacs)', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
                                                         for n, m in ((1, 9), (2, 6), (3, 3)) for _ in range(m)], col('#8A6A45'), '18 paquets : 9 × 1, 6 × 2, 3 × 3'))
         elif p['bag'] == 'premium':
-            OBJ.append(bag('Sac du lac Supérieur', 46, pos, [tile(f'Castor ×{n} (Supérieur)', f'tile_S{n}_sec', 30, back=f'tile_S{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
+            OBJ.append(bag('Sac du lac Supérieur', 46, pos, [tile(f'Castor gras ×{n} (Supérieur)', f'tile_S{n}_gras', 30, back=f'tile_S{n}_gras', desc='Castor gras (★) : toutes les tuiles du lac Supérieur sont grasses.', face='up')
                                                          for n, m in ((1, 3), (2, 5), (3, 4)) for _ in range(m)], col('#8A6418'), '12 paquets : 3 × 1, 5 × 2, 4 × 3'))
         else:
             HN = {'fur1': 'Traite : 1 castor', 'fur2': 'Traite : 2 castors', 'fur3': 'Traite : 3 castors', 'mission': 'Missionnaire', 'present': 'Présent', 'fievre': 'Fièvre', 'gatees': 'Peaux gâtées'}
