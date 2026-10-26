@@ -62,7 +62,7 @@ def reserve():
     for k, lab in enumerate(["associés", "matériel", "fin de mois", "défausse", "demande de Paris", "grand événement"]):
         x = 110 + k * 300
         g.append(f"<rect x='{x}' y='1560' width='270' height='340' rx='16' fill='{PCARD}' stroke='{EDGE}' stroke-width='3' stroke-dasharray='14 9'/>" + T(x + 135, 1740, lab, 24, 'middle', fill=MUTED))
-    g.append(zone(1950, 1480, 1570, 460, "Voyageurs et dés", "représentant 2 livres · guide, milicien, interprète 1 livre · un par place de congé"))
+    g.append(zone(1950, 1480, 1570, 460, "Voyageurs et dés", "représentant 2 livres · guide, milicien, interprète 1 livre"))
     for k, lab in enumerate(["représentant", "guide", "milicien", "interprète", "dés · 1er"]):
         x = 1985 + k * 305
         g.append(f"<rect x='{x}' y='1600' width='280' height='300' rx='16' fill='{PAPER}' stroke='{EDGE}' stroke-width='2.5' stroke-dasharray='12 8'/>" + T(x + 140, 1880, lab, 24, 'middle', fill=MUTED))
@@ -106,7 +106,7 @@ def decks():
     for c in rc:
         if c['id'] == 'c_ferme': c['effect'] = "Vendez à Québec jusqu’à 3 de vos peaux au prix de Paris moins 1, sans navire."
     DECKS['riv'] = sheet('deck_riv', 'Recrue', [card_html(rk[c['kind']], c['title'], c['effect'], c.get('note', ''), c.get('star', 0)) for c in rc], 'Rivière', 'recrutement'); DECKS['riv']['names'] = [c['title'] for c in rc]
-    mats = [("Navire", "Une carte de navire du chantier, entièrement payée, et 2 livres de dette envers La Rochelle."), ("Parts de navire", "2 parts payées sur une carte de navire au chantier, et 3 livres."),
+    mats = [("Navire", "Une carte de navire du chantier, entièrement payée, et 2 de crédit envers la compagnie."), ("Parts de navire", "2 parts payées sur une carte de navire au chantier, et 3 livres."),
             ("Bourse", "4 livres."), ("Ballots de marchandises", "4 marchandises."), ("Eau-de-vie", "2 bouteilles et 1 livre."), ("Assortiment", "2 marchandises et 1 bouteille."),
             ("Petit canot", "1 petit canot et 2 livres."), ("Grand canot", "1 grand canot et 1 livre."), ("Alambic", "1 alambic et 1 livre.")]
     DECKS['mat'] = sheet('deck_mat', 'Matériel de départ', [card_html('Matériel de départ', t, fx) for t, fx in mats], 'Matériel', 'distribué en entier · 3 par marchand', css=CARD_CSS.replace('.t{font-family:', '.t{font-size:60px!important;font-family:').replace('.fx{font-size:30px', '.fx{font-size:44px')); DECKS['mat']['names'] = [t for t, _ in mats]
@@ -156,12 +156,10 @@ def tiles():
             else: cur = (cur + ' ' + w).strip()
         lines.append(cur)
         svg(f'hid_{k}', S, S, tile_frame(S, '#EADFC2', '#8E2F25') + T(S / 2, 112, t, 50, 'middle', fam=DISP, fill='#8E2F25') + ''.join(T(S / 2, 190 + i * 42, l, 30, 'middle') for i, l in enumerate(lines)))
-    # Congés : 0, 1 ou 2 places de voyageur, au choix du joueur
+    # Congés : marchandises offertes dans le crédit, et coût en crédit
     seal = f"<circle cx='{S/2}' cy='70' r='30' fill='#8E2F25'/><circle cx='{S/2}' cy='70' r='20' fill='none' stroke='#F2D9B0' stroke-width='3'/>"
-    for n in (0, 1, 2):
-        slots = ''.join(f"<circle cx='{S/2 + (i - (n - 1) / 2) * 140}' cy='250' r='58' fill='#fff' stroke='{INK}' stroke-width='4' stroke-dasharray='12 8'/>" for i in range(n))
-        sub = {0: 'sans voyageur', 1: '1 voyageur', 2: '2 voyageurs'}[n]
-        svg(f'conge_{n}', S, S, tile_frame(S, PAPER) + seal + T(S / 2, 150, 'Congé', 50, 'middle', fam=DISP) + slots + T(S / 2, 360, sub + (' au choix' if n else ''), 28, 'middle', fill=MUTED))
+    for n, c in ((4, 3), (3, 2), (2, 1)):
+        svg(f'conge_m{n}', S, S, tile_frame(S, PAPER) + seal + T(S / 2, 150, 'Congé', 50, 'middle', fam=DISP) + T(S / 2, 250, f'{n} marchandises', 40, 'middle', weight=700) + T(S / 2, 330, f'coût : {c} crédit', 32, 'middle', fill='#A3352A', weight=700) + T(S / 2, 378, 'plus pauvre : −1', 24, 'middle', fill=MUTED))
     svg('conge_back', S, S, tile_frame(S, '#8E2F25', '#5E1F18') + T(S / 2, 215, 'Congé', 66, 'middle', fam=DISP, fill='#F6EFDC') + T(S / 2, 268, "de l’intendant", 30, 'middle', fam=SER, italic=True, fill='#F6EFDC'))
     # Voyageurs
     VOY = {'rep': ('Représentant', '#7A2E3A'), 'guide': ('Guide', '#2F5E4A'), 'mil': ('Milicien', '#3E5A7A'), 'int': ('Interprète', '#8A5A14')}
@@ -241,15 +239,16 @@ print(len(MANIFEST), 'pages')
 AIDE_CSS = f""".s{{width:1600px;height:1150px;padding:20px}}.in{{height:100%;border-radius:30px;background:{PAPER};border:4px solid {EDGE};padding:34px 44px;display:grid;grid-template-columns:1fr 1fr;column-gap:46px;align-content:start}}
 h1{{grid-column:1/-1;font-family:{DISP};font-weight:400;font-size:52px;margin-bottom:14px;color:{INK};border-bottom:3px solid {FRAME};padding-bottom:8px}}
 h2{{font-family:{DISP};font-weight:400;font-size:37px;margin:14px 0 6px;color:{FRAME}}}
-.a{{margin-bottom:13px;font-size:29px;line-height:1.3}}.a b{{font-weight:700}}.n{{color:{MUTED}}}"""
+.a{{margin-bottom:11px;font-size:27px;line-height:1.28}}.a b{{font-weight:700}}.n{{color:{MUTED}}}"""
 def A(t, x): return f"<div class='a'><b>{E(t)}</b> — {E(x)}</div>"
 recto = ("<h1>Aide de jeu · une action par mois, d’avril à novembre</h1><div>"
   "<h2>Actions</h2>"
-  + A("Partir en expédition", "à Montréal, composez le canot. Avec un congé : grand canot (5 places) ou petit canot (3 places), voyageurs permis. Sans congé : canot de coureur des bois (2 places, marchandises seulement, +1 soupçon). Payez avant de partir ; s’il manque de l’argent, la dette monte.")
+  + A("Partir en expédition", "à Montréal, composez le canot. Il faut un congé, acheté au printemps à crédit avec ses marchandises. Le canot (achat ou location) et les voyageurs se paient en livres au départ. Grand canot (5 places) ou petit canot (3 places), voyageurs permis.")
+  + A("Coureurs des bois", "sans congé : fournissez 2 éléments de votre stock (marchandises ou eau-de-vie), sans autre prix ; +1 soupçon. Au retour, les peaux se vendent normalement, ou à Albany sans soupçon ; la première peau vendue paie les coureurs, le reste vous revient.")
   + A("Commercer à un lac", "canot prêt (partie pleine). Avec un représentant, vous choisissez le lac ; sinon le dé : 1–2 Huron, 3–4 Érié, 5–6 Ontario. Une charge contre une tuile.")
-  + A("Redescendre", "une case par mois, deux depuis le lac Supérieur. Arrivée dans la zone rayée de Montréal, déchargement le mois suivant.")
+  + A("Redescendre", "le canot prend la route du retour. Arrivée dans la zone rayée de Montréal, déchargement le mois suivant.")
   + A("Vendre des peaux", "sur un navire en rade, à un prix par peau au plus égal au prix de Paris ; ou à Albany : 2 par peau, payé deux mois plus tard, +2 soupçon.")
-  + A("Investir", "parts de navire au chantier (1 livre la part, 5 parts), grand canot 3, petit canot 2, alambic 4.")
+  + A("Investir", "en livres : parts de navire au chantier (1 livre la part, 5 parts), grand canot 3, petit canot 2, alambic 4.")
   + "</div><div><h2>&nbsp;</h2>"
   + A("Recruter", "prenez une carte de la rivière au prix de sa case : 3, 2 ou 1 livre.")
   + A("Changer les prix", "reposez sur la piste tous vos produits, canots et navires.")
@@ -259,7 +258,7 @@ recto = ("<h1>Aide de jeu · une action par mois, d’avril à novembre</h1><div
   + A("Jouer un contrat", "de votre main (deux au plus), puis jouez votre tour.")
   + A("Faire partir votre navire", "avant qu’il soit plein : 1 livre de faux fret par place vide.")
   + A("Ouvrir votre place réservée", "au public, sur votre navire en rade.")
-  + "<h2>Voyageurs · un par place de congé</h2>"
+  + "<h2>Voyageurs · payés en livres au départ</h2>"
   + A("Représentant · 2", "choisit le lac, peut en changer (1 action), seul à mener au Michigan et au Supérieur.")
   + A("Guide · 1", "regarde les jetons cachés avant d’échanger.")
   + A("Interprète · 1", "le premier baril échangé à chaque lac ne fait pas de ravage.")
@@ -269,16 +268,17 @@ verso = ("<h1>Aide de jeu · déroulement de l’année</h1><div>"
   "<h2>Printemps</h2>"
   + A("La Rochelle", "chaque navire part et lance un dé : 4 ou plus, il arrive en mai, sinon en juin.")
   + A("Navire du roi", "en rade dès avril les années I et II.")
-  + A("Congés", "joueurs − 1 par an, tirés du sac ; délivrés sur 3+ en avril, 2+ en mai, assurés en juin ; enchère secrète.")
+  + A("Congés", "4 tirés du sac à 3 joueurs, délivrés sur 3+ en avril ou 2+ en mai. Chacun s’achète à crédit (1, 2 ou 3) et offre 2, 3 ou 4 marchandises. Un joueur peut en acheter plusieurs. Remélangés chaque année.")
+  + A("Joueur le plus pauvre", "chaque congé lui coûte 1 crédit de moins (celui à 1 est gratuit).")
   + "<h2>Chaque mois</h2>"
-  + A("Début", "les canots de la zone rayée glissent dans la zone pleine, puis les canots en route avancent d’une case.")
+  + A("Début", "les canots de la zone rayée glissent dans la zone pleine, puis les canots en route avancent d’une case. Retour des Grands Lacs : sur 3+ au dé (bonus des voyageurs à fixer), le canot rentre aussitôt à Montréal. Du lac Supérieur : le premier mois, il rejoint les Grands Lacs, puis même dé.")
   + A("Tour", "une action chacun ; l’ordre tourne d’un cran chaque mois.")
   + A("Fin", "événement de fin de mois ; la carte de droite de la rivière part à la défausse, les autres glissent, une nouvelle entre à 3 livres.")
   + "<h2>Navires de retour</h2>"
   + A("Places", "3 publiques et 1 réservée au propriétaire. Une offre moins chère évince la peau la plus chère.")
   + A("Départ", "plein, ou fin septembre. Paris baisse de 1 toutes les 3 peaux embarquées.")
   + "</div><div><h2>Hiver</h2>"
-  + A("Dettes", "remboursez ; l’impayé grossit de moitié.")
+  + A("Finances", "remboursement du crédit et intérêts (à fixer). Défaut : cédez à la compagnie une possession française de votre choix (navire, alambic), qui devient générique ; chacune efface une tranche de crédit (par exemple 3). Garanties : navires, alambics et autres possessions ouvrent du crédit supplémentaire (à fixer).")
   + A("Commande", "à La Rochelle : marchandise 1, eau-de-vie 2, cale vide 1 ; 4 cales par navire. En saison, seulement avec la carte Commission en France.")
   + A("Paris", "+2, puis tirez la demande de Paris.")
   + A("Ravages", "−1.")

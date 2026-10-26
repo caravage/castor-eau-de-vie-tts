@@ -6,7 +6,7 @@ def aspect(img):
     if img not in ASP: w, h = Image.open(f'img/{img}.png').size; ASP[img] = h / w
     return ASP[img]
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v9/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v10/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
@@ -109,7 +109,7 @@ for p in TP['pieces']:
         elif kind == 'paris': OBJ.append(token('Prix de Paris', 'tok_marker', 20, pos, col('#C9952B')))
         elif kind == 'disc':
             if p.get('dem'): OBJ.append(token('Demande · ' + ('Grands Lacs' if p['dem'] == 'gl' else 'Supérieur'), 'tok_disc', 16, pos, INKC))
-            else: OBJ.append(token(f"{ {'livres': 'Livres', 'dette': 'Dette'}.get(p.get('track'), 'Soupçon') } {PN[c]}", 'tok_disc', 11 if p.get('track') else 18, pos, color))
+            else: OBJ.append(token(f"{ {'livres': 'Livres', 'credit': 'Crédit'}.get(p.get('track'), 'Soupçon') } {PN[c]}", 'tok_disc', 11 if p.get('track') else 18, pos, color))
         elif kind == 'march': OBJ.append(token(f'Marchandise {who}', 'tok_caisse_w', w, pos, color))
         elif kind == 'baril': OBJ.append(token(f'Eau-de-vie {who}', 'tok_bouteille_w', w, pos, color))
         elif kind == 'grand': OBJ.append(token(f'Grand canot {who}', 'canot_grand', w, pos, color))
@@ -139,8 +139,8 @@ for k in range(11): OBJ.append(token('Marchandise (comptoir)', 'tok_caisse_w', 2
 for k in range(5): OBJ.append(token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, P(1312 + k * 28, 486 + 73), GREY))
 OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1326, 486 + 105), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1392, 486 + 105), GREY))
 OBJ.append(token('Navire du roi', 'navire_roi', 40, P(1450, 486 + 105))); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1500, 486 + 105)))
-OBJ.append(bag('Sac des congés', 40, P(1760, 486 + 140), [tile(f'Congé · {n} place' + ('s' if n > 1 else ''), f'conge_{n}', 40, back='conge_back') for n, m in ((1, 6), (2, 4), (0, 2)) for _ in range(m)],
-               col('#8E2F25'), '12 congés : 6 à 1 place, 4 à 2 places, 2 sans place. Une place = un voyageur au choix ; pas de canot.'))
+OBJ.append(bag('Sac des congés', 40, P(1760, 486 + 140), [tile(f'Congé · {n} marchandises · {c} crédit', f'conge_m{n}', 40, back='conge_back') for n, c, m in ((4, 3, 3), (3, 2, 4), (2, 1, 3)) for _ in range(m)],
+               col('#8E2F25'), '10 congés : 3 à 4 marchandises (3 crédit), 4 à 3 marchandises (2 crédit), 3 à 2 marchandises (1 crédit). 4 tirés par an à 3 joueurs, remélangés chaque année. Joueur le plus pauvre : −1 crédit.'))
 # Aide de jeu : une par joueur, empilées sous le matériel de départ
 for k in range(3): OBJ.append(tile('Aide de jeu', 'aide_a', 430, P(1515, 1120), back='aide_b', typ=3, thick=0.05, h=0.5 + k * 0.3))
 for i in range(3):
@@ -149,11 +149,11 @@ for i in range(3):
     for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, P(mx + 470, my + 90), PC[i], h=0.5 + k * 0.3))
 LUA = open('setup.lua').read().replace('@W@', str((X1 - X0) * U)).replace('@D@', str(Y1 * U))
 rules = open('rules.txt').read().strip().split('\n\n')
-rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 livres de dette') for r in rules]
+rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 de crédit') for r in rules]
 intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; "
          "ensuite il ne fait que remettre à la bonne taille une pièce qui sort d’un sac ou d’un paquet. Les pièces grises appartiennent au comptoir de Québec. "
          "Tuiles visibles : paquets de 1 à 3 castors secs, retournés côté gras (★) s’ils ne sont pas troqués à la fin de l’année. "
-         "Congés : tirés du sac ; chaque place accueille un voyageur au choix ; un congé ne donne pas de canot. Marchandise : caisse. Eau-de-vie : bouteille.")
+         "Congés : tirés du sac, achetés à crédit, ils offrent des marchandises ; un congé ne donne pas de canot. Crédit : piste de 0 à −10. Marchandise : caisse. Eau-de-vie : bouteille.")
 SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'VersionNumber': 'v13.2.2', 'GameMode': 'Castor et eau-de-vie', 'GameType': '', 'GameComplexity': '', 'Tags': [],
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_Custom', 'TableURL': URL + 'table.png', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},

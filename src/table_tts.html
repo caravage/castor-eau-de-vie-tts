@@ -237,9 +237,9 @@ function setup(n){
     add({k:"tok",kind:"pawn",c:i},mx+404,my+120);
     for(let k=0;k<8;k++)add({k:"tok",kind:"part",c:i},mx+16+k*20,my+400);
     add({k:"tok",kind:"disc",c:i},mx+246+0*26+4,my+10);
-    const lx=BX+40+90+(1120-90)/31*0,dx=BX+40+90;
+    const lx=BX+40+90+(1120-90)/31*0,dx=BX+40+90+10*(1120-90)/21; /* crédit : jeton sur 0, au milieu */
     add({k:"tok",kind:"disc",c:i,track:"livres"},lx+4+(i%2)*12,BY+LIV_Y+4+Math.floor(i/2)*14);
-    add({k:"tok",kind:"disc",c:i,track:"dette"},dx+4+(i%2)*12,BY+DET_Y+4+Math.floor(i/2)*14);
+    add({k:"tok",kind:"disc",c:i,track:"credit"},dx+4+(i%2)*12,BY+DET_Y+4+Math.floor(i/2)*14);
   }
   hist=[];$("undo").disabled=true;sel=null;peek=null;save();renderPrinted();render();fit();
 }
@@ -315,10 +315,10 @@ function printedSVG(){
   // Calendrier et année
   h+=`<text class="pl" x="40" y="40" style="font-size:16px">Calendrier</text><text class="cq" x="148" y="38">Année</text>`;
   ["I","II","III","IV","V"].forEach((r,k)=>{h+=`<rect x="${186+k*34}" y="20" width="30" height="26" rx="3" fill="${PCARD}" stroke="${EDGE}"/><text class="cq" x="${201+k*34}" y="58" text-anchor="middle" style="font-weight:700">${r}</text>`});
-  const notes=[["Comptoir","Congés sur 3+"],["Congés sur 2+"],["Congés assurés"],[],["Commission :","dernier mois"],["Départ ou","hivernage"],["Retour :","glaces 1"],["Retour :","glaces 1–2"]];
+  const notes=[["Comptoir","Congés sur 3+"],["Congés sur 2+"],[],[],["Commission :","dernier mois"],["Départ ou","hivernage"],["Retour :","glaces 1"],["Retour :","glaces 1–2"]];
   h+=`<rect x="40" y="54" width="100" height="100" rx="6" fill="#E3EBD6" stroke="#8FA67A"/><text class="cm" x="50" y="78">Printemps</text><text class="cq gold" x="50" y="95">Départ de</text><text class="cq gold" x="50" y="109">La Rochelle</text><text class="cq gold" x="50" y="123">Roi en rade (I–II)</text>`;
   for(let i=0;i<8;i++){const x=146+i*108,ic=i>=6;h+=`<rect x="${x}" y="54" width="102" height="100" rx="6" fill="${i===7?"#DCE9EC":i===6?"#E7EFEC":PCARD}" stroke="${ic?"#8FB0B7":EDGE}"/><text class="cm" x="${x+10}" y="78">${MCAP[i]}</text>`;notes[i].forEach((t,k)=>{h+=`<text class="cq ${ic?"ice":"gold"}" x="${x+10}" y="${95+k*14}">${t}</text>`})}
-  h+=`<rect x="1012" y="54" width="148" height="100" rx="6" fill="#22332F"/><text class="cm" x="1024" y="78" style="fill:#EFE6D0">Hiver</text><text class="cq" x="1024" y="96" style="fill:#C9D6D2">Dettes · commande</text><text class="cq" x="1024" y="152" style="fill:#E7C27A">+ 1 investissement gratuit</text><text class="cq" x="1024" y="110" style="fill:#C9D6D2">Paris +2 · demande</text><text class="cq" x="1024" y="124" style="fill:#C9D6D2">Ravages −1</text><text class="cq" x="1024" y="138" style="fill:#C9D6D2">Entretien 1 / navire</text>`;
+  h+=`<rect x="1012" y="54" width="148" height="100" rx="6" fill="#22332F"/><text class="cm" x="1024" y="78" style="fill:#EFE6D0">Hiver</text><text class="cq" x="1024" y="96" style="fill:#C9D6D2">Finances · commande</text><text class="cq" x="1024" y="152" style="fill:#E7C27A">+ 1 investissement gratuit</text><text class="cq" x="1024" y="110" style="fill:#C9D6D2">Paris +2 · demande</text><text class="cq" x="1024" y="124" style="fill:#C9D6D2">Ravages −1</text><text class="cq" x="1024" y="138" style="fill:#C9D6D2">Entretien 1 / navire</text>`;
   // Ravages
   h+=`<text class="pl" x="40" y="192" style="font-size:17px">Ravages</text>`;
   for(let v=0;v<=RAV_MAX;v++){const x=RAV_X0+v*RAV_STEP,mk=v===RAV_EV||v===RAV_MAX,col=v===RAV_MAX?"#A3352A":"#B86E12";h+=`<rect x="${x}" y="172" width="${RAV_STEP-4}" height="30" rx="3" fill="${PCARD}" stroke="${mk?col:EDGE}" stroke-width="${mk?1.6:1}"/><text class="cq" x="${x+(RAV_STEP-4)/2}" y="192" text-anchor="middle" style="font-weight:700;${mk?`fill:${col}`:""}">${v}</text>`;}
@@ -329,9 +329,11 @@ function printedSVG(){
   h+=`<text class="pl" x="40" y="${PT_Y-10}" style="font-size:16px">Magasins de Québec · piste des prix</text>`;
   for(let k=1;k<=5;k++){const x=40+(k-1)*(PT_W+PT_GAP);h+=`<rect x="${x}" y="${PT_Y}" width="${PT_W}" height="96" rx="6" fill="${PCARD}" stroke="${EDGE}"/><rect x="${x}" y="${PT_Y}" width="${PT_W}" height="24" rx="6" fill="#7A5232"/><rect x="${x}" y="${PT_Y+16}" width="${PT_W}" height="8" fill="#7A5232"/><text class="num" x="${x+PT_W/2}" y="${PT_Y+16}" text-anchor="middle" style="font-size:13px">${k} livre${k>1?"s":""}</text>`;
     }
-  // Livres et dette
+  // Livres et crédit
   const track=(y0,label,max,danger)=>{const cw=(1120-90)/(max+1);let t=`<text class="pl" x="40" y="${y0+24}" style="font-size:16px">${label}</text>`;for(let v=0;v<=max;v++){const x=130+v*cw,mk=v%5===0;t+=`<rect x="${x}" y="${y0}" width="${cw-3}" height="38" rx="3" fill="${PCARD}" stroke="${mk?(danger?"#A3352A":"#7A5232"):EDGE}" stroke-width="${mk?1.4:1}"/>`;if(mk)t+=`<text class="cq" x="${x+(cw-3)/2}" y="${y0+52}" text-anchor="middle" style="font-weight:700;${danger?"fill:#A3352A":""}">${v===max?v+"+":v}</text>`}return t};
-  h+=track(LIV_Y,"Livres",30,false)+track(DET_Y,"Dette",20,true);
+  h+=track(LIV_Y,"Livres",30,false);
+  // Crédit auprès de la compagnie : de 0 (au milieu) vers −10 (à gauche) ; moitié droite vide pour l'instant
+  {const cw=(1120-90)/21;h+=`<text class="pl" x="40" y="${DET_Y+24}" style="font-size:16px">Crédit</text>`;for(let v=-10;v<=0;v++){const x=130+(v+10)*cw,mk=v%5===0;h+=`<rect x="${x}" y="${DET_Y}" width="${cw-3}" height="38" rx="3" fill="${PCARD}" stroke="${mk?"#A3352A":EDGE}" stroke-width="${mk?1.4:1}"/>`;if(mk)h+=`<text class="cq" x="${x+(cw-3)/2}" y="${DET_Y+52}" text-anchor="middle" style="font-weight:700;fill:#A3352A">${v===0?0:"−"+(-v)}</text>`}}
   h+=`</g>`;
   // Réserve générale
   const lab=(x,y,t,s)=>`<text class="lab" x="${x}" y="${y}">${t}</text>`;
