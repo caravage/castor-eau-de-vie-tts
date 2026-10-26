@@ -6,7 +6,7 @@ def aspect(img):
     if img not in ASP: w, h = Image.open(f'img/{img}.png').size; ASP[img] = h / w
     return ASP[img]
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v10/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
@@ -51,8 +51,8 @@ def bag(nick, wpx, pos, items, color, desc=''):
     for it in items: it['Transform'] = T(fz=it['Transform']['rotZ']); it['Locked'] = False
     random.shuffle(items); o['ContainedObjects'] = items; return o
 
-DECK_ID = {'pers': 1, 'riv': 2, 'mat': 3, 'ev': 4, 'dem': 5, 'grand': 6}
-DECK_NAME = {'pers': 'Associés', 'riv': 'Rivière de recrutement', 'mat': 'Matériel de départ', 'ev': 'Événements de fin de mois', 'dem': 'Demande de Paris', 'grand': 'Grands événements'}
+DECK_ID = {'pers': 1, 'riv': 2, 'mat': 3, 'ev': 4, 'dem': 5, 'grand': 6, 'riv_recrue': 7, 'riv_contrat': 8, 'riv_nation': 9, 'riv_charge': 10}
+DECK_NAME = {'pers': 'Associés', 'riv': 'Rivière de recrutement', 'mat': 'Matériel de départ', 'ev': 'Événements de fin de mois', 'dem': 'Demande de Paris', 'grand': 'Grands événements', 'riv_recrue': 'Recrues', 'riv_contrat': 'Contrats', 'riv_nation': 'Alliances', 'riv_charge': 'Charges'}
 def cdeck(k):
     d = DK[k]; return {str(DECK_ID[k]): {'FaceURL': URL + f'deck_{k}.png', 'BackURL': URL + f'deck_{k}_back.png', 'NumWidth': d['cols'], 'NumHeight': d['rows'],
                                          'BackIsHidden': True, 'UniqueBack': False, 'Type': 0}}
@@ -83,7 +83,8 @@ for p in TP['pieces']:
     if k == 'card': continue                                         # pas de mise en place : la rivière reste en paquet
     if p.get('bank'): continue                                       # comptoir : rangé dans son stock, plus bas
     elif k == 'deck':
-        if p['deck'] == 'rec': OBJ.append(deck('riv', P(-138 + 52, 40 + 83)))
+        if p['deck'] == 'rec':                                    # rivière : un paquet par type de carte
+            for kd, x, y in (('riv_recrue', 1765, 1112), ('riv_contrat', 1885, 1112), ('riv_nation', 1765, 1288), ('riv_charge', 1885, 1288)): OBJ.append(deck(kd, P(x + 50, y + 70)))
         elif p['deck'] == 'sit': OBJ.append(deck('pers', C(p, 'deck')))
         else: OBJ.append(deck({'ev': 'ev', 'dem': 'dem', 'grand': 'grand'}[p['deck']], C(p, 'deck')))
     elif k == 'bag':
@@ -131,6 +132,8 @@ for p in TP['pieces']:
         else: raise SystemExit('pièce inconnue : ' + kind)
 
 # Ajouts propres à la version actuelle du jeu, posés dans des places libres de la table
+# Plateaux des joueurs : tuiles indépendantes posées sur la table, qu’on peut déplacer (les pièces posées dessus suivent)
+for i in range(3): OBJ.insert(1 + i, tile(f'Plateau du joueur {PN[i]}', f'pmat_{i}', 450, P(-140 + i * 490 + 225, 1270 + 84), typ=3, thick=0.1, h=0.15, desc='Soupçon et réserve du joueur.'))
 OBJ.append(deck('mat', P(1740 + 35, 810 + 49)))
 OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4), 'd': round(98 * U, 4)})
 for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4), 'd': round(98 * U, 4)})

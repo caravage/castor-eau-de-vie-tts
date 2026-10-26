@@ -14,11 +14,12 @@ const svg=await pg.evaluate(()=>{let s=document.getElementById('printed').outerH
   s=s.replace(/Situations, équipiers et cartes de navire/g,'Associé, recrues, congés et cartes de navire');
   return s});
 const css=await pg.evaluate(()=>[...document.styleSheets].map(ss=>{try{return [...ss.cssRules].map(r=>r.cssText).join('\n')}catch(e){return ''}}).join('\n'));
-const shots=[['table_full',-150,0,2145,1450,2]];
+const shots=[['table_full',-150,0,2145,1450,2],['pmat_0',-140,1270,450,168,4],['pmat_1',350,1270,450,168,4],['pmat_2',840,1270,450,168,4]];
 for(const [n,x,y,w,h,k] of shots){
-  const html='<!doctype html><html><head><meta charset="utf-8"><style>'+FF+css+'html,body{margin:0;background:#231B15}#printed{display:block}</style></head><body>'+svg.replace(/<svg([^>]*)id="printed"([^>]*)>/,(m)=>m.replace(/width="[^"]*"/,'').replace(/height="[^"]*"/,'').replace(/viewBox="[^"]*"/,''))+'</body></html>';
+  const isMat=n.startsWith('pmat');const svgN=isMat?svg:svg.replace(/<g class="pmat">[\s\S]*?<\/g><!--\/pmat-->/g,'');
+  const html='<!doctype html><html><head><meta charset="utf-8"><style>'+FF+css+'html,body{margin:0;background:'+(isMat?'transparent':'#231B15')+'}#printed{display:block}</style></head><body>'+svgN.replace(/<svg([^>]*)id="printed"([^>]*)>/,(m)=>m.replace(/width="[^"]*"/,'').replace(/height="[^"]*"/,'').replace(/viewBox="[^"]*"/,''))+'</body></html>';
   await pg.setViewportSize({width:Math.round(w*k),height:Math.round(h*k)});await pg.setContent(html);
   await pg.evaluate(([x,y,w,h,k])=>{const s=document.getElementById('printed');s.setAttribute('viewBox',x+' '+y+' '+w+' '+h);s.setAttribute('width',w*k);s.setAttribute('height',h*k);s.style.width=w*k+'px';s.style.height=h*k+'px'},[x,y,w,h,k]);
   await pg.evaluate(()=>document.fonts.ready);await pg.waitForTimeout(300);
-  await pg.screenshot({path:'img/'+n+'.png',clip:{x:0,y:0,width:Math.round(w*k),height:Math.round(h*k)}});}
+  await pg.screenshot({omitBackground:isMat,path:'img/'+n+'.png',clip:{x:0,y:0,width:Math.round(w*k),height:Math.round(h*k)}});}
 await b.close();console.log('ok')})();

@@ -106,6 +106,9 @@ def decks():
     for c in rc:
         if c['id'] == 'c_ferme': c['effect'] = "Vendez à Québec jusqu’à 3 de vos peaux au prix de Paris moins 1, sans navire."
     DECKS['riv'] = sheet('deck_riv', 'Recrue', [card_html(rk[c['kind']], c['title'], c['effect'], c.get('note', ''), c.get('star', 0)) for c in rc], 'Rivière', 'recrutement'); DECKS['riv']['names'] = [c['title'] for c in rc]
+    for kd, plur in (('recrue', 'Recrues'), ('contrat', 'Contrats'), ('nation', 'Alliances'), ('charge', 'Charges')):
+        cs = [c for c in rc if c['kind'] == kd]
+        DECKS['riv_' + kd] = sheet('deck_riv_' + kd, rk[kd], [card_html(rk[kd], c['title'], c['effect'], c.get('note', ''), c.get('star', 0)) for c in cs], plur, 'rivière de recrutement'); DECKS['riv_' + kd]['names'] = [c['title'] for c in cs]
     mats = [("Navire", "Une carte de navire du chantier, entièrement payée, et 2 de crédit envers la compagnie."), ("Parts de navire", "2 parts payées sur une carte de navire au chantier, et 3 livres."),
             ("Bourse", "4 livres."), ("Ballots de marchandises", "4 marchandises."), ("Eau-de-vie", "2 bouteilles et 1 livre."), ("Assortiment", "2 marchandises et 1 bouteille."),
             ("Petit canot", "1 petit canot et 2 livres."), ("Grand canot", "1 grand canot et 1 livre."), ("Alambic", "1 alambic et 1 livre.")]
@@ -242,14 +245,19 @@ h2{{font-family:{DISP};font-weight:400;font-size:37px;margin:14px 0 6px;color:{F
 .a{{margin-bottom:11px;font-size:27px;line-height:1.28}}.a b{{font-weight:700}}.n{{color:{MUTED}}}"""
 def A(t, x): return f"<div class='a'><b>{E(t)}</b> — {E(x)}</div>"
 recto = ("<h1>Aide de jeu · une action par mois, d’avril à novembre</h1><div>"
-  "<h2>Actions</h2>"
+  "<h2>Expéditions</h2>"
   + A("Partir en expédition", "à Montréal, composez le canot. Il faut un congé, acheté au printemps à crédit avec ses marchandises. Le canot (achat ou location) et les voyageurs se paient en livres au départ. Grand canot (5 places) ou petit canot (3 places), voyageurs permis.")
   + A("Coureurs des bois", "sans congé : fournissez 2 éléments de votre stock (marchandises ou eau-de-vie), sans autre prix ; +1 soupçon. Au retour, les peaux se vendent normalement, ou à Albany sans soupçon ; la première peau vendue paie les coureurs, le reste vous revient.")
   + A("Commercer à un lac", "canot prêt (partie pleine). Avec un représentant, vous choisissez le lac ; sinon le dé : 1–2 Huron, 3–4 Érié, 5–6 Ontario. Une charge contre une tuile.")
   + A("Redescendre", "le canot prend la route du retour. Arrivée dans la zone rayée de Montréal, déchargement le mois suivant.")
+  + "<h2>Voyageurs · payés en livres au départ</h2>"
+  + A("Représentant · 2", "choisit le lac, peut en changer (1 action), seul à mener au Michigan et au Supérieur.")
+  + A("Guide · 1", "regarde les jetons cachés avant d’échanger.")
+  + A("Interprète · 1", "le premier baril échangé à chaque lac ne fait pas de ravage.")
+  + A("Milicien · 1", "sans effet pour l’instant.")
+  + "</div><div><h2>Autres actions</h2>"
   + A("Vendre des peaux", "sur un navire en rade, à un prix par peau au plus égal au prix de Paris ; ou à Albany : 2 par peau, payé deux mois plus tard, +2 soupçon.")
   + A("Investir", "en livres : parts de navire au chantier (1 livre la part, 5 parts), grand canot 3, petit canot 2, alambic 4.")
-  + "</div><div><h2>&nbsp;</h2>"
   + A("Recruter", "prenez une carte de la rivière au prix de sa case : 3, 2 ou 1 livre.")
   + A("Changer les prix", "reposez sur la piste tous vos produits, canots et navires.")
   + A("Prendre le pas", "vous jouerez en premier le mois prochain.")
@@ -258,11 +266,6 @@ recto = ("<h1>Aide de jeu · une action par mois, d’avril à novembre</h1><div
   + A("Jouer un contrat", "de votre main (deux au plus), puis jouez votre tour.")
   + A("Faire partir votre navire", "avant qu’il soit plein : 1 livre de faux fret par place vide.")
   + A("Ouvrir votre place réservée", "au public, sur votre navire en rade.")
-  + "<h2>Voyageurs · payés en livres au départ</h2>"
-  + A("Représentant · 2", "choisit le lac, peut en changer (1 action), seul à mener au Michigan et au Supérieur.")
-  + A("Guide · 1", "regarde les jetons cachés avant d’échanger.")
-  + A("Interprète · 1", "le premier baril échangé à chaque lac ne fait pas de ravage.")
-  + A("Milicien · 1", "sans effet pour l’instant.")
   + "</div>")
 verso = ("<h1>Aide de jeu · déroulement de l’année</h1><div>"
   "<h2>Printemps</h2>"

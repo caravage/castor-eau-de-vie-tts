@@ -26,6 +26,46 @@
    700
   ],
   [
+   "deck_riv_recrue",
+   5000,
+   1400
+  ],
+  [
+   "deck_riv_recrue_back",
+   500,
+   700
+  ],
+  [
+   "deck_riv_contrat",
+   5000,
+   700
+  ],
+  [
+   "deck_riv_contrat_back",
+   500,
+   700
+  ],
+  [
+   "deck_riv_nation",
+   2500,
+   700
+  ],
+  [
+   "deck_riv_nation_back",
+   500,
+   700
+  ],
+  [
+   "deck_riv_charge",
+   1500,
+   700
+  ],
+  [
+   "deck_riv_charge_back",
+   500,
+   700
+  ],
+  [
    "deck_mat",
    4500,
    700
@@ -435,6 +475,64 @@
     "Les Anishinaabeg du Sault",
     "Les Cinq-Nations",
     "Les Wendat de Lorette",
+    "Marguillier de la paroisse",
+    "Conseiller au Conseil souverain",
+    "Fief sur le Richelieu"
+   ]
+  },
+  "riv_recrue": {
+   "cols": 10,
+   "rows": 2,
+   "n": 12,
+   "names": [
+    "Garde-magasin",
+    "Teneur de livres",
+    "Canotier d’expérience",
+    "Facteur de La Rochelle",
+    "Calfat",
+    "Notaire royal",
+    "Censitaires",
+    "Maître de barque",
+    "Aubergiste de Montréal",
+    "Armateur associé",
+    "Père jésuite",
+    "Négociant huguenot"
+   ]
+  },
+  "riv_contrat": {
+   "cols": 10,
+   "rows": 1,
+   "n": 10,
+   "names": [
+    "Commission en France",
+    "Foire de Montréal",
+    "Lettre de change",
+    "Congé de faveur",
+    "Contrat de la Ferme",
+    "Portage rapide",
+    "Renseignement de traite",
+    "Prendre les devants",
+    "Part offerte",
+    "Dénonciation à l’intendant"
+   ]
+  },
+  "riv_nation": {
+   "cols": 5,
+   "rows": 1,
+   "n": 5,
+   "names": [
+    "Les Outaouais",
+    "Les Potéouatamis de la baie des Puants",
+    "Les Anishinaabeg du Sault",
+    "Les Cinq-Nations",
+    "Les Wendat de Lorette"
+   ]
+  },
+  "riv_charge": {
+   "cols": 3,
+   "rows": 1,
+   "n": 3,
+   "names": [
     "Marguillier de la paroisse",
     "Conseiller au Conseil souverain",
     "Fief sur le Richelieu"
