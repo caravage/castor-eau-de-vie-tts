@@ -57,3 +57,37 @@ def rrect(x0, y0, x1, y1, r, n=6):
     return pts
 ASPECT['sac_coureur'] = mesh('sac_coureur', 'tok_coureur', rrect(8, 8, 392, 392, 46), 60, (200, 10))
 json.dump(ASPECT, open('meshes.json', 'w'), indent=1)
+# Canot 3D : profil trapézoïdal (comme le jeton plat) extrudé sur la largeur ; pont = haut de la texture, flancs = bas (lettre)
+def canot3d(name, cells):
+    L = cells * 120 + 92; Lb = L - 96; Hh = 100; B = 150; k = 1 / L
+    V, VT, VN, F = [], [], [], []
+    def v(x, y, z): V.append((x * k, y * k, z * k)); return len(V)
+    def vt(u, w): VT.append((u, w)); return len(VT)
+    def vn(x, y, z): VN.append((x, y, z)); return len(VN)
+    def quadf(P, n, ni):  # P : 4 (indice sommet, indice uv) ; faces dans les deux sens
+        a, b, c, d = P
+        for t in ((a, b, c), (a, c, d)): F.append((*t, n)); F.append((t[2], t[1], t[0], ni))
+    up, dn = vn(0, 1, 0), vn(0, -1, 0); fz, bz = vn(0, 0, 1), vn(0, 0, -1)
+    h = L / 2; hb = Lb / 2
+    S = 1.5; TW = round(L * S); DH = round(B * S); SH = round(Hh * S); TH = DH + SH + 24; y0 = DH + 18; mm = 48 * S
+    tv = lambda z: 1 - (6 + (z + B / 2) / B * DH) / TH
+    quadf([(v(-h, Hh, -B/2), vt(6/TW, tv(-B/2))), (v(h, Hh, -B/2), vt(1 - 6/TW, tv(-B/2))), (v(h, Hh, B/2), vt(1 - 6/TW, tv(B/2))), (v(-h, Hh, B/2), vt(6/TW, tv(B/2)))], up, dn)
+    vs_top, vs_bot = 1 - y0 / TH, 1 - (TH - 6) / TH
+    for z, sgn, n, ni in ((B / 2, 1, fz, bz), (-B / 2, -1, bz, fz)):
+        ut = lambda x: (6 + (0.5 + sgn * x / L) * (TW - 12)) / TW
+        ub = lambda x: (6 + mm + (0.5 + sgn * x / Lb) * (TW - 12 - 2 * mm)) / TW
+        quadf([(v(-h, Hh, z), vt(ut(-h), vs_top)), (v(h, Hh, z), vt(ut(h), vs_top)), (v(hb, 0, z), vt(ub(hb), vs_bot)), (v(-hb, 0, z), vt(ub(-hb), vs_bot))], n, ni)
+    e = vt(2 / TW, 1 - (TH - 2) / TH)   # couleur sombre du bord
+    nx, nxi = vn(1, 0, 0), vn(-1, 0, 0)
+    quadf([(v(h, Hh, -B/2), e), (v(h, Hh, B/2), e), (v(hb, 0, B/2), e), (v(hb, 0, -B/2), e)], nx, nxi)
+    quadf([(v(-h, Hh, B/2), e), (v(-h, Hh, -B/2), e), (v(-hb, 0, -B/2), e), (v(-hb, 0, B/2), e)], nxi, nx)
+    quadf([(v(-hb, 0, -B/2), e), (v(hb, 0, -B/2), e), (v(hb, 0, B/2), e), (v(-hb, 0, B/2), e)], dn, up)
+    with open(f'img/{name}.obj', 'w') as f:
+        f.write(''.join(f'v {x:.5f} {y:.5f} {z:.5f}\n' for x, y, z in V) + ''.join(f'vt {u:.5f} {w:.5f}\n' for u, w in VT) + ''.join(f'vn {x:.4f} {y:.4f} {z:.4f}\n' for x, y, z in VN))
+        f.write(''.join(f'f {a[0]}/{a[1]}/{nn} {b[0]}/{b[1]}/{nn} {c[0]}/{c[1]}/{nn}\n' for a, b, c, nn in F))
+    return round(B / L, 4)
+for nm, cells in (('grand', 5), ('petit', 3), ('coureur', 2)):
+    ASPECT[f'canot3d_{nm}'] = canot3d(f'canot3d_{nm}', cells)
+# Sac de cartes Expédition : petit paquet de cartes (rectangle arrondi épais)
+ASPECT['sac_exp'] = mesh('sac_exp', 'sacexp_rouge_grand', rrect(0, 0, 560, 400, 40), 70, (280, 2))
+json.dump(ASPECT, open('meshes.json', 'w'), indent=1)

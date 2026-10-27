@@ -6,12 +6,12 @@ def aspect(img):
     if img not in ASP: w, h = Image.open(f'img/{img}.png').size; ASP[img] = h / w
     return ASP[img]
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v15/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v16/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
-X0, X1, Y1 = -150, 1995, 1450                # image exportée : x de -150 à 1995, y de 0 à 1265
-def P(cx, cy): return round((cx - (X0 + X1) / 2) * U, 3), round(-(cy - Y1 / 2) * U, 3)
+X0, X1, Y0, Y1 = -290, 1995, -330, 1610                # image exportée : x de -150 à 1995, y de 0 à 1265
+def P(cx, cy): return round((cx - (X0 + X1) / 2) * U, 3), round(-(cy - (Y0 + Y1) / 2) * U, 3)
 used = set()
 def guid():
     while True:
@@ -57,10 +57,16 @@ def mbag(nick, mesh, tex, wpx, pos, items, color=WHITE, desc='', order=0, inf=Fa
     o = base('Custom_Model_Infinite_Bag' if inf else 'Custom_Model_Bag', nick, wpx, pos, color, False, 0.6, y3=True, desc=desc, s0=round(wpx * U, 4))
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * MESH[mesh] * U, 4)})
     o['CustomMesh'] = {'MeshURL': URL + mesh + '.obj', 'DiffuseURL': URL + tex + '.png', 'NormalURL': '', 'ColliderURL': '', 'Convex': True,
-                       'MaterialIndex': 1, 'TypeIndex': 7 if inf else 6, 'CastShadows': True}
-    o['Bag'] = {'Order': order}; o['MaterialIndex'] = 1
+                       'MaterialIndex': 0, 'TypeIndex': 7 if inf else 6, 'CastShadows': True}
+    o['Bag'] = {'Order': order}; o['MaterialIndex'] = 0
     for it in items: it['Transform'] = T(fz=it['Transform']['rotZ']); it['Locked'] = False
     o['ContainedObjects'] = items; return o
+def model(nick, mesh, tex, wpx, pos=None, desc=''):
+    # Pièce 3D (Custom_Model), couleur cuite dans la texture
+    o = base('Custom_Model', nick, wpx, pos, WHITE, False, 0.6, y3=True, desc=desc, s0=round(wpx * U, 4))
+    o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * MESH[mesh] * U, 4)})
+    o['CustomMesh'] = {'MeshURL': URL + mesh + '.obj', 'DiffuseURL': URL + tex + '.png', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 0, 'CastShadows': True}
+    o['MaterialIndex'] = 0; return o
 DECK_ID = {'pers': 1, 'riv': 2, 'mat': 3, 'ev': 4, 'dem': 5, 'grand': 6, 'riv_recrue': 7, 'riv_contrat': 8, 'riv_nation': 9, 'riv_charge': 10}
 DECK_NAME = {'pers': 'Associés', 'riv': 'Rivière de recrutement', 'mat': 'Matériel de départ', 'ev': 'Événements de fin de mois', 'dem': 'Demande de Paris', 'grand': 'Grands événements', 'riv_recrue': 'Recrues', 'riv_contrat': 'Contrats', 'riv_nation': 'Alliances', 'riv_charge': 'Charges'}
 def cdeck(k):
@@ -79,7 +85,7 @@ def deck(k, pos, skip=()):
     o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
     return o
 
-OBJ = [tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, Y1 / 2), typ=0, thick=0.2, lock=True, h=0.1)]
+OBJ = [tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, (Y0 + Y1) / 2), typ=0, thick=0.2, lock=True, h=0.1)]
 def C(p, kind):  # centre d'une pièce de l'artefact
     w, h = SIZE[kind]; return P(p['x'] + w / 2, p['y'] + h / 2)
 
@@ -96,7 +102,7 @@ for p in TP['pieces']:
     if p.get('bank'): continue                                       # comptoir : rangé dans son stock, plus bas
     elif k == 'deck':
         if p['deck'] == 'rec':                                    # rivière : un paquet par type de carte
-            for kd, x, y in (('riv_recrue', 1765, 1112), ('riv_contrat', 1885, 1112), ('riv_nation', 1765, 1288), ('riv_charge', 1885, 1288)): OBJ.append(deck(kd, P(x + 50, y + 70)))
+            for kd, x, y in (('riv_recrue', -270, 40), ('riv_contrat', -270, 214), ('riv_nation', -270, 388), ('riv_charge', -270, 562)): OBJ.append(deck(kd, P(x + 50, y + 70)))
         elif p['deck'] == 'sit': OBJ.append(deck('pers', C(p, 'deck')))
         else: OBJ.append(deck({'ev': 'ev', 'dem': 'dem', 'grand': 'grand'}[p['deck']], C(p, 'deck')))
     elif k == 'bag':
@@ -145,7 +151,7 @@ for p in TP['pieces']:
 
 # Ajouts propres à la version actuelle du jeu, posés dans des places libres de la table
 # Plateaux des joueurs : tuiles indépendantes posées sur la table, qu’on peut déplacer (les pièces posées dessus suivent)
-for i in range(3): OBJ.insert(1 + i, tile(f'Plateau du joueur {PN[i]}', f'pmat_{i}', 465, P(-148 + i * 485 + 232.5, 1222 + 106), typ=3, thick=0.1, h=0.15, desc='Soupçon et personnages du joueur.'))
+for i in range(3): OBJ.insert(1 + i, tile(f'Plateau du joueur {PN[i]}', f'pmat_{i}', 465, P(-257 + i * 614 + 232.5, 1362 + 106), typ=3, thick=0.1, h=0.15, desc='Soupçon et personnages du joueur.'))
 OBJ.append(deck('mat', P(1740 + 35, 810 + 49)))
 OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4), 'd': round(98 * U, 4)})
 for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4), 'd': round(98 * U, 4)})
@@ -154,39 +160,39 @@ OBJ.append(mbag('Marchandises (comptoir)', 'sac_caisse', 'tok_caisse_w', 44, P(1
 OBJ.append(mbag('Eau-de-vie (comptoir)', 'sac_bouteille', 'tok_bouteille_w', 30, P(1400, 486 + 50), [token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, None, GREY)], GREY, 'Eau-de-vie générique, en nombre illimité', inf=True))
 for ci, (kc, (lab, img)) in enumerate(CREW.items()): OBJ.append(mbag(f'{lab}s', f'sac_voy_{kc}', img, 40, P(1300 + ci * 170 + 70, 680 + 48), [token(lab, img, 22) for _ in range(4)], desc=f'4 {lab.lower()}s'))
 OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1326, 486 + 105), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1392, 486 + 105), GREY))
-OBJ.append(token('Navire du roi', 'navire_roi', 40, P(1450, 486 + 105))); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1500, 486 + 105)))
+ROI = base('Custom_Model', 'Navire du roi', 40, P(1450, 486 + 105), WHITE, False, 0.8, y3=True, s0=1.0, desc='En rade dès avril les années I et II, 4 places publiques.')   # figurine fournie, en blanc
+ROI['CustomMesh'] = {'MeshURL': 'https://steamusercontent-a.akamaihd.net/ugc/952982844368369073/FB63C915DB2529E0210C26EEDFD717929BB7E7A6/', 'DiffuseURL': '', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 1, 'CastShadows': True}
+ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1500, 486 + 105)))
 OBJ.append(bag('Sac des congés', 40, P(1760, 486 + 140), [tile(f'Congé · {n} marchandises · {c} crédit', f'conge_m{n}', 40, back='conge_back') for n, c, m in ((4, 3, 3), (3, 2, 4), (2, 1, 3)) for _ in range(m)],
                col('#8E2F25'), '10 congés : 3 à 4 marchandises (3 crédit), 4 à 3 marchandises (2 crédit), 3 à 2 marchandises (1 crédit). 4 tirés par an à 3 joueurs, remélangés chaque année. Joueur le plus pauvre : −1 crédit.'))
 # Aide de jeu : une par joueur, empilées sous le matériel de départ
-for k in range(3): OBJ.append(tile('Aide de jeu', 'aide_a', 430, P(1515, 1120), back='aide_b', typ=3, thick=0.05, h=0.5 + k * 0.3))
+OBJ.append(tile('Aide de jeu (recto)', 'aide_a', 430, P(640 - 225, -146), back='aide_b', typ=3, thick=0.05)); OBJ.append(tile('Aide de jeu (verso)', 'aide_b', 430, P(640 + 225, -146), back='aide_a', typ=3, thick=0.05))   # au-dessus du plateau, côte à côte
 OBJ.append(mbag('Coureurs des bois', 'sac_coureur', 'tok_coureur', 34, P(1840, 626), [tile('Coureur des bois', 'tok_coureur', 40, typ=3, thick=0.1)], desc='Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.', inf=True))
-CANOT = {'grand': ('Grand canot', 52, 80), 'petit': ('Petit canot', 40, 62), 'coureur': ('Coureurs des bois', 32, 46)}
+CANOT = {'grand': ('Grand canot', 52, 80), 'petit': ('Petit canot', 40, round(80 * 452 / 692, 1)), 'coureur': ('Coureurs des bois', 32, round(80 * 332 / 692, 1))}   # même largeur, longueur selon les cases
 EXP_ID = 11
 for i in range(3):
-    mx = -148 + i * 485; Q = lambda x, y: P(mx + x, y); col_ = PC[i]      # y absolu : sacs à 1045, cartes à 1150, plateau dès 1222
-    OBJ.append(mbag(f'Marchandises {PN[i]}', 'sac_caisse', 'tok_caisse_w', 40, Q(22, 1045), [token(f'Marchandise {PN[i]}', 'tok_caisse_w', 24, None, col_) for _ in range(8)], col_, '8 marchandises'))
-    OBJ.append(mbag(f'Eau-de-vie {PN[i]}', 'sac_bouteille', 'tok_bouteille_w', 28, Q(62, 1045), [token(f'Eau-de-vie {PN[i]}', 'tok_bouteille_w', 24, None, col_) for _ in range(8)], col_, '8 bouteilles'))
+    x0 = -269 + i * 614; mx = x0 + 12; Q = lambda x, y: P(mx + x, y); col_ = PC[i]      # zone du joueur : sacs à 1505, cartes jouées dessous, plateau dès 1662, sacs Expédition à droite
+    OBJ.append(mbag(f'Marchandises {PN[i]}', 'sac_caisse', 'tok_caisse_w', 40, Q(22, 1332), [token(f'Marchandise {PN[i]}', 'tok_caisse_w', 24, None, col_) for _ in range(8)], col_, '8 marchandises'))
+    OBJ.append(mbag(f'Eau-de-vie {PN[i]}', 'sac_bouteille', 'tok_bouteille_w', 28, Q(62, 1332), [token(f'Eau-de-vie {PN[i]}', 'tok_bouteille_w', 24, None, col_) for _ in range(8)], col_, '8 bouteilles'))
     for k, (key, (lab, wp, wb)) in enumerate(CANOT.items()):
-        OBJ.append(mbag(f'{lab} {PN[i]}', f'sac_canot_{key}', f'canot_{key}', wb, Q((120, 205, 270)[k], 1045), [token(f'{lab} {n} {PN[i]}', f'canot_{key}_{n}', wp, None, col_) for n in 'ABC'], col_, f'{lab} A, B et C : chacun suit sa carte Expédition.'))
-    for k in range(2): OBJ.append(token(f'Alambic {PN[i]}', 'alambic', 26, Q(355 + k * 28, 1045), col_))
-    OBJ.append(base('PlayerPawn', f'Pion {PN[i]}', 18, Q(412, 1045), col_, h=0.6, y3=True, s0=1.0))
-    for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, Q(444, 1045), col_, h=0.5 + k * 0.3))
-    OBJ.append(token(f'Soupçon {PN[i]}', 'tok_disc', 18, Q(254, 1222 + 19), col_))
+        OBJ.append(mbag(f'{lab} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}', wb, Q((120, 205, 270)[k], 1332), [model(f'{lab} {n} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}_{n}', wb) for n in 'CBA'], WHITE, f'{lab} A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.'))
+    for k in range(2): OBJ.append(token(f'Alambic {PN[i]}', 'alambic', 26, Q(315 + k * 28, 1332), col_))
+    OBJ.append(base('PlayerPawn', f'Pion {PN[i]}', 18, Q(372, 1332), col_, h=0.6, y3=True, s0=1.0))
+    for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, Q(404, 1332), col_, h=0.5 + k * 0.3))
+    OBJ.append(token(f'Soupçon {PN[i]}', 'tok_disc', 18, Q(254, 1362 + 19), col_))
     # Cartes Expédition : un tas par type (A sur le dessus), face visible, devant le joueur
     cd = {str(EXP_ID + i): {'FaceURL': URL + f'exp_{PN[i]}.png', 'BackURL': URL + f'exp_{PN[i]}_back.png', 'NumWidth': 3, 'NumHeight': 3, 'BackIsHidden': True, 'UniqueBack': False, 'Type': 0}}
-    for t, (tx, tlab) in enumerate(((75, 'Grand canot'), (232.5, 'Petit canot'), (390, 'Coureur des bois'))):
+    for t, (tx, key, tlab) in enumerate(((1400, 'grand', 'Grand canot'), (1468, 'petit', 'Petit canot'), (1536, 'coureur', 'Coureurs des bois'))):
         cards = []
-        for j in (t, 3 + t, 6 + t):                       # A sur le dessus (premier objet du paquet), C au fond
-            c = base('Card', f"{DK['exp']['names'][j]} ({PN[i]})", 150, None, s0=1.0); c['GMNotes'] = json.dumps({**json.loads(c['GMNotes']), 'd': round(107 * U, 4)})
+        for j in (6 + t, 3 + t, t):                       # sortent dans l'ordre A, B, C (le dernier objet du sac sort en premier)
+            c = base('Card', f"{DK['exp']['names'][j]} ({PN[i]})", 150, None, s0=1.0); c['GMNotes'] = json.dumps({**json.loads(c['GMNotes']), 'd': round(107 * U, 4), 'face': 'up'})
             c['CardID'] = (EXP_ID + i) * 100 + j; c['CustomDeck'] = cd; c['SidewaysCard'] = True; c['Transform'] = T(s=1.0); c['Locked'] = False; cards.append(c)
-        d = base('Deck', f'Expéditions · {tlab} ({PN[i]})', 150, Q(tx, 1150), s0=1.0); d['GMNotes'] = json.dumps({**json.loads(d['GMNotes']), 'd': round(107 * U, 4)})
-        d['DeckIDs'] = [c['CardID'] for c in cards]; d['CustomDeck'] = cd; d['ContainedObjects'] = cards; d['SidewaysCard'] = True
-        OBJ.append(d)
+        OBJ.append(mbag(f'Expéditions · {tlab} ({PN[i]})', 'sac_exp', f'sacexp_{PN[i]}_{key}', 62, P(x0 + 533, tx), cards, WHITE, 'Cartes Expédition A, B, C, dans cet ordre.'))
     # Main du joueur, en face de son plateau
-    hp = P(mx + 232.5, 1450 + 70)
-    OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': hp[0], 'posY': 4.0, 'posZ': hp[1], 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': round(465 * U, 3), 'scaleY': 5.0, 'scaleZ': 4.0},
-                'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': hp[0], 'z': hp[1], 'hw': round(465 * U, 3)}), 'ColorDiffuse': PC[i], 'FogColor': SEAT[i], 'Locked': True})
-LUA = open('setup.lua').read().replace('@W@', str((X1 - X0) * U)).replace('@D@', str(Y1 * U))
+    hp = P(x0 + 295, 1610 + 60)
+    OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': hp[0], 'posY': 4.0, 'posZ': hp[1], 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': round(590 * U, 3), 'scaleY': 5.0, 'scaleZ': 4.0},
+                'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': hp[0], 'z': hp[1], 'hw': round(590 * U, 3)}), 'ColorDiffuse': PC[i], 'FogColor': SEAT[i], 'Locked': True})
+LUA = open('setup.lua').read().replace('@W@', str((X1 - X0) * U)).replace('@D@', str((Y1 - Y0) * U))
 rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 de crédit') for r in rules]
 intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; "

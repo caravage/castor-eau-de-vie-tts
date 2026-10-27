@@ -313,4 +313,25 @@ _im = _I.open('coureur_src.png').convert('RGB'); _im = _im.crop((0, 0, _im.width
 _u = 'data:image/jpeg;base64,' + base64.b64encode(_b.getvalue()).decode()
 svg('tok_coureur', 400, 400, f"<defs><clipPath id='cp'><rect x='16' y='16' width='368' height='368' rx='40'/></clipPath></defs><rect x='8' y='8' width='384' height='384' rx='46' fill='{PAPER}' stroke='{EDGE}' stroke-width='8'/>"
     f"<image href='{_u}' x='16' y='16' width='368' height='368' clip-path='url(#cp)' preserveAspectRatio='xMidYMid slice'/><rect x='16' y='300' width='368' height='84' fill='{FRAME}' opacity='.85' clip-path='url(#cp)'/>" + T(200, 356, 'Coureur des bois', 44, 'middle', fam=DISP, fill='#F6EFDC'))
+# Canots 3D : texture 1024 × 512, pont en haut (cases de place), flanc en bas (lettre), couleur du joueur cuite dans l'image
+CN = {'grand': 5, 'petit': 3, 'coureur': 2}
+def canot_tex(name, c, cd, cells, letter):
+    # Proportions identiques au modèle 3D (meshes.py) : longueur L = 120 × cases + 92, largeur 150, hauteur 100 ; 1,5 px par unité
+    S = 1.5; L = cells * 120 + 92; W = round(L * S); DH = round(150 * S); SH = round(100 * S); H = DH + SH + 24
+    g = [f"<rect x='0' y='0' width='{W}' height='{H}' fill='{cd}'/><rect x='6' y='6' width='{W-12}' height='{DH}' rx='14' fill='{c}' stroke='{cd}' stroke-width='8'/>"]
+    sq = 106 * S
+    for k in range(cells):
+        x = W / 2 + (k - (cells - 1) / 2) * 120 * S - sq / 2
+        g.append(f"<rect x='{x:.1f}' y='{6 + DH/2 - sq/2:.1f}' width='{sq:.1f}' height='{sq:.1f}' rx='14' fill='{PAPER}' stroke='{cd}' stroke-width='6'/>")
+    m = 48 * S; y0 = DH + 18
+    g.append(f"<path d='M6 {y0} L{W-6} {y0} L{W-6-m:.1f} {H-6} L{6+m:.1f} {H-6} Z' fill='{c}' stroke='{cd}' stroke-width='8' stroke-linejoin='round'/>")
+    if letter: g.append(T(W / 2, H - 30, letter, 130, 'middle', weight=700, fill=PAPER))
+    svg(name, W, H, ''.join(g))
+for pn, (c, cd) in PCOL.items():
+    for key, cells in CN.items():
+        for L in ('A', 'B', 'C', ''):
+            canot_tex(f'cn_{pn}_{key}' + (f'_{L}' if L else ''), c, cd, cells, L)
+    for key, lab in (('grand', 'Grand canot'), ('petit', 'Petit canot'), ('coureur', 'Coureurs des bois')):
+        svg(f'sacexp_{pn}_{key}', 560, 400, f"<rect x='0' y='0' width='560' height='400' rx='40' fill='{c}'/><rect x='18' y='18' width='524' height='364' rx='28' fill='none' stroke='#F6EFDC' stroke-width='6'/>"
+            + T(280, 170, 'Expéditions', 64, 'middle', fam=DISP, fill='#F6EFDC') + T(280, 260, lab, 50, 'middle', weight=700, fill='#F6EFDC') + T(280, 330, 'A · B · C', 40, 'middle', fill='#F6EFDC'))
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)

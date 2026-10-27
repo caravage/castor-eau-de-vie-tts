@@ -8,5 +8,9 @@
  "sac_voy_guide": 1.0,
  "sac_voy_mil": 1.0,
  "sac_voy_int": 1.0,
- "sac_coureur": 1.0
+ "sac_coureur": 1.0,
+ "canot3d_grand": 0.2168,
+ "canot3d_petit": 0.3319,
+ "canot3d_coureur": 0.4518,
+ "sac_exp": 0.7143
 }

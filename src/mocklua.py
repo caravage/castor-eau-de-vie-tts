@@ -29,7 +29,7 @@ objs=[]
 for o in save['ObjectStates']:
     if o['Name']=='HandTrigger': continue
     if o['Name'].startswith('Custom_Model'):
-        nn=json.loads(o['GMNotes']); objs.append((o,G.mk(o['GMNotes'],1,nn['d']/nn['w']),(1,nn['d']/nn['w']))); continue
+        nn=json.loads(o['GMNotes']); r=nn.get('d',nn['w'])/nn['w']; objs.append((o,G.mk(o['GMNotes'],1,r),(1,r))); continue
     base={'Custom_Tile':(2,2),'Custom_Token':(9,9),'Card':(2.2,3.0),'Deck':(2.2,3.0)}.get(o['Name'],(1.5,1.5))
     objs.append((o,G.mk(o.get('GMNotes',''),*base),base))
 G.getObjects=lambda: L.table_from([x[1] for x in objs]); G.Hands=L.eval('{getHands=function() return {} end}')
@@ -43,9 +43,10 @@ for o,lo,base in objs[1:]:
     if not lo.pos: continue
     w=base[0]*lo.sc.x; d=base[1]*lo.sc.z; cx=lo.pos[1]*px+W/2; cy=-lo.pos[3]*px+H/2
     ci=o.get('CustomImage')
-    name=list(o['CustomDeck'].values())[0]['BackURL'] if o['Name']=='Deck' else (ci['ImageURL'] if ci else (o['CustomMesh']['DiffuseURL'] if 'CustomMesh' in o else None))
+    name=list(o['CustomDeck'].values())[0]['BackURL'] if o['Name']=='Deck' else (ci['ImageURL'] if ci else (o['CustomMesh']['DiffuseURL'] or None if 'CustomMesh' in o else None))
     if name:
         im=Image.open('img/'+name.split('/')[-1]).convert('RGBA')
+        if '/cn_' in name: im=im.crop((0,0,im.width,im.height//2))
         if o['Name']=='Deck' and o['Transform']['rotZ']==0:  # faceup : carte du dessus
             cdk=list(o['CustomDeck'].values())[0]; cid=o['ContainedObjects'][0]['CardID']%100; sh=Image.open('img/'+cdk['FaceURL'].split('/')[-1]).convert('RGBA')
             cw,ch=sh.width//cdk['NumWidth'],sh.height//cdk['NumHeight']; im=sh.crop(((cid%cdk['NumWidth'])*cw,(cid//cdk['NumWidth'])*ch,(cid%cdk['NumWidth']+1)*cw,(cid//cdk['NumWidth']+1)*ch))
