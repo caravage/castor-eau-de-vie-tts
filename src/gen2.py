@@ -239,59 +239,44 @@ json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), en
 print(len(MANIFEST), 'pages')
 
 # ------------------------------------------------------------ Aide de jeu (recto : actions ; verso : déroulement)
-AIDE_CSS = f""".s{{width:1600px;height:1150px;padding:20px}}.in{{height:100%;border-radius:30px;background:{PAPER};border:4px solid {EDGE};padding:34px 44px;display:grid;grid-template-columns:1fr 1fr;column-gap:46px;align-content:start}}
-h1{{grid-column:1/-1;font-family:{DISP};font-weight:400;font-size:52px;margin-bottom:14px;color:{INK};border-bottom:3px solid {FRAME};padding-bottom:8px}}
-h2{{font-family:{DISP};font-weight:400;font-size:37px;margin:14px 0 6px;color:{FRAME}}}
-.a{{margin-bottom:11px;font-size:27px;line-height:1.28}}.a b{{font-weight:700}}.n{{color:{MUTED}}}"""
+AIDE_CSS = f""".s{{width:1600px;height:1150px;padding:20px}}.in{{height:100%;border-radius:30px;background:{PAPER};border:4px solid {EDGE};padding:26px 34px}}
+h1{{font-family:{DISP};font-weight:400;font-size:46px;margin-bottom:12px;color:{INK};border-bottom:3px solid {FRAME};padding-bottom:6px}}
+.sea{{border-radius:22px;padding:10px 22px 8px;margin-bottom:12px;border:3px solid var(--b);background:var(--c)}}
+.sea>h2{{font-family:{DISP};font-weight:400;font-size:38px;margin:0 0 4px;color:var(--t)}}.sea>h2 span{{font-family:{BODY};font-size:22px;color:{MUTED};margin-left:12px}}
+.g2{{display:grid;grid-template-columns:1fr 1fr;column-gap:18px}}.cols{{display:grid;grid-template-columns:1fr 1fr;column-gap:34px}}
+.sub{{border-radius:16px;padding:8px 16px 4px;background:var(--c);border:2px solid var(--b)}}
+h3{{font-family:{DISP};font-weight:400;font-size:31px;margin:2px 0 4px;color:var(--t)}}h4{{font-family:{DISP};font-weight:400;font-size:26px;margin:8px 0 2px;color:{FRAME}}}
+.a{{margin-bottom:7px;font-size:23.5px;line-height:1.24}}.big .a{{font-size:28px;margin-bottom:12px;line-height:1.3}}.big .sea{{padding:16px 26px 12px;margin-bottom:18px}}.a b{{font-weight:700}}"""
 def A(t, x): return f"<div class='a'><b>{E(t)}</b> — {E(x)}</div>"
-recto = ("<h1>Aide de jeu · une action par mois, d’avril à novembre</h1><div>"
-  "<h2>Expéditions</h2>"
-  + A("Partir en expédition", "à Montréal, composez le canot. Il faut un congé, acheté au printemps à crédit avec ses marchandises. Le canot (achat ou location) et les voyageurs se paient en livres au départ. Grand canot (5 places) ou petit canot (3 places), voyageurs permis.")
-  + A("Coureurs des bois", "sans congé : fournissez 2 éléments de votre stock (marchandises ou eau-de-vie), sans autre prix ; +1 soupçon. Au retour, les peaux se vendent normalement, ou à Albany sans soupçon ; la première peau vendue paie les coureurs, le reste vous revient.")
-  + A("Commercer à un lac", "canot prêt (partie pleine). Avec un représentant, vous choisissez le lac ; sinon le dé : 1–2 Huron, 3–4 Érié, 5–6 Ontario. Une charge contre une tuile.")
-  + A("Redescendre", "le canot prend la route du retour. Arrivée dans la zone rayée de Montréal, déchargement le mois suivant.")
-  + "<h2>Voyageurs · payés en livres au départ</h2>"
-  + A("Représentant · 2", "choisit le lac, peut en changer (1 action), seul à mener au Michigan et au Supérieur.")
-  + A("Guide · 1", "regarde les jetons cachés avant d’échanger.")
-  + A("Interprète · 1", "le premier baril échangé à chaque lac ne fait pas de ravage.")
-  + A("Milicien · 1", "sans effet pour l’instant.")
-  + "</div><div><h2>Autres actions</h2>"
-  + A("Vendre des peaux", "sur un navire en rade, à un prix par peau au plus égal au prix de Paris ; ou à Albany : 2 par peau, payé deux mois plus tard, +2 soupçon.")
-  + A("Investir", "en livres : parts de navire au chantier (1 livre la part, 5 parts), grand canot 3, petit canot 2, alambic 4.")
-  + A("Recruter", "prenez une carte de la rivière au prix de sa case : 3, 2 ou 1 livre.")
-  + A("Changer les prix", "reposez sur la piste tous vos produits, canots et navires.")
-  + A("Prendre le pas", "vous jouerez en premier le mois prochain.")
-  + A("Attendre", "laissez passer le mois.")
-  + "<h2>Sans action</h2>"
-  + A("Jouer un contrat", "de votre main (deux au plus), puis jouez votre tour.")
-  + A("Faire partir votre navire", "avant qu’il soit plein : 1 livre de faux fret par place vide.")
-  + A("Ouvrir votre place réservée", "au public, sur votre navire en rade.")
-  + "</div>")
-verso = ("<h1>Aide de jeu · déroulement de l’année</h1><div>"
-  "<h2>Printemps</h2>"
-  + A("La Rochelle", "chaque navire part et lance un dé : 4 ou plus, il arrive en mai, sinon en juin.")
-  + A("Navire du roi", "en rade dès avril les années I et II.")
-  + A("Congés", "4 tirés du sac à 3 joueurs, délivrés sur 3+ en avril ou 2+ en mai. Achat au début de ce mois, sans action, dans l’ordre du tour : 1, 2 ou 3 crédit pour 2, 3 ou 4 marchandises. Remélangés chaque année.")
-  + A("Joueur le plus pauvre", "chaque congé lui coûte 1 crédit de moins.")
-  + "<h2>Chaque mois</h2>"
-  + A("Début", "les canots de la zone rayée glissent dans la zone pleine, puis les canots en route avancent d’une case. Retour des Grands Lacs : sur 3+ (bonus des voyageurs à fixer), le canot rentre aussitôt à Montréal ; du Supérieur, il rejoint d’abord les Grands Lacs.")
-  + A("Tour", "une action chacun ; l’ordre tourne d’un cran chaque mois.")
-  + A("Fin", "événement de fin de mois ; la carte de droite de la rivière part à la défausse, les autres glissent, une nouvelle entre à 3 livres.")
-  + "<h2>Navires de retour</h2>"
-  + A("Places", "3 publiques et 1 réservée au propriétaire. Une offre moins chère évince la peau la plus chère.")
-  + A("Départ", "plein, ou fin septembre. Paris baisse de 1 toutes les 3 peaux embarquées.")
-  + "</div><div><h2>Hiver</h2>"
-  + A("Finances", "remboursement du crédit et intérêts (à fixer). Défaut : cédez à la compagnie une possession française de votre choix (navire, alambic), qui devient générique ; chacune efface une tranche de crédit (par exemple 3). Garanties : navires, alambics et autres possessions ouvrent du crédit supplémentaire (à fixer).")
-  + A("Commande", "à La Rochelle : marchandise 1, eau-de-vie 2, cale vide 1 ; 4 cales par navire. En saison, seulement avec la carte Commission en France.")
-  + A("Paris", "+2, puis tirez la demande de Paris.")
-  + A("Ravages", "−1.")
-  + A("Entretien", "1 livre par navire qui hiverne.")
-  + A("Investissement", "un gratuit, sans action.")
-  + "<h2>Lacs</h2>"
-  + A("Demande de marchandises", "par an : 6 pour les Grands Lacs, 2 au lac Supérieur. L’eau-de-vie est toujours acceptée, mais chaque baril fait monter les ravages.")
-  + A("Castor", "tuiles visibles de 1 à 3 castors secs ; non troquées à la fin de l’année, elles passent côté gras (★).")
-  + A("Ravages", "à 4 : grand événement à chaque passage ; à 6 : interdiction royale et fin de partie.")
-  + "</div>")
+def SEA(title, sub, c, b, t, body): return f"<div class='sea' style='--c:{c};--b:{b};--t:{t}'><h2>{E(title)}<span>{E(sub)}</span></h2>{body}</div>"
+def SUB(title, c, b, t, body): return f"<div class='sub' style='--c:{c};--b:{b};--t:{t}'><h3>{E(title)}</h3>{body}</div>"
+# Saison du castor (recto) : Québec et Expédition
+recto = ("<h1>Aide de jeu · l’année en trois saisons</h1>"
+  + SEA("Saison du castor", "d’avril à novembre · une action par mois · au verso : printemps et hiver", "#F9EEDA", "#D9B978", "#7A5232",
+    "<div class='cols'><div>"
+    + A("Début du mois", 'les canots de la zone rayée glissent dans la zone pleine, puis les canots en route avancent d’une case. Retour des Grands Lacs : sur 3+ (bonus des voyageurs à fixer), le canot rentre aussitôt à Montréal ; du Supérieur, il rejoint d’abord les Grands Lacs.')
+    + "</div><div>"
+    + A("Tour", 'une action chacun ; l’ordre tourne d’un cran chaque mois.') + A("Fin du mois", 'événement de fin de mois ; la carte de droite de la rivière part à la défausse, les autres glissent, une nouvelle entre à 3 livres.')
+    + "</div></div><div class='g2'>"
+    + SUB("À Québec", "#E7F1FB", "#9DB9D6", "#2F4E6E",
+        A("Vendre des peaux", 'sur un navire en rade, à un prix par peau au plus égal au prix de Paris ; ou à Albany : 2 par peau, payé deux mois plus tard, +2 soupçon.') + A("Investir", 'en livres : parts de navire au chantier (1 livre la part, 5 parts), grand canot 3, petit canot 2, alambic 4.') + A("Recruter", 'prenez une carte de la rivière au prix de sa case : 3, 2 ou 1 livre.')
+        + A("Changer les prix", 'reposez sur la piste tous vos produits, canots et navires.') + A("Prendre le pas", 'vous jouerez en premier le mois prochain.') + A("Attendre", 'laissez passer le mois.')
+        + "<h4>Sans action</h4>" + A("Jouer un contrat", 'de votre main (deux au plus), puis jouez votre tour.') + A("Faire partir votre navire", 'avant qu’il soit plein : 1 livre de faux fret par place vide.') + A("Ouvrir votre place réservée", 'au public, sur votre navire en rade.')
+        + "<h4>Navires de retour</h4>" + A("Places", '3 publiques et 1 réservée au propriétaire. Une offre moins chère évince la peau la plus chère.') + A("Départ", 'plein, ou fin septembre. Paris baisse de 1 toutes les 3 peaux embarquées.'))
+    + SUB("En expédition", "#F9ECE7", "#D9A48E", "#8E3F25",
+        A("Partir en expédition", 'à Montréal, composez le canot. Il faut un congé, acheté au printemps à crédit avec ses marchandises. Le canot (achat ou location) et les voyageurs se paient en livres au départ. Grand canot (5 places) ou petit canot (3 places), voyageurs permis.') + A("Coureurs des bois", 'sans congé : fournissez 2 éléments de votre stock (marchandises ou eau-de-vie), sans autre prix ; +1 soupçon. Au retour, les peaux se vendent normalement, ou à Albany sans soupçon ; la première peau vendue paie les coureurs, le reste vous revient.') + A("Commercer à un lac", 'canot prêt (partie pleine). Avec un représentant, vous choisissez le lac ; sinon le dé : 1–2 Huron, 3–4 Érié, 5–6 Ontario. Une charge contre une tuile.') + A("Redescendre", 'le canot prend la route du retour. Arrivée dans la zone rayée de Montréal, déchargement le mois suivant.')
+        + "<h4>Voyageurs · payés en livres au départ</h4>" + A("Représentant · 2", 'choisit le lac, peut en changer (1 action), seul à mener au Michigan et au Supérieur.') + A("Guide · 1", 'regarde les jetons cachés avant d’échanger.') + A("Interprète · 1", 'le premier baril échangé à chaque lac ne fait pas de ravage.') + A("Milicien · 1", 'sans effet pour l’instant.'))
+    + "</div>"))
+# Printemps et hiver (verso)
+verso = ("<h1>Aide de jeu · printemps et hiver</h1><div class='cols big'><div>"
+  + SEA("Printemps", "avant avril", "#E5F4E4", "#9CC39A", "#2F5E2C",
+    A("La Rochelle", 'chaque navire part et lance un dé : 4 ou plus, il arrive en mai, sinon en juin.') + A("Navire du roi", 'en rade dès avril les années I et II.') + A("Congés", '4 tirés du sac à 3 joueurs, délivrés sur 3+ en avril ou 2+ en mai. Achat au début de ce mois, sans action, dans l’ordre du tour : 1, 2 ou 3 crédit pour 2, 3 ou 4 marchandises. Remélangés chaque année.') + A("Joueur le plus pauvre", 'chaque congé lui coûte 1 crédit de moins.'))
+  + SEA("Lacs", "toute l’année", "#F6EFDC", "#C9B88E", "#7A5232",
+    A("Demande de marchandises", 'par an : 6 pour les Grands Lacs, 2 au lac Supérieur. L’eau-de-vie est toujours acceptée, mais chaque baril fait monter les ravages.') + A("Castor", 'tuiles visibles de 1 à 3 castors secs ; non troquées à la fin de l’année, elles passent côté gras (★).') + A("Ravages", 'à 4 : grand événement à chaque passage ; à 6 : interdiction royale et fin de partie.'))
+  + "</div><div>"
+  + SEA("Hiver", "après novembre", "#DCE9EC", "#8FB0B7", "#2E5560",
+    A("Finances", 'remboursement du crédit et intérêts (à fixer). Défaut : cédez à la compagnie une possession française de votre choix (navire, alambic), qui devient générique ; chacune efface une tranche de crédit (par exemple 3). Garanties : navires, alambics et autres possessions ouvrent du crédit supplémentaire (à fixer).') + A("Commande", 'à La Rochelle : marchandise 1, eau-de-vie 2, cale vide 1 ; 4 cales par navire. En saison, seulement avec la carte Commission en France.') + A("Paris", '+2, puis tirez la demande de Paris.') + A("Ravages", '−1.') + A("Entretien", '1 livre par navire qui hiverne.') + A("Investissement", 'un gratuit, sans action.'))
+  + "</div></div>")
 for nm, body in (('aide_a', recto), ('aide_b', verso)):
     page(nm, 1600, 1150, f"<div class='s'><div class='in'>{body}</div></div>", AIDE_CSS)
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)
