@@ -18,7 +18,7 @@ def mesh(name, img, poly, thick, edge_px):
     def vt(u, w): VT.append((u, w)); return len(VT)
     def vn(x, y, z): VN.append((x, y, z)); return len(VN)
     def face(a, b, c, n):   # deux faces opposées : visible quel que soit le sens retenu à l'import
-        F.append((a, b, c, n[0])); F.append((c, b, a, n[1]))
+        F.append((a, b, c, n[0])); F.append((c, b, a, n[0]))   # même normale vers l'extérieur pour les deux sens : éclairage correct quel que soit le sens retenu
     up, dn = vn(0, 1, 0), vn(0, -1, 0)
     top = [(v((px - cx) * k, t, (py - cy) * k), vt(px / W, 1 - py / H)) for px, py in poly]
     bot = [(v((px - cx) * k, 0, (py - cy) * k), vt(px / W, 1 - py / H)) for px, py in poly]
@@ -66,7 +66,7 @@ def canot3d(name, cells):
     def vn(x, y, z): VN.append((x, y, z)); return len(VN)
     def quadf(P, n, ni):  # P : 4 (indice sommet, indice uv) ; faces dans les deux sens
         a, b, c, d = P
-        for t in ((a, b, c), (a, c, d)): F.append((*t, n)); F.append((t[2], t[1], t[0], ni))
+        for t in ((a, b, c), (a, c, d)): F.append((*t, n)); F.append((t[2], t[1], t[0], n))
     up, dn = vn(0, 1, 0), vn(0, -1, 0); fz, bz = vn(0, 0, 1), vn(0, 0, -1)
     h = L / 2; hb = Lb / 2
     S = 1.5; TW = round(L * S); DH = round(B * S); SH = round(Hh * S); TH = DH + SH + 24; y0 = DH + 18; mm = 48 * S

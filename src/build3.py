@@ -6,7 +6,7 @@ def aspect(img):
     if img not in ASP: w, h = Image.open(f'img/{img}.png').size; ASP[img] = h / w
     return ASP[img]
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v17/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
@@ -19,7 +19,7 @@ def guid():
         if g not in used: used.add(g); return g
 def col(h): h = h.lstrip('#'); return {'r': int(h[0:2], 16) / 255, 'g': int(h[2:4], 16) / 255, 'b': int(h[4:6], 16) / 255}
 WHITE = col('#FFFFFF'); GREY = col('#8C877E'); INKC = col('#2A2418')
-PC = [col('#C0392B'), col('#2F6FB0'), col('#4E8A2C')]; SEAT = ['Red', 'Blue', 'Green']; PN = ['rouge', 'bleu', 'vert']
+PC = [col('#A8322A'), col('#2F5E8E'), col('#4E7A2C')]; SEAT = ['Red', 'Blue', 'Green']; PN = ['rouge', 'bleu', 'vert']   # mêmes couleurs que les plateaux des joueurs
 
 def T(x=0, z=0, y=2.0, s=1.0, fz=0):
     return {'posX': x, 'posY': y, 'posZ': z, 'rotX': 0, 'rotY': 180, 'rotZ': fz, 'scaleX': s, 'scaleY': 1.0, 'scaleZ': s}
@@ -57,16 +57,16 @@ def mbag(nick, mesh, tex, wpx, pos, items, color=WHITE, desc='', order=0, inf=Fa
     o = base('Custom_Model_Infinite_Bag' if inf else 'Custom_Model_Bag', nick, wpx, pos, color, False, 0.6, y3=True, desc=desc, s0=round(wpx * U, 4))
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * MESH[mesh] * U, 4)})
     o['CustomMesh'] = {'MeshURL': URL + mesh + '.obj', 'DiffuseURL': URL + tex + '.png', 'NormalURL': '', 'ColliderURL': '', 'Convex': True,
-                       'MaterialIndex': 0, 'TypeIndex': 7 if inf else 6, 'CastShadows': True}
-    o['Bag'] = {'Order': order}; o['MaterialIndex'] = 0
+                       'MaterialIndex': 3, 'TypeIndex': 7 if inf else 6, 'CastShadows': True}
+    o['Bag'] = {'Order': order}; o['MaterialIndex'] = 3
     for it in items: it['Transform'] = T(fz=it['Transform']['rotZ']); it['Locked'] = False
     o['ContainedObjects'] = items; return o
 def model(nick, mesh, tex, wpx, pos=None, desc=''):
     # Pièce 3D (Custom_Model), couleur cuite dans la texture
     o = base('Custom_Model', nick, wpx, pos, WHITE, False, 0.6, y3=True, desc=desc, s0=round(wpx * U, 4))
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * MESH[mesh] * U, 4)})
-    o['CustomMesh'] = {'MeshURL': URL + mesh + '.obj', 'DiffuseURL': URL + tex + '.png', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 0, 'CastShadows': True}
-    o['MaterialIndex'] = 0; return o
+    o['CustomMesh'] = {'MeshURL': URL + mesh + '.obj', 'DiffuseURL': URL + tex + '.png', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 3, 'TypeIndex': 0, 'CastShadows': True}
+    o['MaterialIndex'] = 3; return o
 DECK_ID = {'pers': 1, 'riv': 2, 'mat': 3, 'ev': 4, 'dem': 5, 'grand': 6, 'riv_recrue': 7, 'riv_contrat': 8, 'riv_nation': 9, 'riv_charge': 10}
 DECK_NAME = {'pers': 'Associés', 'riv': 'Rivière de recrutement', 'mat': 'Matériel de départ', 'ev': 'Événements de fin de mois', 'dem': 'Demande de Paris', 'grand': 'Grands événements', 'riv_recrue': 'Recrues', 'riv_contrat': 'Contrats', 'riv_nation': 'Alliances', 'riv_charge': 'Charges'}
 def cdeck(k):

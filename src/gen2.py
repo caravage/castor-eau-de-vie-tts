@@ -322,7 +322,7 @@ def canot_tex(name, c, cd, cells, letter):
     sq = 106 * S
     for k in range(cells):
         x = W / 2 + (k - (cells - 1) / 2) * 120 * S - sq / 2
-        g.append(f"<rect x='{x:.1f}' y='{6 + DH/2 - sq/2:.1f}' width='{sq:.1f}' height='{sq:.1f}' rx='14' fill='{PAPER}' stroke='{cd}' stroke-width='6'/>")
+        g.append(f"<rect x='{x:.1f}' y='{6 + DH/2 - sq/2:.1f}' width='{sq:.1f}' height='{sq:.1f}' rx='14' fill='#FFFFFF' stroke='{cd}' stroke-width='6'/>")
     m = 48 * S; y0 = DH + 18
     g.append(f"<path d='M6 {y0} L{W-6} {y0} L{W-6-m:.1f} {H-6} L{6+m:.1f} {H-6} Z' fill='{c}' stroke='{cd}' stroke-width='8' stroke-linejoin='round'/>")
     if letter: g.append(T(W / 2, H - 30, letter, 130, 'middle', weight=700, fill=PAPER))
