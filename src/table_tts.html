@@ -170,7 +170,7 @@ const LAKES=[
 ];
 
 /* ---------- Géométrie de la table ---------- */
-const TW=2000,TH=1910,BX=40,BY=40,MDY=114,MAT_Y=1362,MAT_W=465,MAT_H=212;
+const TW=2000,TH=1910,BX=40,BY=40,MDY=114,MAT_Y=1216,MAT_W=465,MAT_H=212;
 const B=(x,y)=>[BX+x,BY+y],M=(x,y)=>[BX+x,BY+MDY+y];
 const RAV_X0=120,RAV_MAX=6,RAV_EV=4,RAV_STEP=1040/7,YEARS=5,DEM_X=430,DEM_Y=104;
 const PT_Y=706,PT_W=216,PT_GAP=10,LIV_Y=800,DET_Y=860,PARIS_X=614,PARIS_STEP=28;
@@ -204,8 +204,8 @@ function setup(n){
   for(let k=0;k<(n>=4?5:4);k++){const id=S.decks.rec.pop(),c=S.pieces[id];c.in=null;c.up=true;c.x=RIV_X+k*RIV_STEP+4;c.y=RIV_Y+22;c.z=S.z++}
   Object.keys(BAGS).forEach(b=>BAGS[b].items.forEach(it=>{for(let k=0;k<it.n;k++)S.bags[b].push(add({k:"chit",bag:b,q:it.q||0,e:it.k&&it.k!=="fur"?it.k:null,up:false,gras:false,in:"bag"},0,0))}));
   // Paquets et sacs dans la réserve générale
-  add({k:"deck",deck:"sit"},1300,SUP.deckY);add({k:"deck",deck:"ev"},1420,SUP.deckY);add({k:"deck",deck:"dem"},1540,SUP.deckY);add({k:"deck",deck:"grand"},1660,SUP.deckY);
-  add({k:"bag",bag:"classic"},1300,SUP.deck2Y);add({k:"bag",bag:"premium"},1430,SUP.deck2Y);add({k:"bag",bag:"hidden"},1560,SUP.deck2Y);
+  add({k:"deck",deck:"sit"},1290,SUP.deckY);add({k:"deck",deck:"ev"},1418,SUP.deckY);add({k:"deck",deck:"dem"},1546,SUP.deckY);add({k:"deck",deck:"grand"},1674,SUP.deckY);
+  add({k:"bag",bag:"classic"},1290,SUP.deck2Y);add({k:"bag",bag:"premium"},1420,SUP.deck2Y);add({k:"bag",bag:"hidden"},1550,SUP.deck2Y);
   // Marqueurs communs sur le plateau
   add({k:"tok",kind:"month",c:-1},...B(40+62,54+72));
   add({k:"tok",kind:"year",c:-1,label:"I"},...B(190,22));
@@ -222,10 +222,10 @@ function setup(n){
   // Navire marchand générique, en chargement à La Rochelle
   add({k:"tok",kind:"ship",c:-1,bank:true,merch:true},...M(1070,150));
   // Chantier : cartes de navire à 5 parts
-  for(let k=0;k<6;k++)add({k:"tok",kind:"shipcard",c:-1},1300+(k%3)*140,SUP.yardY+20+Math.floor(k/3)*76);
-  for(let k=0;k<3;k++)add({k:"tok",kind:"pas",c:-1},1860+k*40,SUP.bankY+20);
+  for(let k=0;k<6;k++)add({k:"tok",kind:"shipcard",c:-1},1290+(k%3)*140,SUP.yardY+20+Math.floor(k/3)*76);
+  for(let k=0;k<3;k++)add({k:"tok",kind:"pas",c:-1},1580+k*44,SUP.bankY+76);
   // Dés, équipiers, jetons de prix
-  add({k:"die",v:3},1700,SUP.diceY+30);add({k:"die",v:5},1750,SUP.diceY+30);add({k:"die",v:1,cross:true},1800,SUP.diceY+30);
+  add({k:"die",v:3},1580,SUP.diceY+30);add({k:"die",v:5},1630,SUP.diceY+30);add({k:"die",v:1,cross:true},1680,SUP.diceY+30);
   CREW.forEach((c,ci)=>{for(let k=0;k<4;k++)add({k:"tok",kind:"crew",c:-1,crew:c.id},1300+ci*170+k*40,SUP.crewY+30)});
   for(let v=1;v<=8;v++)for(let k=0;k<4;k++)add({k:"tok",kind:"num",c:-1,label:String(v)},1300+(v-1)*80+(k%2)*28,SUP.numY+30+Math.floor(k/2)*28);
   // Plateaux des joueurs
@@ -308,20 +308,20 @@ function printedSVG(){
   h+=`</g>`;
   // Réserve générale
   const lab=(x,y,t,s)=>`<text class="lab" x="${x}" y="${y}">${t}</text>`;
-  h+=lab(1300,SUP.deckY-24,"Paquets","glisser pour piocher · déposer dessus pour remettre");
-  h+=lab(1300,SUP.deck2Y-24,"Sacs de jetons","cliquer pour piocher · déposer un jeton dessus pour le remettre");
-  h+=lab(1300,SUP.bankY-6,"Comptoir de Québec","gris · ne vend que son stock · prix fixé à l’arrivée : milieu entre le plus bas et le plus haut des joueurs, arrondi en bas")+lab(1700,SUP.diceY-6,"Dés","le 3ᵉ : dé de traversée")+lab(1700,SUP.bankY+104,"Congés","");
-  h+=lab(1300,SUP.crewY-6,"Équipiers","représentant 2 · guide, milicien, interprète 1");
+  h+=lab(1290,SUP.deckY-24,"Paquets","glisser pour piocher · déposer dessus pour remettre");
+  h+=lab(1290,SUP.deck2Y-24,"Sacs de jetons","cliquer pour piocher · déposer un jeton dessus pour le remettre");
+  h+=lab(1290,SUP.bankY-6,"Comptoir de Québec","gris · ne vend que son stock · prix fixé à l’arrivée : milieu entre le plus bas et le plus haut des joueurs, arrondi en bas")+lab(1580,SUP.diceY-6,"Dés","le 3ᵉ : dé de traversée")+lab(1580,SUP.bankY+124,"Congés","");
+  h+=lab(1290,SUP.crewY-6,"Équipiers","représentant 2 · guide, milicien, interprète 1");
   
   h+=`<text class="lab" x="-138" y="30">Rivière</text><rect x="-138" y="40" width="108" height="166" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/>`;
   ["3 livres","2 livres","1 livre"].forEach((t,k)=>{const y=226+k*174;h+=`<rect x="-138" y="${y}" width="108" height="148" rx="8" fill="#F2EAD3" stroke="#B7A675"/><text class="lab" x="-84" y="${y+163}" text-anchor="middle" style="font-size:14px">${t}</text>`});
   h+=`<rect x="-138" y="${226+3*174}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="-84" y="${226+3*174+80}" text-anchor="middle">Défausse</text>`;
-  h+=lab(1740,784,"Matériel de départ");
+  h+=lab(1290,964,"Matériel de départ");
   h+=lab(-270,30,"Paquets");
   [["Recrues",40],["Contrats",214],["Alliances",388],["Charges",562]].forEach(([t,y])=>{h+=`<text class="labs" x="-220" y="${y+156}" text-anchor="middle">${t}</text>`});
-  h+=lab(1300,SUP.yardY-6,"Chantier de La Rochelle","cartes de navire · 5 parts de 1 livre, un disque de couleur par part");
+  h+=lab(1290,SUP.yardY-6,"Chantier de La Rochelle","cartes de navire · 5 parts de 1 livre, un disque de couleur par part");
   // Zones des joueurs : un cadre par joueur, séparés
-  for(let i=0;i<n;i++){const x0=-269+i*614;h+=`<rect x="${x0}" y="1300" width="590" height="290" rx="18" fill="${COL[i]}" fill-opacity=".10" stroke="${COL[i]}" stroke-width="3"/>`}
+  for(let i=0;i<n;i++){const x0=-269+i*614;h+=`<rect x="${x0}" y="1154" width="590" height="290" rx="18" fill="${COL[i]}" fill-opacity=".10" stroke="${COL[i]}" stroke-width="3"/>`}
   // Plateaux des joueurs
   for(let i=0;i<n;i++){const mx=-257+i*614,my=MAT_Y;
     h+=`<g class="pmat">`;
