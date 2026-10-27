@@ -10,13 +10,13 @@
  "Gravity": 0.5,
  "PlayArea": 1.0,
  "Table": "Table_Custom",
- "TableURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/table.png",
+ "TableURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/table.png",
  "Sky": "Sky_Museum",
  "Note": "",
  "TabStates": {
   "0": {
    "title": "Règles",
-   "body": "Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; ensuite il ne fait que remettre à la bonne taille une pièce qui sort d’un sac ou d’un paquet. Les pièces grises appartiennent au comptoir de Québec. Tuiles visibles : paquets de 1 à 3 castors secs, retournés côté gras (★) s’ils ne sont pas troqués à la fin de l’année. Congés : tirés du sac, achetés à crédit, ils offrent des marchandises ; un congé ne donne pas de canot. Crédit : piste de 0 à −10. Marchandise : caisse. Eau-de-vie : bouteille.\n\nMise en place. Chaque joueur est un marchand qui monte sa propre affaire. Il pioche 3 personnages et en garde un : son associé, qui lui donne un effet. Puis le paquet de matériel (9 cartes à 3 joueurs : navire avec 2 de crédit, parts de navire, bourse, ballots, barils, assortiment, petit canot, grand canot, alambic) est distribué en entier, 3 cartes chacun, d’environ 4 livres de valeur chacune.\n\nLes mois. D’avril à novembre, chacun joue une action à son tour ; puis le mois avance, les canots et les navires avancent d’une case, et un événement de fin de mois est tiré (aucun avant la fin du premier mois). Le joueur reste à Québec : il agit même quand son canot voyage. 5 ans. L’ordre tourne d’un cran chaque mois ; l’action « Prendre le pas » permet de jouer en premier le mois suivant.\n\nRecruter. Une action : prenez une carte de la rivière (4 visibles, 5 à 4 joueurs) au prix de sa position, 3, 2, 1 ou 1 livre. Recrues, alliances et charges se posent devant vous ; un contrat se garde en main (deux au plus) et se joue plus tard pendant votre tour, sans action. En fin de mois, la carte la moins chère part à la défausse, les autres glissent et une nouvelle entre à 3 livres. Une alliance avec une nation est perdue dès que vous échangez un baril chez elle (ravages +1).\n\nCommander en France. Seulement en hiver, sans action (en saison, il faut la carte Commission en France). Chaque hiver, après la phase de finance, chacun prépare ses navires à La Rochelle dans l’ordre du tour : une commande (marchandise 1 livre, baril 2, chaque alambic offre 2 barils) dans son navire ou un navire affrété au fret posé sur la piste, 4 cales par navire, 1 livre par cale vide ; et/ou un navire sur lest (4 livres). Le financement des commandes d’hiver reste à fixer (jusqu’ici, La Rochelle avançait jusqu’à 6 livres de dette, 9 avec le Négociant huguenot). En avril, chaque navire quitte La Rochelle et lance un dé : 4 ou plus, il arrive en mai ; sinon en juin (Pilote +2, Armateurs de La Rochelle +1, corsaires −1). Il reste ensuite en rade pour le retour.\n\nPiste des prix. Ce qui arrive à quai se pose sur la piste commune, à un prix de 1 à 5, en jetons de votre couleur ; vos canots aussi (prix de location) et vos navires, à La Rochelle ou en rade (prix du fret). Chaque joueur affiche un seul prix par ressource : tous ses barils au même prix, toutes ses marchandises au même prix, tous ses grands canots, tous ses petits canots, et un seul fret pour tous ses navires ; de nouveaux arrivages rejoignent ce prix, ou déplacent tout le lot si vous en choisissez un autre. Le comptoir de Québec y a ses jetons gris. Chaque produit générique (marchandise ou baril du comptoir, canot du comptoir, fret du navire du roi ou du navire marchand) reçoit son prix au moment où il arrive sur le plateau : le milieu entre le prix le plus bas et le plus haut affichés par les joueurs pour ce produit, arrondi à l’inférieur (sans offre : marchandise 2, baril 3, grand canot 2, petit canot 1, fret 2). Ce prix ne bouge plus ensuite. Le comptoir ne vend que son stock : 1 grand et 1 petit canot à louer, et au départ la cargaison du navire du roi (3 marchandises, 1 baril). Chaque année suivante, il achète la charge la moins chère posée par un joueur, plus la cargaison du navire du roi en année II. Vos propres produits sont gratuits pour vous.\n\nCongés. Chaque année, 4 congés sont tirés du sac à 3 joueurs. L’intendant les délivre sur 3+ au dé en avril, ou sur 2+ en mai. Chaque congé s’achète à crédit auprès de la compagnie et comprend des marchandises génériques : 4 marchandises pour 3 crédit, 3 pour 2, 2 pour 1. Un joueur peut en acheter plusieurs. Le joueur le plus pauvre paie chaque congé 1 crédit de moins (celui à 1 est gratuit). Les congés retournent au sac en fin d’année. Un congé permet une expédition en grand ou petit canot.\n\nLe canot. Avec un congé : grand canot (5 places) ou petit canot (3 places), équipiers permis. Le canot (achat ou location) et les équipiers se paient en livres au départ ; sans livres, on peut louer un canot bon marché et partir sans équipier. Les équipiers ne prennent pas de place.\n\nCoureurs des bois. Sans congé, on peut envoyer des coureurs des bois : fournissez 2 éléments de votre stock (marchandises ou eau-de-vie), sans autre prix ; +1 soupçon. Au retour, les peaux se vendent normalement, ou à Albany sans soupçon. La première peau vendue paie les coureurs ; le reste revient au joueur.\n\nLes lacs. Chaque lac a un jeton visible (qualité 1 à 3) et un jeton caché ; l’Ontario, proche des Anglais, en a deux cachés ; le lac Supérieur a des jetons de qualité 2 à 5. Les lacs se regarnissent au printemps ; un jeton visible resté au lac toute l’année devient du castor gras.\n\nVoyager. Montréal → case de l’Outaouais → arrivée aux Grands Lacs, une case par mois. Le canot qui arrive se pose dans la partie rayée de la zone des Grands Lacs (un tiers) : ce mois-là, il ne visite pas de lac (il peut seulement pousser vers le Sault) et le joueur joue une autre action. Au début du mois suivant, il glisse dans la partie pleine (deux tiers) : il est prêt et peut aller à un lac. Même chose au Supérieur : partie rayée à l’arrivée, partie pleine quand le canot est prêt à échanger sur le lac. Au début de chaque mois, on fait d’abord glisser les canots de la partie rayée vers la partie pleine, puis on avance les canots en route. Sur place, « Commercer à un lac » : le représentant choisit ; sans lui, le dé décide (1–2 Huron, 3–4 Érié, 5–6 Ontario) et on relance si le lac tiré est vide. Seul un représentant mène au lac Michigan ou, par la case du Sault, au lac Supérieur, et lui seul peut changer de lac ensuite (1 action) ; les peaux déjà chargées restent à bord. Une charge contre un jeton.\n\nMarchandise ou eau-de-vie. La demande de marchandises est limitée par zone et par an : 6 pour l’ensemble des Grands Lacs, 2 au lac Supérieur, premier arrivé premier servi. L’eau-de-vie est toujours acceptée, mais chaque baril échangé fait monter les ravages.\n\nRetour et glaces. Redescendre : le canot prend la route du retour. Au début de chaque mois, un canot qui revient des Grands Lacs lance un dé : sur 3+ (bonus des équipiers à fixer), il rentre aussitôt à Montréal ; sinon il avance normalement. Depuis le lac Supérieur, le premier mois le ramène aux Grands Lacs, puis même dé. L’aller garde sa durée. Le canot arrive dans la zone rayée du retour, à Montréal ; il est déchargé au début du mois suivant (peaux à Québec, charges remises à quai, canot libéré). En hiver, les canots rentrés sont déchargés tout de suite. À l’arrivée à Montréal, accident sur 1 en octobre, sur 1 ou 2 en novembre ou en hiver.\n\nLes navires de retour. Les navires qui ont apporté les commandes restent en rade et repartent avec les peaux. Chaque navire a 3 places publiques et 1 place réservée à la couleur de son propriétaire, qui peut l’ouvrir au public (sans action) ; une peau posée sur une place réservée ouverte ne peut plus être évincée. Le navire du roi est en rade dès avril les années I et II, 4 places publiques, puis il est réquisitionné pour la guerre ; les navires des joueurs, partis de La Rochelle en avril, arrivent en mai ou en juin selon le dé, chargés de la commande d’hiver ou sur lest. On embarque en annonçant un prix par point de qualité, au plus le prix de Paris. Quand les places publiques sont prises, une offre moins chère évince la peau la plus chère. Un navire part à la fin du mois où il est plein, ou fin septembre. Le propriétaire peut le faire partir plus tôt, sans action, pour vendre avant que Paris baisse : il paie alors le faux fret, 1 livre par place vide. Un départ normal (plein, ou fin septembre) ne paie rien pour ses places vides.\n\nNavires partagés. Un navire est une carte à 5 parts de 1 livre. On peut l’acheter seul ou n’en financer que quelques parts : la carte attend au chantier et les autres marchands peuvent acheter les parts restantes (une action Investir). Armé à 5 parts, il revient à l’armateur principal (le plus de parts, le fondateur en cas d’égalité), qui en paie les frais et tient la place réservée ; le fret encaissé se partage selon les parts.\n\nHivernage. Plutôt que de partir fin septembre, un navire peut hiverner à Québec avec ses peaux à bord : l’armateur principal paie 1 livre d’entretien en hiver. Il ne pourra pas traverser avec une commande l’année suivante.\n\nDé de traversée. Seulement quand un événement le met en jeu : « Gros temps sur l’Atlantique » (ce mois-ci) ou la demande « Guerre en Europe » (corsaires anglais jusqu’à l’hiver). Chaque navire qui arrive à Québec ou qui en part lance un dé : sur 1, il est perdu avec sa cargaison.\n\nPaiement et prix de Paris. Au départ, chaque vendeur touche qualité × son prix (au plus le prix de Paris du moment) et paie le fret au propriétaire. Le prix de Paris baisse de 1 toutes les 3 peaux embarquées sur un navire qui part, remonte de 2 chaque hiver, et la demande de Paris, tirée chaque hiver, le modifie pour l’année suivante. Les peaux qui ne partent pas attendent à Québec, sans gagner en qualité. Albany paie 2 × qualité deux mois plus tard, mais +2 soupçon.\n\nHiver. Phase de finance : remboursement du crédit et intérêts (à fixer). En cas de défaut, le joueur cède à la compagnie une possession française de son choix (navire, alambic), qui devient générique ; chacune efface une tranche de crédit (par exemple 3). Les possessions servent aussi de garanties et ouvrent du crédit supplémentaire (à fixer). Le soupçon s’accumule mais n’a pas encore d’effet.\n\nRavages. Piste de 6. Chaque baril échangé : +1 ; chaque hiver : −1. Chaque fois qu’elle monte à 4, un grand événement. À 6, interdiction royale et fin de partie.\n\nVictoire. Pour l’instant : livres moins crédit utilisé, plus 1 par possession et la qualité des peaux invendues.",
+   "body": "Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; ensuite il ne fait que remettre à la bonne taille une pièce qui sort d’un sac ou d’un paquet. Les pièces grises appartiennent au comptoir de Québec. Tuiles visibles : paquets de 1 à 3 castors secs, retournés côté gras (★) s’ils ne sont pas troqués à la fin de l’année. Congés : tirés du sac, achetés à crédit, ils offrent des marchandises ; un congé ne donne pas de canot. Crédit : piste de 0 à −10. Marchandise : caisse. Eau-de-vie : bouteille.\n\nMise en place. Chaque joueur est un marchand qui monte sa propre affaire. Il pioche 3 personnages et en garde un : son associé, qui lui donne un effet. Puis le paquet de matériel (9 cartes à 3 joueurs : navire avec 2 de crédit, parts de navire, bourse, ballots, barils, assortiment, petit canot, grand canot, alambic) est distribué en entier, 3 cartes chacun, d’environ 4 livres de valeur chacune.\n\nLes mois. D’avril à novembre, chacun joue une action à son tour ; puis le mois avance, les canots et les navires avancent d’une case, et un événement de fin de mois est tiré (aucun avant la fin du premier mois). Le joueur reste à Québec : il agit même quand son canot voyage. 5 ans. L’ordre tourne d’un cran chaque mois ; l’action « Prendre le pas » permet de jouer en premier le mois suivant.\n\nRecruter. Une action : prenez une carte de la rivière (4 visibles, 5 à 4 joueurs) au prix de sa position, 3, 2, 1 ou 1 livre. Recrues, alliances et charges se posent devant vous ; un contrat se garde en main (deux au plus) et se joue plus tard pendant votre tour, sans action. En fin de mois, la carte la moins chère part à la défausse, les autres glissent et une nouvelle entre à 3 livres. Une alliance avec une nation est perdue dès que vous échangez un baril chez elle (ravages +1).\n\nCommander en France. Seulement en hiver, sans action (en saison, il faut la carte Commission en France). Chaque hiver, après la phase de finance, chacun prépare ses navires à La Rochelle dans l’ordre du tour : une commande (marchandise 1 livre, baril 2, chaque alambic offre 2 barils) dans son navire ou un navire affrété au fret posé sur la piste, 4 cales par navire, 1 livre par cale vide ; et/ou un navire sur lest (4 livres). Le financement des commandes d’hiver reste à fixer (jusqu’ici, La Rochelle avançait jusqu’à 6 livres de dette, 9 avec le Négociant huguenot). En avril, chaque navire quitte La Rochelle et lance un dé : 4 ou plus, il arrive en mai ; sinon en juin (Pilote +2, Armateurs de La Rochelle +1, corsaires −1). Il reste ensuite en rade pour le retour.\n\nPiste des prix. Ce qui arrive à quai se pose sur la piste commune, à un prix de 1 à 5, en jetons de votre couleur ; vos canots aussi (prix de location) et vos navires, à La Rochelle ou en rade (prix du fret). Chaque joueur affiche un seul prix par ressource : tous ses barils au même prix, toutes ses marchandises au même prix, tous ses grands canots, tous ses petits canots, et un seul fret pour tous ses navires ; de nouveaux arrivages rejoignent ce prix, ou déplacent tout le lot si vous en choisissez un autre. Le comptoir de Québec y a ses jetons gris. Chaque produit générique (marchandise ou baril du comptoir, canot du comptoir, fret du navire du roi ou du navire marchand) reçoit son prix au moment où il arrive sur le plateau : le milieu entre le prix le plus bas et le plus haut affichés par les joueurs pour ce produit, arrondi à l’inférieur (sans offre : marchandise 2, baril 3, grand canot 2, petit canot 1, fret 2). Ce prix ne bouge plus ensuite. Le comptoir ne vend que son stock : 1 grand et 1 petit canot à louer, et au départ la cargaison du navire du roi (3 marchandises, 1 baril). Chaque année suivante, il achète la charge la moins chère posée par un joueur, plus la cargaison du navire du roi en année II. Vos propres produits sont gratuits pour vous.\n\nCongés. Chaque année, 4 congés sont tirés du sac à 3 joueurs. L’intendant les délivre sur 3+ au dé en avril, ou sur 2+ en mai. Au début du mois où ils sont délivrés, chaque joueur peut en acheter, dans l’ordre du tour et sans dépenser d’action. Chaque congé s’achète à crédit auprès de la compagnie et comprend des marchandises génériques : 4 marchandises pour 3 crédit, 3 pour 2, 2 pour 1. Un joueur peut en acheter plusieurs. Le joueur le plus pauvre paie chaque congé 1 crédit de moins (celui à 1 est gratuit). Les congés retournent au sac en fin d’année. Un congé permet une expédition en grand ou petit canot.\n\nLe canot. Avec un congé : grand canot (5 places) ou petit canot (3 places), équipiers permis. Le canot (achat ou location) et les équipiers se paient en livres au départ ; sans livres, on peut louer un canot bon marché et partir sans équipier. Les équipiers ne prennent pas de place.\n\nCoureurs des bois. Sans congé, on peut envoyer des coureurs des bois : fournissez 2 éléments de votre stock (marchandises ou eau-de-vie), sans autre prix ; +1 soupçon. Au retour, les peaux se vendent normalement, ou à Albany sans soupçon. La première peau vendue paie les coureurs ; le reste revient au joueur.\n\nLes lacs. Chaque lac a un jeton visible (qualité 1 à 3) et un jeton caché ; l’Ontario, proche des Anglais, en a deux cachés ; le lac Supérieur a des jetons de qualité 2 à 5. Les lacs se regarnissent au printemps ; un jeton visible resté au lac toute l’année devient du castor gras.\n\nVoyager. Montréal → case de l’Outaouais → arrivée aux Grands Lacs, une case par mois. Le canot qui arrive se pose dans la partie rayée de la zone des Grands Lacs (un tiers) : ce mois-là, il ne visite pas de lac (il peut seulement pousser vers le Sault) et le joueur joue une autre action. Au début du mois suivant, il glisse dans la partie pleine (deux tiers) : il est prêt et peut aller à un lac. Même chose au Supérieur : partie rayée à l’arrivée, partie pleine quand le canot est prêt à échanger sur le lac. Au début de chaque mois, on fait d’abord glisser les canots de la partie rayée vers la partie pleine, puis on avance les canots en route. Sur place, « Commercer à un lac » : le représentant choisit ; sans lui, le dé décide (1–2 Huron, 3–4 Érié, 5–6 Ontario) et on relance si le lac tiré est vide. Seul un représentant mène au lac Michigan ou, par la case du Sault, au lac Supérieur, et lui seul peut changer de lac ensuite (1 action) ; les peaux déjà chargées restent à bord. Une charge contre un jeton.\n\nMarchandise ou eau-de-vie. La demande de marchandises est limitée par zone et par an : 6 pour l’ensemble des Grands Lacs, 2 au lac Supérieur, premier arrivé premier servi. L’eau-de-vie est toujours acceptée, mais chaque baril échangé fait monter les ravages.\n\nRetour et glaces. Redescendre : le canot prend la route du retour. Au début de chaque mois, un canot qui revient des Grands Lacs lance un dé : sur 3+ (bonus des équipiers à fixer), il rentre aussitôt à Montréal ; sinon il avance normalement. Depuis le lac Supérieur, le premier mois le ramène aux Grands Lacs, puis même dé. L’aller garde sa durée. Le canot arrive dans la zone rayée du retour, à Montréal ; il est déchargé au début du mois suivant (peaux à Québec, charges remises à quai, canot libéré). En hiver, les canots rentrés sont déchargés tout de suite. À l’arrivée à Montréal, accident sur 1 en octobre, sur 1 ou 2 en novembre ou en hiver.\n\nLes navires de retour. Les navires qui ont apporté les commandes restent en rade et repartent avec les peaux. Chaque navire a 3 places publiques et 1 place réservée à la couleur de son propriétaire, qui peut l’ouvrir au public (sans action) ; une peau posée sur une place réservée ouverte ne peut plus être évincée. Le navire du roi est en rade dès avril les années I et II, 4 places publiques, puis il est réquisitionné pour la guerre ; les navires des joueurs, partis de La Rochelle en avril, arrivent en mai ou en juin selon le dé, chargés de la commande d’hiver ou sur lest. On embarque en annonçant un prix par point de qualité, au plus le prix de Paris. Quand les places publiques sont prises, une offre moins chère évince la peau la plus chère. Un navire part à la fin du mois où il est plein, ou fin septembre. Le propriétaire peut le faire partir plus tôt, sans action, pour vendre avant que Paris baisse : il paie alors le faux fret, 1 livre par place vide. Un départ normal (plein, ou fin septembre) ne paie rien pour ses places vides.\n\nNavires partagés. Un navire est une carte à 5 parts de 1 livre. On peut l’acheter seul ou n’en financer que quelques parts : la carte attend au chantier et les autres marchands peuvent acheter les parts restantes (une action Investir). Armé à 5 parts, il revient à l’armateur principal (le plus de parts, le fondateur en cas d’égalité), qui en paie les frais et tient la place réservée ; le fret encaissé se partage selon les parts.\n\nHivernage. Plutôt que de partir fin septembre, un navire peut hiverner à Québec avec ses peaux à bord : l’armateur principal paie 1 livre d’entretien en hiver. Il ne pourra pas traverser avec une commande l’année suivante.\n\nDé de traversée. Seulement quand un événement le met en jeu : « Gros temps sur l’Atlantique » (ce mois-ci) ou la demande « Guerre en Europe » (corsaires anglais jusqu’à l’hiver). Chaque navire qui arrive à Québec ou qui en part lance un dé : sur 1, il est perdu avec sa cargaison.\n\nPaiement et prix de Paris. Au départ, chaque vendeur touche qualité × son prix (au plus le prix de Paris du moment) et paie le fret au propriétaire. Le prix de Paris baisse de 1 toutes les 3 peaux embarquées sur un navire qui part, remonte de 2 chaque hiver, et la demande de Paris, tirée chaque hiver, le modifie pour l’année suivante. Les peaux qui ne partent pas attendent à Québec, sans gagner en qualité. Albany paie 2 × qualité deux mois plus tard, mais +2 soupçon.\n\nHiver. Phase de finance : remboursement du crédit et intérêts (à fixer). En cas de défaut, le joueur cède à la compagnie une possession française de son choix (navire, alambic), qui devient générique ; chacune efface une tranche de crédit (par exemple 3). Les possessions servent aussi de garanties et ouvrent du crédit supplémentaire (à fixer). Le soupçon s’accumule mais n’a pas encore d’effet.\n\nRavages. Piste de 6. Chaque baril échangé : +1 ; chaque hiver : −1. Chaque fois qu’elle monte à 4, un grand événement. À 6, interdiction royale et fin de partie.\n\nVictoire. Pour l’instant : livres moins crédit utilisé, plus 1 par possession et la qualité des peaux invendues.",
    "color": "Grey",
    "visibleColor": {
     "r": 0.5,
@@ -59,8 +59,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/table_full.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/table_full.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/table_full.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/table_full.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -100,8 +100,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/pmat_0.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/pmat_0.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/pmat_0.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/pmat_0.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -141,8 +141,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/pmat_1.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/pmat_1.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/pmat_1.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/pmat_1.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -182,8 +182,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/pmat_2.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/pmat_2.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/pmat_2.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/pmat_2.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -238,8 +238,8 @@
    ],
    "CustomDeck": {
     "7": {
-     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
      "NumWidth": 10,
      "NumHeight": 2,
      "BackIsHidden": true,
@@ -279,8 +279,8 @@
      "CardID": 711,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -320,8 +320,8 @@
      "CardID": 702,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -361,8 +361,8 @@
      "CardID": 709,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -402,8 +402,8 @@
      "CardID": 708,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -443,8 +443,8 @@
      "CardID": 701,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -484,8 +484,8 @@
      "CardID": 706,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -525,8 +525,8 @@
      "CardID": 703,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -566,8 +566,8 @@
      "CardID": 704,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -607,8 +607,8 @@
      "CardID": 707,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -648,8 +648,8 @@
      "CardID": 705,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -689,8 +689,8 @@
      "CardID": 710,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -730,8 +730,8 @@
      "CardID": 700,
      "CustomDeck": {
       "7": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_recrue_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_recrue_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -784,8 +784,8 @@
    ],
    "CustomDeck": {
     "8": {
-     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
      "NumWidth": 10,
      "NumHeight": 1,
      "BackIsHidden": true,
@@ -825,8 +825,8 @@
      "CardID": 805,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -866,8 +866,8 @@
      "CardID": 800,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -907,8 +907,8 @@
      "CardID": 807,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -948,8 +948,8 @@
      "CardID": 806,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -989,8 +989,8 @@
      "CardID": 809,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1030,8 +1030,8 @@
      "CardID": 801,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1071,8 +1071,8 @@
      "CardID": 808,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1112,8 +1112,8 @@
      "CardID": 802,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1153,8 +1153,8 @@
      "CardID": 804,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1194,8 +1194,8 @@
      "CardID": 803,
      "CustomDeck": {
       "8": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_contrat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_contrat_back.png",
        "NumWidth": 10,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1243,8 +1243,8 @@
    ],
    "CustomDeck": {
     "9": {
-     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation.png",
-     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation_back.png",
+     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation.png",
+     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation_back.png",
      "NumWidth": 5,
      "NumHeight": 1,
      "BackIsHidden": true,
@@ -1284,8 +1284,8 @@
      "CardID": 902,
      "CustomDeck": {
       "9": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation_back.png",
        "NumWidth": 5,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1325,8 +1325,8 @@
      "CardID": 903,
      "CustomDeck": {
       "9": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation_back.png",
        "NumWidth": 5,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1366,8 +1366,8 @@
      "CardID": 904,
      "CustomDeck": {
       "9": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation_back.png",
        "NumWidth": 5,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1407,8 +1407,8 @@
      "CardID": 900,
      "CustomDeck": {
       "9": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation_back.png",
        "NumWidth": 5,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1448,8 +1448,8 @@
      "CardID": 901,
      "CustomDeck": {
       "9": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_nation_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_nation_back.png",
        "NumWidth": 5,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1495,8 +1495,8 @@
    ],
    "CustomDeck": {
     "10": {
-     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_charge.png",
-     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_charge_back.png",
+     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_charge.png",
+     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_charge_back.png",
      "NumWidth": 3,
      "NumHeight": 1,
      "BackIsHidden": true,
@@ -1536,8 +1536,8 @@
      "CardID": 1001,
      "CustomDeck": {
       "10": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_charge.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_charge_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_charge.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_charge_back.png",
        "NumWidth": 3,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1577,8 +1577,8 @@
      "CardID": 1002,
      "CustomDeck": {
       "10": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_charge.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_charge_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_charge.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_charge_back.png",
        "NumWidth": 3,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1618,8 +1618,8 @@
      "CardID": 1000,
      "CustomDeck": {
       "10": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_charge.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_riv_charge_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_charge.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_riv_charge_back.png",
        "NumWidth": 3,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -1676,8 +1676,8 @@
    ],
    "CustomDeck": {
     "1": {
-     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
      "NumWidth": 10,
      "NumHeight": 2,
      "BackIsHidden": true,
@@ -1717,8 +1717,8 @@
      "CardID": 101,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -1758,8 +1758,8 @@
      "CardID": 103,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -1799,8 +1799,8 @@
      "CardID": 105,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -1840,8 +1840,8 @@
      "CardID": 104,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -1881,8 +1881,8 @@
      "CardID": 110,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -1922,8 +1922,8 @@
      "CardID": 112,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -1963,8 +1963,8 @@
      "CardID": 113,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -2004,8 +2004,8 @@
      "CardID": 102,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -2045,8 +2045,8 @@
      "CardID": 106,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -2086,8 +2086,8 @@
      "CardID": 108,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -2127,8 +2127,8 @@
      "CardID": 111,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -2168,8 +2168,8 @@
      "CardID": 109,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -2209,8 +2209,8 @@
      "CardID": 100,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -2250,8 +2250,8 @@
      "CardID": 107,
      "CustomDeck": {
       "1": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_pers_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_pers_back.png",
        "NumWidth": 10,
        "NumHeight": 2,
        "BackIsHidden": true,
@@ -2301,8 +2301,8 @@
    ],
    "CustomDeck": {
     "4": {
-     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev.png",
-     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev_back.png",
+     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev.png",
+     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev_back.png",
      "NumWidth": 7,
      "NumHeight": 1,
      "BackIsHidden": true,
@@ -2342,8 +2342,8 @@
      "CardID": 402,
      "CustomDeck": {
       "4": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev_back.png",
        "NumWidth": 7,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2383,8 +2383,8 @@
      "CardID": 404,
      "CustomDeck": {
       "4": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev_back.png",
        "NumWidth": 7,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2424,8 +2424,8 @@
      "CardID": 403,
      "CustomDeck": {
       "4": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev_back.png",
        "NumWidth": 7,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2465,8 +2465,8 @@
      "CardID": 401,
      "CustomDeck": {
       "4": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev_back.png",
        "NumWidth": 7,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2506,8 +2506,8 @@
      "CardID": 400,
      "CustomDeck": {
       "4": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev_back.png",
        "NumWidth": 7,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2547,8 +2547,8 @@
      "CardID": 406,
      "CustomDeck": {
       "4": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev_back.png",
        "NumWidth": 7,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2588,8 +2588,8 @@
      "CardID": 405,
      "CustomDeck": {
       "4": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_ev_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_ev_back.png",
        "NumWidth": 7,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2638,8 +2638,8 @@
    ],
    "CustomDeck": {
     "5": {
-     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem.png",
-     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem_back.png",
+     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem.png",
+     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem_back.png",
      "NumWidth": 6,
      "NumHeight": 1,
      "BackIsHidden": true,
@@ -2679,8 +2679,8 @@
      "CardID": 502,
      "CustomDeck": {
       "5": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem_back.png",
        "NumWidth": 6,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2720,8 +2720,8 @@
      "CardID": 503,
      "CustomDeck": {
       "5": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem_back.png",
        "NumWidth": 6,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2761,8 +2761,8 @@
      "CardID": 504,
      "CustomDeck": {
       "5": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem_back.png",
        "NumWidth": 6,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2802,8 +2802,8 @@
      "CardID": 500,
      "CustomDeck": {
       "5": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem_back.png",
        "NumWidth": 6,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2843,8 +2843,8 @@
      "CardID": 501,
      "CustomDeck": {
       "5": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem_back.png",
        "NumWidth": 6,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2884,8 +2884,8 @@
      "CardID": 505,
      "CustomDeck": {
       "5": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_dem_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_dem_back.png",
        "NumWidth": 6,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -2931,8 +2931,8 @@
    ],
    "CustomDeck": {
     "6": {
-     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_grand.png",
-     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_grand_back.png",
+     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_grand.png",
+     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_grand_back.png",
      "NumWidth": 3,
      "NumHeight": 1,
      "BackIsHidden": true,
@@ -2972,8 +2972,8 @@
      "CardID": 602,
      "CustomDeck": {
       "6": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_grand.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_grand_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_grand.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_grand_back.png",
        "NumWidth": 3,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -3013,8 +3013,8 @@
      "CardID": 601,
      "CustomDeck": {
       "6": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_grand.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_grand_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_grand.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_grand_back.png",
        "NumWidth": 3,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -3054,8 +3054,8 @@
      "CardID": 600,
      "CustomDeck": {
       "6": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_grand.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_grand_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_grand.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_grand_back.png",
        "NumWidth": 3,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -3128,8 +3128,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3169,8 +3169,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3210,8 +3210,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G3_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G3_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G3_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G3_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3251,8 +3251,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3292,8 +3292,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G3_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G3_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G3_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G3_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3333,8 +3333,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3374,8 +3374,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G3_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G3_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G3_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G3_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3415,8 +3415,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3456,8 +3456,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3497,8 +3497,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3538,8 +3538,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3579,8 +3579,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3620,8 +3620,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3661,8 +3661,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3702,8 +3702,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3743,8 +3743,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3784,8 +3784,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3825,8 +3825,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_sec.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_G1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_sec.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_G1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3901,8 +3901,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S3_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S3_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S3_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S3_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3942,8 +3942,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S3_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S3_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S3_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S3_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -3983,8 +3983,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4024,8 +4024,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S3_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S3_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S3_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S3_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4065,8 +4065,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S1_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S1_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4106,8 +4106,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S1_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S1_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4147,8 +4147,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S1_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S1_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S1_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S1_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4188,8 +4188,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4229,8 +4229,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S3_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S3_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S3_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S3_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4270,8 +4270,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4311,8 +4311,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4352,8 +4352,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tile_S2_gras.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tile_S2_gras.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4428,8 +4428,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur1.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur1.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4469,8 +4469,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_mission.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_mission.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4510,8 +4510,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_gatees.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_gatees.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4551,8 +4551,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur1.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur1.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4592,8 +4592,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur3.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur3.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4633,8 +4633,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur2.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur2.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4674,8 +4674,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur3.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur3.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4715,8 +4715,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_mission.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_mission.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4756,8 +4756,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur1.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur1.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4797,8 +4797,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur1.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur1.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4838,8 +4838,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur1.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur1.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4879,8 +4879,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur1.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur1.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4920,8 +4920,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur2.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur2.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -4961,8 +4961,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fievre.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fievre.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5002,8 +5002,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur3.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur3.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5043,8 +5043,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur2.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur2.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5084,8 +5084,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur2.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur2.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5125,8 +5125,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_present.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_present.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5166,8 +5166,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_gatees.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_gatees.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5207,8 +5207,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fievre.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fievre.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5248,8 +5248,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_present.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_present.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5289,8 +5289,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur2.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur2.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5330,8 +5330,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_fur2.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/hid_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_fur2.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/hid_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -5373,7 +5373,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_marker.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_marker.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5414,7 +5414,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_marker.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_marker.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5455,7 +5455,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_marker.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_marker.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5496,7 +5496,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_marker.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_marker.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5537,7 +5537,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5578,7 +5578,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5619,8 +5619,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_1.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_1.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_1.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_1.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -5660,7 +5660,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/navire_1.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/navire_1.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5701,8 +5701,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_2.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_2.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_2.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_2.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -5742,7 +5742,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/navire_2.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/navire_2.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5783,8 +5783,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_3.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_3.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_3.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_3.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -5824,7 +5824,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/navire_3.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/navire_3.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5865,8 +5865,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_4.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_4.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_4.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_4.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -5906,7 +5906,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/navire_4.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/navire_4.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -5947,8 +5947,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_5.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_5.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_5.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_5.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -5988,7 +5988,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/navire_5.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/navire_5.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6029,8 +6029,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_6.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/carte_navire_6.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_6.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/carte_navire_6.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -6070,7 +6070,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/navire_6.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/navire_6.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6111,8 +6111,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_pas.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_pas.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_pas.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_pas.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -6152,8 +6152,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_pas.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_pas.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_pas.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_pas.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -6193,8 +6193,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_pas.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_pas.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_pas.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_pas.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -6321,7 +6321,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_rep.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_rep.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6362,7 +6362,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_rep.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_rep.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6403,7 +6403,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_rep.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_rep.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6444,7 +6444,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_rep.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_rep.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6485,7 +6485,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_guide.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_guide.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6526,7 +6526,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_guide.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_guide.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6567,7 +6567,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_guide.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_guide.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6608,7 +6608,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_guide.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_guide.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6649,7 +6649,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_mil.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_mil.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6690,7 +6690,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_mil.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_mil.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6731,7 +6731,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_mil.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_mil.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6772,7 +6772,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_mil.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_mil.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6813,7 +6813,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_int.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_int.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6854,7 +6854,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_int.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_int.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6895,7 +6895,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_int.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_int.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6936,7 +6936,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/voy_int.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/voy_int.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -6977,7 +6977,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7018,7 +7018,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7059,7 +7059,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7100,7 +7100,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7141,7 +7141,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7182,7 +7182,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7223,7 +7223,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7264,7 +7264,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7305,7 +7305,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7346,7 +7346,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7387,7 +7387,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7428,7 +7428,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7469,7 +7469,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7510,7 +7510,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7551,7 +7551,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7592,7 +7592,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7633,7 +7633,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_grand.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_grand.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7674,7 +7674,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_petit.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_petit.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7715,7 +7715,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/alambic.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/alambic.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7756,7 +7756,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_grand.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_grand.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7797,7 +7797,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_petit.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_petit.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7838,7 +7838,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/alambic.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/alambic.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7908,7 +7908,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7949,7 +7949,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -7990,7 +7990,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8031,7 +8031,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8072,7 +8072,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8113,7 +8113,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8154,7 +8154,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8195,7 +8195,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8236,7 +8236,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8277,7 +8277,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8318,7 +8318,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8359,7 +8359,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8400,7 +8400,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8441,7 +8441,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8482,7 +8482,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8523,7 +8523,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8564,7 +8564,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8605,7 +8605,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8646,7 +8646,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8687,7 +8687,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_grand.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_grand.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8728,7 +8728,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_petit.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_petit.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8769,7 +8769,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/alambic.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/alambic.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8810,7 +8810,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_grand.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_grand.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8851,7 +8851,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_petit.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_petit.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8892,7 +8892,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/alambic.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/alambic.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -8962,7 +8962,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9003,7 +9003,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9044,7 +9044,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9085,7 +9085,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9126,7 +9126,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9167,7 +9167,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9208,7 +9208,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9249,7 +9249,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9290,7 +9290,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9331,7 +9331,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9372,7 +9372,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9413,7 +9413,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9454,7 +9454,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9495,7 +9495,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9536,7 +9536,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9577,7 +9577,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9618,7 +9618,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9659,7 +9659,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9700,7 +9700,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9741,7 +9741,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_grand.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_grand.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9782,7 +9782,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_petit.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_petit.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9823,7 +9823,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/alambic.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/alambic.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9864,7 +9864,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_grand.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_grand.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9905,7 +9905,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_petit.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_petit.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -9946,7 +9946,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/alambic.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/alambic.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10016,7 +10016,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10057,7 +10057,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10098,7 +10098,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10151,8 +10151,8 @@
    ],
    "CustomDeck": {
     "3": {
-     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+     "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+     "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
      "NumWidth": 9,
      "NumHeight": 1,
      "BackIsHidden": true,
@@ -10192,8 +10192,8 @@
      "CardID": 302,
      "CustomDeck": {
       "3": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
        "NumWidth": 9,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -10233,8 +10233,8 @@
      "CardID": 305,
      "CustomDeck": {
       "3": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
        "NumWidth": 9,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -10274,8 +10274,8 @@
      "CardID": 304,
      "CustomDeck": {
       "3": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
        "NumWidth": 9,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -10315,8 +10315,8 @@
      "CardID": 301,
      "CustomDeck": {
       "3": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
        "NumWidth": 9,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -10356,8 +10356,8 @@
      "CardID": 307,
      "CustomDeck": {
       "3": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
        "NumWidth": 9,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -10397,8 +10397,8 @@
      "CardID": 308,
      "CustomDeck": {
       "3": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
        "NumWidth": 9,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -10438,8 +10438,8 @@
      "CardID": 303,
      "CustomDeck": {
       "3": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
        "NumWidth": 9,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -10479,8 +10479,8 @@
      "CardID": 306,
      "CustomDeck": {
       "3": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
        "NumWidth": 9,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -10520,8 +10520,8 @@
      "CardID": 300,
      "CustomDeck": {
       "3": {
-       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat.png",
-       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/deck_mat_back.png",
+       "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat.png",
+       "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/deck_mat_back.png",
        "NumWidth": 9,
        "NumHeight": 1,
        "BackIsHidden": true,
@@ -10561,7 +10561,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10602,7 +10602,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10643,7 +10643,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10684,7 +10684,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10725,7 +10725,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10766,7 +10766,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10807,7 +10807,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10848,7 +10848,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10889,7 +10889,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10930,7 +10930,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -10971,7 +10971,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_caisse_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_caisse_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11012,7 +11012,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11053,7 +11053,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11094,7 +11094,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11135,7 +11135,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11176,7 +11176,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_bouteille_w.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_bouteille_w.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11217,7 +11217,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_grand.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_grand.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11258,7 +11258,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_petit.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_petit.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11299,7 +11299,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/navire_roi.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/navire_roi.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11340,7 +11340,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/navire_marchand.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/navire_marchand.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11414,8 +11414,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m2.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m2.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11455,8 +11455,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m3.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m3.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11496,8 +11496,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m4.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m4.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11537,8 +11537,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m4.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m4.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11578,8 +11578,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m4.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m4.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11619,8 +11619,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m3.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m3.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11660,8 +11660,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m2.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m2.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11701,8 +11701,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m3.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m3.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11742,8 +11742,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m2.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m2.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11783,8 +11783,8 @@
      "Hands": false,
      "HideWhenFaceDown": false,
      "CustomImage": {
-      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_m3.png",
-      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/conge_back.png",
+      "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_m3.png",
+      "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/conge_back.png",
       "ImageScalar": 1.0,
       "WidthScale": 0.0,
       "CustomTile": {
@@ -11826,8 +11826,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/aide_a.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/aide_b.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/aide_a.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/aide_b.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -11867,8 +11867,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/aide_a.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/aide_b.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/aide_a.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/aide_b.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -11908,8 +11908,8 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/aide_a.png",
-    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/aide_b.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/aide_a.png",
+    "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/aide_b.png",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
     "CustomTile": {
@@ -11949,7 +11949,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_coureur.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_coureur.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -11990,7 +11990,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_coureur.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_coureur.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12031,7 +12031,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12072,7 +12072,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12113,7 +12113,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12154,7 +12154,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12195,7 +12195,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12236,7 +12236,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12277,7 +12277,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12318,7 +12318,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12359,7 +12359,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12400,7 +12400,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12441,7 +12441,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_coureur.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_coureur.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12482,7 +12482,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_coureur.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_coureur.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12523,7 +12523,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12564,7 +12564,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12605,7 +12605,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12646,7 +12646,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12687,7 +12687,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12728,7 +12728,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12769,7 +12769,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12810,7 +12810,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12851,7 +12851,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12892,7 +12892,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12933,7 +12933,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_coureur.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_coureur.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -12974,7 +12974,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/canot_coureur.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/canot_coureur.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13015,7 +13015,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13056,7 +13056,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13097,7 +13097,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13138,7 +13138,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13179,7 +13179,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13220,7 +13220,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13261,7 +13261,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13302,7 +13302,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13343,7 +13343,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,
@@ -13384,7 +13384,7 @@
    "Hands": false,
    "HideWhenFaceDown": false,
    "CustomImage": {
-    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v11/tok_disc.png",
+    "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v12/tok_disc.png",
     "ImageSecondaryURL": "",
     "ImageScalar": 1.0,
     "WidthScale": 0.0,

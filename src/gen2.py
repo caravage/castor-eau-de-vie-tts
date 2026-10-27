@@ -271,10 +271,10 @@ verso = ("<h1>Aide de jeu · déroulement de l’année</h1><div>"
   "<h2>Printemps</h2>"
   + A("La Rochelle", "chaque navire part et lance un dé : 4 ou plus, il arrive en mai, sinon en juin.")
   + A("Navire du roi", "en rade dès avril les années I et II.")
-  + A("Congés", "4 tirés du sac à 3 joueurs, délivrés sur 3+ en avril ou 2+ en mai. Chacun s’achète à crédit (1, 2 ou 3) et offre 2, 3 ou 4 marchandises. Un joueur peut en acheter plusieurs. Remélangés chaque année.")
-  + A("Joueur le plus pauvre", "chaque congé lui coûte 1 crédit de moins (celui à 1 est gratuit).")
+  + A("Congés", "4 tirés du sac à 3 joueurs, délivrés sur 3+ en avril ou 2+ en mai. Achat au début de ce mois, sans action, dans l’ordre du tour : 1, 2 ou 3 crédit pour 2, 3 ou 4 marchandises. Remélangés chaque année.")
+  + A("Joueur le plus pauvre", "chaque congé lui coûte 1 crédit de moins.")
   + "<h2>Chaque mois</h2>"
-  + A("Début", "les canots de la zone rayée glissent dans la zone pleine, puis les canots en route avancent d’une case. Retour des Grands Lacs : sur 3+ au dé (bonus des voyageurs à fixer), le canot rentre aussitôt à Montréal. Du lac Supérieur : le premier mois, il rejoint les Grands Lacs, puis même dé.")
+  + A("Début", "les canots de la zone rayée glissent dans la zone pleine, puis les canots en route avancent d’une case. Retour des Grands Lacs : sur 3+ (bonus des voyageurs à fixer), le canot rentre aussitôt à Montréal ; du Supérieur, il rejoint d’abord les Grands Lacs.")
   + A("Tour", "une action chacun ; l’ordre tourne d’un cran chaque mois.")
   + A("Fin", "événement de fin de mois ; la carte de droite de la rivière part à la défausse, les autres glissent, une nouvelle entre à 3 livres.")
   + "<h2>Navires de retour</h2>"
