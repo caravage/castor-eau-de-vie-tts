@@ -1,0 +1,12 @@
+{
+ "sac_caisse": 0.907,
+ "sac_bouteille": 1.7222,
+ "sac_canot_grand": 0.2429,
+ "sac_canot_petit": 0.3696,
+ "sac_canot_coureur": 0.5,
+ "sac_voy_rep": 1.0,
+ "sac_voy_guide": 1.0,
+ "sac_voy_mil": 1.0,
+ "sac_voy_int": 1.0,
+ "sac_coureur": 1.0
+}

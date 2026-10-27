@@ -279,4 +279,38 @@ verso = ("<h1>Aide de jeu · printemps et hiver</h1><div class='cols big'><div>"
   + "</div></div>")
 for nm, body in (('aide_a', recto), ('aide_b', verso)):
     page(nm, 1600, 1150, f"<div class='s'><div class='in'>{body}</div></div>", AIDE_CSS)
+
+# ------------------------------------------------------------ Canots numérotés (teintés dans TTS) et cartes Expédition
+for name, cells in (('grand', 5), ('petit', 3), ('coureur', 2)):
+    cw = 120; w = cells * cw + 120; h = 210
+    hull = f"<path d='M14 34 L{w-14} 34 L{w-62} {h-14} L62 {h-14} Z' fill='#F4F4F4' stroke='#3A3A3A' stroke-width='8' stroke-linejoin='round'/>"
+    for n in 'ABC':
+        svg(f'canot_{name}_{n}', w, h, hull + T(w / 2, 150, n, 120, 'middle', weight=700, fill='#1E1E1E'))
+EXP_CSS = (f".g{{display:grid;grid-template-columns:repeat(3,1050px);grid-auto-rows:750px}}"
+           f".e{{width:1050px;height:750px;position:relative;background:{PAPER};border:18px solid var(--c);border-radius:44px}}"
+           f".e h1{{position:absolute;left:0;right:0;top:0;height:112px;background:var(--c);color:#F6EFDC;font:400 62px {DISP};padding:20px 36px 0}}"
+           f".z{{position:absolute;background:#E9E0C6;border:5px dashed {EDGE};display:flex;align-items:center;justify-content:center;font:500 34px {BODY};color:{MUTED}}}"
+           f".cg{{left:30px;top:146px;width:300px;height:300px;border-radius:30px}}"
+           f".v{{top:176px;width:150px;height:216px;border-radius:50%;border-style:solid;border-color:var(--d);font-size:28px;text-align:center;line-height:1.1}}"
+           f".m{{left:30px;right:30px;top:478px;height:226px;border-radius:30px}}"
+           f".bk{{width:1050px;height:750px;background:var(--c);border-radius:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#F6EFDC}}"
+           f".bk div{{font:400 110px {DISP}}}.bk span{{font:500 40px {BODY};opacity:.8;margin-top:10px}}")
+TYPES = (('grand', 'Grand canot', 3), ('petit', 'Petit canot', 3), ('coureur', 'Coureur des bois', 0))
+for pn, (c, cd) in PCOL.items():
+    cards = []
+    for n in 'ABC':
+        for key, lab, nv in TYPES:
+            cg = 'Coureur<br>des bois' if key == 'coureur' else 'Congé'
+            vs = ''.join(f"<div class='z v' style='left:{380 + k * 220}px'>Voyageur<br>{k + 1}</div>" for k in range(nv))
+            cards.append(f"<div class='e' style='--c:{c};--d:{cd}'><h1>Expédition <b style=\"font:700 56px {BODY}\">{n}</b> · {lab}</h1><div class='z cg' style='text-align:center'>{cg}</div>{vs}<div class='z m'>Marchandises</div></div>")
+    page(f'exp_{pn}', 3150, 2250, f"<div class='g'>{''.join(cards)}</div>", EXP_CSS)
+    page(f'exp_{pn}_back', 1050, 750, f"<div class='bk' style='--c:{c}'><div>Expédition</div><span>Castor et eau-de-vie</span></div>", EXP_CSS)
+DECKS['exp'] = {'cols': 3, 'rows': 3, 'n': 9, 'names': [f'Expédition {n} · {lab}' for n in 'ABC' for _, lab, _ in TYPES]}
+# Jeton Coureur des bois (taille d'un congé), posé sur la carte Expédition des coureurs à la place du congé
+import base64, io
+from PIL import Image as _I
+_im = _I.open('coureur_src.png').convert('RGB'); _im = _im.crop((0, 0, _im.width, _im.width)); _b = io.BytesIO(); _im.save(_b, 'JPEG', quality=90)
+_u = 'data:image/jpeg;base64,' + base64.b64encode(_b.getvalue()).decode()
+svg('tok_coureur', 400, 400, f"<defs><clipPath id='cp'><rect x='16' y='16' width='368' height='368' rx='40'/></clipPath></defs><rect x='8' y='8' width='384' height='384' rx='46' fill='{PAPER}' stroke='{EDGE}' stroke-width='8'/>"
+    f"<image href='{_u}' x='16' y='16' width='368' height='368' clip-path='url(#cp)' preserveAspectRatio='xMidYMid slice'/><rect x='16' y='300' width='368' height='84' fill='{FRAME}' opacity='.85' clip-path='url(#cp)'/>" + T(200, 356, 'Coureur des bois', 44, 'middle', fam=DISP, fill='#F6EFDC'))
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)

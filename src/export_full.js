@@ -14,7 +14,7 @@ const svg=await pg.evaluate(()=>{let s=document.getElementById('printed').outerH
   s=s.replace(/Situations, équipiers et cartes de navire/g,'Associé, recrues, congés et cartes de navire');
   return s});
 const css=await pg.evaluate(()=>[...document.styleSheets].map(ss=>{try{return [...ss.cssRules].map(r=>r.cssText).join('\n')}catch(e){return ''}}).join('\n'));
-const shots=[['table_full',-150,0,2145,1450,2],['pmat_0',-140,1270,450,168,4],['pmat_1',350,1270,450,168,4],['pmat_2',840,1270,450,168,4]];
+const shots=[['table_full',-150,0,2145,1450,2],['pmat_0',-148,1222,465,212,4],['pmat_1',337,1222,465,212,4],['pmat_2',822,1222,465,212,4]];
 for(const [n,x,y,w,h,k] of shots){
   const isMat=n.startsWith('pmat');const svgN=isMat?svg:svg.replace(/<g class="pmat">[\s\S]*?<\/g><!--\/pmat-->/g,'');
   const html='<!doctype html><html><head><meta charset="utf-8"><style>'+FF+css+'html,body{margin:0;background:'+(isMat?'transparent':'#231B15')+'}#printed{display:block}</style></head><body>'+svgN.replace(/<svg([^>]*)id="printed"([^>]*)>/,(m)=>m.replace(/width="[^"]*"/,'').replace(/height="[^"]*"/,'').replace(/viewBox="[^"]*"/,''))+'</body></html>';

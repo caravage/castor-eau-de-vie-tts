@@ -6,7 +6,7 @@ def aspect(img):
     if img not in ASP: w, h = Image.open(f'img/{img}.png').size; ASP[img] = h / w
     return ASP[img]
 random.seed(1670)
-URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v14/'
+URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v15/'
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
@@ -51,6 +51,16 @@ def bag(nick, wpx, pos, items, color, desc=''):
     for it in items: it['Transform'] = T(fz=it['Transform']['rotZ']); it['Locked'] = False
     random.shuffle(items); o['ContainedObjects'] = items; return o
 
+MESH = json.load(open('meshes.json'))
+def mbag(nick, mesh, tex, wpx, pos, items, color=WHITE, desc='', order=0, inf=False):
+    # Sac en forme de pièce (Custom_Model_Bag) : le modèle est la pièce agrandie, l'image du jeton sur le dessus.
+    o = base('Custom_Model_Infinite_Bag' if inf else 'Custom_Model_Bag', nick, wpx, pos, color, False, 0.6, y3=True, desc=desc, s0=round(wpx * U, 4))
+    o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * MESH[mesh] * U, 4)})
+    o['CustomMesh'] = {'MeshURL': URL + mesh + '.obj', 'DiffuseURL': URL + tex + '.png', 'NormalURL': '', 'ColliderURL': '', 'Convex': True,
+                       'MaterialIndex': 1, 'TypeIndex': 7 if inf else 6, 'CastShadows': True}
+    o['Bag'] = {'Order': order}; o['MaterialIndex'] = 1
+    for it in items: it['Transform'] = T(fz=it['Transform']['rotZ']); it['Locked'] = False
+    o['ContainedObjects'] = items; return o
 DECK_ID = {'pers': 1, 'riv': 2, 'mat': 3, 'ev': 4, 'dem': 5, 'grand': 6, 'riv_recrue': 7, 'riv_contrat': 8, 'riv_nation': 9, 'riv_charge': 10}
 DECK_NAME = {'pers': 'Associés', 'riv': 'Rivière de recrutement', 'mat': 'Matériel de départ', 'ev': 'Événements de fin de mois', 'dem': 'Demande de Paris', 'grand': 'Grands événements', 'riv_recrue': 'Recrues', 'riv_contrat': 'Contrats', 'riv_nation': 'Alliances', 'riv_charge': 'Charges'}
 def cdeck(k):
@@ -77,6 +87,8 @@ CREW = {'rep': ('Représentant', 'voy_rep'), 'guide': ('Guide', 'voy_guide'), 'm
 SHIPS = ['L’Aigle d’Or', 'Le Saint-Sébastien', 'Le Jardin de Hollande', 'Le Saint-Jean-Baptiste', 'Le Chat de Hollande', 'Le Vieux Siméon']
 nship = 0
 for p in TP['pieces']:
+    if p.get('kind') in ('march', 'baril', 'grand', 'petit', 'alambic', 'pawn') and p.get('c', -1) >= 0: continue   # rangés dans les sacs du plateau du joueur
+    if p.get('kind') == 'crew' or (p.get('kind') == 'disc' and p.get('c', -1) >= 0 and not p.get('track')): continue
     if p.get('kind') == 'part': continue                                          # parts : une pile à côté du plateau du joueur
     if p.get('kind') in ('baril', 'march') and p.get('c', -1) >= 0: p = {**p, 'x': p['x'] + 56}   # réserve à droite du libellé
     k = p['k']; kind = p.get('kind'); c = p.get('c', -1); color = GREY if c == -1 else PC[c]; who = '(comptoir)' if c == -1 else PN[c] if c >= 0 else ''
@@ -97,7 +109,7 @@ for p in TP['pieces']:
                                                          for n, m in ((1, 3), (2, 5), (3, 4)) for _ in range(m)], col('#8A6418'), '12 paquets : 3 × 1, 5 × 2, 4 × 3'))
         else:
             HN = {'fur1': 'Traite : 1 castor', 'fur2': 'Traite : 2 castors', 'fur3': 'Traite : 3 castors', 'mission': 'Missionnaire', 'present': 'Présent', 'fievre': 'Fièvre', 'gatees': 'Peaux gâtées'}
-            OBJ.append(bag('Jetons cachés', 46, pos, [tile(HN[h], f'hid_{h}', 30, back='hid_back', fz=180, face='down') for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
+            OBJ.append(bag('Jetons cachés', 46, pos, [tile('', f'hid_{h}', 30, back='hid_back', fz=180, face='down') for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
                            col('#3A2618'), '23 jetons, posés face cachée (?) sur les lacs'))
     elif k == 'die':
         d = base('Die_6', 'Dé de traversée' if p.get('cross') else 'Dé', 24, C(p, 'die'), col('#8E2F25') if p.get('cross') else WHITE, h=0.7, y3=True, s0=1.0); OBJ.append(d)
@@ -133,23 +145,47 @@ for p in TP['pieces']:
 
 # Ajouts propres à la version actuelle du jeu, posés dans des places libres de la table
 # Plateaux des joueurs : tuiles indépendantes posées sur la table, qu’on peut déplacer (les pièces posées dessus suivent)
-for i in range(3): OBJ.insert(1 + i, tile(f'Plateau du joueur {PN[i]}', f'pmat_{i}', 450, P(-140 + i * 490 + 225, 1270 + 84), typ=3, thick=0.1, h=0.15, desc='Soupçon et réserve du joueur.'))
+for i in range(3): OBJ.insert(1 + i, tile(f'Plateau du joueur {PN[i]}', f'pmat_{i}', 465, P(-148 + i * 485 + 232.5, 1222 + 106), typ=3, thick=0.1, h=0.15, desc='Soupçon et personnages du joueur.'))
 OBJ.append(deck('mat', P(1740 + 35, 810 + 49)))
 OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4), 'd': round(98 * U, 4)})
 for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4), 'd': round(98 * U, 4)})
 # Comptoir de Québec : tout son stock rangé dans sa zone (rien n'est mis en vente d'avance)
-for k in range(11): OBJ.append(token('Marchandise (comptoir)', 'tok_caisse_w', 24, P(1312 + k * 28, 486 + 41), GREY))
-for k in range(5): OBJ.append(token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, P(1312 + k * 28, 486 + 73), GREY))
+OBJ.append(mbag('Marchandises (comptoir)', 'sac_caisse', 'tok_caisse_w', 44, P(1340, 486 + 50), [token('Marchandise (comptoir)', 'tok_caisse_w', 24, None, GREY)], GREY, 'Marchandises génériques, en nombre illimité', inf=True))
+OBJ.append(mbag('Eau-de-vie (comptoir)', 'sac_bouteille', 'tok_bouteille_w', 30, P(1400, 486 + 50), [token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, None, GREY)], GREY, 'Eau-de-vie générique, en nombre illimité', inf=True))
+for ci, (kc, (lab, img)) in enumerate(CREW.items()): OBJ.append(mbag(f'{lab}s', f'sac_voy_{kc}', img, 40, P(1300 + ci * 170 + 70, 680 + 48), [token(lab, img, 22) for _ in range(4)], desc=f'4 {lab.lower()}s'))
 OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1326, 486 + 105), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1392, 486 + 105), GREY))
 OBJ.append(token('Navire du roi', 'navire_roi', 40, P(1450, 486 + 105))); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1500, 486 + 105)))
 OBJ.append(bag('Sac des congés', 40, P(1760, 486 + 140), [tile(f'Congé · {n} marchandises · {c} crédit', f'conge_m{n}', 40, back='conge_back') for n, c, m in ((4, 3, 3), (3, 2, 4), (2, 1, 3)) for _ in range(m)],
                col('#8E2F25'), '10 congés : 3 à 4 marchandises (3 crédit), 4 à 3 marchandises (2 crédit), 3 à 2 marchandises (1 crédit). 4 tirés par an à 3 joueurs, remélangés chaque année. Joueur le plus pauvre : −1 crédit.'))
 # Aide de jeu : une par joueur, empilées sous le matériel de départ
 for k in range(3): OBJ.append(tile('Aide de jeu', 'aide_a', 430, P(1515, 1120), back='aide_b', typ=3, thick=0.05, h=0.5 + k * 0.3))
+OBJ.append(mbag('Coureurs des bois', 'sac_coureur', 'tok_coureur', 34, P(1840, 626), [tile('Coureur des bois', 'tok_coureur', 40, typ=3, thick=0.1)], desc='Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.', inf=True))
+CANOT = {'grand': ('Grand canot', 52, 80), 'petit': ('Petit canot', 40, 62), 'coureur': ('Coureurs des bois', 32, 46)}
+EXP_ID = 11
 for i in range(3):
-    mx, my = -140 + i * 490, 1270
-    for k in range(2): OBJ.append(token(f'Canot de coureur des bois {PN[i]}', 'canot_coureur', 32, P(mx + 252 + k * 42, my + 135), PC[i]))
-    for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, P(mx + 470, my + 90), PC[i], h=0.5 + k * 0.3))
+    mx = -148 + i * 485; Q = lambda x, y: P(mx + x, y); col_ = PC[i]      # y absolu : sacs à 1045, cartes à 1150, plateau dès 1222
+    OBJ.append(mbag(f'Marchandises {PN[i]}', 'sac_caisse', 'tok_caisse_w', 40, Q(22, 1045), [token(f'Marchandise {PN[i]}', 'tok_caisse_w', 24, None, col_) for _ in range(8)], col_, '8 marchandises'))
+    OBJ.append(mbag(f'Eau-de-vie {PN[i]}', 'sac_bouteille', 'tok_bouteille_w', 28, Q(62, 1045), [token(f'Eau-de-vie {PN[i]}', 'tok_bouteille_w', 24, None, col_) for _ in range(8)], col_, '8 bouteilles'))
+    for k, (key, (lab, wp, wb)) in enumerate(CANOT.items()):
+        OBJ.append(mbag(f'{lab} {PN[i]}', f'sac_canot_{key}', f'canot_{key}', wb, Q((120, 205, 270)[k], 1045), [token(f'{lab} {n} {PN[i]}', f'canot_{key}_{n}', wp, None, col_) for n in 'ABC'], col_, f'{lab} A, B et C : chacun suit sa carte Expédition.'))
+    for k in range(2): OBJ.append(token(f'Alambic {PN[i]}', 'alambic', 26, Q(355 + k * 28, 1045), col_))
+    OBJ.append(base('PlayerPawn', f'Pion {PN[i]}', 18, Q(412, 1045), col_, h=0.6, y3=True, s0=1.0))
+    for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, Q(444, 1045), col_, h=0.5 + k * 0.3))
+    OBJ.append(token(f'Soupçon {PN[i]}', 'tok_disc', 18, Q(254, 1222 + 19), col_))
+    # Cartes Expédition : un tas par type (A sur le dessus), face visible, devant le joueur
+    cd = {str(EXP_ID + i): {'FaceURL': URL + f'exp_{PN[i]}.png', 'BackURL': URL + f'exp_{PN[i]}_back.png', 'NumWidth': 3, 'NumHeight': 3, 'BackIsHidden': True, 'UniqueBack': False, 'Type': 0}}
+    for t, (tx, tlab) in enumerate(((75, 'Grand canot'), (232.5, 'Petit canot'), (390, 'Coureur des bois'))):
+        cards = []
+        for j in (t, 3 + t, 6 + t):                       # A sur le dessus (premier objet du paquet), C au fond
+            c = base('Card', f"{DK['exp']['names'][j]} ({PN[i]})", 150, None, s0=1.0); c['GMNotes'] = json.dumps({**json.loads(c['GMNotes']), 'd': round(107 * U, 4)})
+            c['CardID'] = (EXP_ID + i) * 100 + j; c['CustomDeck'] = cd; c['SidewaysCard'] = True; c['Transform'] = T(s=1.0); c['Locked'] = False; cards.append(c)
+        d = base('Deck', f'Expéditions · {tlab} ({PN[i]})', 150, Q(tx, 1150), s0=1.0); d['GMNotes'] = json.dumps({**json.loads(d['GMNotes']), 'd': round(107 * U, 4)})
+        d['DeckIDs'] = [c['CardID'] for c in cards]; d['CustomDeck'] = cd; d['ContainedObjects'] = cards; d['SidewaysCard'] = True
+        OBJ.append(d)
+    # Main du joueur, en face de son plateau
+    hp = P(mx + 232.5, 1450 + 70)
+    OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': hp[0], 'posY': 4.0, 'posZ': hp[1], 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': round(465 * U, 3), 'scaleY': 5.0, 'scaleZ': 4.0},
+                'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': hp[0], 'z': hp[1], 'hw': round(465 * U, 3)}), 'ColorDiffuse': PC[i], 'FogColor': SEAT[i], 'Locked': True})
 LUA = open('setup.lua').read().replace('@W@', str((X1 - X0) * U)).replace('@D@', str(Y1 * U))
 rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 de crédit') for r in rules]

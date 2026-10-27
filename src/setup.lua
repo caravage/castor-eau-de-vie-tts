@@ -52,6 +52,8 @@ local function layout()
         h.setPosition({n.x * F, top + 2.5, n.z * F})
         h.setScale({n.hw * F, 5, 4 * F})
         h.setRotation({0, 0, 0})
+      else
+        h.destruct()                -- mains par défaut de la table : retirées
       end
     end
   end

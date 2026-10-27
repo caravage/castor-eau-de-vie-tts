@@ -419,6 +419,86 @@
    "aide_b",
    1600,
    1150
+  ],
+  [
+   "canot_grand_A",
+   720,
+   210
+  ],
+  [
+   "canot_grand_B",
+   720,
+   210
+  ],
+  [
+   "canot_grand_C",
+   720,
+   210
+  ],
+  [
+   "canot_petit_A",
+   480,
+   210
+  ],
+  [
+   "canot_petit_B",
+   480,
+   210
+  ],
+  [
+   "canot_petit_C",
+   480,
+   210
+  ],
+  [
+   "canot_coureur_A",
+   360,
+   210
+  ],
+  [
+   "canot_coureur_B",
+   360,
+   210
+  ],
+  [
+   "canot_coureur_C",
+   360,
+   210
+  ],
+  [
+   "exp_rouge",
+   3150,
+   2250
+  ],
+  [
+   "exp_rouge_back",
+   1050,
+   750
+  ],
+  [
+   "exp_bleu",
+   3150,
+   2250
+  ],
+  [
+   "exp_bleu_back",
+   1050,
+   750
+  ],
+  [
+   "exp_vert",
+   3150,
+   2250
+  ],
+  [
+   "exp_vert_back",
+   1050,
+   750
+  ],
+  [
+   "tok_coureur",
+   400,
+   400
   ]
  ],
  "decks": {
@@ -589,6 +669,22 @@
     "Refus des sacrements",
     "Une nation refuse l’alcool",
     "Ordonnance royale"
+   ]
+  },
+  "exp": {
+   "cols": 3,
+   "rows": 3,
+   "n": 9,
+   "names": [
+    "Expédition A · Grand canot",
+    "Expédition A · Petit canot",
+    "Expédition A · Coureur des bois",
+    "Expédition B · Grand canot",
+    "Expédition B · Petit canot",
+    "Expédition B · Coureur des bois",
+    "Expédition C · Grand canot",
+    "Expédition C · Petit canot",
+    "Expédition C · Coureur des bois"
    ]
   }
  }
