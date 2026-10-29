@@ -21,11 +21,11 @@ local function fit(o, n)
 end
 
 local function tableInfo()
-  local tw, td, top = 90, 60, 1.0
+  local tw, td, top = LW / 0.97, LD / 0.97, 1.0   -- pas de table TTS : le tapis de jeu sert de table, à l'échelle 1
   local ok, t = pcall(function() return Tables.getTableObject() end)
   if ok and t then
     local b = t.getBounds()
-    tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2
+    if b.size.x > 5 then tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2 end
   end
   return tw, td, top
 end

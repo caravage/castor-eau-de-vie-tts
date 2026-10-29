@@ -39,7 +39,7 @@
    "id": "m_cog",
    "kind": "maison",
    "title": "Bouilleurs de Cognac",
-   "effect": "Commencez avec 1 alambic, 2 livres et 3 barils.",
+   "effect": "Commencez avec 1 distillerie, 2 livres et 3 barils.",
    "note": "Les bouilleurs charentais vendent leur eau-de-vie aux négociants de La Rochelle."
   },
   {
@@ -467,8 +467,8 @@
   },
   {
    "id": "x_alambic",
-   "title": "Alambic",
-   "text": "1 alambic.",
+   "title": "Distillerie",
+   "text": "1 distillerie.",
    "alambic": 1
   }
  ],
@@ -832,7 +832,7 @@
   {
    "id": "investir",
    "title": "Investir",
-   "text": "Acheter un navire, un canot ou un alambic."
+   "text": "Acheter un navire, un canot ou une distillerie."
   },
   {
    "id": "recruter",

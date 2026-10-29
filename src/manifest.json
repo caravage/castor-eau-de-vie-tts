@@ -226,11 +226,6 @@
    400
   ],
   [
-   "voy_rep",
-   240,
-   240
-  ],
-  [
    "voy_guide",
    240,
    240
@@ -419,6 +414,26 @@
    "aide_b",
    1600,
    1150
+  ],
+  [
+   "fort_fr",
+   220,
+   220
+  ],
+  [
+   "fort_uk",
+   220,
+   220
+  ],
+  [
+   "mission",
+   220,
+   220
+  ],
+  [
+   "abime",
+   220,
+   220
   ],
   [
    "canot_grand_A",
@@ -856,7 +871,7 @@
     "Assortiment",
     "Petit canot",
     "Grand canot",
-    "Alambic"
+    "Distillerie"
    ]
   },
   "ev": {

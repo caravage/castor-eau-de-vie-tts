@@ -10,8 +10,9 @@ URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
-X0, X1, Y0, Y1 = -530, 1810, -330, 1464                # image exportée : x de -150 à 1995, y de 0 à 1265
-def P(cx, cy): return round((cx - (X0 + X1) / 2) * U, 3), round(-(cy - (Y0 + Y1) / 2) * U, 3)
+X0, X1, Y0, Y1 = -158, 1272, 8, 1026                   # image exportée : plateau + rivière seulement
+CX, CY = 640, 567                                       # origine du monde inchangée (pièces aux mêmes places)
+def P(cx, cy): return round((cx - CX) * U, 3), round(-(cy - CY) * U, 3)
 used = set()
 def guid():
     while True:
@@ -85,11 +86,12 @@ def deck(k, pos, skip=()):
     o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
     return o
 
-OBJ = [tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, (Y0 + Y1) / 2), typ=0, thick=0.2, lock=True, h=0.1)]
+MAT_W = 3300                                            # tapis de jeu (remplace la table TTS) : couvre toute l'aire de jeu
+OBJ = [tile('Tapis de jeu', 'table', MAT_W, P(CX, CY), typ=0, thick=0.2, lock=True, h=-0.2), tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, (Y0 + Y1) / 2), typ=0, thick=0.2, lock=True, h=0.1)]
 def C(p, kind):  # centre d'une pièce de l'artefact
     w, h = SIZE[kind]; return P(p['x'] + w / 2, p['y'] + h / 2)
 
-CREW = {'rep': ('Représentant', 'voy_rep'), 'guide': ('Guide', 'voy_guide'), 'mil': ('Milicien', 'voy_mil'), 'int': ('Interprète', 'voy_int')}
+CREW = {'guide': ('Guide', 'voy_guide'), 'mil': ('Milicien', 'voy_mil'), 'int': ('Interprète', 'voy_int')}
 SHIPS = ['L’Aigle d’Or', 'Le Saint-Sébastien', 'Le Jardin de Hollande', 'Le Saint-Jean-Baptiste', 'Le Chat de Hollande', 'Le Vieux Siméon']
 nship = 0
 for p in TP['pieces']:
@@ -137,7 +139,7 @@ for p in TP['pieces']:
             if p.get('roi'): OBJ.append(token('Navire du roi', 'navire_roi', w, pos))
             elif p.get('merch'): OBJ.append(token('Navire marchand', 'navire_marchand', w, pos))
             else: continue                                           # les navires viennent des cartes du chantier
-        elif kind == 'alambic': OBJ.append(token(f'Alambic {who}', 'alambic', w, pos, color))
+        elif kind == 'alambic': OBJ.append(token(f'Distillerie {who}', 'alambic', w, pos, color))
         elif kind == 'part': OBJ.append(token(f'Part {who}', 'tok_disc', w, pos, color))
         elif kind == 'shipcard':
             nm = SHIPS[nship]; nship += 1
@@ -165,6 +167,16 @@ ROI['CustomMesh'] = {'MeshURL': 'https://steamusercontent-a.akamaihd.net/ugc/952
 ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1490, 486 + 105)))
 OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(f'Congé · {n} marchandises · {c} crédit', f'conge_m{n}', 40, back='conge_back') for n, c, m in ((4, 3, 3), (3, 2, 4), (2, 1, 3)) for _ in range(m)],
                col('#8E2F25'), '10 congés : 3 à 4 marchandises (3 crédit), 4 à 3 marchandises (2 crédit), 3 à 2 marchandises (1 crédit). 4 tirés par an à 3 joueurs, remélangés chaque année. Joueur le plus pauvre : −1 crédit.'))
+# Forts, missions et jetons Abîmé : réserves illimitées ; un fort aux Lacs d'en bas et une mission aux Lacs d'en haut à la mise en place
+def ibag(nick, pos, item, color, desc):
+    o = base('Infinite_Bag', nick, 44, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0
+    item['Transform'] = T(); item['Locked'] = False; o['ContainedObjects'] = [item]; return o
+OBJ.append(ibag('Forts français', P(1765, 560), token('Fort français', 'fort_fr', 26), col('#7A5232'), 'Forts français en nombre illimité'))
+OBJ.append(ibag('Forts anglais', P(1825, 560), token('Fort anglais', 'fort_uk', 26), col('#012169'), 'Forts anglais en nombre illimité'))
+OBJ.append(ibag('Missions', P(1765, 620), token('Mission', 'mission', 26), col('#1E1A14'), 'Missions en nombre illimité'))
+OBJ.append(ibag('Jetons Abîmé', P(1765, 680), token('Abîmé', 'abime', 26), col('#A3352A'), 'Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé'))
+OBJ.append(token('Fort français', 'fort_fr', 22, P(40 + 384, 178 + 380)))      # Lacs d'en bas (fort Frontenac, 1673)
+OBJ.append(token('Mission', 'mission', 22, P(40 + 258, 178 + 300)))            # Lacs d'en haut (Saint-Ignace, 1671)
 # Aide de jeu : une par joueur, empilées sous le matériel de départ
 OBJ.append(tile('Aide de jeu (recto)', 'aide_a', 430, P(640 - 225, -146), back='aide_b', typ=3, thick=0.05)); OBJ.append(tile('Aide de jeu (verso)', 'aide_b', 430, P(640 + 225, -146), back='aide_a', typ=3, thick=0.05))   # au-dessus du plateau, côte à côte
 OBJ.append(mbag('Coureurs des bois', 'sac_coureur', 'tok_coureur', 34, P(1690, 656), [tile('Coureur des bois', 'tok_coureur', 40, typ=3, thick=0.1)], desc='Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.', inf=True))
@@ -176,7 +188,7 @@ for i in range(3):
     OBJ.append(mbag(f'Eau-de-vie {PN[i]}', 'sac_bouteille', 'tok_bouteille_w', 28, Q(62, 1186), [token(f'Eau-de-vie {PN[i]}', 'tok_bouteille_w', 24, None, col_) for _ in range(8)], col_, '8 bouteilles'))
     for k, (key, (lab, wp, wb)) in enumerate(CANOT.items()):
         OBJ.append(mbag(f'{lab} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}', wb, Q((120, 205, 270)[k], 1186), [model(f'{lab} {n} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}_{n}', wb) for n in 'CBA'], WHITE, f'{lab} A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.'))
-    for k in range(2): OBJ.append(token(f'Alambic {PN[i]}', 'alambic', 26, Q(315 + k * 28, 1186), col_))
+    for k in range(2): OBJ.append(token(f'Distillerie {PN[i]}', 'alambic', 26, Q(315 + k * 28, 1186), col_))
     OBJ.append(base('PlayerPawn', f'Pion {PN[i]}', 18, Q(372, 1186), col_, h=0.6, y3=True, s0=1.0))
     for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, Q(404, 1186), col_, h=0.5 + k * 0.3))
     OBJ.append(token(f'Soupçon {PN[i]}', 'tok_disc', 18, Q(254, 1216 + 19), col_))
@@ -192,7 +204,7 @@ for i in range(3):
     hp = P(x0 + 295, 1464 + 60)
     OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': hp[0], 'posY': 4.0, 'posZ': hp[1], 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': round(590 * U, 3), 'scaleY': 5.0, 'scaleZ': 4.0},
                 'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': hp[0], 'z': hp[1], 'hw': round(590 * U, 3)}), 'ColorDiffuse': PC[i], 'FogColor': SEAT[i], 'Locked': True})
-LUA = open('setup.lua').read().replace('@W@', str((X1 - X0) * U)).replace('@D@', str((Y1 - Y0) * U))
+LUA = open('setup.lua').read().replace('@W@', str(round(MAT_W * U, 3))).replace('@D@', str(round(MAT_W * aspect('table') * U, 3)))
 rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 de crédit') for r in rules]
 intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; "
@@ -200,7 +212,7 @@ intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, 
          "Tuiles visibles : paquets de 1 à 3 castors secs, retournés côté gras (★) s’ils ne sont pas troqués à la fin de l’année. "
          "Congés : tirés du sac, achetés à crédit, ils offrent des marchandises ; un congé ne donne pas de canot. Crédit : piste de 0 à −10. Marchandise : caisse. Eau-de-vie : bouteille.")
 SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'VersionNumber': 'v13.2.2', 'GameMode': 'Castor et eau-de-vie', 'GameType': '', 'GameComplexity': '', 'Tags': [],
-        'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_Custom', 'TableURL': URL + 'table.png', 'Sky': 'Sky_Museum', 'Note': '',
+        'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
 json.dump(SAVE, open('Castor_et_eau-de-vie.json', 'w'), ensure_ascii=False, indent=1)
