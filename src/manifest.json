@@ -347,63 +347,63 @@
   ],
   [
    "carte_navire_1",
-   600,
-   320
+   1200,
+   640
   ],
   [
    "navire_1",
-   320,
-   280
+   640,
+   560
   ],
   [
    "carte_navire_2",
-   600,
-   320
+   1200,
+   640
   ],
   [
    "navire_2",
-   320,
-   280
+   640,
+   560
   ],
   [
    "carte_navire_3",
-   600,
-   320
+   1200,
+   640
   ],
   [
    "navire_3",
-   320,
-   280
+   640,
+   560
   ],
   [
    "carte_navire_4",
-   600,
-   320
+   1200,
+   640
   ],
   [
    "navire_4",
-   320,
-   280
+   640,
+   560
   ],
   [
    "carte_navire_5",
-   600,
-   320
+   1200,
+   640
   ],
   [
    "navire_5",
-   320,
-   280
+   640,
+   560
   ],
   [
    "carte_navire_6",
-   600,
-   320
+   1200,
+   640
   ],
   [
    "navire_6",
-   320,
-   280
+   640,
+   560
   ],
   [
    "aide_a",
@@ -739,6 +739,46 @@
    "sacexp_vert_coureur",
    560,
    400
+  ],
+  [
+   "carte_distillerie_1",
+   1200,
+   640
+  ],
+  [
+   "pion_distillerie_1",
+   440,
+   600
+  ],
+  [
+   "carte_distillerie_2",
+   1200,
+   640
+  ],
+  [
+   "pion_distillerie_2",
+   440,
+   600
+  ],
+  [
+   "carte_distillerie_3",
+   1200,
+   640
+  ],
+  [
+   "pion_distillerie_3",
+   440,
+   600
+  ],
+  [
+   "carte_distillerie_4",
+   1200,
+   640
+  ],
+  [
+   "pion_distillerie_4",
+   440,
+   600
   ]
  ],
  "decks": {

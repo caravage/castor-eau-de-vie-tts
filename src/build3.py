@@ -145,7 +145,7 @@ for p in TP['pieces']:
         elif kind == 'shipcard':
             nm = SHIPS[nship]; nship += 1
             OBJ.append(tile(f'Carte de navire · {nm}', f'carte_navire_{nship}', w, pos, typ=3, thick=0.08, desc='Financez-la au chantier ; le propriétaire la pose devant lui et envoie le navire du même nom sur le plateau.'))
-            OBJ.append(token(f'Navire · {nm}', f'navire_{nship}', 40, P(p['x'] + 27, p['y'] + 37), h=0.7))
+            OBJ.append(token(f'Navire · {nm}', f'navire_{nship}', 34, P(p['x'] + 27, p['y'] + 37), h=0.7))
         elif kind == 'pas': OBJ.append(tile('Prendre le pas · 1er', 'tok_pas', w, pos))
         elif kind == 'crew': lab, img = CREW[p['crew']]; OBJ.append(token(lab, img, 26, pos))
         elif kind == 'pawn':
@@ -190,7 +190,6 @@ for i in range(3):
     OBJ.append(mbag(f'Eau-de-vie {PN[i]}', 'sac_bouteille', 'tok_bouteille_w', 28, Q(62, 1186), [token(f'Eau-de-vie {PN[i]}', 'tok_bouteille_w', 24, None, col_) for _ in range(8)], col_, '8 bouteilles'))
     for k, (key, (lab, wp, wb)) in enumerate(CANOT.items()):
         OBJ.append(mbag(f'{lab} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}', wb, Q((120, 205, 270)[k], 1186), [model(f'{lab} {n} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}_{n}', wb) for n in 'CBA'], WHITE, f'{lab} A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.'))
-    for k in range(2): OBJ.append(token(f'Distillerie {PN[i]}', 'alambic', 26, Q(315 + k * 28, 1186), col_))
     OBJ.append(base('PlayerPawn', f'Pion {PN[i]}', 18, Q(372, 1186), col_, h=0.6, y3=True, s0=1.0))
     for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, Q(404, 1186), col_, h=0.5 + k * 0.3))
     OBJ.append(token(f'Soupçon {PN[i]}', 'tok_disc', 18, Q(254, 1216 + 19), col_))
@@ -219,9 +218,9 @@ SPOT = {'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 
         'Navire du roi': (1495, 715), 'Navire marchand': (1545, 715), 'Dé de traversée': (1370, 50),
         'Guides': (1290, 120), 'Miliciens': (1345, 120), 'Interprètes': (1400, 120), 'Coureurs des bois': (1460, 120),
         'Forts français': (1290, 190), 'Forts anglais': (1345, 190), 'Missions': (1400, 190), 'Jetons Abîmé': (1455, 190),
-        'Matériel de départ': (1310, 560)}
+        'Matériel de départ': (1310, 628)}
 MULTI = {'Dé': [(1290, 50), (1330, 50)], 'Prendre le pas · 1er': [(1440, 50), (1485, 50), (1530, 50)]}
-SHIPS = [(1335, 270), (1475, 270), (1335, 346), (1475, 346), (1335, 422), (1475, 422)]
+SHIPS = [(1335, 262), (1475, 262), (1335, 332), (1475, 332), (1335, 402), (1475, 402)]
 DX_JOUEURS = 640 - (-257 + 614 + 232.5)               # plateau du joueur bleu centré sous le plateau
 cnt = {}; ships = []
 for o in OBJ:
@@ -234,7 +233,13 @@ for o in OBJ:
 for k, o in enumerate(ships):
     nm = o['Nickname'].split(' · ', 1)[1]; place(o, *SHIPS[k])
     for t in OBJ:
-        if t.get('Nickname') == f'Navire · {nm}': place(t, SHIPS[k][0] - 33, SHIPS[k][1] + 5)
+        if t.get('Nickname') == f'Navire · {nm}': place(t, SHIPS[k][0] - 37, SHIPS[k][1] + 3)
+# Distilleries : 4 cartes (4 parts chacune) et leur pion alambic cuivre, posé sur la case de la carte
+DIST = [('Fonds-Saint-Jacques', 'Martinique'), ('La Lise', 'Guadeloupe'), ('Petit-Goâve', 'Saint-Domingue'), ('Saint-Louis', 'Saint-Domingue')]
+for k, (nm, ile) in enumerate(DIST):
+    x, y = (1335, 1475)[k % 2], 472 + (k // 2) * 70
+    OBJ.append(tile(f'Carte de distillerie · {nm}', f'carte_distillerie_{k+1}', 120, P(x, y), typ=3, thick=0.08, desc=f'{ile}. Construite à 4 parts ; chaque part produit 1 eau-de-vie.'))
+    OBJ.append(token(f'Distillerie · {nm}', f'pion_distillerie_{k+1}', 22, P(x - 37, y + 3), h=0.7, desc=f'Distillerie de {nm} ({ile})'))
 LUA = open('setup.lua').read().replace('@W@', str(round(2 * max(CX - MAT_X0, MAT_X1 - CX) * U, 3))).replace('@D@', str(round(2 * max(CY - MAT_Y0, MAT_Y1 - CY) * U, 3)))
 rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 de crédit') for r in rules]
@@ -246,5 +251,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v20"'))   # ?v20 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v21"'))   # ?v21 : force TTS à recharger les images
 print(len(OBJ), 'objets')

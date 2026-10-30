@@ -349,4 +349,5 @@ for pn, (c, cd) in PCOL.items():
     for key, lab in (('grand', 'Grand canot'), ('petit', 'Petit canot'), ('coureur', 'Coureurs des bois')):
         svg(f'sacexp_{pn}_{key}', 560, 400, f"<rect x='0' y='0' width='560' height='400' rx='40' fill='{c}'/><rect x='18' y='18' width='524' height='364' rx='28' fill='none' stroke='#F6EFDC' stroke-width='6'/>"
             + T(280, 170, 'Expéditions', 64, 'middle', fam=DISP, fill='#F6EFDC') + T(280, 260, lab, 50, 'middle', weight=700, fill='#F6EFDC') + T(280, 330, 'A · B · C', 40, 'middle', fill='#F6EFDC'))
+exec(open('cartes_v20.py', encoding='utf-8').read())   # cartes de navire et de distillerie v20
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)
