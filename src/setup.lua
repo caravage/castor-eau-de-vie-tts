@@ -38,7 +38,7 @@ local function layout()
     local n = notes(o)
     if n and n.x then
       o.setLock(true)
-      o.setRotation({0, 180, n.fz or 0})
+      o.setRotation({0, n.ry or 180, n.fz or 0})
       fit(o, n)
       o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})
       table.insert(moved, {o, n})

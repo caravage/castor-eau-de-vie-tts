@@ -10,7 +10,7 @@ URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
-X0, X1, Y0, Y1 = -158, 1272, 8, 1026                   # image exportée : plateau + rivière seulement
+X0, X1, Y0, Y1 = -178, 1253, 28, 1007                   # image exportée : plateau + rivière seulement
 CX, CY = 640, 567                                       # origine du monde inchangée (pièces aux mêmes places)
 def P(cx, cy): return round((cx - CX) * U, 3), round(-(cy - CY) * U, 3)
 used = set()
@@ -40,11 +40,11 @@ def tile(nick, front, wpx, pos=None, back=None, typ=3, thick=0.1, color=WHITE, l
     o['CustomImage'] = {'ImageURL': URL + front + '.png', 'ImageSecondaryURL': URL + (back or front) + '.png', 'ImageScalar': 1.0, 'WidthScale': 0.0,
                         'CustomTile': {'Type': typ, 'Thickness': thick, 'Stackable': False, 'Stretch': False}}
     return o
-def token(nick, img, wpx, pos=None, color=WHITE, h=0.5, desc=''):
+def token(nick, img, wpx, pos=None, color=WHITE, h=0.5, desc='', thick=0.2):
     o = base('Custom_Token', nick, wpx, pos, color, False, h, desc=desc, s0=0.1)
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * aspect(img) * U, 4)})
     o['CustomImage'] = {'ImageURL': URL + img + '.png', 'ImageSecondaryURL': '', 'ImageScalar': 1.0, 'WidthScale': 0.0,
-                        'CustomToken': {'Thickness': 0.2, 'MergeDistancePixels': 15.0, 'StandUp': False, 'Stackable': True}}
+                        'CustomToken': {'Thickness': thick, 'MergeDistancePixels': 15.0, 'StandUp': False, 'Stackable': True}}
     return o
 def bag(nick, wpx, pos, items, color, desc=''):
     o = base('Bag', nick, wpx, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0; o['Bag'] = {'Order': 2}   # ordre de tirage : 0 LIFO, 1 FIFO, 2 aléatoire
@@ -86,8 +86,9 @@ def deck(k, pos, skip=()):
     o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
     return o
 
-MAT_W = 3300                                            # tapis de jeu (remplace la table TTS) : couvre toute l'aire de jeu
-OBJ = [tile('Tapis de jeu', 'table', MAT_W, P(CX, CY), typ=0, thick=0.2, lock=True, h=-0.2), tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, (Y0 + Y1) / 2), typ=0, thick=0.2, lock=True, h=0.1)]
+MAT_X0, MAT_X1, MAT_Y0, MAT_Y1 = -324, 1604, -331, 1458   # tapis de jeu (remplace la table TTS), au plus près des pièces
+MAT_W = MAT_X1 - MAT_X0
+OBJ = [tile('Tapis de jeu', 'tapis', MAT_W, P((MAT_X0 + MAT_X1) / 2, (MAT_Y0 + MAT_Y1) / 2), typ=0, thick=0.2, lock=True, h=-0.2), tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, (Y0 + Y1) / 2), typ=0, thick=0.2, lock=True, h=0.1)]
 def C(p, kind):  # centre d'une pièce de l'artefact
     w, h = SIZE[kind]; return P(p['x'] + w / 2, p['y'] + h / 2)
 
@@ -170,13 +171,14 @@ OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(f'Congé · {n} 
 # Forts, missions et jetons Abîmé : réserves illimitées ; un fort aux Lacs d'en bas et une mission aux Lacs d'en haut à la mise en place
 def ibag(nick, pos, item, color, desc):
     o = base('Infinite_Bag', nick, 44, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0
+    o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'ry': 0}); o['Transform']['rotY'] = 0   # contenu lisible à l'endroit
     item['Transform'] = T(); item['Locked'] = False; o['ContainedObjects'] = [item]; return o
-OBJ.append(ibag('Forts français', P(1765, 560), token('Fort français', 'fort_fr', 26), col('#7A5232'), 'Forts français en nombre illimité'))
-OBJ.append(ibag('Forts anglais', P(1825, 560), token('Fort anglais', 'fort_uk', 26), col('#012169'), 'Forts anglais en nombre illimité'))
-OBJ.append(ibag('Missions', P(1765, 620), token('Mission', 'mission', 26), col('#1E1A14'), 'Missions en nombre illimité'))
-OBJ.append(ibag('Jetons Abîmé', P(1765, 680), token('Abîmé', 'abime', 26), col('#A3352A'), 'Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé'))
-OBJ.append(token('Fort français', 'fort_fr', 22, P(40 + 384, 178 + 380)))      # Lacs d'en bas (fort Frontenac, 1673)
-OBJ.append(token('Mission', 'mission', 22, P(40 + 258, 178 + 300)))            # Lacs d'en haut (Saint-Ignace, 1671)
+OBJ.append(ibag('Forts français', P(1765, 560), token('Fort français', 'fort_fr', 26, thick=0.06), col('#7A5232'), 'Forts français en nombre illimité'))
+OBJ.append(ibag('Forts anglais', P(1825, 560), token('Fort anglais', 'fort_uk', 26, thick=0.06), col('#012169'), 'Forts anglais en nombre illimité'))
+OBJ.append(ibag('Missions', P(1765, 620), token('Mission', 'mission', 26, thick=0.06), col('#1E1A14'), 'Missions en nombre illimité'))
+OBJ.append(ibag('Jetons Abîmé', P(1765, 680), token('Abîmé', 'abime', 26, thick=0.06), col('#A3352A'), 'Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé'))
+OBJ.append(token('Fort français', 'fort_fr', 22, P(40 + 384, 178 + 380), thick=0.06))      # Lacs d'en bas (fort Frontenac, 1673)
+OBJ.append(token('Mission', 'mission', 22, P(40 + 258, 178 + 300), thick=0.06))            # Lacs d'en haut (Saint-Ignace, 1671)
 # Aide de jeu : une par joueur, empilées sous le matériel de départ
 OBJ.append(tile('Aide de jeu (recto)', 'aide_a', 430, P(640 - 225, -146), back='aide_b', typ=3, thick=0.05)); OBJ.append(tile('Aide de jeu (verso)', 'aide_b', 430, P(640 + 225, -146), back='aide_a', typ=3, thick=0.05))   # au-dessus du plateau, côte à côte
 OBJ.append(mbag('Coureurs des bois', 'sac_coureur', 'tok_coureur', 34, P(1690, 656), [tile('Coureur des bois', 'tok_coureur', 40, typ=3, thick=0.1)], desc='Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.', inf=True))
@@ -204,7 +206,36 @@ for i in range(3):
     hp = P(x0 + 295, 1464 + 60)
     OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': hp[0], 'posY': 4.0, 'posZ': hp[1], 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': round(590 * U, 3), 'scaleY': 5.0, 'scaleZ': 4.0},
                 'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': hp[0], 'z': hp[1], 'hw': round(590 * U, 3)}), 'ColorDiffuse': PC[i], 'FogColor': SEAT[i], 'Locked': True})
-LUA = open('setup.lua').read().replace('@W@', str(round(MAT_W * U, 3))).replace('@D@', str(round(MAT_W * aspect('table') * U, 3)))
+# Disposition v20 : plateau centré sur le tapis, joueur bleu au milieu, réserve tassée autour du plateau
+def place(o, cx, cy):
+    n = json.loads(o['GMNotes']); n['x'] = round((cx - CX) * U, 3); n['z'] = round(-(cy - CY) * U, 3)
+    o['GMNotes'] = json.dumps(n); o['Transform']['posX'] = n['x']; o['Transform']['posZ'] = n['z']
+def at(o):
+    n = json.loads(o['GMNotes']); return n['x'] / U + CX, -n['z'] / U + CY
+SPOT = {'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 'Charges': (140, -76),
+        'Associés': (1140, -226), 'Événements de fin de mois': (1250, -226), 'Demande de Paris': (1140, -76), 'Grands événements': (1250, -76),
+        'Sac des Grands Lacs': (-16, 130), 'Sac du lac Supérieur': (-16, 200), 'Jetons cachés': (-16, 270), 'Sac des congés': (-16, 340),
+        'Marchandises (comptoir)': (1285, 715), 'Eau-de-vie (comptoir)': (1330, 715), 'Grand canot (comptoir)': (1385, 715), 'Petit canot (comptoir)': (1445, 715),
+        'Navire du roi': (1495, 715), 'Navire marchand': (1545, 715), 'Dé de traversée': (1370, 50),
+        'Guides': (1290, 120), 'Miliciens': (1345, 120), 'Interprètes': (1400, 120), 'Coureurs des bois': (1460, 120),
+        'Forts français': (1290, 190), 'Forts anglais': (1345, 190), 'Missions': (1400, 190), 'Jetons Abîmé': (1455, 190),
+        'Matériel de départ': (1310, 560)}
+MULTI = {'Dé': [(1290, 50), (1330, 50)], 'Prendre le pas · 1er': [(1440, 50), (1485, 50), (1530, 50)]}
+SHIPS = [(1335, 270), (1475, 270), (1335, 346), (1475, 346), (1335, 422), (1475, 422)]
+DX_JOUEURS = 640 - (-257 + 614 + 232.5)               # plateau du joueur bleu centré sous le plateau
+cnt = {}; ships = []
+for o in OBJ:
+    if not o.get('GMNotes', '').startswith('{') or 'x' not in json.loads(o['GMNotes']): continue
+    nk = o.get('Nickname', ''); x, y = at(o)
+    if y > 1100 and nk != 'Tapis de jeu': place(o, x + DX_JOUEURS, y)
+    elif nk in SPOT and (x > 1260 or x < -100): place(o, *SPOT[nk])
+    elif nk in MULTI and x > 1260: k = cnt.get(nk, 0); cnt[nk] = k + 1; place(o, *MULTI[nk][k])
+    elif nk.startswith('Carte de navire'): ships.append(o)
+for k, o in enumerate(ships):
+    nm = o['Nickname'].split(' · ', 1)[1]; place(o, *SHIPS[k])
+    for t in OBJ:
+        if t.get('Nickname') == f'Navire · {nm}': place(t, SHIPS[k][0] - 33, SHIPS[k][1] + 5)
+LUA = open('setup.lua').read().replace('@W@', str(round(2 * max(CX - MAT_X0, MAT_X1 - CX) * U, 3))).replace('@D@', str(round(2 * max(CY - MAT_Y0, MAT_Y1 - CY) * U, 3)))
 rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 de crédit') for r in rules]
 intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; "
@@ -215,5 +246,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-json.dump(SAVE, open('Castor_et_eau-de-vie.json', 'w'), ensure_ascii=False, indent=1)
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v20"'))   # ?v20 : force TTS à recharger les images
 print(len(OBJ), 'objets')

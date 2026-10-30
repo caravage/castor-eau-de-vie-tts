@@ -283,9 +283,11 @@ function printedSVG(){
   h+=lab(1290,SUP.bankY-6,"Comptoir de Québec","gris · ne vend que son stock · prix fixé à l’arrivée : milieu entre le plus bas et le plus haut des joueurs, arrondi en bas")+lab(1580,SUP.diceY-6,"Dés","le 3ᵉ : dé de traversée")+lab(1580,SUP.bankY+124,"Congés","");
   h+=lab(1290,SUP.crewY-6,"Équipiers","guide, milicien, interprète 1");
   
+  h+=`<g transform="translate(-30,24)">`;
   h+=`<text class="lab" x="-138" y="30">Rivière</text><rect x="-138" y="40" width="108" height="166" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/>`;
   ["3 livres","2 livres","1 livre"].forEach((t,k)=>{const y=226+k*174;h+=`<rect x="-138" y="${y}" width="108" height="148" rx="8" fill="#F2EAD3" stroke="#B7A675"/><text class="lab" x="-84" y="${y+163}" text-anchor="middle" style="font-size:14px">${t}</text>`});
   h+=`<rect x="-138" y="${226+3*174}" width="108" height="148" rx="8" fill="none" stroke="#8A7A5A" stroke-dasharray="5 4"/><text class="labs" x="-84" y="${226+3*174+80}" text-anchor="middle">Défausse</text>`;
+  h+=`</g>`;
   h+=lab(1290,964,"Matériel de départ");
   h+=lab(-270,30,"Paquets");
   [["Recrues",40],["Contrats",214],["Alliances",388],["Charges",562]].forEach(([t,y])=>{h+=`<text class="labs" x="-220" y="${y+156}" text-anchor="middle">${t}</text>`});
@@ -296,11 +298,11 @@ function printedSVG(){
   for(let i=0;i<n;i++){const mx=-257+i*614,my=MAT_Y;
     h+=`<g class="pmat">`;
     h+=`<rect x="${mx}" y="${my}" width="${MAT_W}" height="${MAT_H}" rx="12" fill="${PCARD}" stroke="${EDGE}"/><rect x="${mx}" y="${my}" width="${MAT_W}" height="40" rx="12" fill="${COL[i]}"/><rect x="${mx}" y="${my+28}" width="${MAT_W}" height="12" fill="${COL[i]}"/>`;
-    h+=`<text class="lab" x="${mx+14}" y="${my+27}">Joueur ${COLNAME[i]}</text><text class="num" x="${mx+232}" y="${my+25}" text-anchor="end" style="font-size:11px">Soupçon</text>`;
+    h+=`<text class="lab" x="${mx+14}" y="${my+27}">${["Famille Le Moyne","Famille Gamelin","Famille Couagne"][i]}</text><text class="num" x="${mx+232}" y="${my+25}" text-anchor="end" style="font-size:11px">Soupçon</text>`;
     for(let k=0;k<=6;k++)h+=`<rect x="${mx+242+k*26}" y="${my+6}" width="24" height="26" rx="3" fill="#F6EFDC" stroke="${COL_DARK[i]}"/><text class="cq" x="${mx+254+k*26}" y="${my+36}" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:9px">${k}</text>`;
     const zone=(x,y,w,hh,t)=>`<rect x="${mx+x}" y="${my+y}" width="${w}" height="${hh}" rx="6" fill="none" stroke="${EDGE}" stroke-dasharray="4 3"/><text class="cq" x="${mx+x+6}" y="${my+y+13}">${t}</text>`;
-    h+=zone(8,44,449,162,"Personnages");
-    [0,1,2,3].forEach(k=>{h+=`<rect x="${mx+16+k*110}" y="${my+63}" width="100" height="138" rx="6" fill="#F6EFDC" stroke="${EDGE}" stroke-dasharray="2 2"/>`});
+    h+=`<text class="cq" x="${mx+16}" y="${my+57}">Société de traite</text>`;
+    [0,1,2,3].forEach(k=>{h+=`<rect x="${mx+16+k*110}" y="${my+63}" width="100" height="138" rx="6" fill="#F6EFDC"/>`});
     h+=`</g><!--/pmat-->`;
   }
   return h;
