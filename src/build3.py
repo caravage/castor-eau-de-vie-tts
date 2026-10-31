@@ -10,7 +10,7 @@ URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
-X0, X1, Y0, Y1 = -178, 1253, 28, 1007                   # image exportée : plateau + rivière seulement
+X0, X1, Y0, Y1 = -178, 1253, 28, 987                    # image exportée : plateau + rivière seulement
 CX, CY = 640, 567                                       # origine du monde inchangée (pièces aux mêmes places)
 def P(cx, cy): return round((cx - CX) * U, 3), round(-(cy - CY) * U, 3)
 used = set()
@@ -86,7 +86,7 @@ def deck(k, pos, skip=()):
     o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
     return o
 
-MAT_X0, MAT_X1, MAT_Y0, MAT_Y1 = -324, 1604, -331, 1546   # tapis de jeu (remplace la table TTS), au plus près des pièces
+MAT_X0, MAT_X1, MAT_Y0, MAT_Y1 = -324, 1604, -331, 1526   # tapis de jeu (remplace la table TTS), au plus près des pièces
 MAT_W = MAT_X1 - MAT_X0
 OBJ = [tile('Tapis de jeu', 'tapis', MAT_W, P((MAT_X0 + MAT_X1) / 2, (MAT_Y0 + MAT_Y1) / 2), typ=0, thick=0.2, lock=True, h=-0.2), tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, (Y0 + Y1) / 2), typ=0, thick=0.2, lock=True, h=0.1)]
 def C(p, kind):  # centre d'une pièce de l'artefact
@@ -166,7 +166,7 @@ OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1316, 486 + 105)
 ROI = base('Custom_Model', 'Navire du roi', 40, P(1440, 486 + 105), WHITE, False, 0.8, y3=True, s0=1.0, desc='En rade dès avril les années I et II, 4 places publiques.')   # figurine fournie, en blanc
 ROI['CustomMesh'] = {'MeshURL': 'https://steamusercontent-a.akamaihd.net/ugc/952982844368369073/FB63C915DB2529E0210C26EEDFD717929BB7E7A6/', 'DiffuseURL': '', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 1, 'CastShadows': True}
 ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(token('Navire de la compagnie', 'navire_compagnie', 34, P(1490, 486 + 105))); OBJ.append(token('Le Profond (navire du roi)', 'navire_profond', 34, P(1440, 486 + 140), desc='Marqueur du navire du roi.'))
-OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(f'Congé · {n} marchandises · {c} crédit', f'conge_m{n}', 40, back='conge_back') for n, c, m in ((4, 3, 3), (3, 2, 4), (2, 1, 3)) for _ in range(m)],
+OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(f'Congé · {n} marchandises · {c} crédit', f'conge_m{n}', 32, back='conge_back') for n, c, m in ((4, 3, 3), (3, 2, 4), (2, 1, 3)) for _ in range(m)],
                col('#8E2F25'), '10 congés : 3 à 4 marchandises (3 crédit), 4 à 3 marchandises (2 crédit), 3 à 2 marchandises (1 crédit). 4 tirés par an à 3 joueurs, remélangés chaque année. Joueur le plus pauvre : −1 crédit.'))
 # Forts, missions et jetons Abîmé : réserves illimitées ; un fort aux Lacs d'en bas et une mission aux Lacs d'en haut à la mise en place
 def ibag(nick, pos, item, color, desc):
@@ -229,7 +229,7 @@ cnt = {}; ships = []
 for o in OBJ:
     if not o.get('GMNotes', '').startswith('{') or 'x' not in json.loads(o['GMNotes']): continue
     nk = o.get('Nickname', ''); x, y = at(o)
-    if y > 1100 and nk != 'Tapis de jeu': place(o, x + DX_JOUEURS, y)
+    if y > 1100 and nk != 'Tapis de jeu': place(o, x + DX_JOUEURS, y - 20)   # plateau raccourci de 80 puis allongé de 60
     elif nk in SPOT and (x > 1260 or x < -100): place(o, *SPOT[nk])
     elif nk in MULTI and x > 1260: k = cnt.get(nk, 0); cnt[nk] = k + 1; place(o, *MULTI[nk][k])
     elif nk.startswith('Carte de navire'): ships.append(o)
@@ -254,5 +254,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v22"'))   # ?v22 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v23"'))   # ?v23 : force TTS à recharger les images
 print(len(OBJ), 'objets')
