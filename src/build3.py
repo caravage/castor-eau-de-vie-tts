@@ -10,7 +10,7 @@ URL = 'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img
 DK = json.load(open('manifest.json'))['decks']
 TP = json.load(open('table_pieces.json')); SIZE = TP['SIZE']; TW, TH = TP['TW'], TP['TH']
 U = 0.035                                   # 1 pixel de l'artefact = 0,035 unité de plan
-X0, X1, Y0, Y1 = -178, 1253, 28, 987                    # image exportée : plateau + rivière seulement
+X0, X1, Y0, Y1 = -178, 1289, 28, 1003                    # image exportée : plateau + rivière seulement
 CX, CY = 640, 567                                       # origine du monde inchangée (pièces aux mêmes places)
 def P(cx, cy): return round((cx - CX) * U, 3), round(-(cy - CY) * U, 3)
 used = set()
@@ -46,13 +46,15 @@ def token(nick, img, wpx, pos=None, color=WHITE, h=0.5, desc='', thick=0.1):
     o['CustomImage'] = {'ImageURL': URL + img + '.png', 'ImageSecondaryURL': '', 'ImageScalar': 1.0, 'WidthScale': 0.0,
                         'CustomToken': {'Thickness': thick, 'MergeDistancePixels': 15.0, 'StandUp': False, 'Stackable': True}}
     return o
+def upright(o): o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'face': 'up'}); return o
+def stile(nick, img, wpx, pos=None, h=0.5, desc=''): return tile(nick, img, wpx, pos, typ=3, thick=0.1, color=col('#4A3324'), h=h, desc=desc)
 def bag(nick, wpx, pos, items, color, desc=''):
     o = base('Bag', nick, wpx, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0; o['Bag'] = {'Order': 2}   # ordre de tirage : 0 LIFO, 1 FIFO, 2 aléatoire
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'rnd': True})
     for it in items: it['Transform'] = T(fz=it['Transform']['rotZ']); it['Locked'] = False
     random.shuffle(items); o['ContainedObjects'] = items; return o
 
-MESH = json.load(open('meshes.json'))
+MESH = json.load(open('meshes.json')); MESH['de_noir'] = 1.0
 def mbag(nick, mesh, tex, wpx, pos, items, color=WHITE, desc='', order=0, inf=False):
     # Sac en forme de pièce (Custom_Model_Bag) : le modèle est la pièce agrandie, l'image du jeton sur le dessus.
     o = base('Custom_Model_Infinite_Bag' if inf else 'Custom_Model_Bag', nick, wpx, pos, color, False, 0.6, y3=True, desc=desc, s0=round(wpx * U, 4))
@@ -86,7 +88,7 @@ def deck(k, pos, skip=()):
     o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
     return o
 
-MAT_X0, MAT_X1, MAT_Y0, MAT_Y1 = -324, 1604, -331, 1526   # tapis de jeu (remplace la table TTS), au plus près des pièces
+MAT_X0, MAT_X1, MAT_Y0, MAT_Y1 = -324, 1640, -331, 1542   # tapis de jeu (remplace la table TTS), au plus près des pièces
 MAT_W = MAT_X1 - MAT_X0
 OBJ = [tile('Tapis de jeu', 'tapis', MAT_W, P((MAT_X0 + MAT_X1) / 2, (MAT_Y0 + MAT_Y1) / 2), typ=0, thick=0.2, lock=True, h=-0.2), tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, (Y0 + Y1) / 2), typ=0, thick=0.2, lock=True, h=0.1)]
 def C(p, kind):  # centre d'une pièce de l'artefact
@@ -111,14 +113,14 @@ for p in TP['pieces']:
     elif k == 'bag':
         pos = C(p, 'bag')
         if p['bag'] == 'classic':
-            OBJ.append(bag('Sac des Grands Lacs', 46, pos, [tile(f'Castor ×{n} (Grands Lacs)', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
+            OBJ.append(bag('Sac des Grands Lacs', 46, pos, [tile(f'Castor ×{n} (Grands Lacs)', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', color=col('#B7A675'), desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
                                                         for n, m in ((1, 9), (2, 6), (3, 3)) for _ in range(m)], col('#8A6A45'), '18 paquets : 9 × 1, 6 × 2, 3 × 3'))
         elif p['bag'] == 'premium':
-            OBJ.append(bag('Sac du lac Supérieur', 46, pos, [tile(f'Castor gras ×{n} (Supérieur)', f'tile_S{n}_gras', 30, back=f'tile_S{n}_gras', desc='Castor gras (★) : toutes les tuiles du lac Supérieur sont grasses.', face='up')
+            OBJ.append(bag('Sac du lac Supérieur', 46, pos, [tile(f'Castor gras ×{n} (Supérieur)', f'tile_S{n}_gras', 30, back=f'tile_S{n}_gras', color=col('#C9952B'), desc='Castor gras (★) : toutes les tuiles du lac Supérieur sont grasses.', face='up')
                                                          for n, m in ((1, 3), (2, 5), (3, 4)) for _ in range(m)], col('#8A6418'), '12 paquets : 3 × 1, 5 × 2, 4 × 3'))
         else:
             HN = {'fur1': 'Traite : 1 castor', 'fur2': 'Traite : 2 castors', 'fur3': 'Traite : 3 castors', 'mission': 'Missionnaire', 'present': 'Présent', 'fievre': 'Fièvre', 'gatees': 'Peaux gâtées'}
-            OBJ.append(bag('Jetons cachés', 46, pos, [tile('', f'hid_{h}', 30, back='hid_back', fz=180, face='down') for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
+            OBJ.append(bag('Jetons cachés', 46, pos, [tile('', f'hid_{h}', 30, back='hid_back', fz=180, face='down', color=col('#B7A675')) for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
                            col('#3A2618'), '23 jetons, posés face cachée (?) sur les lacs'))
     elif k == 'die':
         d = base('Die_6', 'Dé de traversée' if p.get('cross') else 'Dé', 24, C(p, 'die'), col('#8E2F25') if p.get('cross') else WHITE, h=0.7, y3=True, s0=1.0); OBJ.append(d)
@@ -127,8 +129,8 @@ for p in TP['pieces']:
         if kind in ('num', 'conge'): continue                       # pas de marqueurs de prix ; les congés viennent du sac
         if kind == 'month': OBJ.append(token('Mois', 'tok_marker', 24, pos, INKC))
         elif kind == 'year': OBJ.append(token('Année', 'tok_marker', 22, pos, INKC))
-        elif kind == 'cube': OBJ.append(token('Ravages', 'tok_marker', 20, pos, col('#8E2F25')))
-        elif kind == 'paris': OBJ.append(token('Prix de Paris', 'tok_marker', 20, pos, col('#C9952B')))
+        elif kind == 'cube': OBJ.append(tile('Ravages', 'pion_ravages', 28, pos, typ=2, color=col('#8E2F25')))
+        elif kind == 'paris': OBJ.append(tile('Prix du castor', 'pion_prix', 28, pos, typ=2, color=col('#C9952B')))
         elif kind == 'disc':
             if p.get('dem'): OBJ.append(token('Demande · ' + ('Grands Lacs' if p['dem'] == 'gl' else 'Supérieur'), 'tok_disc', 16, pos, INKC))
             else: OBJ.append(token(f"{ {'livres': 'Livres', 'credit': 'Crédit'}.get(p.get('track'), 'Soupçon') } {PN[c]}", 'tok_disc', 11 if p.get('track') else 18, pos, color))
@@ -137,15 +139,15 @@ for p in TP['pieces']:
         elif kind == 'grand': OBJ.append(token(f'Grand canot {who}', 'canot_grand', w, pos, color))
         elif kind == 'petit': OBJ.append(token(f'Petit canot {who}', 'canot_petit', w, pos, color))
         elif kind == 'ship':
-            if p.get('roi'): OBJ.append(token('Le Profond (navire du roi)', 'navire_profond', 34, pos))
-            elif p.get('merch'): OBJ.append(token('Navire de la compagnie', 'navire_compagnie', 34, pos))
+            if p.get('roi'): OBJ.append(stile('Le Profond (navire du roi)', 'navire_profond', 34, pos))
+            elif p.get('merch'): OBJ.append(stile('Navire de la compagnie', 'navire_compagnie', 34, pos))
             else: continue                                           # les navires viennent des cartes du chantier
         elif kind == 'alambic': OBJ.append(token(f'Distillerie {who}', 'alambic', w, pos, color))
         elif kind == 'part': OBJ.append(token(f'Part {who}', 'tok_disc', w, pos, color))
         elif kind == 'shipcard':
             nm = SHIPS[nship]; nship += 1
             OBJ.append(tile(f'Carte de navire · {nm}', f'carte_navire_{nship}', w, pos, typ=3, thick=0.08, desc='Financez-la au chantier ; le propriétaire la pose devant lui et envoie le navire du même nom sur le plateau.'))
-            OBJ.append(token(f'Navire · {nm}', f'navire_{nship}', 34, P(p['x'] + 27, p['y'] + 37), h=0.7))
+            OBJ.append(stile(f'Navire · {nm}', f'navire_{nship}', 34, P(p['x'] + 27, p['y'] + 37), h=0.7))
         elif kind == 'pas': OBJ.append(tile('Prendre le pas · 1er', 'tok_pas', w, pos))
         elif kind == 'crew': lab, img = CREW[p['crew']]; OBJ.append(token(lab, img, 26, pos))
         elif kind == 'pawn':
@@ -159,13 +161,13 @@ OBJ.append(deck('mat', P(1290 + 35, 976 + 49)))
 OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4), 'd': round(98 * U, 4)})
 for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4), 'd': round(98 * U, 4)})
 # Comptoir de Québec : tout son stock rangé dans sa zone (rien n'est mis en vente d'avance)
-OBJ.append(mbag('Marchandises (comptoir)', 'sac_caisse', 'tok_caisse_w', 44, P(1320, 486 + 50), [token('Marchandise (comptoir)', 'tok_caisse_w', 24, None, GREY)], GREY, 'Marchandises génériques, en nombre illimité', inf=True))
-OBJ.append(mbag('Eau-de-vie (comptoir)', 'sac_bouteille', 'tok_bouteille_w', 30, P(1380, 486 + 50), [token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, None, GREY)], GREY, 'Eau-de-vie générique, en nombre illimité', inf=True))
+OBJ.append(mbag('Marchandises (comptoir)', 'sac_caisse', 'tok_caisse_w', 44, P(1320, 486 + 50), [upright(token('Marchandise (comptoir)', 'tok_caisse_w', 24, None, GREY))], GREY, 'Marchandises génériques, en nombre illimité', inf=True))
+OBJ.append(mbag('Eau-de-vie (comptoir)', 'sac_bouteille', 'tok_bouteille_w', 30, P(1380, 486 + 50), [upright(token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, None, GREY))], GREY, 'Eau-de-vie générique, en nombre illimité', inf=True))
 for ci, (kc, (lab, img)) in enumerate(CREW.items()): OBJ.append(mbag(f'{lab}s', f'sac_voy_{kc}', img, 40, P(1320 + ci * 120, 680 + 48), [token(lab, img, 22) for _ in range(4)], desc=f'4 {lab.lower()}s'))
 OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1316, 486 + 105), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1382, 486 + 105), GREY))
 ROI = base('Custom_Model', 'Navire du roi', 40, P(1440, 486 + 105), WHITE, False, 0.8, y3=True, s0=1.0, desc='En rade dès avril les années I et II, 4 places publiques.')   # figurine fournie, en blanc
 ROI['CustomMesh'] = {'MeshURL': 'https://steamusercontent-a.akamaihd.net/ugc/952982844368369073/FB63C915DB2529E0210C26EEDFD717929BB7E7A6/', 'DiffuseURL': '', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 1, 'CastShadows': True}
-ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(token('Navire de la compagnie', 'navire_compagnie', 34, P(1490, 486 + 105))); OBJ.append(token('Le Profond (navire du roi)', 'navire_profond', 34, P(1440, 486 + 140), desc='Marqueur du navire du roi.'))
+ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(stile('Navire de la compagnie', 'navire_compagnie', 34, P(1490, 486 + 105))); OBJ.append(stile('Le Profond (navire du roi)', 'navire_profond', 34, P(1440, 486 + 140), desc='Marqueur du navire du roi.'))
 OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(f'Congé · {n} marchandises · {c} crédit', f'conge_m{n}', 32, back='conge_back') for n, c, m in ((4, 3, 3), (3, 2, 4), (2, 1, 3)) for _ in range(m)],
                col('#8E2F25'), '10 congés : 3 à 4 marchandises (3 crédit), 4 à 3 marchandises (2 crédit), 3 à 2 marchandises (1 crédit). 4 tirés par an à 3 joueurs, remélangés chaque année. Joueur le plus pauvre : −1 crédit.'))
 # Forts, missions et jetons Abîmé : réserves illimitées ; un fort aux Lacs d'en bas et une mission aux Lacs d'en haut à la mise en place
@@ -173,12 +175,14 @@ def ibag(nick, pos, item, color, desc):
     o = base('Infinite_Bag', nick, 44, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'ry': 0}); o['Transform']['rotY'] = 0   # contenu lisible à l'endroit
     item['Transform'] = T(); item['Locked'] = False; o['ContainedObjects'] = [item]; return o
-OBJ.append(ibag('Forts français', P(1765, 560), token('Fort français', 'fort_fr', 26), col('#7A5232'), 'Forts français en nombre illimité'))
-OBJ.append(ibag('Forts anglais', P(1825, 560), token('Fort anglais', 'fort_uk', 26), col('#012169'), 'Forts anglais en nombre illimité'))
-OBJ.append(ibag('Missions', P(1765, 620), token('Mission', 'mission', 26), col('#1E1A14'), 'Missions en nombre illimité'))
+OBJ.append(ibag('Forts français', P(1765, 560), tile('Fort français', 'fort_fr', 26, typ=3, color=col('#F2EAD3')), col('#7A5232'), 'Forts français en nombre illimité'))
+OBJ.append(ibag('Forts anglais', P(1825, 560), tile('Fort anglais', 'fort_uk', 26, typ=3, color=col('#F2EAD3')), col('#012169'), 'Forts anglais en nombre illimité'))
+OBJ.append(ibag('Missions', P(1765, 620), tile('Mission', 'mission', 26, typ=3, color=col('#1E1A14')), col('#1E1A14'), 'Missions en nombre illimité'))
 OBJ.append(ibag('Jetons Abîmé', P(1765, 680), token('Abîmé', 'abime', 26), col('#A3352A'), 'Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé'))
-OBJ.append(token('Fort français', 'fort_fr', 22, P(40 + 384, 178 + 380)))      # Lacs d'en bas (fort Frontenac, 1673)
-OBJ.append(token('Mission', 'mission', 22, P(40 + 258, 178 + 300)))            # Lacs d'en haut (Saint-Ignace, 1671)
+OBJ.append(tile('Fort français', 'fort_fr', 26, P(40 + 36 + 427, 238 + 502), typ=3, color=col('#F2EAD3')))      # Lacs d'en bas, case Fort (fort Frontenac, 1673)
+OBJ.append(tile('Mission', 'mission', 26, P(40 + 36 + 47, 238 + 324.5), typ=3, color=col('#1E1A14')))            # Lacs d'en haut, case Mission (Saint-Ignace, 1671)
+for k, (dx, dy) in enumerate(((48, 20), (207, 20), (48, 50), (207, 50))):
+    OBJ.append(model('Dé du marché', 'de_noir', 'de_noir', 20, P(40 + 689.63 + dx + 12, 40 + 198 + 512 + dy), desc='Prix actuel du produit au marché de Québec.'))
 # Aide de jeu : une par joueur, empilées sous le matériel de départ
 OBJ.append(tile('Aide de jeu (recto)', 'aide_a', 430, P(640 - 225, -146), back='aide_b', typ=3, thick=0.05)); OBJ.append(tile('Aide de jeu (verso)', 'aide_b', 430, P(640 + 225, -146), back='aide_a', typ=3, thick=0.05))   # au-dessus du plateau, côte à côte
 OBJ.append(mbag('Coureurs des bois', 'sac_coureur', 'tok_coureur', 34, P(1690, 656), [tile('Coureur des bois', 'tok_coureur', 40, typ=3, thick=0.1)], desc='Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.', inf=True))
@@ -191,7 +195,7 @@ for i in range(3):
     for k, (key, (lab, wp, wb)) in enumerate(CANOT.items()):
         OBJ.append(mbag(f'{lab} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}', wb, Q((120, 205, 270)[k], 1186), [model(f'{lab} {n} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}_{n}', wb) for n in 'CBA'], WHITE, f'{lab} A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.'))
     OBJ.append(base('PlayerPawn', f'Pion {PN[i]}', 18, Q(372, 1186), col_, h=0.6, y3=True, s0=1.0))
-    for k in range(10): OBJ.append(base('Checker_white', f'Part {PN[i]}', 16, Q(404, 1186), col_, False, 0.5 + k * 0.3, y3=True, s0=0.5))
+    for k in range(10): OBJ.append(base('Checker_white', f'Part {PN[i]}', 10, Q(404, 1186), col_, False, 0.5 + k * 0.3, y3=True, s0=0.5))
     OBJ.append(token(f'Soupçon {PN[i]}', 'tok_disc', 18, Q(254, 1216 + 19), col_))
     # Cartes Expédition : un tas par type (A sur le dessus), face visible, devant le joueur
     cd = {str(EXP_ID + i): {'FaceURL': URL + f'exp_{PN[i]}.png', 'BackURL': URL + f'exp_{PN[i]}_back.png', 'NumWidth': 3, 'NumHeight': 3, 'BackIsHidden': True, 'UniqueBack': False, 'Type': 0}}
@@ -216,7 +220,7 @@ def at(o):
     n = json.loads(o['GMNotes']); return n['x'] / U + CX, -n['z'] / U + CY
 SPOT = {'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 'Charges': (140, -76),
         'Associés': (1140, -226), 'Événements de fin de mois': (1250, -226), 'Demande de Paris': (1140, -76), 'Grands événements': (1250, -76),
-        'Sac des Grands Lacs': (-16, 130), 'Sac du lac Supérieur': (-16, 200), 'Jetons cachés': (-16, 270), 'Sac des congés': (-16, 340),
+        'Sac des Grands Lacs': (-16, 410), 'Sac du lac Supérieur': (-16, 480), 'Jetons cachés': (-16, 550), 'Sac des congés': (-16, 620),
         'Marchandises (comptoir)': (1285, 715), 'Eau-de-vie (comptoir)': (1330, 715), 'Grand canot (comptoir)': (1385, 715), 'Petit canot (comptoir)': (1445, 715),
         'Navire du roi': (1495, 715), 'Le Profond (navire du roi)': (1495, 765), 'Navire de la compagnie': (1545, 715), 'Dé de traversée': (1370, 50),
         'Guides': (1290, 120), 'Miliciens': (1345, 120), 'Interprètes': (1400, 120), 'Coureurs des bois': (1460, 120),
@@ -224,12 +228,12 @@ SPOT = {'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 
         'Matériel de départ': (1310, 628)}
 MULTI = {'Dé': [(1290, 50), (1330, 50)], 'Prendre le pas · 1er': [(1440, 50), (1485, 50), (1530, 50)]}
 SHIPS = [(1335, 262), (1475, 262), (1335, 332), (1475, 332), (1335, 402), (1475, 402)]
-DX_JOUEURS = 640 - (-257 + 614 + 232.5)               # plateau du joueur bleu centré sous le plateau
+DX_JOUEURS = 658 - (-257 + 614 + 232.5)               # plateau du joueur bleu centré sous le plateau
 cnt = {}; ships = []
 for o in OBJ:
     if not o.get('GMNotes', '').startswith('{') or 'x' not in json.loads(o['GMNotes']): continue
     nk = o.get('Nickname', ''); x, y = at(o)
-    if y > 1100 and nk != 'Tapis de jeu': place(o, x + DX_JOUEURS, y - 20)   # plateau raccourci de 80 puis allongé de 60
+    if y > 1100 and nk != 'Tapis de jeu': place(o, x + DX_JOUEURS, y - 4)   # plateau raccourci de 80 puis allongé de 60
     elif nk in SPOT and (x > 1260 or x < -100): place(o, *SPOT[nk])
     elif nk in MULTI and x > 1260: k = cnt.get(nk, 0); cnt[nk] = k + 1; place(o, *MULTI[nk][k])
     elif nk.startswith('Carte de navire'): ships.append(o)
@@ -243,6 +247,11 @@ for k, (nm, ile) in enumerate(DIST):
     x, y = (1335, 1475)[k % 2], 472 + (k // 2) * 70
     OBJ.append(tile(f'Carte de distillerie · {nm}', f'carte_distillerie_{k+1}', 120, P(x, y), typ=3, thick=0.08, desc=f'{ile}. Construite à 4 parts ; chaque part produit 1 eau-de-vie.'))
     OBJ.append(token(f'Distillerie · {nm}', f'pion_distillerie_{k+1}', 22, P(x - 37, y + 3), h=0.7, desc=f'Distillerie de {nm} ({ile})'))
+# Plateau élargi de 36 à droite (carte agrandie) : la réserve de droite se décale d'autant
+for o in OBJ:
+    if o.get('Nickname') in ('Tapis de jeu', 'Table du castor') or not o.get('GMNotes', '').startswith('{') or 'x' not in json.loads(o['GMNotes']): continue
+    x, y = at(o)
+    if x > 1255 and -10 < y < 1100: place(o, x + 36, y)
 LUA = open('setup.lua').read().replace('@W@', str(round(2 * max(CX - MAT_X0, MAT_X1 - CX) * U, 3))).replace('@D@', str(round(2 * max(CY - MAT_Y0, MAT_Y1 - CY) * U, 3)))
 rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 de crédit') for r in rules]
@@ -254,5 +263,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v24"'))   # ?v24 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v25"'))   # ?v25 : force TTS à recharger les images
 print(len(OBJ), 'objets')
