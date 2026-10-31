@@ -6,7 +6,7 @@ for a in ('navire_gravure', 'alambic_gravure'): shutil.copy(f'assets/{a}.png', f
 BROWN, COPPER, COPPER_L, COPPER_D = '#4A3324', '#8A4B2A', '#B87333', '#5C3216'
 CSS20 = (f".t20{{font-family:{DISP};font-size:32px;fill:#F6EFDC}}.lv{{font-family:{BODY};font-weight:700;font-size:15px;fill:{MUTED}}}"
          f".fd{{font-family:{SER};font-style:italic;font-size:13px;fill:{MUTED}}}.lb{{font-family:{SER};font-style:italic;font-size:17px;fill:{MUTED}}}"
-         f".rl{{font-family:{BODY};font-size:13.5px;fill:{INK}}}.rl2{{font-family:{BODY};font-size:12px;fill:{MUTED}}}.nm{{font-family:{DISP};fill:{INK}}}")
+         f".rl{{font-family:{BODY};font-size:13.5px;fill:{INK}}}.rl2{{font-family:{BODY};font-size:12px;fill:{MUTED}}}.nm{{font-family:{DISP};fill:{INK}}}.cc{{font-family:{SER};font-style:italic;font-size:96px;fill:#C9952E;stroke:#4A3324;stroke-width:1.5px}}")
 ALAMBIC = (f"<ellipse cx='104' cy='160' rx='82' ry='68' fill='{COPPER_L}' stroke='{COPPER_D}' stroke-width='8'/>"
            f"<path d='M104 92 L104 36 L190 36 L190 132' fill='none' stroke='{COPPER_D}' stroke-width='9' stroke-linecap='round'/>"
            f"<rect x='170' y='130' width='40' height='50' rx='6' fill='{COPPER_L}' stroke='{COPPER_D}' stroke-width='6'/>")
@@ -53,6 +53,20 @@ for i, nm in enumerate(SHIPS):
          f"<image href='../img/navire_gravure.png' x='52' y='14' width='216' height='192'/>"
          f"<rect x='22' y='212' width='276' height='48' rx='10' fill='{PAPER}' stroke='{INK}' stroke-width='2.5'/>"
          f"<text x='160' y='{236+fs*0.33:.0f}' text-anchor='middle' class='nm' style='font-size:{fs}px'>{E(short(nm))}</text>")
+
+# Navire du roi « Le Profond » (fleur de lys dorée) et navire de la compagnie (C cursif doré), même modèle de marqueur
+FLEUR = ("<path d='M0,-27 C9,-17 10,-6 4,7 L-4,7 C-10,-6 -9,-17 0,-27 Z'/><path d='M5,6 C9,-6 20,-12 27,-5 C32,1 28,11 21,10 C25,5 21,0 16,3 C12,6 11,8 9,8 Z'/>"
+         "<path d='M-5,6 C-9,-6 -20,-12 -27,-5 C-32,1 -28,11 -21,10 C-25,5 -21,0 -16,3 C-12,6 -11,8 -9,8 Z'/><rect x='-14' y='8' width='28' height='5' rx='1.5'/>"
+         "<path d='M-3,13 L3,13 L4,21 L0,26 L-4,21 Z'/><path d='M-6,13 C-8,19 -13,22 -17,20 C-13,19 -11,16 -11,13 Z'/><path d='M6,13 C8,19 13,22 17,20 C13,19 11,16 11,13 Z'/>")
+GOLD = '#C9952E'
+def marker(name, label, mark):
+    body = (f"<rect x='4' y='4' width='312' height='272' rx='26' fill='{PAPER}' stroke='{BROWN}' stroke-width='8'/>"
+            f"<image href='../img/navire_gravure.png' x='52' y='{14 if label else 30}' width='216' height='192'/>" + mark)
+    if label: body += (f"<rect x='22' y='212' width='276' height='48' rx='10' fill='{PAPER}' stroke='{INK}' stroke-width='2.5'/>"
+                       f"<text x='160' y='246' text-anchor='middle' class='nm' style='font-size:30px'>{E(label)}</text>")
+    svg2(name, 320, 280, 2, body)
+marker('navire_profond', 'Le Profond', f"<g transform='translate(272 52) scale(1.15)' fill='{GOLD}' stroke='{BROWN}' stroke-width='1'>{FLEUR}</g>")
+marker('navire_compagnie', '', f"<text x='272' y='96' text-anchor='middle' class='cc'>C</text>")
 
 # Distilleries : 4 parts, chaque carte a son pion alambic cuivre portant le nom du lieu
 DISTILLERIES = [('Fonds-Saint-Jacques', 'Fonds-St-Jacques'), ('La Lise', 'La Lise'), ('Petit-Goâve', 'Petit-Goâve'), ('Saint-Louis', 'Saint-Louis')]

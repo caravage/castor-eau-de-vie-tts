@@ -218,7 +218,7 @@ def mats():
 
 reserve(); decks(); tiles(); mats()
 # ------------------------------------------------------------ Navires nommés (carte au chantier + jeton du même nom)
-SHIPS = ["L’Aigle d’Or", "Le Saint-Sébastien", "Le Jardin de Hollande", "Le Saint-Jean-Baptiste", "Le Chat de Hollande", "Le Vieux Siméon"]
+SHIPS = ["L’Aigle d’Or", "Le Courageux", "Le Jardin de Hollande", "Le Saint-Jean-Baptiste", "La Famille", "Le Vieux Siméon"]
 def ships():
     for i, nm in enumerate(SHIPS):
         W, H = 600, 320

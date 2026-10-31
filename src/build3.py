@@ -40,7 +40,7 @@ def tile(nick, front, wpx, pos=None, back=None, typ=3, thick=0.1, color=WHITE, l
     o['CustomImage'] = {'ImageURL': URL + front + '.png', 'ImageSecondaryURL': URL + (back or front) + '.png', 'ImageScalar': 1.0, 'WidthScale': 0.0,
                         'CustomTile': {'Type': typ, 'Thickness': thick, 'Stackable': False, 'Stretch': False}}
     return o
-def token(nick, img, wpx, pos=None, color=WHITE, h=0.5, desc='', thick=0.2):
+def token(nick, img, wpx, pos=None, color=WHITE, h=0.5, desc='', thick=0.1):
     o = base('Custom_Token', nick, wpx, pos, color, False, h, desc=desc, s0=0.1)
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * aspect(img) * U, 4)})
     o['CustomImage'] = {'ImageURL': URL + img + '.png', 'ImageSecondaryURL': '', 'ImageScalar': 1.0, 'WidthScale': 0.0,
@@ -86,14 +86,14 @@ def deck(k, pos, skip=()):
     o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
     return o
 
-MAT_X0, MAT_X1, MAT_Y0, MAT_Y1 = -324, 1604, -331, 1458   # tapis de jeu (remplace la table TTS), au plus près des pièces
+MAT_X0, MAT_X1, MAT_Y0, MAT_Y1 = -324, 1604, -331, 1546   # tapis de jeu (remplace la table TTS), au plus près des pièces
 MAT_W = MAT_X1 - MAT_X0
 OBJ = [tile('Tapis de jeu', 'tapis', MAT_W, P((MAT_X0 + MAT_X1) / 2, (MAT_Y0 + MAT_Y1) / 2), typ=0, thick=0.2, lock=True, h=-0.2), tile('Table du castor', 'table_full', X1 - X0, P((X0 + X1) / 2, (Y0 + Y1) / 2), typ=0, thick=0.2, lock=True, h=0.1)]
 def C(p, kind):  # centre d'une pièce de l'artefact
     w, h = SIZE[kind]; return P(p['x'] + w / 2, p['y'] + h / 2)
 
 CREW = {'guide': ('Guide', 'voy_guide'), 'mil': ('Milicien', 'voy_mil'), 'int': ('Interprète', 'voy_int')}
-SHIPS = ['L’Aigle d’Or', 'Le Saint-Sébastien', 'Le Jardin de Hollande', 'Le Saint-Jean-Baptiste', 'Le Chat de Hollande', 'Le Vieux Siméon']
+SHIPS = ['L’Aigle d’Or', 'Le Courageux', 'Le Jardin de Hollande', 'Le Saint-Jean-Baptiste', 'La Famille', 'Le Vieux Siméon']
 nship = 0
 for p in TP['pieces']:
     if p.get('kind') in ('march', 'baril', 'grand', 'petit', 'alambic', 'pawn') and p.get('c', -1) >= 0: continue   # rangés dans les sacs du plateau du joueur
@@ -137,8 +137,8 @@ for p in TP['pieces']:
         elif kind == 'grand': OBJ.append(token(f'Grand canot {who}', 'canot_grand', w, pos, color))
         elif kind == 'petit': OBJ.append(token(f'Petit canot {who}', 'canot_petit', w, pos, color))
         elif kind == 'ship':
-            if p.get('roi'): OBJ.append(token('Navire du roi', 'navire_roi', w, pos))
-            elif p.get('merch'): OBJ.append(token('Navire marchand', 'navire_marchand', w, pos))
+            if p.get('roi'): OBJ.append(token('Le Profond (navire du roi)', 'navire_profond', 34, pos))
+            elif p.get('merch'): OBJ.append(token('Navire de la compagnie', 'navire_compagnie', 34, pos))
             else: continue                                           # les navires viennent des cartes du chantier
         elif kind == 'alambic': OBJ.append(token(f'Distillerie {who}', 'alambic', w, pos, color))
         elif kind == 'part': OBJ.append(token(f'Part {who}', 'tok_disc', w, pos, color))
@@ -154,7 +154,7 @@ for p in TP['pieces']:
 
 # Ajouts propres à la version actuelle du jeu, posés dans des places libres de la table
 # Plateaux des joueurs : tuiles indépendantes posées sur la table, qu’on peut déplacer (les pièces posées dessus suivent)
-for i in range(3): OBJ.insert(1 + i, tile(f'Plateau du joueur {PN[i]}', f'pmat_{i}', 465, P(-257 + i * 614 + 232.5, 1216 + 106), typ=3, thick=0.1, h=0.15, desc='Soupçon et personnages du joueur.'))
+for i in range(3): OBJ.insert(1 + i, tile(f'Plateau du joueur {PN[i]}', f'pmat_{i}', 465, P(-257 + i * 614 + 232.5, 1216 + 150), typ=3, thick=0.1, h=0.15, desc='Soupçon et personnages du joueur.'))
 OBJ.append(deck('mat', P(1290 + 35, 976 + 49)))
 OBJ[-1]['GMNotes'] = json.dumps({**json.loads(OBJ[-1]['GMNotes']), 'w': round(70 * U, 4), 'd': round(98 * U, 4)})
 for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 * U, 4), 'd': round(98 * U, 4)})
@@ -165,7 +165,7 @@ for ci, (kc, (lab, img)) in enumerate(CREW.items()): OBJ.append(mbag(f'{lab}s', 
 OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1316, 486 + 105), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1382, 486 + 105), GREY))
 ROI = base('Custom_Model', 'Navire du roi', 40, P(1440, 486 + 105), WHITE, False, 0.8, y3=True, s0=1.0, desc='En rade dès avril les années I et II, 4 places publiques.')   # figurine fournie, en blanc
 ROI['CustomMesh'] = {'MeshURL': 'https://steamusercontent-a.akamaihd.net/ugc/952982844368369073/FB63C915DB2529E0210C26EEDFD717929BB7E7A6/', 'DiffuseURL': '', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 1, 'CastShadows': True}
-ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(token('Navire marchand', 'navire_marchand', 40, P(1490, 486 + 105)))
+ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(token('Navire de la compagnie', 'navire_compagnie', 34, P(1490, 486 + 105))); OBJ.append(token('Le Profond (navire du roi)', 'navire_profond', 34, P(1440, 486 + 140), desc='Marqueur du navire du roi.'))
 OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(f'Congé · {n} marchandises · {c} crédit', f'conge_m{n}', 40, back='conge_back') for n, c, m in ((4, 3, 3), (3, 2, 4), (2, 1, 3)) for _ in range(m)],
                col('#8E2F25'), '10 congés : 3 à 4 marchandises (3 crédit), 4 à 3 marchandises (2 crédit), 3 à 2 marchandises (1 crédit). 4 tirés par an à 3 joueurs, remélangés chaque année. Joueur le plus pauvre : −1 crédit.'))
 # Forts, missions et jetons Abîmé : réserves illimitées ; un fort aux Lacs d'en bas et une mission aux Lacs d'en haut à la mise en place
@@ -173,12 +173,12 @@ def ibag(nick, pos, item, color, desc):
     o = base('Infinite_Bag', nick, 44, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'ry': 0}); o['Transform']['rotY'] = 0   # contenu lisible à l'endroit
     item['Transform'] = T(); item['Locked'] = False; o['ContainedObjects'] = [item]; return o
-OBJ.append(ibag('Forts français', P(1765, 560), token('Fort français', 'fort_fr', 26, thick=0.06), col('#7A5232'), 'Forts français en nombre illimité'))
-OBJ.append(ibag('Forts anglais', P(1825, 560), token('Fort anglais', 'fort_uk', 26, thick=0.06), col('#012169'), 'Forts anglais en nombre illimité'))
-OBJ.append(ibag('Missions', P(1765, 620), token('Mission', 'mission', 26, thick=0.06), col('#1E1A14'), 'Missions en nombre illimité'))
-OBJ.append(ibag('Jetons Abîmé', P(1765, 680), token('Abîmé', 'abime', 26, thick=0.06), col('#A3352A'), 'Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé'))
-OBJ.append(token('Fort français', 'fort_fr', 22, P(40 + 384, 178 + 380), thick=0.06))      # Lacs d'en bas (fort Frontenac, 1673)
-OBJ.append(token('Mission', 'mission', 22, P(40 + 258, 178 + 300), thick=0.06))            # Lacs d'en haut (Saint-Ignace, 1671)
+OBJ.append(ibag('Forts français', P(1765, 560), token('Fort français', 'fort_fr', 26), col('#7A5232'), 'Forts français en nombre illimité'))
+OBJ.append(ibag('Forts anglais', P(1825, 560), token('Fort anglais', 'fort_uk', 26), col('#012169'), 'Forts anglais en nombre illimité'))
+OBJ.append(ibag('Missions', P(1765, 620), token('Mission', 'mission', 26), col('#1E1A14'), 'Missions en nombre illimité'))
+OBJ.append(ibag('Jetons Abîmé', P(1765, 680), token('Abîmé', 'abime', 26), col('#A3352A'), 'Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé'))
+OBJ.append(token('Fort français', 'fort_fr', 22, P(40 + 384, 178 + 380)))      # Lacs d'en bas (fort Frontenac, 1673)
+OBJ.append(token('Mission', 'mission', 22, P(40 + 258, 178 + 300)))            # Lacs d'en haut (Saint-Ignace, 1671)
 # Aide de jeu : une par joueur, empilées sous le matériel de départ
 OBJ.append(tile('Aide de jeu (recto)', 'aide_a', 430, P(640 - 225, -146), back='aide_b', typ=3, thick=0.05)); OBJ.append(tile('Aide de jeu (verso)', 'aide_b', 430, P(640 + 225, -146), back='aide_a', typ=3, thick=0.05))   # au-dessus du plateau, côte à côte
 OBJ.append(mbag('Coureurs des bois', 'sac_coureur', 'tok_coureur', 34, P(1690, 656), [tile('Coureur des bois', 'tok_coureur', 40, typ=3, thick=0.1)], desc='Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.', inf=True))
@@ -191,7 +191,7 @@ for i in range(3):
     for k, (key, (lab, wp, wb)) in enumerate(CANOT.items()):
         OBJ.append(mbag(f'{lab} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}', wb, Q((120, 205, 270)[k], 1186), [model(f'{lab} {n} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}_{n}', wb) for n in 'CBA'], WHITE, f'{lab} A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.'))
     OBJ.append(base('PlayerPawn', f'Pion {PN[i]}', 18, Q(372, 1186), col_, h=0.6, y3=True, s0=1.0))
-    for k in range(10): OBJ.append(token(f'Part {PN[i]}', 'tok_disc', 16, Q(404, 1186), col_, h=0.5 + k * 0.3))
+    for k in range(10): OBJ.append(base('Checker_white', f'Part {PN[i]}', 16, Q(404, 1186), col_, False, 0.5 + k * 0.3, y3=True, s0=0.5))
     OBJ.append(token(f'Soupçon {PN[i]}', 'tok_disc', 18, Q(254, 1216 + 19), col_))
     # Cartes Expédition : un tas par type (A sur le dessus), face visible, devant le joueur
     cd = {str(EXP_ID + i): {'FaceURL': URL + f'exp_{PN[i]}.png', 'BackURL': URL + f'exp_{PN[i]}_back.png', 'NumWidth': 3, 'NumHeight': 3, 'BackIsHidden': True, 'UniqueBack': False, 'Type': 0}}
@@ -201,8 +201,11 @@ for i in range(3):
             c = base('Card', f"{DK['exp']['names'][j]} ({PN[i]})", 150, None, s0=1.0); c['GMNotes'] = json.dumps({**json.loads(c['GMNotes']), 'd': round(107 * U, 4), 'face': 'up'})
             c['CardID'] = (EXP_ID + i) * 100 + j; c['CustomDeck'] = cd; c['SidewaysCard'] = True; c['Transform'] = T(s=1.0); c['Locked'] = False; cards.append(c)
         OBJ.append(mbag(f'Expéditions · {tlab} ({PN[i]})', 'sac_exp', f'sacexp_{PN[i]}_{key}', 62, P(x0 + 533, tx), cards, WHITE, 'Cartes Expédition A, B, C, dans cet ordre.'))
+    # Capital circulant : compteur numérique TTS, à droite de la case Capital
+    cnt = base('Counter', f'Capital circulant {PN[i]}', 50, P(x0 + 533, 1478), col_, False, 0.6, y3=True, s0=1.0, desc='Capital circulant : livres + charges (5 max) + canots + fourrures + parts.')
+    cnt['Counter'] = {'value': 0}; OBJ.append(cnt)
     # Main du joueur, en face de son plateau
-    hp = P(x0 + 295, 1464 + 60)
+    hp = P(x0 + 295, 1552 + 60)
     OBJ.append({'GUID': guid(), 'Name': 'HandTrigger', 'Transform': {'posX': hp[0], 'posY': 4.0, 'posZ': hp[1], 'rotX': 0, 'rotY': 0, 'rotZ': 0, 'scaleX': round(590 * U, 3), 'scaleY': 5.0, 'scaleZ': 4.0},
                 'Nickname': '', 'Description': '', 'GMNotes': json.dumps({'hand': True, 'x': hp[0], 'z': hp[1], 'hw': round(590 * U, 3)}), 'ColorDiffuse': PC[i], 'FogColor': SEAT[i], 'Locked': True})
 # Disposition v20 : plateau centré sur le tapis, joueur bleu au milieu, réserve tassée autour du plateau
@@ -215,7 +218,7 @@ SPOT = {'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 
         'Associés': (1140, -226), 'Événements de fin de mois': (1250, -226), 'Demande de Paris': (1140, -76), 'Grands événements': (1250, -76),
         'Sac des Grands Lacs': (-16, 130), 'Sac du lac Supérieur': (-16, 200), 'Jetons cachés': (-16, 270), 'Sac des congés': (-16, 340),
         'Marchandises (comptoir)': (1285, 715), 'Eau-de-vie (comptoir)': (1330, 715), 'Grand canot (comptoir)': (1385, 715), 'Petit canot (comptoir)': (1445, 715),
-        'Navire du roi': (1495, 715), 'Navire marchand': (1545, 715), 'Dé de traversée': (1370, 50),
+        'Navire du roi': (1495, 715), 'Le Profond (navire du roi)': (1495, 765), 'Navire de la compagnie': (1545, 715), 'Dé de traversée': (1370, 50),
         'Guides': (1290, 120), 'Miliciens': (1345, 120), 'Interprètes': (1400, 120), 'Coureurs des bois': (1460, 120),
         'Forts français': (1290, 190), 'Forts anglais': (1345, 190), 'Missions': (1400, 190), 'Jetons Abîmé': (1455, 190),
         'Matériel de départ': (1310, 628)}
@@ -251,5 +254,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v21"'))   # ?v21 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v22"'))   # ?v22 : force TTS à recharger les images
 print(len(OBJ), 'objets')
