@@ -355,4 +355,5 @@ exec(open('cartes_v20.py', encoding='utf-8').read())   # cartes de navire et de 
 exec(open('tuiles_v39.py', encoding='utf-8').read())   # tuiles de peaux, tuiles secrètes et congés v39
 exec(open('elements_v40.py', encoding='utf-8').read())   # forts et pions v40
 exec(open('elements_v42.py', encoding='utf-8').read())   # voyageurs et pion Livres v42
+exec(open('elements_v44.py', encoding='utf-8').read())   # aide de jeu Actions v44
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)
