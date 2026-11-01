@@ -54,8 +54,7 @@ ASSOC45 = [('Pierre Lestage', 'gros équipeur de Montréal', 'Chaque expédition
            ('Milot', 'marchand de Lachine', 'Le comptoir vous vend les marchandises 1 ₶ moins cher (0,5 ₶ minimum).'),
            ('Jean-Baptiste Migeon', 'bailli et marchand', 'Chaque hiver, transférez un de vos soupçons à un autre joueur.'),
            ('Le cabaretier', 'des Trois-Rivières', 'Le comptoir vous vend l’eau-de-vie 1 ₶ moins cher (1 ₶ minimum).'),
-           ('Tonty', 'commandant aux Illinois', 'Vos expéditions peuvent entrer dans la zone des Illinois, même fermée.'),
-           ('Paul Dumouchel', 'voyageur à permis', 'Une fois par an, montez une expédition en octobre ou en novembre ; elle hiverne sans entretien.'),
+           ('Tonty', 'homme de l’Ouest', 'Vos expéditions peuvent trafiquer dans les Pays fermés.'),
            ('Les engagés', 'de la compagnie de la colonie', 'Vos moyens canots portent 4 charges.')]
 DECKS['pers'] = sheet('deck_pers', 'Associé', [card_html('Associé', t, fx, q) for t, q, fx in ASSOC45], 'Associés', 'piochez 3 · gardez-en 1'); DECKS['pers']['names'] = [f'{t}, {q}' for t, q, fx in ASSOC45]
 # Manigances v45 (validées le 1er nov.) : 10 cartes, 1 exemplaire chacune

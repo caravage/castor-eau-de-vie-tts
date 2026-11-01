@@ -8,7 +8,7 @@
   [
    "deck_pers",
    5000,
-   1400
+   700
   ],
   [
    "deck_pers_back",
@@ -1119,8 +1119,8 @@
  "decks": {
   "pers": {
    "cols": 10,
-   "rows": 2,
-   "n": 11,
+   "rows": 1,
+   "n": 10,
    "names": [
     "Pierre Lestage, gros équipeur de Montréal",
     "Bouchard, Coton et Bigras, société de voyageurs",
@@ -1130,8 +1130,7 @@
     "Milot, marchand de Lachine",
     "Jean-Baptiste Migeon, bailli et marchand",
     "Le cabaretier, des Trois-Rivières",
-    "Tonty, commandant aux Illinois",
-    "Paul Dumouchel, voyageur à permis",
+    "Tonty, homme de l’Ouest",
     "Les engagés, de la compagnie de la colonie"
    ]
   },
