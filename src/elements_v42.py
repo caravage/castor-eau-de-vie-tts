@@ -8,9 +8,11 @@ for k, n, c, fs, lines in VOY42:
         + T(150, y0 + 28, n, fs, 'middle', fam=DISP, fill=c) + ''.join(T(150, y0 + 68 + i * 27, l, 21, 'middle') for i, l in enumerate(lines)))
     svg(f'voy_{k}_used', 300, 432, f"<ellipse cx='150' cy='216' rx='142' ry='208' fill='{c}' stroke='#2A2418' stroke-width='6'/><ellipse cx='150' cy='216' rx='122' ry='186' fill='none' stroke='#F2EAD3' stroke-width='2' opacity='.6'/>"
         + T(150, 206, n, fs, 'middle', fam=DISP, fill='#F2EAD3') + f"<text x='150' y='246' text-anchor='middle' font-family=\"{BODY}\" font-weight='700' font-size='24' letter-spacing='2' fill='#F2EAD3'>UTILISÉ</text>")
-svg('disc_livres', 160, 160, "<circle cx='80' cy='80' r='74' fill='#FFFFFF' stroke='#3A3A3A' stroke-width='6'/><circle cx='80' cy='80' r='56' fill='none' stroke='#3A3A3A' stroke-width='3' opacity='.35'/>")
-svg('disc_livres_30', 160, 160, "<circle cx='80' cy='80' r='74' fill='#FFFFFF' stroke='#3A3A3A' stroke-width='6'/><circle cx='80' cy='80' r='56' fill='none' stroke='#3A3A3A' stroke-width='3' opacity='.35'/>"
-    f"<text x='80' y='96' text-anchor='middle' font-family=\"{BODY}\" font-weight='700' font-size='46' fill='#1E1E1E'>30+</text>")
+PCOL42 = {'rouge': ('#A8322A', '#5E1E17'), 'bleu': ('#2F5E8E', '#1B3A5C'), 'vert': ('#4E7A2C', '#2E4A18')}   # couleurs des joueurs (build3 : PC)
+for pn, (c, d) in PCOL42.items():
+    ring = f"<circle cx='80' cy='80' r='74' fill='{c}' stroke='{d}' stroke-width='6'/><circle cx='80' cy='80' r='56' fill='none' stroke='#F6EFDC' stroke-width='3' opacity='.4'/>"
+    svg(f'disc_livres_{pn}', 160, 160, ring)
+    svg(f'disc_livres_{pn}_30', 160, 160, ring + f"<text x='80' y='96' text-anchor='middle' font-family=\"{BODY}\" font-weight='700' font-size='46' fill='#FFFFFF'>+30</text>")
 _seen = {}
 for _m in MANIFEST: _seen[_m[0]] = _m
 MANIFEST[:] = list(_seen.values())

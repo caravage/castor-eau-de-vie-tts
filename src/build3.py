@@ -133,7 +133,7 @@ for p in TP['pieces']:
         elif kind == 'paris': OBJ.append(tile('Prix du castor', 'pion_prix', 28, pos, typ=2, color=col('#C9952B')))
         elif kind == 'disc':
             if p.get('dem'): OBJ.append(token('Demande · ' + ('Grands Lacs' if p['dem'] == 'gl' else 'Supérieur'), 'tok_disc', 16, pos, INKC))
-            elif p.get('track') == 'livres': o = tile(f'Livres {PN[c]}', 'disc_livres', 14, pos, back='disc_livres_30', typ=2, thick=0.12, color=color); o['Snap'] = True; OBJ.append(o)   # v42 : retourné = 30 livres de plus
+            elif p.get('track') == 'livres': o = tile(f'Livres {PN[c]}', f'disc_livres_{PN[c]}', 14, pos, back=f'disc_livres_{PN[c]}_30', typ=2, thick=0.12, color=WHITE); o['Snap'] = True; OBJ.append(o)   # v42 : retourné = 30 livres de plus
             else: OBJ.append(token(f"{ {'livres': 'Livres', 'credit': 'Crédit'}.get(p.get('track'), 'Soupçon') } {PN[c]}", 'tok_disc', 11 if p.get('track') else 18, pos, color))
         elif kind == 'march': OBJ.append(token(f'Marchandise {who}', 'tok_caisse_w', w, pos, color))
         elif kind == 'baril': OBJ.append(token(f'Eau-de-vie {who}', 'tok_bouteille_w', w, pos, color))
@@ -287,5 +287,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v29"'))   # ?v29 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v30"'))   # ?v30 : force TTS à recharger les images
 print(len(OBJ), 'objets')

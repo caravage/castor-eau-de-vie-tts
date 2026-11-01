@@ -966,12 +966,32 @@
    432
   ],
   [
-   "disc_livres",
+   "disc_livres_rouge",
    160,
    160
   ],
   [
-   "disc_livres_30",
+   "disc_livres_rouge_30",
+   160,
+   160
+  ],
+  [
+   "disc_livres_bleu",
+   160,
+   160
+  ],
+  [
+   "disc_livres_bleu_30",
+   160,
+   160
+  ],
+  [
+   "disc_livres_vert",
+   160,
+   160
+  ],
+  [
+   "disc_livres_vert_30",
    160,
    160
   ]
