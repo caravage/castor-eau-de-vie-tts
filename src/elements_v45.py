@@ -46,6 +46,7 @@ page('deck_mat', 5 * MW, 2 * MH, "<div style='display:grid;grid-template-columns
 page('deck_mat_back', MW, MH, "<div class='m' style='background:#4E5B3A;align-items:center;justify-content:center'><div style='border:2px solid #F2EAD3;border-radius:10px;width:300px;height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#F2EAD3'><div style=\"font:italic 40px 'IM Fell English',serif\">Matériel</div><div style=\"font:400 18px 'IM Fell English SC',serif;letter-spacing:3px;margin-top:6px\">de départ</div></div></div>", MCSS)
 DECKS['mat'] = {'cols': 5, 'rows': 2, 'n': 9, 'names': ['Matériel de départ'] * 9, 'half': True}
 # Associés v45 (validés le 1er nov.)
+BIGCSS = CARD_CSS.replace('.fx{font-size:30px', '.fx{font-size:44px').replace('.t{font-family:', '.t{font-size:52px!important;font-family:').replace('.band{background:var(--k);color:#F6EFDC;font-size:22px', '.band{background:var(--k);color:#F6EFDC;font-size:28px').replace('.nt{margin-top:auto;font-family:'+SER+';font-style:italic;font-size:24px', '.nt{margin-top:auto;font-family:'+SER+';font-style:italic;font-size:34px')
 ASSOC45 = [('Pierre Lestage', 'gros équipeur de Montréal', 'Chaque expédition que vous montez reçoit 1 marchandise gratuite.'),
            ('Bouchard, Coton et Bigras', 'société de voyageurs', 'Les voyageurs d’une expédition chaque année ne coûtent rien au départ (l’entretien d’hiver reste dû).'),
            ('Jean-Jérôme Patron', 'bourgeois du congé', 'Vos congés coûtent 1 ₶ de moins à rembourser (minimum 1 ₶).'),
@@ -55,8 +56,13 @@ ASSOC45 = [('Pierre Lestage', 'gros équipeur de Montréal', 'Chaque expédition
            ('Jean-Baptiste Migeon', 'bailli et marchand', 'Chaque hiver, transférez un de vos soupçons à un autre joueur.'),
            ('Le cabaretier', 'des Trois-Rivières', 'Le comptoir vous vend l’eau-de-vie 1 ₶ moins cher (1 ₶ minimum).'),
            ('Tonty', 'homme de l’Ouest', 'Vos expéditions peuvent trafiquer dans les Pays fermés. +1 soupçon.'),
-           ('Les engagés', 'de la compagnie de la colonie', 'Vos moyens canots portent 4 charges.')]
-DECKS['pers'] = sheet('deck_pers', 'Associé', [card_html('Associé', t, fx, q) for t, q, fx in ASSOC45], 'Associés', 'piochez 3 · gardez-en 1'); DECKS['pers']['names'] = [f'{t}, {q}' for t, q, fx in ASSOC45]
+           ('Les engagés', 'de la compagnie de la colonie', 'Vos moyens canots portent 4 charges.'),
+           ('Le confesseur', 'récollet', 'Chaque hiver, soupçon −1.'),
+           ('Nicolas Perrot', 'interprète et commandant', 'Au printemps, après le regarnissage, ajoutez 1 tuile du sac Castor sec dans un lac de votre choix.'),
+           ('Médard Chouart Des Groseilliers', 'coureur des bois', 'Trafiquer : une fois par action, relancez tous vos dés.'),
+           ('Riverin', 'directeur de la Compagnie de la colonie', 'Vendre des fourrures à Montréal : +1 ₶ par peau sèche.'),
+           ('Jean Soumande', 'gros marchand', 'Chaque hiver, votre marqueur de crédit recule d’une case, gratuitement.')]
+DECKS['pers'] = sheet('deck_pers', 'Associé', [card_html('Associé', t, fx, q) for t, q, fx in ASSOC45], 'Associés', 'piochez 3 · gardez-en 1 · les autres vont à la rivière', css=BIGCSS); DECKS['pers']['names'] = [f'{t}, {q}' for t, q, fx in ASSOC45]
 # Manigances v45 (validées le 1er nov.) : 10 cartes, 1 exemplaire chacune
 KCOL['Manigance'] = '#5A2A4A'
 MANIG45 = [('Canotée de trop', 'Pendant votre action « Monter une expédition ».', 'Ajoutez un canot de plus à une expédition.'),
@@ -90,6 +96,16 @@ for k, t, x, c, n in EVT45:
     page(f'evt_{k}', 300, 300, f"<div class='e' style='--k:{c}'><div class='h'>Événement du mois</div><div class='b'><div class='t{" s" if x or len(t) > 22 else ""}'>{E(t)}</div>" + (f"<div class='x'>{E(x)}</div>" if x else '') + "</div></div>", ECSS)
 page('evt_back', 300, 300, "<div class='e' style='--k:#3F6D78;background:#3F6D78;align-items:center;justify-content:center'><div style=\"font:italic 34px/1.1 'IM Fell English',serif;color:#F2EAD3;text-align:center\">Événement<br>du mois</div></div>", ECSS)
 json.dump([[k, t, n] for k, t, x, c, n in EVT45], open('evt45.json', 'w'), ensure_ascii=False)
+# Rivière v45 (validée le 1er nov.) : un seul paquet ; les associés non choisis au départ y sont ajoutés
+KCOL['Prestige'] = '#7A1F3A'; KCOL['Achat'] = '#4E5B3A'; KCOL['Événement'] = '#3F6D78'
+PREST45 = [('Banc à l’église Notre-Dame', 2, 1), ('Marguillier de Notre-Dame', 2, 0), ('Dot de votre fille', 3, 0), ('Commission d’officier pour votre fils', 3, 1),
+           ('Mariage avec un officier', 2, 1), ('Capitaine de milice de la côte', 1, 0), ('Tapisserie de haute lice', 2, 1)]
+ACHAT45 = [('Vente après décès', 'Obtenez 2 marchandises et 1 eau-de-vie.'), ('Parts d’un navire', 'Obtenez 2 parts de navire.'), ('Créance recouvrée', 'Gagnez 4 ₶.'),
+           ('Canot neuf', 'Obtenez 1 grand canot.'), ('Protection du gouverneur', 'Soupçon −2.')]
+RUM45 = ('Rumeurs des Pays d’en Haut', 'Au moment où cette carte est révélée, piochez deux événements mensuels et ajoutez-les face cachée à la fin du prochain mois sans événement.')
+RIV45 = ([('Prestige', t, f"{v} point{'s' if v > 1 else ''} de victoire." + (f" Entretien : {e} ₶ par hiver." if e else ' Pas d’entretien.'), v) for t, v, e in PREST45]
+         + [('Événement', RUM45[0], RUM45[1], 0)] * 3 + [('Achat', t, x, 0) for t, x in ACHAT45])
+DECKS['riv'] = sheet('deck_riv', 'Recrue', [card_html(k, t, x, '', v) for k, t, x, v in RIV45], 'Rivière', 'recrutement', css=BIGCSS); DECKS['riv']['names'] = [t for k, t, x, v in RIV45]
 _seen = {}
 for _m in MANIFEST: _seen[_m[0]] = _m
 MANIFEST[:] = list(_seen.values())

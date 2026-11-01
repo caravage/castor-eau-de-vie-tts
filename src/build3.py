@@ -108,7 +108,7 @@ for p in TP['pieces']:
     if p.get('bank'): continue                                       # comptoir : rangé dans son stock, plus bas
     elif k == 'deck':
         if p['deck'] == 'rec':                                    # rivière : un paquet par type de carte
-            for kd, x, y in (('riv_recrue', -270, 40), ('riv_contrat', -270, 214), ('riv_nation', -270, 388), ('riv_charge', -270, 562)): OBJ.append(deck(kd, P(x + 50, y + 70)))
+            OBJ.append(deck('riv', P(30, -226)))   # v45 : un seul paquet (les associés non choisis y sont ajoutés à la mise en place)
         elif p['deck'] == 'sit': OBJ.append(deck('pers', C(p, 'deck')))
         elif p['deck'] == 'grand': OBJ.append(deck('grand', C(p, 'deck')))   # v45 : fin de mois remplacé par le sac d'événements ; Demande de Paris retirée
     elif k == 'bag':
@@ -229,7 +229,7 @@ def place(o, cx, cy):
     o['GMNotes'] = json.dumps(n); o['Transform']['posX'] = n['x']; o['Transform']['posZ'] = n['z']
 def at(o):
     n = json.loads(o['GMNotes']); return n['x'] / U + CX, -n['z'] / U + CY
-SPOT = {'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 'Charges': (140, -76),
+SPOT = {'Rivière de recrutement': (30, -226), 'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 'Charges': (140, -76),
         'Associés': (1140, -226), 'Manigances': (1250, -226), 'Événements du mois': (1140, -76), 'Grands événements': (1250, -76),
         'Castor sec': (-16, 410), 'Castor gras': (-16, 480), 'Tuiles secrètes': (-16, 550), 'Sac des congés': (-16, 620),
         'Marchandises (comptoir)': (1285, 715), 'Eau-de-vie (comptoir)': (1330, 715), 'Grand canot (comptoir)': (1385, 715), 'Moyen canot (comptoir)': (1445, 715),
@@ -292,5 +292,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v35"'))   # ?v31 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v36"'))   # ?v31 : force TTS à recharger les images
 print(len(OBJ), 'objets')

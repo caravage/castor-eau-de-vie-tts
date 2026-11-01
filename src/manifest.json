@@ -8,7 +8,7 @@
   [
    "deck_pers",
    5000,
-   700
+   1400
   ],
   [
    "deck_pers_back",
@@ -18,7 +18,7 @@
   [
    "deck_riv",
    5000,
-   2100
+   1400
   ],
   [
    "deck_riv_back",
@@ -1119,8 +1119,8 @@
  "decks": {
   "pers": {
    "cols": 10,
-   "rows": 1,
-   "n": 10,
+   "rows": 2,
+   "n": 15,
    "names": [
     "Pierre Lestage, gros équipeur de Montréal",
     "Bouchard, Coton et Bigras, société de voyageurs",
@@ -1131,44 +1131,34 @@
     "Jean-Baptiste Migeon, bailli et marchand",
     "Le cabaretier, des Trois-Rivières",
     "Tonty, homme de l’Ouest",
-    "Les engagés, de la compagnie de la colonie"
+    "Les engagés, de la compagnie de la colonie",
+    "Le confesseur, récollet",
+    "Nicolas Perrot, interprète et commandant",
+    "Médard Chouart Des Groseilliers, coureur des bois",
+    "Riverin, directeur de la Compagnie de la colonie",
+    "Jean Soumande, gros marchand"
    ]
   },
   "riv": {
    "cols": 10,
-   "rows": 3,
-   "n": 30,
+   "rows": 2,
+   "n": 15,
    "names": [
-    "Garde-magasin",
-    "Teneur de livres",
-    "Canotier d’expérience",
-    "Facteur de La Rochelle",
-    "Calfat",
-    "Notaire royal",
-    "Censitaires",
-    "Maître de barque",
-    "Aubergiste de Montréal",
-    "Armateur associé",
-    "Père jésuite",
-    "Négociant huguenot",
-    "Commission en France",
-    "Foire de Montréal",
-    "Lettre de change",
-    "Congé de faveur",
-    "Contrat de la Ferme",
-    "Portage rapide",
-    "Renseignement de traite",
-    "Prendre les devants",
-    "Part offerte",
-    "Dénonciation à l’intendant",
-    "Les Outaouais",
-    "Les Potéouatamis de la baie des Puants",
-    "Les Anishinaabeg du Sault",
-    "Les Cinq-Nations",
-    "Les Wendat de Lorette",
-    "Marguillier de la paroisse",
-    "Conseiller au Conseil souverain",
-    "Fief sur le Richelieu"
+    "Banc à l’église Notre-Dame",
+    "Marguillier de Notre-Dame",
+    "Dot de votre fille",
+    "Commission d’officier pour votre fils",
+    "Mariage avec un officier",
+    "Capitaine de milice de la côte",
+    "Tapisserie de haute lice",
+    "Rumeurs des Pays d’en Haut",
+    "Rumeurs des Pays d’en Haut",
+    "Rumeurs des Pays d’en Haut",
+    "Vente après décès",
+    "Parts d’un navire",
+    "Créance recouvrée",
+    "Canot neuf",
+    "Protection du gouverneur"
    ]
   },
   "riv_recrue": {
