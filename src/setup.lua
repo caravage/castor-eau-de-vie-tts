@@ -3,6 +3,13 @@
 local LW, LD = @W@, @D@     -- taille du plan, en unités de plan
 local F = 1                 -- facteur plan -> table
 local DONE = false
+local SNAP = @SNAP@   -- points d'accroche : pistes Ravages et Prix du castor, cases Tour, emplacements Mission/Fort
+
+local function snaps(top)
+  local pts = {}
+  for _, p in ipairs(SNAP) do table.insert(pts, {position = {p[1] * F, top + 0.2, p[2] * F}, rotation_snap = false}) end
+  pcall(function() Global.setSnapPoints(pts) end)
+end
 
 local function notes(o)
   local ok, n = pcall(JSON.decode, o.getGMNotes() or "")
@@ -57,6 +64,7 @@ local function layout()
       end
     end
   end
+  snaps(top)
   Wait.time(function()
     for _, m in ipairs(moved) do
       if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end
@@ -76,7 +84,7 @@ end
 function onLoad(state)
   if state and state ~= "" then
     local ok, d = pcall(JSON.decode, state)
-    if ok and d and d.done then DONE = true; F = d.F or 1; return end
+    if ok and d and d.done then DONE = true; F = d.F or 1; local _, _, top = tableInfo(); snaps(top); return end
   end
   Wait.condition(layout, allLoaded, 30, layout)
 end

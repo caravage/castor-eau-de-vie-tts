@@ -353,4 +353,5 @@ for pn, (c, cd) in PCOL.items():
             + T(280, 170, 'Expéditions', 64, 'middle', fam=DISP, fill='#F6EFDC') + T(280, 260, lab, 50, 'middle', weight=700, fill='#F6EFDC') + T(280, 330, 'A · B · C', 40, 'middle', fill='#F6EFDC'))
 exec(open('cartes_v20.py', encoding='utf-8').read())   # cartes de navire et de distillerie v20
 exec(open('tuiles_v39.py', encoding='utf-8').read())   # tuiles de peaux, tuiles secrètes et congés v39
+exec(open('elements_v40.py', encoding='utf-8').read())   # forts et pions v40
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)

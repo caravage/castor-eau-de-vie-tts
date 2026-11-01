@@ -183,7 +183,9 @@ OBJ.append(ibag('Jetons Abîmé', P(1765, 680), token('Abîmé', 'abime', 26), c
 OBJ.append(tile('Fort français', 'fort_fr', 26, P(40 + 36 + 427, 238 + 502), typ=3, color=col('#F2EAD3')))      # Lacs d'en bas, case Fort (fort Frontenac, 1673)
 OBJ.append(tile('Mission', 'mission', 26, P(40 + 36 + 47, 238 + 324.5), typ=3, color=col('#1E1A14')))            # Lacs d'en haut, case Mission (Saint-Ignace, 1671)
 for k, (dx, dy) in enumerate(((48, 20), (207, 20), (48, 50), (207, 50))):
-    OBJ.append(model('Dé du marché', 'de_noir', 'de_noir', 20, P(40 + 689.63 + dx + 12, 40 + 198 + 512 + dy), desc='Prix actuel du produit au marché de Québec.'))
+    d = base('Die_6_Rounded', 'Dé du marché', 20, P(40 + 689.63 + dx + 12, 40 + 198 + 512 + dy), col('#000000'), h=0.7, y3=True, s0=1.0, desc='Prix actuel du produit au marché de Québec.')
+    d['RotationValues'] = [{'Value': str(v), 'Rotation': r} for v, r in ((1, {'x': 0, 'y': 0, 'z': 0}), (2, {'x': 90, 'y': 0, 'z': 0}), (3, {'x': 0, 'y': 0, 'z': 90}), (4, {'x': 0, 'y': 0, 'z': -90}), (5, {'x': -90, 'y': 0, 'z': 0}), (6, {'x': 0, 'y': 0, 'z': -180}))]
+    OBJ.append(d)
 # Aide de jeu : une par joueur, empilées sous le matériel de départ
 OBJ.append(tile('Aide de jeu (recto)', 'aide_a', 430, P(640 - 225, -146), back='aide_b', typ=3, thick=0.05)); OBJ.append(tile('Aide de jeu (verso)', 'aide_b', 430, P(640 + 225, -146), back='aide_a', typ=3, thick=0.05))   # au-dessus du plateau, côte à côte
 OBJ.append(mbag('Coureurs des bois', 'sac_coureur', 'tok_coureur', 34, P(1690, 656), [tile('Coureur des bois', 'tok_coureur', 40, typ=3, thick=0.1)], desc='Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.', inf=True))
@@ -253,7 +255,11 @@ for o in OBJ:
     if o.get('Nickname') in ('Tapis de jeu', 'Table du castor') or not o.get('GMNotes', '').startswith('{') or 'x' not in json.loads(o['GMNotes']): continue
     x, y = at(o)
     if x > 1255 and -10 < y < 1100: place(o, x + 36, y)
-LUA = open('setup.lua').read().replace('@W@', str(round(2 * max(CX - MAT_X0, MAT_X1 - CX) * U, 3))).replace('@D@', str(round(2 * max(CY - MAT_Y0, MAT_Y1 - CY) * U, 3)))
+# Points d'accroche (coordonnées de l'artefact) : pistes Ravages (0-6) et Prix du castor (1-8), cases Tour (I-VIII), emplacements Mission/Fort
+SNAPS = [(268 + 33 * v, 246) for v in range(7)] + [(833.5 + 33 * v, 246) for v in range(8)] + [(239 + 30 * k, 73) for k in range(8)]
+SNAPS += [(76 + x, 238 + y) for x, y in ((412, 112), (412, 144), (47, 324.5), (47, 356.5), (427, 470), (427, 502))]
+SNAP_LUA = '{' + ','.join('{%s,%s}' % P(x, y) for x, y in SNAPS) + '}'
+LUA = open('setup.lua').read().replace('@SNAP@', SNAP_LUA).replace('@W@', str(round(2 * max(CX - MAT_X0, MAT_X1 - CX) * U, 3))).replace('@D@', str(round(2 * max(CY - MAT_Y0, MAT_Y1 - CY) * U, 3)))
 rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 de crédit') for r in rules]
 intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; "
@@ -264,5 +270,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v26"'))   # ?v26 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v27"'))   # ?v27 : force TTS à recharger les images
 print(len(OBJ), 'objets')
