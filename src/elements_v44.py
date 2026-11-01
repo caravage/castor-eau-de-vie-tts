@@ -21,24 +21,24 @@ ACSS = ("*{box-sizing:border-box;margin:0}"
  ".zh{font:400 42px 'IM Fell English SC',serif;padding:14px 24px 8px;display:flex;justify-content:space-between;align-items:baseline}"
  ".mtl .zh{background:#E6DAB6;color:#5A3B24;border-radius:15px 15px 0 0}.exp .zh{background:#8FA67A;color:#F6EFDC;border-radius:15px 15px 0 0}.free .zh{color:#6B5F45;font-size:30px}"
  ".zh small{font:italic 24px 'IM Fell English',serif}"
- ".acts{display:grid;gap:14px;padding:16px 18px 18px}"
+ ".acts{display:grid;gap:12px;padding:12px 18px 14px}"
  ".a{background:#FFFDF6;border-radius:12px;padding:12px 16px;border:1.5px solid rgba(0,0,0,.12);display:flex;gap:16px;align-items:flex-start}.a svg{flex:none;margin-top:4px}"
- ".a b{display:block;font:400 36px 'IM Fell English SC',serif;margin-bottom:4px}.a p{font:400 27.5px/1.3 'Alegreya Sans',sans-serif;color:#2A2418}"
- ".mtl .a b{color:#7A4E2A}.exp .a b{color:#2F4D19}.note{margin-top:6px;font-size:24px!important;color:#4A3A2C!important}.note u{text-decoration:none;font-weight:700}"
- ".free .acts{grid-template-columns:repeat(3,1fr);padding:4px 20px 16px}.free .a{background:transparent;border:none;padding:0 6px}.free .a b{font-size:28px;color:#6B5F45}.free .a p{font-size:22px}")
+ ".a b{display:block;font:400 36px 'IM Fell English SC',serif;margin-bottom:4px}.a p{font:400 25.5px/1.26 'Alegreya Sans',sans-serif;color:#2A2418}"
+ ".mtl .a b{color:#7A4E2A}.exp .a b{color:#2F4D19}.note{margin-top:4px;font-size:22px!important;color:#4A3A2C!important}.note u{text-decoration:none;font-weight:700}"
+ ".xnote{font:400 23px/1.2 'Alegreya Sans',sans-serif;color:#2F4D19;padding:10px 22px 0}.xnote b{font-weight:700}.free .acts{grid-template-columns:repeat(3,1fr);padding:4px 20px 16px}.free .a{background:transparent;border:none;padding:0 6px}.free .a b{font-size:28px;color:#6B5F45}.free .a p{font-size:22px}")
 AM=[('Monter une expédition','Composez une ou des expéditions (choix du congé et/ou Coureur des bois, canots, charges et voyageurs), payez les dépenses puis posez le ou les canots sur une traversée adjacente à Montréal.',''),
-    ('Vendre des fourrures','Vendez des fourrures de votre entrepôt : à Montréal, contre des lettres de change ; à Albany au prix du castor +1.',''),
+    ('Vendre des fourrures','Vendez des fourrures de votre entrepôt :<br>– à Montréal, au prix du castor<br>– à Albany (soupçon), au prix du castor +1',''),
     ('Investir','Achetez un canot, des marchandises, de l’eau-de-vie au Marché de Québec ou des parts de distillerie ou de navire.',''),
     ('Recruter','Achetez une carte de la rivière.','')]
-AX=[('Voyager','Faites avancer vos canots de leur zone de troc vers une traversée adjacente.',''),
-    ('Troquer','Vos expéditions échangent dans un lac sélectionné toutes les charges voulues contre les tuiles présentes. Pour chaque eau-de-vie troquée, lancez un dé : sur un 1, +1 ravage.','<u>Mission :</u> +1 soupçon par eau-de-vie échangée. CdB interdits.'),
-    ('Trafiquer','Vos expéditions essayent de trafiquer de la fourrure de castor contre une eau-de-vie. Lancez un dé : sur 2 ou plus, piochez une tuile du sac Castor sec. Vous pouvez répéter cette action en ajoutant un dé à chaque essai ; un seul 1 fait échouer l’essai. Échec : perte de l’eau-de-vie, le lac est ravagé (posez-y un marqueur Ravagé), +1 ravage.','<u>Mission :</u> interdit. <u>CdB :</u> un échec ne ravage pas le lac.')]
+AX=[('Voyager','Faites avancer une expédition d’une zone de troc vers une zone adjacente.',''),
+    ('Troquer','Dans un lac ou Pays, une expédition échange autant de charges voulues contre les tuiles présentes. Pour chaque eau-de-vie troquée, lancez un dé : sur un 1, +1 ravage.','<u>Mission :</u> +1 soupçon par eau-de-vie échangée.<br><u>Coureurs des bois :</u> interdits.'),
+    ('Trafiquer','Dans un lac ou Pays, une expédition essaye de trafiquer de la fourrure de castor contre une eau-de-vie. Lancez un dé : sur 2 ou plus, piochez une tuile du sac Castor sec. Vous pouvez répéter cette action en ajoutant un dé à chaque essai ; un seul 1 fait échouer l’essai. Échec : perte de l’eau-de-vie, le lac est ravagé (posez-y un marqueur Ravagé), +1 ravage.','<u>Mission :</u> interdit. <br><u>Coureurs des bois :</u> un échec ne ravage pas le lac.')]
 AG=[('Jouer une carte','de votre main en respectant la condition écrite sur la carte.',''),
     ('Faire partir votre navire','avant octobre, en payant 1 ₶ de faux fret par place vide.',''),
     ('Échanger entre joueurs','Acheter, louer ou vendre à un prix négocié entre joueurs 1 canot ou jusqu’à 5 charges ou peaux.','')]
 def aacts(L, c, sz=70): return ''.join(f"<div class='a'>{icon(t,c,sz)}<div><b>{t}</b><p>{d}</p>" + (f"<p class='note'>{n}</p>" if n else '') + "</div></div>" for t, d, n in L)
 page('aide_a', 1600, 1150, "<div class='page'><div style='display:flex;gap:24px;flex:1'>"
-     f"<div class='zone exp' style='flex:1.25'><div class='zh'>En expédition <small>Pays-d’en-Haut</small></div><div class='acts'>{aacts(AX,'#2F4D19')}</div></div>"
+     f"<div class='zone exp' style='flex:1.25'><div class='zh'>En expédition <small>Pays-d’en-Haut</small></div><div class='xnote'>Chaque mois : <b>une action par canot</b> qui n’est pas en transit. Action faite : couchez le canot.</div><div class='acts'>{aacts(AX,'#2F4D19')}</div></div>"
      f"<div class='zone mtl' style='flex:1'><div class='zh'>À Montréal</div><div class='acts'>{aacts(AM,'#7A4E2A')}</div></div></div>"
      f"<div class='zone free'><div class='zh'>Actions gratuites <small>une par tour</small></div><div class='acts'>{aacts(AG,'#6B5F45',46)}</div></div></div>", ACSS)
 # Marqueur Ravagé : carré comme la mission, flammes

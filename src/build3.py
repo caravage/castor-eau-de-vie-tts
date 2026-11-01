@@ -55,6 +55,7 @@ def bag(nick, wpx, pos, items, color, desc=''):
     random.shuffle(items); o['ContainedObjects'] = items; return o
 
 MESH = json.load(open('meshes.json')); MESH['de_noir'] = 1.0
+for _k in ('grand', 'petit', 'coureur'): MESH[f'canot3d_{_k}_couche'] = MESH[f'canot3d_{_k}']
 def mbag(nick, mesh, tex, wpx, pos, items, color=WHITE, desc='', order=0, inf=False):
     # Sac en forme de pièce (Custom_Model_Bag) : le modèle est la pièce agrandie, l'image du jeton sur le dessus.
     o = base('Custom_Model_Infinite_Bag' if inf else 'Custom_Model_Bag', nick, wpx, pos, color, False, 0.6, y3=True, desc=desc, s0=round(wpx * U, 4))
@@ -199,12 +200,15 @@ OBJ.append(tile('Aide de jeu (recto)', 'aide_a', 430, P(640 - 225, -146), back='
 OBJ.append(mbag('Coureurs des bois', 'sac_coureur', 'tok_coureur', 34, P(1690, 656), [tile('Coureur des bois', 'tok_coureur', 40, typ=3, thick=0.1)], desc='Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.', inf=True))
 CANOT = {'grand': ('Grand canot', 52, 80), 'petit': ('Moyen canot', 40, round(80 * 452 / 692, 1)), 'coureur': ('Petit canot (coureurs des bois)', 32, round(80 * 332 / 692, 1))}   # même largeur, longueur selon les cases
 EXP_ID = 11
+def canot_etats(nick, key, tex, wb):   # v46 : état 2 = canot couché (action faite ce mois) ; touches 1/2 ou PgUp/PgDn pour changer d'état
+    a = model(nick, f'canot3d_{key}', tex, wb); b = model(nick + ' (couché)', f'canot3d_{key}_couche', tex, wb)
+    b['Transform'] = T(); b['Locked'] = False; a['States'] = {'2': b}; return a
 for i in range(3):
     x0 = -269 + i * 614; mx = x0 + 12; Q = lambda x, y: P(mx + x, y); col_ = PC[i]      # zone du joueur : sacs à 1505, cartes jouées dessous, plateau dès 1662, sacs Expédition à droite
     OBJ.append(mbag(f'Marchandises {PN[i]}', 'sac_caisse', 'tok_caisse_w', 40, Q(22, 1186), [token(f'Marchandise {PN[i]}', 'tok_caisse_w', 24, None, col_) for _ in range(8)], col_, '8 marchandises'))
     OBJ.append(mbag(f'Eau-de-vie {PN[i]}', 'sac_bouteille', 'tok_bouteille_w', 28, Q(62, 1186), [token(f'Eau-de-vie {PN[i]}', 'tok_bouteille_w', 24, None, col_) for _ in range(8)], col_, '8 bouteilles'))
     for k, (key, (lab, wp, wb)) in enumerate(CANOT.items()):
-        OBJ.append(mbag(f'{lab} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}', wb, Q((120, 205, 270)[k], 1186), [model(f'{lab} {n} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}_{n}', wb) for n in 'CBA'], WHITE, f'{lab} A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.'))
+        OBJ.append(mbag(f'{lab} {PN[i]}', f'canot3d_{key}', f'cn_{PN[i]}_{key}', wb, Q((120, 205, 270)[k], 1186), [canot_etats(f'{lab} {n} {PN[i]}', key, f'cn_{PN[i]}_{key}_{n}', wb) for n in 'CBA'], WHITE, f'{lab} A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.'))
     OBJ.append(base('PlayerPawn', f'Pion {PN[i]}', 18, Q(372, 1186), col_, h=0.6, y3=True, s0=1.0))
     for k in range(10): OBJ.append(base('Checker_white', f'Part {PN[i]}', 10, Q(404, 1186), col_, False, 0.5 + k * 0.3, y3=True, s0=0.5))
     OBJ.append(token(f'Soupçon {PN[i]}', 'tok_disc', 18, Q(254, 1216 + 19), col_))
@@ -292,5 +296,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v37"'))   # ?v31 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v38"'))   # ?v31 : force TTS à recharger les images
 print(len(OBJ), 'objets')

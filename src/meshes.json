@@ -12,5 +12,8 @@
  "canot3d_grand": 0.2168,
  "canot3d_petit": 0.3319,
  "canot3d_coureur": 0.4518,
- "sac_exp": 0.7143
+ "sac_exp": 0.7143,
+ "canot3d_grand_couche": 0.2168,
+ "canot3d_petit_couche": 0.3319,
+ "canot3d_coureur_couche": 0.4518
 }
