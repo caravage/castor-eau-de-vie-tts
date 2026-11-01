@@ -60,10 +60,10 @@ ASSOC45 = [('Pierre Lestage', 'gros équipeur de Montréal', 'Chaque expédition
 DECKS['pers'] = sheet('deck_pers', 'Associé', [card_html('Associé', t, fx, q) for t, q, fx in ASSOC45], 'Associés', 'piochez 3 · gardez-en 1'); DECKS['pers']['names'] = [f'{t}, {q}' for t, q, fx in ASSOC45]
 # Manigances v45 (validées le 1er nov.) : 10 cartes, 1 exemplaire chacune
 KCOL['Manigance'] = '#5A2A4A'
-MANIG45 = [('Canotée de trop', '', 'Ajoutez un canot de plus à une expédition.'),
-           ('Faussaire', '', 'Après qu’un joueur a choisi un congé, prenez-le. Il reste à sa charge. +1 soupçon.'),
-           ('Eau-de-vie coupée', '', 'Troquer : une eau-de-vie compte pour deux.'),
-           ('Société secrète', '', 'Vendez à Albany sans test de soupçon.'),
+MANIG45 = [('Canotée de trop', 'Pendant votre action « Monter une expédition ».', 'Ajoutez un canot de plus à une expédition.'),
+           ('Faussaire', 'Après qu’un joueur a choisi un congé et qu’il en reste encore au moins un autre disponible.', 'Volez le congé. Il reste à sa charge. +1 soupçon.'),
+           ('Eau-de-vie coupée', 'Pendant votre action Troquer ou Trafiquer.', 'Vos eaux-de-vie comptent double pour toute l’action.'),
+           ('Société secrète', 'Pendant votre action « Vendre des fourrures ».', 'Vendez à Albany sans test de soupçon.'),
            ('Rafler la traite', 'Au moment où un joueur annonce un troc dans votre zone.', 'Troquez à sa place (hors de votre tour).'),
            ('Pillage', 'À tout moment.', 'Une expédition adverse dans votre zone perd 2 charges ; vous en gardez 1. +1 soupçon.'),
            ('Commandant complaisant', 'Quand une expédition arrive dans une zone de troc.', 'Dans un lac avec un fort, réservez 1 peau visible.'),
