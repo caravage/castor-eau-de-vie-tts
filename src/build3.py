@@ -255,9 +255,23 @@ for o in OBJ:
     if o.get('Nickname') in ('Tapis de jeu', 'Table du castor') or not o.get('GMNotes', '').startswith('{') or 'x' not in json.loads(o['GMNotes']): continue
     x, y = at(o)
     if x > 1255 and -10 < y < 1100: place(o, x + 36, y)
+# v41 : pas de description au survol (cartes, tuiles, pions) ; plateaux sans info-bulle ; « snap » sur les pièces qui vont sur un point d'accroche
+SNAP_ON = ('Ravages', 'Prix du castor', 'Année', 'Fort français', 'Fort anglais', 'Mission', 'Navire du roi', 'Navire de la compagnie', 'Le Profond (navire du roi)')
+def clean(objs, bagname=''):
+    for o in objs:
+        nk = o.get('Nickname', '')
+        if o['Name'] not in ('Bag', 'Infinite_Bag', 'Custom_Model_Bag', 'Custom_Model_Infinite_Bag', 'Counter'): o['Description'] = ''
+        if nk in ('Tapis de jeu', 'Table du castor') or nk.startswith('Plateau du joueur'): o['Tooltip'] = False
+        if nk in SNAP_ON or nk.startswith('Navire · ') or bagname in ('Castor sec', 'Castor gras'): o['Snap'] = True
+        clean(o.get('ContainedObjects', []), nk)
+clean(OBJ)
 # Points d'accroche (coordonnées de l'artefact) : pistes Ravages (0-6) et Prix du castor (1-8), cases Tour (I-VIII), emplacements Mission/Fort
 SNAPS = [(268 + 33 * v, 246) for v in range(7)] + [(833.5 + 33 * v, 246) for v in range(8)] + [(239 + 30 * k, 73) for k in range(8)]
 SNAPS += [(76 + x, 238 + y) for x, y in ((412, 112), (412, 144), (47, 324.5), (47, 356.5), (427, 470), (427, 502))]
+for rx0, nx in ((667.63, 705.63), (932.0, 970.0)):                       # rades de Québec et de La Rochelle : navire puis 5 cales par rangée
+    for r in range(4):
+        SNAPS.append((76 + rx0 + 14, 238 + 347.45 + 12 + 40 * r))
+        SNAPS += [(76 + nx + 15.5 + 37 * k, 238 + 343.45 + 16 + 40 * r) for k in range(5)]
 SNAP_LUA = '{' + ','.join('{%s,%s}' % P(x, y) for x, y in SNAPS) + '}'
 LUA = open('setup.lua').read().replace('@SNAP@', SNAP_LUA).replace('@W@', str(round(2 * max(CX - MAT_X0, MAT_X1 - CX) * U, 3))).replace('@D@', str(round(2 * max(CY - MAT_Y0, MAT_Y1 - CY) * U, 3)))
 rules = open('rules.txt').read().strip().split('\n\n')
@@ -270,5 +284,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v27"'))   # ?v27 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v28"'))   # ?v28 : force TTS à recharger les images
 print(len(OBJ), 'objets')

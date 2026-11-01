@@ -11,9 +11,9 @@ svg('fort_uk', 220, 220, "<defs><clipPath id='u'><rect x='10' y='10' width='200'
     "<path d='M110 10V210M10 110H210' stroke='#FFFFFF' stroke-width='64'/><path d='M110 10V210M10 110H210' stroke='#C8102E' stroke-width='38'/></g>"
     "<rect x='10' y='10' width='200' height='200' rx='34' fill='none' stroke='#2A2418' stroke-width='8'/>")
 # Pions : lettre manuscrite (IM Fell English italique), centrée sur sa boîte et réduite pour ne pas toucher le cercle intérieur
-for nm, c, d, ink, L, s, bx in (('pion_ravages', '#8E2F25', '#5E1E17', '#F6EFDC', 'R', .682, 136.16), ('pion_prix', '#C9952B', '#7A5A14', '#2A2418', 'C', .666, 141.0)):
+for nm, c, d, ink, L, s, bx, by in (('pion_ravages', '#8E2F25', '#5E1E17', '#F6EFDC', 'R', 0.7538, 155.81, 72.83), ('pion_prix', '#C9952B', '#7A5A14', '#2A2418', 'C', 0.8325, 138.0, 57.25)):
     svg(nm, 200, 200, f"<circle cx='100' cy='100' r='96' fill='{c}' stroke='{d}' stroke-width='6'/><circle cx='100' cy='100' r='74' fill='none' stroke='#F6EFDC' stroke-width='3' opacity='.45'/>"
-        f"<text x='100' y='100' transform='translate(100 100) scale({s}) translate({-bx} -59.5)' font-family=\"'IM Fell English',serif\" font-style='italic' font-size='120' fill='{ink}'>{L}</text>")
+        f"<text x='100' y='100' transform='translate(100 100) scale({s}) translate({-bx} {-by})' font-family=\"'IM Fell English',serif\" font-style='italic' font-size='120' fill='{ink}'>{L}</text>")
 _seen = {}
 for _m in MANIFEST: _seen[_m[0]] = _m
 MANIFEST[:] = list(_seen.values())
