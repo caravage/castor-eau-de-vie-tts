@@ -111,7 +111,7 @@ def decks():
         DECKS['riv_' + kd] = sheet('deck_riv_' + kd, rk[kd], [card_html(rk[kd], c['title'], c['effect'], c.get('note', ''), c.get('star', 0)) for c in cs], plur, 'rivière de recrutement'); DECKS['riv_' + kd]['names'] = [c['title'] for c in cs]
     mats = [("Navire", "Une carte de navire du chantier, entièrement payée, et 2 de crédit envers la compagnie."), ("Parts de navire", "2 parts payées sur une carte de navire au chantier, et 3 livres."),
             ("Bourse", "4 livres."), ("Ballots de marchandises", "4 marchandises."), ("Eau-de-vie", "2 bouteilles et 1 livre."), ("Assortiment", "2 marchandises et 1 bouteille."),
-            ("Petit canot", "1 petit canot et 2 livres."), ("Grand canot", "1 grand canot et 1 livre."), ("Distillerie", "1 distillerie et 1 livre.")]
+            ("Moyen canot", "1 moyen canot et 2 livres."), ("Grand canot", "1 grand canot et 1 livre."), ("Distillerie", "1 distillerie et 1 livre.")]
     DECKS['mat'] = sheet('deck_mat', 'Matériel de départ', [card_html('Matériel de départ', t, fx) for t, fx in mats], 'Matériel', 'distribué en entier · 3 par marchand', css=CARD_CSS.replace('.t{font-family:', '.t{font-size:60px!important;font-family:').replace('.fx{font-size:30px', '.fx{font-size:44px')); DECKS['mat']['names'] = [t for t, _ in mats]
     ev = [(e['title'], e['text']) for e in D['MONTH_EVENTS'] for _ in range(e['w'])]
     DECKS['ev'] = sheet('deck_ev', 'Fin de mois', [card_html('Fin de mois', t, x) for t, x in ev], 'Fin de mois', 'événement'); DECKS['ev']['names'] = [t for t, _ in ev]
@@ -312,7 +312,7 @@ EXP_CSS = (f".g{{display:grid;grid-template-columns:repeat(3,1050px);grid-auto-r
            f".m{{left:30px;right:30px;top:478px;height:226px;border-radius:30px}}"
            f".bk{{width:1050px;height:750px;background:var(--c);border-radius:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#F6EFDC}}"
            f".bk div{{font:400 110px {DISP}}}.bk span{{font:500 40px {BODY};opacity:.8;margin-top:10px}}")
-TYPES = (('grand', 'Grand canot', 3), ('petit', 'Petit canot', 3), ('coureur', 'Coureur des bois', 0))
+TYPES = (('grand', 'Grand canot', 3), ('petit', 'Moyen canot', 3), ('coureur', 'Coureurs des bois', 0))
 for pn, (c, cd) in PCOL.items():
     cards = []
     for n in 'ABC':
@@ -348,10 +348,11 @@ for pn, (c, cd) in PCOL.items():
     for key, cells in CN.items():
         for L in ('A', 'B', 'C', ''):
             canot_tex(f'cn_{pn}_{key}' + (f'_{L}' if L else ''), c, cd, cells, L)
-    for key, lab in (('grand', 'Grand canot'), ('petit', 'Petit canot'), ('coureur', 'Coureurs des bois')):
+    for key, lab in (('grand', 'Grand canot'), ('petit', 'Moyen canot'), ('coureur', 'Petit canot · CdB')):
         svg(f'sacexp_{pn}_{key}', 560, 400, f"<rect x='0' y='0' width='560' height='400' rx='40' fill='{c}'/><rect x='18' y='18' width='524' height='364' rx='28' fill='none' stroke='#F6EFDC' stroke-width='6'/>"
             + T(280, 170, 'Expéditions', 64, 'middle', fam=DISP, fill='#F6EFDC') + T(280, 260, lab, 50, 'middle', weight=700, fill='#F6EFDC') + T(280, 330, 'A · B · C', 40, 'middle', fill='#F6EFDC'))
 exec(open('cartes_v20.py', encoding='utf-8').read())   # cartes de navire et de distillerie v20
 exec(open('tuiles_v39.py', encoding='utf-8').read())   # tuiles de peaux, tuiles secrètes et congés v39
 exec(open('elements_v40.py', encoding='utf-8').read())   # forts et pions v40
+exec(open('elements_v42.py', encoding='utf-8').read())   # voyageurs et pion Livres v42
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)

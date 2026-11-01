@@ -227,8 +227,8 @@
   ],
   [
    "voy_guide",
-   240,
-   240
+   300,
+   432
   ],
   [
    "voy_mil",
@@ -237,8 +237,8 @@
   ],
   [
    "voy_int",
-   240,
-   240
+   300,
+   432
   ],
   [
    "tok_caisse",
@@ -944,6 +944,36 @@
    "conge_np7",
    400,
    400
+  ],
+  [
+   "voy_guide_used",
+   300,
+   432
+  ],
+  [
+   "voy_int_used",
+   300,
+   432
+  ],
+  [
+   "voy_hiv",
+   300,
+   432
+  ],
+  [
+   "voy_hiv_used",
+   300,
+   432
+  ],
+  [
+   "disc_livres",
+   160,
+   160
+  ],
+  [
+   "disc_livres_30",
+   160,
+   160
   ]
  ],
  "decks": {
@@ -1074,7 +1104,7 @@
     "Ballots de marchandises",
     "Eau-de-vie",
     "Assortiment",
-    "Petit canot",
+    "Moyen canot",
     "Grand canot",
     "Distillerie"
    ]
@@ -1122,14 +1152,14 @@
    "n": 9,
    "names": [
     "Expédition A · Grand canot",
-    "Expédition A · Petit canot",
-    "Expédition A · Coureur des bois",
+    "Expédition A · Moyen canot",
+    "Expédition A · Coureurs des bois",
     "Expédition B · Grand canot",
-    "Expédition B · Petit canot",
-    "Expédition B · Coureur des bois",
+    "Expédition B · Moyen canot",
+    "Expédition B · Coureurs des bois",
     "Expédition C · Grand canot",
-    "Expédition C · Petit canot",
-    "Expédition C · Coureur des bois"
+    "Expédition C · Moyen canot",
+    "Expédition C · Coureurs des bois"
    ]
   }
  }

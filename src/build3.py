@@ -94,7 +94,7 @@ OBJ = [tile('Tapis de jeu', 'tapis', MAT_W, P((MAT_X0 + MAT_X1) / 2, (MAT_Y0 + M
 def C(p, kind):  # centre d'une pièce de l'artefact
     w, h = SIZE[kind]; return P(p['x'] + w / 2, p['y'] + h / 2)
 
-CREW = {'guide': ('Guide', 'voy_guide'), 'mil': ('Milicien', 'voy_mil'), 'int': ('Interprète', 'voy_int')}
+CREW = {'guide': ('Guide', 'voy_guide'), 'int': ('Interprète', 'voy_int'), 'hiv': ('Hivernant', 'voy_hiv')}   # v42 : le milicien est retiré
 SHIPS = ['L’Aigle d’Or', 'Le Courageux', 'Le Jardin de Hollande', 'Le Saint-Jean-Baptiste', 'La Famille', 'Le Vieux Siméon']
 nship = 0
 for p in TP['pieces']:
@@ -133,11 +133,12 @@ for p in TP['pieces']:
         elif kind == 'paris': OBJ.append(tile('Prix du castor', 'pion_prix', 28, pos, typ=2, color=col('#C9952B')))
         elif kind == 'disc':
             if p.get('dem'): OBJ.append(token('Demande · ' + ('Grands Lacs' if p['dem'] == 'gl' else 'Supérieur'), 'tok_disc', 16, pos, INKC))
+            elif p.get('track') == 'livres': o = tile(f'Livres {PN[c]}', 'disc_livres', 14, pos, back='disc_livres_30', typ=2, thick=0.12, color=color); o['Snap'] = True; OBJ.append(o)   # v42 : retourné = 30 livres de plus
             else: OBJ.append(token(f"{ {'livres': 'Livres', 'credit': 'Crédit'}.get(p.get('track'), 'Soupçon') } {PN[c]}", 'tok_disc', 11 if p.get('track') else 18, pos, color))
         elif kind == 'march': OBJ.append(token(f'Marchandise {who}', 'tok_caisse_w', w, pos, color))
         elif kind == 'baril': OBJ.append(token(f'Eau-de-vie {who}', 'tok_bouteille_w', w, pos, color))
         elif kind == 'grand': OBJ.append(token(f'Grand canot {who}', 'canot_grand', w, pos, color))
-        elif kind == 'petit': OBJ.append(token(f'Petit canot {who}', 'canot_petit', w, pos, color))
+        elif kind == 'petit': OBJ.append(token(f'Moyen canot {who}', 'canot_petit', w, pos, color))
         elif kind == 'ship':
             if p.get('roi'): OBJ.append(stile('Le Profond (navire du roi)', 'navire_profond', 34, pos))
             elif p.get('merch'): OBJ.append(stile('Navire de la compagnie', 'navire_compagnie', 34, pos))
@@ -149,7 +150,7 @@ for p in TP['pieces']:
             OBJ.append(tile(f'Carte de navire · {nm}', f'carte_navire_{nship}', w, pos, typ=3, thick=0.08, desc='Financez-la au chantier ; le propriétaire la pose devant lui et envoie le navire du même nom sur le plateau.'))
             OBJ.append(stile(f'Navire · {nm}', f'navire_{nship}', 34, P(p['x'] + 27, p['y'] + 37), h=0.7))
         elif kind == 'pas': OBJ.append(tile('Prendre le pas · 1er', 'tok_pas', w, pos))
-        elif kind == 'crew': lab, img = CREW[p['crew']]; OBJ.append(token(lab, img, 26, pos))
+        elif kind == 'crew': continue   # voyageurs : dans leurs sacs
         elif kind == 'pawn':
             o = base('PlayerPawn', f'Pion {who}', 18, pos, color, h=0.6, y3=True, s0=1.0); OBJ.append(o)
         else: raise SystemExit('pièce inconnue : ' + kind)
@@ -163,8 +164,10 @@ for c in OBJ[-1]['ContainedObjects']: c['GMNotes'] = json.dumps({'w': round(70 *
 # Comptoir de Québec : tout son stock rangé dans sa zone (rien n'est mis en vente d'avance)
 OBJ.append(mbag('Marchandises (comptoir)', 'sac_caisse', 'tok_caisse_w', 44, P(1320, 486 + 50), [upright(token('Marchandise (comptoir)', 'tok_caisse_w', 24, None, GREY))], GREY, 'Marchandises génériques, en nombre illimité', inf=True))
 OBJ.append(mbag('Eau-de-vie (comptoir)', 'sac_bouteille', 'tok_bouteille_w', 30, P(1380, 486 + 50), [upright(token('Eau-de-vie (comptoir)', 'tok_bouteille_w', 24, None, GREY))], GREY, 'Eau-de-vie générique, en nombre illimité', inf=True))
-for ci, (kc, (lab, img)) in enumerate(CREW.items()): OBJ.append(mbag(f'{lab}s', f'sac_voy_{kc}', img, 40, P(1320 + ci * 120, 680 + 48), [token(lab, img, 22) for _ in range(4)], desc=f'4 {lab.lower()}s'))
-OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1316, 486 + 105), GREY)); OBJ.append(token('Petit canot (comptoir)', 'canot_petit', 40, P(1382, 486 + 105), GREY))
+def voy(lab, img):   # jeton ovale à deux faces : tuile ronde étirée aux proportions de l'image
+    o = tile(lab, img, 20, back=img + '_used', typ=2, thick=0.1); o['CustomImage']['CustomTile']['Stretch'] = True; o['Snap'] = True; return o
+for ci, (kc, (lab, img)) in enumerate(CREW.items()): OBJ.append(mbag(f'{lab}s', 'sac_voy_' + ('mil' if kc == 'hiv' else kc), img, 40, P(1320 + ci * 120, 680 + 48), [voy(lab, img) for _ in range(6)], desc=f'6 {lab.lower()}s'))
+OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1316, 486 + 105), GREY)); OBJ.append(token('Moyen canot (comptoir)', 'canot_petit', 40, P(1382, 486 + 105), GREY))
 ROI = base('Custom_Model', 'Navire du roi', 40, P(1440, 486 + 105), WHITE, False, 0.8, y3=True, s0=1.0, desc='En rade dès avril les années I et II, 4 places publiques.')   # figurine fournie, en blanc
 ROI['CustomMesh'] = {'MeshURL': 'https://steamusercontent-a.akamaihd.net/ugc/952982844368369073/FB63C915DB2529E0210C26EEDFD717929BB7E7A6/', 'DiffuseURL': '', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 1, 'CastShadows': True}
 ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(stile('Navire de la compagnie', 'navire_compagnie', 34, P(1490, 486 + 105))); OBJ.append(stile('Le Profond (navire du roi)', 'navire_profond', 34, P(1440, 486 + 140), desc='Marqueur du navire du roi.'))
@@ -189,7 +192,7 @@ for k, (dx, dy) in enumerate(((48, 20), (207, 20), (48, 50), (207, 50))):
 # Aide de jeu : une par joueur, empilées sous le matériel de départ
 OBJ.append(tile('Aide de jeu (recto)', 'aide_a', 430, P(640 - 225, -146), back='aide_b', typ=3, thick=0.05)); OBJ.append(tile('Aide de jeu (verso)', 'aide_b', 430, P(640 + 225, -146), back='aide_a', typ=3, thick=0.05))   # au-dessus du plateau, côte à côte
 OBJ.append(mbag('Coureurs des bois', 'sac_coureur', 'tok_coureur', 34, P(1690, 656), [tile('Coureur des bois', 'tok_coureur', 40, typ=3, thick=0.1)], desc='Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.', inf=True))
-CANOT = {'grand': ('Grand canot', 52, 80), 'petit': ('Petit canot', 40, round(80 * 452 / 692, 1)), 'coureur': ('Coureurs des bois', 32, round(80 * 332 / 692, 1))}   # même largeur, longueur selon les cases
+CANOT = {'grand': ('Grand canot', 52, 80), 'petit': ('Moyen canot', 40, round(80 * 452 / 692, 1)), 'coureur': ('Petit canot (coureurs des bois)', 32, round(80 * 332 / 692, 1))}   # même largeur, longueur selon les cases
 EXP_ID = 11
 for i in range(3):
     x0 = -269 + i * 614; mx = x0 + 12; Q = lambda x, y: P(mx + x, y); col_ = PC[i]      # zone du joueur : sacs à 1505, cartes jouées dessous, plateau dès 1662, sacs Expédition à droite
@@ -202,7 +205,7 @@ for i in range(3):
     OBJ.append(token(f'Soupçon {PN[i]}', 'tok_disc', 18, Q(254, 1216 + 19), col_))
     # Cartes Expédition : un tas par type (A sur le dessus), face visible, devant le joueur
     cd = {str(EXP_ID + i): {'FaceURL': URL + f'exp_{PN[i]}.png', 'BackURL': URL + f'exp_{PN[i]}_back.png', 'NumWidth': 3, 'NumHeight': 3, 'BackIsHidden': True, 'UniqueBack': False, 'Type': 0}}
-    for t, (tx, key, tlab) in enumerate(((1254, 'grand', 'Grand canot'), (1322, 'petit', 'Petit canot'), (1390, 'coureur', 'Coureurs des bois'))):
+    for t, (tx, key, tlab) in enumerate(((1254, 'grand', 'Grand canot'), (1322, 'petit', 'Moyen canot'), (1390, 'coureur', 'Petit canot (coureurs des bois)'))):
         cards = []
         for j in (6 + t, 3 + t, t):                       # sortent dans l'ordre A, B, C (le dernier objet du sac sort en premier)
             c = base('Card', f"{DK['exp']['names'][j]} ({PN[i]})", 150, None, s0=1.0); c['GMNotes'] = json.dumps({**json.loads(c['GMNotes']), 'd': round(107 * U, 4), 'face': 'up'})
@@ -224,9 +227,9 @@ def at(o):
 SPOT = {'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 'Charges': (140, -76),
         'Associés': (1140, -226), 'Événements de fin de mois': (1250, -226), 'Demande de Paris': (1140, -76), 'Grands événements': (1250, -76),
         'Castor sec': (-16, 410), 'Castor gras': (-16, 480), 'Tuiles secrètes': (-16, 550), 'Sac des congés': (-16, 620),
-        'Marchandises (comptoir)': (1285, 715), 'Eau-de-vie (comptoir)': (1330, 715), 'Grand canot (comptoir)': (1385, 715), 'Petit canot (comptoir)': (1445, 715),
+        'Marchandises (comptoir)': (1285, 715), 'Eau-de-vie (comptoir)': (1330, 715), 'Grand canot (comptoir)': (1385, 715), 'Moyen canot (comptoir)': (1445, 715),
         'Navire du roi': (1495, 715), 'Le Profond (navire du roi)': (1495, 765), 'Navire de la compagnie': (1545, 715), 'Dé de traversée': (1370, 50),
-        'Guides': (1290, 120), 'Miliciens': (1345, 120), 'Interprètes': (1400, 120), 'Coureurs des bois': (1460, 120),
+        'Guides': (1290, 120), 'Interprètes': (1345, 120), 'Hivernants': (1400, 120), 'Coureurs des bois': (1460, 120),
         'Forts français': (1290, 190), 'Forts anglais': (1345, 190), 'Missions': (1400, 190), 'Jetons Abîmé': (1455, 190),
         'Matériel de départ': (1310, 628)}
 MULTI = {'Dé': [(1290, 50), (1330, 50)], 'Prendre le pas · 1er': [(1440, 50), (1485, 50), (1530, 50)]}
@@ -284,5 +287,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v28"'))   # ?v28 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v29"'))   # ?v29 : force TTS à recharger les images
 print(len(OBJ), 'objets')
