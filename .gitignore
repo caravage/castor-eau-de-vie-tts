@@ -1,0 +1,7 @@
+# Fichiers de construction locaux (générés par gen2.py, render.js et build3.py)
+src/html/
+src/img/
+src/node_modules/
+src/package-lock.json
+src/package.json
+src/Castor_et_eau-de-vie.json
