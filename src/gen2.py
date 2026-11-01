@@ -356,4 +356,5 @@ exec(open('tuiles_v39.py', encoding='utf-8').read())   # tuiles de peaux, tuiles
 exec(open('elements_v40.py', encoding='utf-8').read())   # forts et pions v40
 exec(open('elements_v42.py', encoding='utf-8').read())   # voyageurs et pion Livres v42
 exec(open('elements_v44.py', encoding='utf-8').read())   # aide de jeu Actions v44
+exec(open('elements_v45.py', encoding='utf-8').read())   # matériel de départ v45
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)
