@@ -41,6 +41,11 @@ page('aide_a', 1600, 1150, "<div class='page'><div style='display:flex;gap:24px;
      f"<div class='zone exp' style='flex:1.25'><div class='zh'>En expédition <small>Pays-d’en-Haut</small></div><div class='acts'>{aacts(AX,'#2F4D19')}</div></div>"
      f"<div class='zone mtl' style='flex:1'><div class='zh'>À Montréal</div><div class='acts'>{aacts(AM,'#7A4E2A')}</div></div></div>"
      f"<div class='zone free'><div class='zh'>Actions gratuites <small>une par tour</small></div><div class='acts'>{aacts(AG,'#6B5F45',46)}</div></div></div>", ACSS)
+# Marqueur Ravagé : carré comme la mission, flammes
+svg('ravage', 220, 220, "<rect x='10' y='10' width='200' height='200' rx='34' fill='#7A1F18' stroke='#2A2418' stroke-width='8'/>"
+    "<path d='M110 30 C122 62 160 78 160 128 C160 162 138 186 110 186 C82 186 60 162 60 128 C60 104 72 90 80 80 C82 98 90 106 98 108 C92 84 98 52 110 30 Z' fill='#E8A93C'/>"
+    "<path d='M112 82 C118 104 140 116 140 142 C140 164 126 176 110 176 C94 176 80 164 80 142 C80 128 88 120 92 114 C94 126 100 132 106 132 C102 116 104 98 112 82 Z' fill='#F6D57A'/>"
+    "<path d='M110 126 C114 140 126 146 126 160 C126 170 118 176 110 176 C102 176 94 170 94 160 C94 150 102 144 110 126 Z' fill='#FFF4D6'/>")
 _seen = {}
 for _m in MANIFEST: _seen[_m[0]] = _m
 MANIFEST[:] = list(_seen.values())

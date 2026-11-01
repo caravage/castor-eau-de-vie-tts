@@ -182,6 +182,7 @@ def ibag(nick, pos, item, color, desc):
 OBJ.append(ibag('Forts français', P(1765, 560), tile('Fort français', 'fort_fr', 26, typ=3, color=col('#F2EAD3')), col('#7A5232'), 'Forts français en nombre illimité'))
 OBJ.append(ibag('Forts anglais', P(1825, 560), tile('Fort anglais', 'fort_uk', 26, typ=3, color=col('#F2EAD3')), col('#012169'), 'Forts anglais en nombre illimité'))
 OBJ.append(ibag('Missions', P(1765, 620), tile('Mission', 'mission', 26, typ=3, color=col('#1E1A14')), col('#1E1A14'), 'Missions en nombre illimité'))
+OBJ.append(ibag('Marqueurs Ravagé', P(1825, 620), tile('Ravagé', 'ravage', 26, typ=3, color=col('#7A1F18')), col('#7A1F18'), 'Marqueurs Ravagé en nombre illimité'))
 OBJ.append(ibag('Jetons Abîmé', P(1765, 680), token('Abîmé', 'abime', 26), col('#A3352A'), 'Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé'))
 OBJ.append(tile('Fort français', 'fort_fr', 26, P(40 + 36 + 427, 238 + 502), typ=3, color=col('#F2EAD3')))      # Lacs d'en bas, case Fort (fort Frontenac, 1673)
 OBJ.append(tile('Mission', 'mission', 26, P(40 + 36 + 47, 238 + 324.5), typ=3, color=col('#1E1A14')))            # Lacs d'en haut, case Mission (Saint-Ignace, 1671)
@@ -259,7 +260,7 @@ for o in OBJ:
     x, y = at(o)
     if x > 1255 and -10 < y < 1100: place(o, x + 36, y)
 # v41 : pas de description au survol (cartes, tuiles, pions) ; plateaux sans info-bulle ; « snap » sur les pièces qui vont sur un point d'accroche
-SNAP_ON = ('Ravages', 'Prix du castor', 'Année', 'Fort français', 'Fort anglais', 'Mission', 'Navire du roi', 'Navire de la compagnie', 'Le Profond (navire du roi)')
+SNAP_ON = ('Ravages', 'Prix du castor', 'Année', 'Fort français', 'Fort anglais', 'Mission', 'Ravagé', 'Navire du roi', 'Navire de la compagnie', 'Le Profond (navire du roi)')
 def clean(objs, bagname=''):
     for o in objs:
         nk = o.get('Nickname', '')
