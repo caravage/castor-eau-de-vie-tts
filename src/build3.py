@@ -113,15 +113,15 @@ for p in TP['pieces']:
     elif k == 'bag':
         pos = C(p, 'bag')
         if p['bag'] == 'classic':
-            OBJ.append(bag('Sac des Grands Lacs', 46, pos, [tile(f'Castor ×{n} (Grands Lacs)', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', color=col('#B7A675'), desc='Retourné côté gras (★) s’il n’est pas troqué à la fin de l’année.', face='up')
-                                                        for n, m in ((1, 9), (2, 6), (3, 3)) for _ in range(m)], col('#8A6A45'), '18 paquets : 9 × 1, 6 × 2, 3 × 3'))
+            OBJ.append(bag('Castor sec', 46, pos, [tile('', f'tile_G{n}_sec', 30, back=f'tile_G{n}_gras', color=col('#B7A675'), face='up')
+                                                        for n, m in ((1, 18), (2, 12), (3, 2)) for _ in range(m)], col('#8A6A45'), '32 tuiles sèches : 18 × 1, 12 × 2, 2 × 3 peaux ; côté gras (★) au verso.'))
         elif p['bag'] == 'premium':
-            OBJ.append(bag('Sac du lac Supérieur', 46, pos, [tile(f'Castor gras ×{n} (Supérieur)', f'tile_S{n}_gras', 30, back=f'tile_S{n}_gras', color=col('#C9952B'), desc='Castor gras (★) : toutes les tuiles du lac Supérieur sont grasses.', face='up')
-                                                         for n, m in ((1, 3), (2, 5), (3, 4)) for _ in range(m)], col('#8A6418'), '12 paquets : 3 × 1, 5 × 2, 4 × 3'))
+            OBJ.append(bag('Castor gras', 46, pos, [tile('', 'tile_gras_neutre', 30, back=f'tile_S{n}_gras', color=col('#C9952B'), face='up')
+                                                         for n, m in ((1, 5), (2, 8), (3, 1)) for _ in range(m)], col('#8A6418'), '14 tuiles grasses : 5 × 1, 8 × 2, 1 × 3 peaux. Face neutre (?) au lac Supérieur tant qu’il n’y a ni mission ni fort.'))
         else:
-            HN = {'fur1': 'Traite : 1 castor', 'fur2': 'Traite : 2 castors', 'fur3': 'Traite : 3 castors', 'mission': 'Missionnaire', 'present': 'Présent', 'fievre': 'Fièvre', 'gatees': 'Peaux gâtées'}
-            OBJ.append(bag('Jetons cachés', 46, pos, [tile('', f'hid_{h}', 30, back='hid_back', fz=180, face='down', color=col('#B7A675')) for h, m in (('fur1', 6), ('fur2', 6), ('fur3', 3), ('mission', 2), ('present', 2), ('fievre', 2), ('gatees', 2)) for _ in range(m)],
-                           col('#3A2618'), '23 jetons, posés face cachée (?) sur les lacs'))
+            OBJ.append(bag('Tuiles secrètes', 46, pos, [tile('', f'hid_{h}', 30, back='hid_back', fz=180, face='down', color=col('#B7A675'))
+                                                        for h, m in (('fur1', 6), ('fur2', 7), ('fur3', 2), ('present', 4), ('alliance', 3), ('gatees', 3), ('mission', 2), ('scorbut', 2), ('concurrence', 2), ('ruine', 1)) for _ in range(m)],
+                           col('#3A2618'), '32 tuiles secrètes, posées face cachée sur les lacs (2 au plus par lac).'))
     elif k == 'die':
         d = base('Die_6', 'Dé de traversée' if p.get('cross') else 'Dé', 24, C(p, 'die'), col('#8E2F25') if p.get('cross') else WHITE, h=0.7, y3=True, s0=1.0); OBJ.append(d)
     elif k == 'tok':
@@ -168,8 +168,9 @@ OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1316, 486 + 105)
 ROI = base('Custom_Model', 'Navire du roi', 40, P(1440, 486 + 105), WHITE, False, 0.8, y3=True, s0=1.0, desc='En rade dès avril les années I et II, 4 places publiques.')   # figurine fournie, en blanc
 ROI['CustomMesh'] = {'MeshURL': 'https://steamusercontent-a.akamaihd.net/ugc/952982844368369073/FB63C915DB2529E0210C26EEDFD717929BB7E7A6/', 'DiffuseURL': '', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 1, 'CastShadows': True}
 ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(stile('Navire de la compagnie', 'navire_compagnie', 34, P(1490, 486 + 105))); OBJ.append(stile('Le Profond (navire du roi)', 'navire_profond', 34, P(1440, 486 + 140), desc='Marqueur du navire du roi.'))
-OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(f'Congé · {n} marchandises · {c} crédit', f'conge_m{n}', 32, back='conge_back') for n, c, m in ((4, 3, 3), (3, 2, 4), (2, 1, 3)) for _ in range(m)],
-               col('#8E2F25'), '10 congés : 3 à 4 marchandises (3 crédit), 4 à 3 marchandises (2 crédit), 3 à 2 marchandises (1 crédit). 4 tirés par an à 3 joueurs, remélangés chaque année. Joueur le plus pauvre : −1 crédit.'))
+CONGES = json.load(open('conges_v39.json'))
+OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(' '.join(nom), f'conge_{cid}', 32, back=(f'conge_{cid}' if cr else f'conge_np{p}')) for cid, nom, p, cr, canot, perso, nc, extra, nb in CONGES for _ in range(nb)],
+               col('#8E2F25'), f'{sum(c[8] for c in CONGES)} congés (permis seuls). Tirés au printemps : autant que de joueurs + 1. Payés en hiver ; posés face « non payé » sur le plateau joueur. Joueur le plus pauvre : −1 ₶ (minimum 1).'))
 # Forts, missions et jetons Abîmé : réserves illimitées ; un fort aux Lacs d'en bas et une mission aux Lacs d'en haut à la mise en place
 def ibag(nick, pos, item, color, desc):
     o = base('Infinite_Bag', nick, 44, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0
@@ -220,7 +221,7 @@ def at(o):
     n = json.loads(o['GMNotes']); return n['x'] / U + CX, -n['z'] / U + CY
 SPOT = {'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 'Charges': (140, -76),
         'Associés': (1140, -226), 'Événements de fin de mois': (1250, -226), 'Demande de Paris': (1140, -76), 'Grands événements': (1250, -76),
-        'Sac des Grands Lacs': (-16, 410), 'Sac du lac Supérieur': (-16, 480), 'Jetons cachés': (-16, 550), 'Sac des congés': (-16, 620),
+        'Castor sec': (-16, 410), 'Castor gras': (-16, 480), 'Tuiles secrètes': (-16, 550), 'Sac des congés': (-16, 620),
         'Marchandises (comptoir)': (1285, 715), 'Eau-de-vie (comptoir)': (1330, 715), 'Grand canot (comptoir)': (1385, 715), 'Petit canot (comptoir)': (1445, 715),
         'Navire du roi': (1495, 715), 'Le Profond (navire du roi)': (1495, 765), 'Navire de la compagnie': (1545, 715), 'Dé de traversée': (1370, 50),
         'Guides': (1290, 120), 'Miliciens': (1345, 120), 'Interprètes': (1400, 120), 'Coureurs des bois': (1460, 120),
@@ -257,11 +258,11 @@ rules = open('rules.txt').read().strip().split('\n\n')
 rules = [r.replace('navire avec 1 livre de dette', 'navire avec 2 de crédit') for r in rules]
 intro = ("Module Tabletop Simulator reproduisant la Table du castor, 3 joueurs, sans automatisation des règles. Au premier chargement, un petit script met chaque pièce à sa taille et à sa place, puis s’arrête ; "
          "ensuite il ne fait que remettre à la bonne taille une pièce qui sort d’un sac ou d’un paquet. Les pièces grises appartiennent au comptoir de Québec. "
-         "Tuiles visibles : paquets de 1 à 3 castors secs, retournés côté gras (★) s’ils ne sont pas troqués à la fin de l’année. "
-         "Congés : tirés du sac, achetés à crédit, ils offrent des marchandises ; un congé ne donne pas de canot. Crédit : piste de 0 à −10. Marchandise : caisse. Eau-de-vie : bouteille.")
+         "Tuiles visibles : 1 à 3 peaux sèches, retournées côté gras (★) au printemps si elles n’ont pas été troquées ; sac Castor gras pour le lac Supérieur (face neutre tant qu’il n’y a ni mission ni fort). "
+         "Congés : permis seuls, tirés du sac, payés en hiver (face « non payé » sur le plateau en attendant) ; un congé ne donne pas de canot. Crédit : piste de 0 à −10. Marchandise : caisse. Eau-de-vie : bouteille.")
 SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'VersionNumber': 'v13.2.2', 'GameMode': 'Castor et eau-de-vie', 'GameType': '', 'GameComplexity': '', 'Tags': [],
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v25"'))   # ?v25 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v26"'))   # ?v26 : force TTS à recharger les images
 print(len(OBJ), 'objets')

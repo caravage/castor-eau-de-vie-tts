@@ -47,7 +47,7 @@ def reserve():
         if p: g.append(f"<circle cx='{x+135}' cy='680' r='30' fill='{GOLD}'/>" + T(x + 135, 691, str(p), 32, 'middle', weight=700, fill='#fff') + T(x + 135, 735, 'livre' + ('s' if p > 1 else ''), 22, 'middle', fill=MUTED))
         else: g.append(T(x + 135, 690, lab, 26, 'middle', fill=MUTED))
     g.append(zone(1950, 160, 1570, 600, "Sacs", "piochez sans regarder · remettez les jetons dans leur sac"))
-    for k, lab in enumerate(["congés", "Grands Lacs", "lac Supérieur", "jetons cachés", "peaux à l’unité"]):
+    for k, lab in enumerate(["congés", "Castor sec", "Castor gras", "tuiles secrètes", "peaux à l’unité"]):
         x = 1985 + k * 305
         g.append(f"<rect x='{x}' y='290' width='280' height='400' rx='18' fill='{PAPER}' stroke='{EDGE}' stroke-width='3' stroke-dasharray='12 8'/>" + T(x + 140, 730, lab, 24, 'middle', fill=MUTED))
     g.append(zone(80, 800, 1840, 640, "Chantier de La Rochelle", "cartes de navire · 5 parts de 1 livre · un disque de couleur par part · le plus de parts : armateur principal"))
@@ -352,4 +352,5 @@ for pn, (c, cd) in PCOL.items():
         svg(f'sacexp_{pn}_{key}', 560, 400, f"<rect x='0' y='0' width='560' height='400' rx='40' fill='{c}'/><rect x='18' y='18' width='524' height='364' rx='28' fill='none' stroke='#F6EFDC' stroke-width='6'/>"
             + T(280, 170, 'Expéditions', 64, 'middle', fam=DISP, fill='#F6EFDC') + T(280, 260, lab, 50, 'middle', weight=700, fill='#F6EFDC') + T(280, 330, 'A · B · C', 40, 'middle', fill='#F6EFDC'))
 exec(open('cartes_v20.py', encoding='utf-8').read())   # cartes de navire et de distillerie v20
+exec(open('tuiles_v39.py', encoding='utf-8').read())   # tuiles de peaux, tuiles secrètes et congés v39
 json.dump({'manifest': MANIFEST, 'decks': DECKS}, open('manifest.json', 'w'), ensure_ascii=False, indent=1)
