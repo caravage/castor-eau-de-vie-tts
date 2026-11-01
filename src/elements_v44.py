@@ -46,6 +46,35 @@ svg('ravage', 220, 220, "<rect x='10' y='10' width='200' height='200' rx='34' fi
     "<path d='M110 30 C122 62 160 78 160 128 C160 162 138 186 110 186 C82 186 60 162 60 128 C60 104 72 90 80 80 C82 98 90 106 98 108 C92 84 98 52 110 30 Z' fill='#E8A93C'/>"
     "<path d='M112 82 C118 104 140 116 140 142 C140 164 126 176 110 176 C94 176 80 164 80 142 C80 128 88 120 92 114 C94 126 100 132 106 132 C102 116 104 98 112 82 Z' fill='#F6D57A'/>"
     "<path d='M110 126 C114 140 126 146 126 160 C126 170 118 176 110 176 C102 176 94 170 94 160 C94 150 102 144 110 126 Z' fill='#FFF4D6'/>")
+# Verso v45 : saisons (printemps, hiver), même style que le recto ; étapes numérotées
+VCSS = ACSS + (".spr{background:#EEF3E2;border-color:#9DB37E}.spr .zh{background:#9DB37E;color:#FBF7EC;border-radius:15px 15px 0 0}"
+ ".hiv{background:#E6ECF2;border-color:#7D93AB}.hiv .zh{background:#4F6A86;color:#F2F5F8;border-radius:15px 15px 0 0}"
+ ".s{background:#FFFDF6;border-radius:12px;padding:10px 14px;border:1.5px solid rgba(0,0,0,.12);display:flex;gap:12px;align-items:flex-start}"
+ ".s i{flex:none;width:40px;height:40px;border-radius:50%;font:700 24px/40px 'Alegreya Sans',sans-serif;text-align:center;color:#FFFDF6;font-style:normal;margin-top:2px}"
+ ".spr .s i{background:#6E8A4C}.hiv .s i{background:#4F6A86}"
+ ".s b{display:block;font:400 30px 'IM Fell English SC',serif;margin-bottom:2px}.spr .s b{color:#3F5A22}.hiv .s b{color:#2F4A66}"
+ ".s p{font:400 22.5px/1.27 'Alegreya Sans',sans-serif;color:#2A2418}"
+ ".steps{display:grid;gap:12px;padding:14px 16px 16px}.hcols{display:flex;gap:12px;padding:14px 16px 16px;align-items:flex-start}.hcols .steps{flex:1;padding:0}")
+SP=[('Ordre du tour','Du plus fort capital circulant au plus faible, fixé pour toute l’année ; en cas d’égalité, on garde l’ordre de l’année précédente.'),
+    ('Départ de La Rochelle','Chaque navire en rade de La Rochelle peut partir si son propriétaire le souhaite ; les navires non joueurs partent automatiquement. Chaque navire lance un dé : sur 4 ou plus, il est placé sur le cercle 1 mois (arrivée en mai), sinon sur le cercle 2 mois (juin).'),
+    ('Lacs','Chaque tuile sèche restée au lac passe côté gras. Puis chaque lac ouvert est regarni de 1 tuile visible et 1 jeton caché (au plus 4 tuiles visibles et 2 jetons cachés par lac). Puis bonus de zone : fort +2 tuiles visibles et +2 cachées, mission +1 visible, du lac le plus haut au plus bas.'),
+    ('Hivernant','Un hivernant déposé dans un Pays y récolte une tuile Castor gras.'),
+    ('Soupçon','Chaque joueur peut piocher autant de cartes Manigance que de soupçon.')]
+HV=[('Castors en France','On compte les castors arrivés en France et on les retire des navires ; la compagnie paie 1 ₶ par case de fret aux propriétaires des navires.'),
+    ('Entretien','3 ₶ par navire qui hiverne à Québec ; 1 ₶ par canot qui hiverne en exploration ; 1 ₶ par hivernant en exploration.'),
+    ('Crédit','Chacun paie d’abord en ₶ ses congés «&nbsp;à&nbsp;payer&nbsp;». Puis chacun rembourse ce qu’il veut de son crédit, au prix d’une case fixé par son rang en capital circulant (le plus soupçonné paie +1). On peut céder une distillerie ou un navire contre 1 case de crédit. Puis : zone rayée (3 à 5), le marqueur recule d’une case ; zone rouge (6 à 8), de deux.'),
+    ('Prix du castor','Il monte ou baisse selon les ventes de l’année.'),
+    ('Ravages','−1.'),
+    ('Tuiles des lacs','Les tuiles visibles et les jetons cachés retirés de la carte retournent dans leur sac.'),
+    ('Lacs ravagés','Pour chaque lac ravagé, lancez un dé ; s’il est supérieur au niveau de la piste Ravages, retirez le marqueur Ravagé.'),
+    ('Fin de partie','Si c’est le dernier tour (année VIII), la partie s’arrête.'),
+    ('Rivière','Faites avancer la rivière.'),
+    ('Commande à La Rochelle','Les distilleries produisent d’abord (1 baril d’eau-de-vie gratuit par part). Chaque joueur débloque des cases de crédit, puis commande avec leur valeur aux prix de La Rochelle : marchandise 1 ₶, baril 2 ₶. Les joueurs s’entendent sur la répartition dans les navires en rade de La Rochelle et le prix du fret par navire.'),
+    ('Année et mois','Le marqueur Année avance d’une case ; le marqueur Mois revient sur Printemps.')]
+def steps(L, k0=1): return ''.join(f"<div class='s'><i>{k}</i><div><b>{t}</b><p>{d}</p></div></div>" for k, (t, d) in enumerate(L, k0))
+page('aide_b', 1600, 1150, "<div class='page' style='flex-direction:row'>"
+     f"<div class='zone spr' style='flex:1'><div class='zh'>Printemps</div><div class='steps'>{steps(SP)}</div></div>"
+     f"<div class='zone hiv' style='flex:2'><div class='zh'>Hiver</div><div class='hcols'><div class='steps'>{steps(HV[:6])}</div><div class='steps'>{steps(HV[6:], 7)}</div></div></div></div>", VCSS)
 _seen = {}
 for _m in MANIFEST: _seen[_m[0]] = _m
 MANIFEST[:] = list(_seen.values())
