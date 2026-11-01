@@ -103,7 +103,7 @@ PREST45 = [('Banc à l’église Notre-Dame', 2, 1), ('Marguillier de Notre-Dame
 ACHAT45 = [('Vente après décès', 'Obtenez 2 marchandises et 1 eau-de-vie.'), ('Parts d’un navire', 'Obtenez 2 parts de navire.'), ('Créance recouvrée', 'Gagnez 4 ₶.'),
            ('Canot neuf', 'Obtenez 1 grand canot.'), ('Protection du gouverneur', 'Soupçon −2.')]
 RUM45 = ('Rumeurs des Pays d’en Haut', 'Au moment où cette carte est révélée, piochez deux événements mensuels et ajoutez-les face cachée à la fin du prochain mois sans événement.')
-RIV45 = ([('Prestige', t, f"{v} point{'s' if v > 1 else ''} de victoire." + (f" Entretien : {e} ₶ par hiver." if e else ' Pas d’entretien.'), v) for t, v, e in PREST45]
+RIV45 = ([('Prestige', t, f"{v} point{'s' if v > 1 else ''} de victoire." + (f" {e} ₶" if e else ''), v) for t, v, e in PREST45]
          + [('Événement', RUM45[0], RUM45[1], 0)] * 3 + [('Achat', t, x, 0) for t, x in ACHAT45])
 DECKS['riv'] = sheet('deck_riv', 'Recrue', [card_html(k, t, x, '', v) for k, t, x, v in RIV45], 'Rivière', 'recrutement', css=BIGCSS); DECKS['riv']['names'] = [t for k, t, x, v in RIV45]
 _seen = {}
