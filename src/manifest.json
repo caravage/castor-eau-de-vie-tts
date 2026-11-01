@@ -67,13 +67,13 @@
   ],
   [
    "deck_mat",
-   4500,
-   700
+   1800,
+   1000
   ],
   [
    "deck_mat_back",
-   500,
-   700
+   360,
+   500
   ],
   [
    "deck_ev",
@@ -1049,28 +1049,90 @@
    "mat45_back",
    360,
    500
+  ],
+  [
+   "deck_man",
+   5000,
+   700
+  ],
+  [
+   "deck_man_back",
+   500,
+   700
+  ],
+  [
+   "evt_calme",
+   300,
+   300
+  ],
+  [
+   "evt_raid",
+   300,
+   300
+  ],
+  [
+   "evt_hudson",
+   300,
+   300
+  ],
+  [
+   "evt_abondante",
+   300,
+   300
+  ],
+  [
+   "evt_mission",
+   300,
+   300
+  ],
+  [
+   "evt_fort",
+   300,
+   300
+  ],
+  [
+   "evt_baisse",
+   300,
+   300
+  ],
+  [
+   "evt_hausse",
+   300,
+   300
+  ],
+  [
+   "evt_compagnie",
+   300,
+   300
+  ],
+  [
+   "evt_profond",
+   300,
+   300
+  ],
+  [
+   "evt_back",
+   300,
+   300
   ]
  ],
  "decks": {
   "pers": {
    "cols": 10,
    "rows": 2,
-   "n": 14,
+   "n": 11,
    "names": [
-    "Interprète wendat",
-    "Commis-voyageur",
-    "Sergent de la Compagnie franche",
-    "Coureur des bois aguerri",
-    "Engagés de Lachine",
-    "Pilote du Saint-Laurent",
-    "Ami du gouverneur",
-    "Confesseur récollet",
-    "Passeurs de Kahnawake",
-    "Guide ojibwé",
-    "Bouilleur associé",
-    "Cabaretier de la basse-ville",
-    "Mercier de la rue Saint-Paul",
-    "Commis du fermier"
+    "Pierre Lestage, gros équipeur de Montréal",
+    "Bouchard, Coton et Bigras, société de voyageurs",
+    "Jean-Jérôme Patron, bourgeois du congé",
+    "Daniel Greysolon Dulhut, commerçant et diplomate",
+    "Simon Réaume, voyageur et diplomate",
+    "Milot, marchand de Lachine",
+    "Jean-Baptiste Migeon, bailli et marchand",
+    "Le cabaretier, des Trois-Rivières",
+    "Tonty, commandant aux Illinois",
+    "Paul Dumouchel, voyageur à permis",
+    "Les engagés, de la compagnie de la colonie"
    ]
   },
   "riv": {
@@ -1169,20 +1231,21 @@
    ]
   },
   "mat": {
-   "cols": 9,
-   "rows": 1,
+   "cols": 5,
+   "rows": 2,
    "n": 9,
    "names": [
-    "Navire",
-    "Parts de navire",
-    "Bourse",
-    "Ballots de marchandises",
-    "Eau-de-vie",
-    "Assortiment",
-    "Moyen canot",
-    "Grand canot",
-    "Distillerie"
-   ]
+    "Matériel de départ",
+    "Matériel de départ",
+    "Matériel de départ",
+    "Matériel de départ",
+    "Matériel de départ",
+    "Matériel de départ",
+    "Matériel de départ",
+    "Matériel de départ",
+    "Matériel de départ"
+   ],
+   "half": true
   },
   "ev": {
    "cols": 7,
@@ -1235,6 +1298,23 @@
     "Expédition C · Grand canot",
     "Expédition C · Moyen canot",
     "Expédition C · Coureurs des bois"
+   ]
+  },
+  "man": {
+   "cols": 10,
+   "rows": 1,
+   "n": 10,
+   "names": [
+    "Canotée de trop",
+    "Faussaire",
+    "Eau-de-vie coupée",
+    "Société secrète",
+    "Rafler la traite",
+    "Pillage",
+    "Commandant complaisant",
+    "Fausse dénonciation",
+    "En sous-main",
+    "Dans le sillage"
    ]
   }
  }

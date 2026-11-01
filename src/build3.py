@@ -70,20 +70,21 @@ def model(nick, mesh, tex, wpx, pos=None, desc=''):
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(wpx * MESH[mesh] * U, 4)})
     o['CustomMesh'] = {'MeshURL': URL + mesh + '.obj', 'DiffuseURL': URL + tex + '.png', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 3, 'TypeIndex': 0, 'CastShadows': True}
     o['MaterialIndex'] = 3; return o
-DECK_ID = {'pers': 1, 'riv': 2, 'mat': 3, 'ev': 4, 'dem': 5, 'grand': 6, 'riv_recrue': 7, 'riv_contrat': 8, 'riv_nation': 9, 'riv_charge': 10}
-DECK_NAME = {'pers': 'Associés', 'riv': 'Rivière de recrutement', 'mat': 'Matériel de départ', 'ev': 'Événements de fin de mois', 'dem': 'Demande de Paris', 'grand': 'Grands événements', 'riv_recrue': 'Recrues', 'riv_contrat': 'Contrats', 'riv_nation': 'Alliances', 'riv_charge': 'Charges'}
+DECK_ID = {'man': 11, 'pers': 1, 'riv': 2, 'mat': 3, 'ev': 4, 'dem': 5, 'grand': 6, 'riv_recrue': 7, 'riv_contrat': 8, 'riv_nation': 9, 'riv_charge': 10}
+DECK_NAME = {'man': 'Manigances', 'pers': 'Associés', 'riv': 'Rivière de recrutement', 'mat': 'Matériel de départ', 'ev': 'Événements de fin de mois', 'dem': 'Demande de Paris', 'grand': 'Grands événements', 'riv_recrue': 'Recrues', 'riv_contrat': 'Contrats', 'riv_nation': 'Alliances', 'riv_charge': 'Charges'}
 def cdeck(k):
     d = DK[k]; return {str(DECK_ID[k]): {'FaceURL': URL + f'deck_{k}.png', 'BackURL': URL + f'deck_{k}_back.png', 'NumWidth': d['cols'], 'NumHeight': d['rows'],
                                          'BackIsHidden': True, 'UniqueBack': False, 'Type': 0}}
 def card(k, i, pos=None, up=False):
-    c = base('Card', DK[k]['names'][i], SIZE['card'][0], pos, fz=0 if up else 180, s0=1.0)
+    sc = 0.72 if DK[k].get('half') else 1.0   # v45 : matériel de départ en demi-format
+    c = base('Card', DK[k]['names'][i], SIZE['card'][0], pos, fz=0 if up else 180, s0=sc)
     c['GMNotes'] = json.dumps({**json.loads(c['GMNotes']), 'd': round(SIZE['card'][0] * 1.4 * U, 4)})
     c['CardID'] = DECK_ID[k] * 100 + i; c['CustomDeck'] = cdeck(k)
     if not pos: c['Transform'] = T(s=1.0, fz=180); c['Locked'] = False
     return c
 def deck(k, pos, skip=()):
     cards = [card(k, i) for i in range(len(DK[k]['names'])) if i not in skip]; random.shuffle(cards)
-    o = base('Deck', DECK_NAME[k], SIZE['card'][0], pos, fz=180, s0=1.0)
+    o = base('Deck', DECK_NAME[k], SIZE['card'][0], pos, fz=180, s0=0.72 if DK[k].get('half') else 1.0)
     o['GMNotes'] = json.dumps({**json.loads(o['GMNotes']), 'd': round(SIZE['card'][0] * 1.4 * U, 4)})
     o['DeckIDs'] = [c['CardID'] for c in cards]; o['CustomDeck'] = cdeck(k); o['ContainedObjects'] = cards
     return o
@@ -109,7 +110,7 @@ for p in TP['pieces']:
         if p['deck'] == 'rec':                                    # rivière : un paquet par type de carte
             for kd, x, y in (('riv_recrue', -270, 40), ('riv_contrat', -270, 214), ('riv_nation', -270, 388), ('riv_charge', -270, 562)): OBJ.append(deck(kd, P(x + 50, y + 70)))
         elif p['deck'] == 'sit': OBJ.append(deck('pers', C(p, 'deck')))
-        else: OBJ.append(deck({'ev': 'ev', 'dem': 'dem', 'grand': 'grand'}[p['deck']], C(p, 'deck')))
+        elif p['deck'] == 'grand': OBJ.append(deck('grand', C(p, 'deck')))   # v45 : fin de mois remplacé par le sac d'événements ; Demande de Paris retirée
     elif k == 'bag':
         pos = C(p, 'bag')
         if p['bag'] == 'classic':
@@ -172,6 +173,9 @@ ROI = base('Custom_Model', 'Navire du roi', 40, P(1440, 486 + 105), WHITE, False
 ROI['CustomMesh'] = {'MeshURL': 'https://steamusercontent-a.akamaihd.net/ugc/952982844368369073/FB63C915DB2529E0210C26EEDFD717929BB7E7A6/', 'DiffuseURL': '', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 1, 'CastShadows': True}
 ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(stile('Navire de la compagnie', 'navire_compagnie', 34, P(1490, 486 + 105))); OBJ.append(stile('Le Profond (navire du roi)', 'navire_profond', 34, P(1440, 486 + 140), desc='Marqueur du navire du roi.'))
 CONGES = json.load(open('conges_v39.json'))
+EVT45 = json.load(open('evt45.json'))   # v45 : sac d'événements du mois (tuiles)
+OBJ.append(bag('Événements du mois', 40, P(1140, -76), [tile(t, f'evt_{k}', 30, back='evt_back') for k, t, n in EVT45 for _ in range(n)], col('#3F6D78'), f"{sum(e[2] for e in EVT45)} tuiles : piochez-en une à la fin de chaque mois."))
+OBJ.append(deck('man', P(1250, -226)))
 OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(' '.join(nom), f'conge_{cid}', 32, back=(f'conge_{cid}' if cr else f'conge_np{p}')) for cid, nom, p, cr, canot, perso, nc, extra, nb in CONGES for _ in range(nb)],
                col('#8E2F25'), f'{sum(c[8] for c in CONGES)} congés (permis seuls). Tirés au printemps : autant que de joueurs + 1. Payés en hiver ; posés face « non payé » sur le plateau joueur. Joueur le plus pauvre : −1 ₶ (minimum 1).'))
 # Forts, missions et jetons Abîmé : réserves illimitées ; un fort aux Lacs d'en bas et une mission aux Lacs d'en haut à la mise en place
@@ -226,7 +230,7 @@ def place(o, cx, cy):
 def at(o):
     n = json.loads(o['GMNotes']); return n['x'] / U + CX, -n['z'] / U + CY
 SPOT = {'Recrues': (30, -226), 'Contrats': (140, -226), 'Alliances': (30, -76), 'Charges': (140, -76),
-        'Associés': (1140, -226), 'Événements de fin de mois': (1250, -226), 'Demande de Paris': (1140, -76), 'Grands événements': (1250, -76),
+        'Associés': (1140, -226), 'Manigances': (1250, -226), 'Événements du mois': (1140, -76), 'Grands événements': (1250, -76),
         'Castor sec': (-16, 410), 'Castor gras': (-16, 480), 'Tuiles secrètes': (-16, 550), 'Sac des congés': (-16, 620),
         'Marchandises (comptoir)': (1285, 715), 'Eau-de-vie (comptoir)': (1330, 715), 'Grand canot (comptoir)': (1385, 715), 'Moyen canot (comptoir)': (1445, 715),
         'Navire du roi': (1495, 715), 'Le Profond (navire du roi)': (1495, 765), 'Navire de la compagnie': (1545, 715), 'Dé de traversée': (1370, 50),
@@ -288,5 +292,5 @@ SAVE = {'SaveName': 'Castor et eau-de-vie', 'EpochTime': 0, 'Date': '', 'Version
         'Gravity': 0.5, 'PlayArea': 1.0, 'Table': 'Table_None', 'TableURL': '', 'Sky': 'Sky_Museum', 'Note': '',
         'TabStates': {'0': {'title': 'Règles', 'body': '\n\n'.join([intro] + rules), 'color': 'Grey', 'visibleColor': {'r': 0.5, 'g': 0.5, 'b': 0.5}, 'id': 0}},
         'LuaScript': LUA, 'LuaScriptState': '', 'XmlUI': '', 'ObjectStates': OBJ}
-open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v33"'))   # ?v31 : force TTS à recharger les images
+open('Castor_et_eau-de-vie.json', 'w').write(json.dumps(SAVE, ensure_ascii=False, indent=1).replace('.png"', '.png?v34"'))   # ?v31 : force TTS à recharger les images
 print(len(OBJ), 'objets')
