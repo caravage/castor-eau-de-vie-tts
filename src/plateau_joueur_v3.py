@@ -66,8 +66,20 @@ for i,c in enumerate(COLS):
         b['CustomMesh']=dict(tpl['CustomMesh'],MeshURL=GH+f'sac_pm_{SLUG[k]}.obj',DiffuseURL=GH+f'pm_{SLUG[k]}.png?v42',TypeIndex=6)
         b['Transform'].update(posX=X,posZ=Z,posY=2.0,scaleX=dia,scaleY=dia,scaleZ=dia)
         b['Locked']=True; objs.append(b)
-# 5. anciens compteurs de capital retirés (le capital s'affiche sur le plateau)
-objs[:]=[q for q in objs if not (q.get('Name')=='Counter' and (q.get('Nickname') or '').startswith('Capital circulant'))]
+# 5. compteurs de capital placés dans la case « = » ; plateaux, compteurs et sacs verrouillés
+for c in COLS:
+    m=mats[c]; cx,cz=m['Transform']['posX'],m['Transform']['posZ']
+    X,Z=world(cx,cz,geo['ctr'][0][0],geo['ctr'][0][1])
+    q=[o for o in objs if o.get('Nickname')=='Capital circulant '+c][0]
+    q['Description']='Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Calculé automatiquement ; clic droit > Recalculer le capital.'
+    q['Transform'].update(posX=X,posZ=Z)
+    q['GMNotes']=json.dumps({'w':1.9,'x':X,'z':Z,'h':0.3,'y3':True,'lock':True},ensure_ascii=False,separators=(', ',': '))
+for q in objs:
+    if q['Name'] in ('Bag','Custom_Model_Bag','Custom_Model_Infinite_Bag','Infinite_Bag','Counter') or (q.get('Nickname') or '').startswith('Plateau du joueur'):
+        q['Locked']=True
+        try: n=json.loads(q.get('GMNotes') or '')
+        except Exception: n=None
+        if isinstance(n,dict) and 'x' in n: n['lock']=True; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
 # 6. cartes au format 63,5 x 88
 def cards(os_):
     for q in os_:
@@ -82,45 +94,44 @@ cards(objs)
 # 7. script : compteurs des mini-sacs + capital circulant
 t=[q for q in objs if q.get('Nickname')=='Table du castor'][0]['Transform']
 im2=Image.open(R+'img/v18/table_v17.png'); TW=2*t['scaleX']; L=t['posX']-TW/2; k=im2.size[0]/TW
-cap_x,cap_z=local(geo['ctr'][0][0], geo['ctr'][0][1])
-sx=mats['rouge']['Transform']['scaleX']
 LUA=f'''
 
 -- Capital circulant (livret) : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres.
--- Ce qui est en expédition ne compte pas. Calcul automatique, affiché dans la case « = » du plateau du joueur.
+-- Ce qui est en expédition ne compte pas. Les sacs d'entrepôt affichent leur contenu à chaque entrée / sortie ;
+-- le capital se recalcule avec le bouton « Calculer le capital » (haut droite de l'écran) ou clic droit sur le compteur.
 local LIV0, PRIX4, PAS = {round(L+1096.9/k,3)}, {round(L+4019.6/k,3)}, {round(108.6/k,4)}
-local CAPPOS, MATSC = {{{cap_x}, 0.15, {cap_z}}}, {sx}
+local NOMS = {{["marchandises"] = "Marchandises", ["eau-de-vie"] = "Eau-de-vie", ["moyen canot"] = "Moyens canots", ["grand canot"] = "Grands canots", ["castor"] = "Fourrures"}}
 local function palier(n) if n >= 25 then return 15 elseif n >= 20 then return 14 elseif n >= 15 then return 12 elseif n >= 10 then return 9 elseif n >= 5 then return 5 end return 0 end
 local function arrondi(v) return math.floor(v + 0.5) end
-local function etiquette(o, txt, pos, taille, sc)
-  local ok, bs = pcall(function() return o.getButtons() end)
-  if ok and bs and #bs > 0 then o.editButton({{index = 0, label = txt}}) return end
-  o.createButton({{click_function = "rien", function_owner = Global, label = txt, position = pos, rotation = {{0, 0, 0}},
-    scale = {{sc, sc, sc}}, width = taille * 1.3, height = taille * 1.1, font_size = taille,
-    color = {{0.16, 0.14, 0.09}}, font_color = {{0.96, 0.92, 0.84}}, hover_color = {{0.16, 0.14, 0.09}}, press_color = {{0.16, 0.14, 0.09}}}})
-end
 function rien() end
+local function sac(o) local g = o.getGMNotes() or "" if g:find('"pm"', 1, true) then local n = notes(o) if n and n.pm then return n end end end
+local function afficheSac(b, n)
+  local q = b.getQuantity()
+  b.setName("Entrepôt · " .. (NOMS[n.k] or n.k) .. " (" .. n.pm .. ") : " .. q)
+  local ok, bs = pcall(function() return b.getButtons() end)
+  if ok and bs and #bs > 0 then b.editButton({{index = 0, label = tostring(q)}}) return q end
+  local sc = 1 / b.getScale().x
+  b.createButton({{click_function = "rien", function_owner = Global, label = tostring(q), position = {{0, 0.25, -0.42}},
+    scale = {{sc, sc, sc}}, width = 340, height = 300, font_size = 260,
+    color = {{0.16, 0.14, 0.09}}, font_color = {{0.96, 0.92, 0.84}}, hover_color = {{0.16, 0.14, 0.09}}, press_color = {{0.16, 0.14, 0.09}}}})
+  return q
+end
 local function capital()
-  local sacs, mats, parts, cartes, livres, prix = {{}}, {{}}, {{}}, {{}}, {{}}, nil
+  local sacs, cpt, parts, cartes, livres, prix = {{}}, {{}}, {{}}, {{}}, {{}}, nil
   for _, o in ipairs(getObjects()) do
-    local nm, g = o.getName(), o.getGMNotes() or ""
-    if g:find('"pm"', 1, true) or g:find('"cap"', 1, true) then
-      local n = notes(o)
-      if n and n.pm then sacs[n.pm] = sacs[n.pm] or {{}}; sacs[n.pm][n.k] = o elseif n and n.cap then mats[n.cap] = o end
-    end
-    if nm:find("^Part ") then table.insert(parts, o)
+    local nm = o.getName()
+    local n = sac(o)
+    if n then sacs[n.pm] = sacs[n.pm] or {{}}; sacs[n.pm][n.k] = afficheSac(o, n)
+    elseif nm:find("^Capital circulant ") then cpt[nm:sub(19)] = o
+    elseif nm:find("^Part ") then table.insert(parts, o)
     elseif nm:find("^Carte de navire") or nm:find("^Carte de distillerie") then table.insert(cartes, o)
     elseif nm:find("^Livres ") then livres[nm:sub(8)] = o
     elseif nm == "Prix du castor" then prix = o end
   end
   local p = 0
   if prix then p = math.max(1, math.min(8, 4 + arrondi((prix.getPosition().x - PRIX4 * F) / (PAS * F)))) end
-  for c, mat in pairs(mats) do
-    local s, q = sacs[c] or {{}}, {{}}
-    for kind, b in pairs(s) do
-      q[kind] = b.getQuantity()
-      etiquette(b, tostring(q[kind]), {{0, 0.25, -0.42}}, 260, 1 / b.getScale().x)
-    end
+  for c, ct in pairs(cpt) do
+    local q = sacs[c] or {{}}
     local charges = math.min(10, (q["marchandises"] or 0) + (q["eau-de-vie"] or 0))
     local np = 0
     for _, pt in ipairs(parts) do
@@ -134,12 +145,23 @@ local function capital()
     end
     local nl = 0
     if livres[c] then nl = math.max(0, arrondi((livres[c].getPosition().x - LIV0 * F) / (PAS * F))) end
-    local total = charges + (q["castor"] or 0) * p + np + palier(nl)
-    etiquette(mat, tostring(total), CAPPOS, 420, 1 / MATSC)
+    pcall(function() ct.Counter.setValue(charges + (q["castor"] or 0) * p + np + palier(nl)) end)
   end
 end
-Wait.time(function() pcall(capital) end, 1.5, -1)
+function majCapital() pcall(capital) end
+function boutonCapital() majCapital() end
+local function majSac(c) Wait.frames(function() if c and not c.isDestroyed() then local n = sac(c) if n then afficheSac(c, n) end end end, 1) end
+local ancienSortie = onObjectLeaveContainer
+function onObjectLeaveContainer(c, o) if ancienSortie then ancienSortie(c, o) end majSac(c) end
+function onObjectEnterContainer(c, o) majSac(c) end
+local function menus()
+  for _, o in ipairs(getObjects()) do
+    if o.getName():find("^Capital circulant ") then pcall(function() o.addContextMenuItem("Recalculer le capital", function() majCapital() end) end) end
+  end
+end
+Wait.time(function() menus(); majCapital() end, 4)
 '''
 d['LuaScript']=d['LuaScript'].rstrip('\n')+LUA
+d['XmlUI']='<Button id="capital" onClick="boutonCapital" rectAlignment="UpperRight" offsetXY="-20 -70" width="200" height="40" fontSize="18" color="#2A2418" textColor="#F4EBD6">Calculer le capital</Button>'
 json.dump(d,open(P,'w'),ensure_ascii=False,indent=2)
-print('ok',len(objs),'LIV0',round(L+1096.9/k,3),'PRIX4',round(L+4019.6/k,3),'PAS',round(108.6/k,4),'cap',cap_x,cap_z)
+print('ok',len(objs),'LIV0',round(L+1096.9/k,3),'PRIX4',round(L+4019.6/k,3),'PAS',round(108.6/k,4))

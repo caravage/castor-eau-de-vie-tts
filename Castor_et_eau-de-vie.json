@@ -26,9 +26,9 @@
       "id": 0
     }
   },
-  "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 70.0, 68.25     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\nlocal SNAP = {{-13.226,20.358},{-12.071,20.358},{-10.916,20.358},{-9.761,20.358},{-8.606,20.358},{-7.451,20.358},{-6.296,20.358},{6.567,20.358},{7.722,20.358},{8.877,20.358},{10.032,20.358},{11.187,20.358},{12.342,20.358},{13.497,20.358},{14.652,20.358},{-17.784,27.519},{-16.468,27.519},{-15.152,27.519},{-13.837,27.519},{-12.521,27.519},{-11.205,27.519},{-9.889,27.519},{-8.573,27.519},{18.951,9.561},{20.334,9.561},{21.629,9.561},{22.924,9.561},{24.219,9.561},{25.514,9.561},{18.951,8.161},{20.334,8.161},{21.629,8.161},{22.924,8.161},{24.219,8.161},{25.514,8.161},{18.951,6.761},{20.334,6.761},{21.629,6.761},{22.924,6.761},{24.219,6.761},{25.514,6.761},{18.951,5.361},{20.334,5.361},{21.629,5.361},{22.924,5.361},{24.219,5.361},{25.514,5.361},{22.884,1.748},{24.267,1.748},{25.562,1.748},{22.884,0.348},{24.267,0.348},{25.562,0.348},{22.884,-1.052},{24.267,-1.052},{25.562,-1.052},{22.884,-2.452},{24.267,-2.452},{25.562,-2.452}}   -- points d'accroche : pistes Ravages et Prix du castor, cases Tour, emplacements Mission/Fort\n\nlocal function snaps(top)\n  local pts = {}\n  for _, p in ipairs(SNAP) do table.insert(pts, {position = {p[1] * F, top + 0.2, p[2] * F}, rotation_snap = false}) end\n  pcall(function() Global.setSnapPoints(pts) end)\nend\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local kx = n.w * F / b.x\n  local kz = kx\n  if n.d and b.z > 0.001 then kz = n.d * F / b.z end   -- profondeur mesurée et corrigée : aucune pièce étirée\n  if n.y3 then o.setScale({s.x * kx, s.y * kx, s.z * kx}) else o.setScale({s.x * kx, s.y, s.z * kz}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = LW / 0.97, LD / 0.97, 1.0   -- pas de table TTS : le tapis de jeu sert de table, à l'échelle 1\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    if b.size.x > 5 then tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2 end\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, n.ry or 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      else\n        h.destruct()                -- mains par défaut de la table : retirées\n      end\n    end\n  end\n  snaps(top)\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; local _, _, top = tableInfo(); snaps(top); return end\n  end\n  Wait.condition(layout, allLoaded, 30, layout)\nend\n\n\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n\n-- Capital circulant (livret) : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres.\n-- Ce qui est en expédition ne compte pas. Calcul automatique, affiché dans la case « = » du plateau du joueur.\nlocal LIV0, PRIX4, PAS = -21.073, 10.011, 1.155\nlocal CAPPOS, MATSC = {-0.711, 0.15, -0.4935}, 8.1375\nlocal function palier(n) if n >= 25 then return 15 elseif n >= 20 then return 14 elseif n >= 15 then return 12 elseif n >= 10 then return 9 elseif n >= 5 then return 5 end return 0 end\nlocal function arrondi(v) return math.floor(v + 0.5) end\nlocal function etiquette(o, txt, pos, taille, sc)\n  local ok, bs = pcall(function() return o.getButtons() end)\n  if ok and bs and #bs > 0 then o.editButton({index = 0, label = txt}) return end\n  o.createButton({click_function = \"rien\", function_owner = Global, label = txt, position = pos, rotation = {0, 0, 0},\n    scale = {sc, sc, sc}, width = taille * 1.3, height = taille * 1.1, font_size = taille,\n    color = {0.16, 0.14, 0.09}, font_color = {0.96, 0.92, 0.84}, hover_color = {0.16, 0.14, 0.09}, press_color = {0.16, 0.14, 0.09}})\nend\nfunction rien() end\nlocal function capital()\n  local sacs, mats, parts, cartes, livres, prix = {}, {}, {}, {}, {}, nil\n  for _, o in ipairs(getObjects()) do\n    local nm, g = o.getName(), o.getGMNotes() or \"\"\n    if g:find('\"pm\"', 1, true) or g:find('\"cap\"', 1, true) then\n      local n = notes(o)\n      if n and n.pm then sacs[n.pm] = sacs[n.pm] or {}; sacs[n.pm][n.k] = o elseif n and n.cap then mats[n.cap] = o end\n    end\n    if nm:find(\"^Part \") then table.insert(parts, o)\n    elseif nm:find(\"^Carte de navire\") or nm:find(\"^Carte de distillerie\") then table.insert(cartes, o)\n    elseif nm:find(\"^Livres \") then livres[nm:sub(8)] = o\n    elseif nm == \"Prix du castor\" then prix = o end\n  end\n  local p = 0\n  if prix then p = math.max(1, math.min(8, 4 + arrondi((prix.getPosition().x - PRIX4 * F) / (PAS * F)))) end\n  for c, mat in pairs(mats) do\n    local s, q = sacs[c] or {}, {}\n    for kind, b in pairs(s) do\n      q[kind] = b.getQuantity()\n      etiquette(b, tostring(q[kind]), {0, 0.25, -0.42}, 260, 1 / b.getScale().x)\n    end\n    local charges = math.min(10, (q[\"marchandises\"] or 0) + (q[\"eau-de-vie\"] or 0))\n    local np = 0\n    for _, pt in ipairs(parts) do\n      if pt.getName() == \"Part \" .. c then\n        local pp = pt.getPosition()\n        for _, ca in ipairs(cartes) do\n          local bb = ca.getBounds()\n          if math.abs(pp.x - bb.center.x) <= bb.size.x / 2 and math.abs(pp.z - bb.center.z) <= bb.size.z / 2 then np = np + 1 break end\n        end\n      end\n    end\n    local nl = 0\n    if livres[c] then nl = math.max(0, arrondi((livres[c].getPosition().x - LIV0 * F) / (PAS * F))) end\n    local total = charges + (q[\"castor\"] or 0) * p + np + palier(nl)\n    etiquette(mat, tostring(total), CAPPOS, 420, 1 / MATSC)\n  end\nend\nWait.time(function() pcall(capital) end, 1.5, -1)\n",
+  "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 70.0, 68.25     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\nlocal SNAP = {{-13.226,20.358},{-12.071,20.358},{-10.916,20.358},{-9.761,20.358},{-8.606,20.358},{-7.451,20.358},{-6.296,20.358},{6.567,20.358},{7.722,20.358},{8.877,20.358},{10.032,20.358},{11.187,20.358},{12.342,20.358},{13.497,20.358},{14.652,20.358},{-17.784,27.519},{-16.468,27.519},{-15.152,27.519},{-13.837,27.519},{-12.521,27.519},{-11.205,27.519},{-9.889,27.519},{-8.573,27.519},{18.951,9.561},{20.334,9.561},{21.629,9.561},{22.924,9.561},{24.219,9.561},{25.514,9.561},{18.951,8.161},{20.334,8.161},{21.629,8.161},{22.924,8.161},{24.219,8.161},{25.514,8.161},{18.951,6.761},{20.334,6.761},{21.629,6.761},{22.924,6.761},{24.219,6.761},{25.514,6.761},{18.951,5.361},{20.334,5.361},{21.629,5.361},{22.924,5.361},{24.219,5.361},{25.514,5.361},{22.884,1.748},{24.267,1.748},{25.562,1.748},{22.884,0.348},{24.267,0.348},{25.562,0.348},{22.884,-1.052},{24.267,-1.052},{25.562,-1.052},{22.884,-2.452},{24.267,-2.452},{25.562,-2.452}}   -- points d'accroche : pistes Ravages et Prix du castor, cases Tour, emplacements Mission/Fort\n\nlocal function snaps(top)\n  local pts = {}\n  for _, p in ipairs(SNAP) do table.insert(pts, {position = {p[1] * F, top + 0.2, p[2] * F}, rotation_snap = false}) end\n  pcall(function() Global.setSnapPoints(pts) end)\nend\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local kx = n.w * F / b.x\n  local kz = kx\n  if n.d and b.z > 0.001 then kz = n.d * F / b.z end   -- profondeur mesurée et corrigée : aucune pièce étirée\n  if n.y3 then o.setScale({s.x * kx, s.y * kx, s.z * kx}) else o.setScale({s.x * kx, s.y, s.z * kz}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = LW / 0.97, LD / 0.97, 1.0   -- pas de table TTS : le tapis de jeu sert de table, à l'échelle 1\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    if b.size.x > 5 then tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2 end\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, n.ry or 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      else\n        h.destruct()                -- mains par défaut de la table : retirées\n      end\n    end\n  end\n  snaps(top)\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; local _, _, top = tableInfo(); snaps(top); return end\n  end\n  Wait.condition(layout, allLoaded, 30, layout)\nend\n\n\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n\n-- Capital circulant (livret) : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres.\n-- Ce qui est en expédition ne compte pas. Les sacs d'entrepôt affichent leur contenu à chaque entrée / sortie ;\n-- le capital se recalcule avec le bouton « Calculer le capital » (haut droite de l'écran) ou clic droit sur le compteur.\nlocal LIV0, PRIX4, PAS = -21.073, 10.011, 1.155\nlocal NOMS = {[\"marchandises\"] = \"Marchandises\", [\"eau-de-vie\"] = \"Eau-de-vie\", [\"moyen canot\"] = \"Moyens canots\", [\"grand canot\"] = \"Grands canots\", [\"castor\"] = \"Fourrures\"}\nlocal function palier(n) if n >= 25 then return 15 elseif n >= 20 then return 14 elseif n >= 15 then return 12 elseif n >= 10 then return 9 elseif n >= 5 then return 5 end return 0 end\nlocal function arrondi(v) return math.floor(v + 0.5) end\nfunction rien() end\nlocal function sac(o) local g = o.getGMNotes() or \"\" if g:find('\"pm\"', 1, true) then local n = notes(o) if n and n.pm then return n end end end\nlocal function afficheSac(b, n)\n  local q = b.getQuantity()\n  b.setName(\"Entrepôt · \" .. (NOMS[n.k] or n.k) .. \" (\" .. n.pm .. \") : \" .. q)\n  local ok, bs = pcall(function() return b.getButtons() end)\n  if ok and bs and #bs > 0 then b.editButton({index = 0, label = tostring(q)}) return q end\n  local sc = 1 / b.getScale().x\n  b.createButton({click_function = \"rien\", function_owner = Global, label = tostring(q), position = {0, 0.25, -0.42},\n    scale = {sc, sc, sc}, width = 340, height = 300, font_size = 260,\n    color = {0.16, 0.14, 0.09}, font_color = {0.96, 0.92, 0.84}, hover_color = {0.16, 0.14, 0.09}, press_color = {0.16, 0.14, 0.09}})\n  return q\nend\nlocal function capital()\n  local sacs, cpt, parts, cartes, livres, prix = {}, {}, {}, {}, {}, nil\n  for _, o in ipairs(getObjects()) do\n    local nm = o.getName()\n    local n = sac(o)\n    if n then sacs[n.pm] = sacs[n.pm] or {}; sacs[n.pm][n.k] = afficheSac(o, n)\n    elseif nm:find(\"^Capital circulant \") then cpt[nm:sub(19)] = o\n    elseif nm:find(\"^Part \") then table.insert(parts, o)\n    elseif nm:find(\"^Carte de navire\") or nm:find(\"^Carte de distillerie\") then table.insert(cartes, o)\n    elseif nm:find(\"^Livres \") then livres[nm:sub(8)] = o\n    elseif nm == \"Prix du castor\" then prix = o end\n  end\n  local p = 0\n  if prix then p = math.max(1, math.min(8, 4 + arrondi((prix.getPosition().x - PRIX4 * F) / (PAS * F)))) end\n  for c, ct in pairs(cpt) do\n    local q = sacs[c] or {}\n    local charges = math.min(10, (q[\"marchandises\"] or 0) + (q[\"eau-de-vie\"] or 0))\n    local np = 0\n    for _, pt in ipairs(parts) do\n      if pt.getName() == \"Part \" .. c then\n        local pp = pt.getPosition()\n        for _, ca in ipairs(cartes) do\n          local bb = ca.getBounds()\n          if math.abs(pp.x - bb.center.x) <= bb.size.x / 2 and math.abs(pp.z - bb.center.z) <= bb.size.z / 2 then np = np + 1 break end\n        end\n      end\n    end\n    local nl = 0\n    if livres[c] then nl = math.max(0, arrondi((livres[c].getPosition().x - LIV0 * F) / (PAS * F))) end\n    pcall(function() ct.Counter.setValue(charges + (q[\"castor\"] or 0) * p + np + palier(nl)) end)\n  end\nend\nfunction majCapital() pcall(capital) end\nfunction boutonCapital() majCapital() end\nlocal function majSac(c) Wait.frames(function() if c and not c.isDestroyed() then local n = sac(c) if n then afficheSac(c, n) end end end, 1) end\nlocal ancienSortie = onObjectLeaveContainer\nfunction onObjectLeaveContainer(c, o) if ancienSortie then ancienSortie(c, o) end majSac(c) end\nfunction onObjectEnterContainer(c, o) majSac(c) end\nlocal function menus()\n  for _, o in ipairs(getObjects()) do\n    if o.getName():find(\"^Capital circulant \") then pcall(function() o.addContextMenuItem(\"Recalculer le capital\", function() majCapital() end) end) end\n  end\nend\nWait.time(function() menus(); majCapital() end, 4)\n",
   "LuaScriptState": "",
-  "XmlUI": "",
+  "XmlUI": "<Button id=\"capital\" onClick=\"boutonCapital\" rectAlignment=\"UpperRight\" offsetXY=\"-20 -70\" width=\"200\" height=\"40\" fontSize=\"18\" color=\"#2A2418\" textColor=\"#F4EBD6\">Calculer le capital</Button>",
   "ObjectStates": [
     {
       "GUID": "d4396d",
@@ -87,7 +87,7 @@
       },
       "Nickname": "Plateau du joueur rouge",
       "Description": "",
-      "GMNotes": "{\"w\": 16.275, \"x\": -20.86, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"rouge\"}",
+      "GMNotes": "{\"w\": 16.275, \"x\": -20.86, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"rouge\", \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -227,7 +227,7 @@
       },
       "Nickname": "Plateau du joueur bleu",
       "Description": "",
-      "GMNotes": "{\"w\": 16.275, \"x\": 0.629, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"bleu\"}",
+      "GMNotes": "{\"w\": 16.275, \"x\": 0.629, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"bleu\", \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -367,7 +367,7 @@
       },
       "Nickname": "Plateau du joueur vert",
       "Description": "",
-      "GMNotes": "{\"w\": 16.275, \"x\": 22.12, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"vert\"}",
+      "GMNotes": "{\"w\": 16.275, \"x\": 22.12, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"vert\", \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -2066,7 +2066,7 @@
       },
       "Nickname": "Castor sec",
       "Description": "32 tuiles sèches : 18 × 1, 12 × 2, 2 × 3 peaux ; côté gras (★) au verso.",
-      "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 10.418, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 10.418, \"h\": 0.8, \"y3\": true, \"rnd\": true, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.5411764705882353,
         "g": 0.41568627450980394,
@@ -3413,7 +3413,7 @@
       },
       "Nickname": "Castor gras",
       "Description": "14 tuiles grasses : 5 × 1, 8 × 2, 1 × 3 peaux. Face neutre (?) au lac Supérieur tant qu’il n’y a ni mission ni fort.",
-      "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 7.968, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 7.968, \"h\": 0.8, \"y3\": true, \"rnd\": true, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.7451,
         "g": 0.6471,
@@ -4022,7 +4022,7 @@
       },
       "Nickname": "Tuiles secrètes",
       "Description": "32 tuiles secrètes, posées face cachée sur les lacs (2 au plus par lac).",
-      "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 5.518, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 5.518, \"h\": 0.8, \"y3\": true, \"rnd\": true, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.22745098039215686,
         "g": 0.14901960784313725,
@@ -7002,7 +7002,7 @@
       },
       "Nickname": "Marchandises (comptoir)",
       "Description": "Marchandises génériques, en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 29.335, \"z\": -5.18, \"h\": 0.6, \"y3\": true, \"d\": 1.3968}",
+      "GMNotes": "{\"w\": 1.54, \"x\": 29.335, \"z\": -5.18, \"h\": 0.6, \"y3\": true, \"d\": 1.3968, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.5490196078431373,
         "g": 0.5294117647058824,
@@ -7088,7 +7088,7 @@
       },
       "Nickname": "Eau-de-vie (comptoir)",
       "Description": "Eau-de-vie générique, en nombre illimité",
-      "GMNotes": "{\"w\": 1.05, \"x\": 30.91, \"z\": -5.18, \"h\": 0.6, \"y3\": true, \"d\": 1.8083}",
+      "GMNotes": "{\"w\": 1.05, \"x\": 30.91, \"z\": -5.18, \"h\": 0.6, \"y3\": true, \"d\": 1.8083, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.5490196078431373,
         "g": 0.5294117647058824,
@@ -7174,7 +7174,7 @@
       },
       "Nickname": "Guides",
       "Description": "6 guides",
-      "GMNotes": "{\"w\": 1.4, \"x\": 19.118, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.4}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 19.118, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.4, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -7465,7 +7465,7 @@
       },
       "Nickname": "Interprètes",
       "Description": "6 interprètes",
-      "GMNotes": "{\"w\": 1.4, \"x\": 20.714, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.4}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 20.714, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.4, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -7756,7 +7756,7 @@
       },
       "Nickname": "Hivernants",
       "Description": "6 hivernants",
-      "GMNotes": "{\"w\": 1.4, \"x\": 22.31, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.4}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 22.31, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.4, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -8251,7 +8251,7 @@
       },
       "Nickname": "Événements du mois",
       "Description": "14 tuiles : piochez-en une à la fin de chaque mois.",
-      "GMNotes": "{\"w\": 1.4, \"x\": 17.5, \"z\": 32.945, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 17.5, \"z\": 32.945, \"h\": 0.8, \"y3\": true, \"rnd\": true, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.24705882352941178,
         "g": 0.42745098039215684,
@@ -9324,7 +9324,7 @@
       },
       "Nickname": "Sac des congés",
       "Description": "33 congés (permis seuls). Tirés au printemps : autant que de joueurs + 1. Payés en hiver ; posés face « non payé » sur le plateau joueur. Joueur le plus pauvre : −1 ₶ (minimum 1).",
-      "GMNotes": "{\"w\": 1.0, \"x\": 11.547, \"z\": 9.448, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.0, \"x\": 11.547, \"z\": 9.448, \"h\": 0.8, \"y3\": true, \"rnd\": true, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.5568627450980392,
         "g": 0.1843137254901961,
@@ -10712,7 +10712,7 @@
       },
       "Nickname": "Forts français",
       "Description": "Forts français en nombre illimité",
-      "GMNotes": "{\"w\": 1.2, \"x\": 19.118, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 19.118, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -10798,7 +10798,7 @@
       },
       "Nickname": "Forts anglais",
       "Description": "Forts anglais en nombre illimité",
-      "GMNotes": "{\"w\": 1.2, \"x\": 20.714, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 20.714, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -10884,7 +10884,7 @@
       },
       "Nickname": "Missions",
       "Description": "Missions en nombre illimité",
-      "GMNotes": "{\"w\": 1.2, \"x\": 22.31, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 22.31, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -10970,7 +10970,7 @@
       },
       "Nickname": "Marqueurs Ravagé",
       "Description": "Marqueurs Ravagé en nombre illimité",
-      "GMNotes": "{\"w\": 1.2, \"x\": 25.502, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.2}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 25.502, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.2, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -11056,7 +11056,7 @@
       },
       "Nickname": "Jetons Abîmé",
       "Description": "Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé",
-      "GMNotes": "{\"w\": 1.2, \"x\": 23.906, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.2}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 23.906, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.2, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -11224,7 +11224,7 @@
       },
       "Nickname": "Coureurs des bois",
       "Description": "Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.",
-      "GMNotes": "{\"w\": 1.19, \"x\": 23.906, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.19}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 23.906, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.19, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -11310,7 +11310,7 @@
       },
       "Nickname": "Marchandises rouge",
       "Description": "Marchandises en nombre illimité",
-      "GMNotes": "{\"w\": 1.4, \"x\": -28.227, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.2698}",
+      "GMNotes": "{\"w\": 1.4, \"x\": -28.227, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.2698, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.6588235294117647,
         "g": 0.19607843137254902,
@@ -11396,7 +11396,7 @@
       },
       "Nickname": "Eau-de-vie rouge",
       "Description": "Eau-de-vie en nombre illimité",
-      "GMNotes": "{\"w\": 0.98, \"x\": -26.828, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.6878}",
+      "GMNotes": "{\"w\": 0.98, \"x\": -26.828, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.6878, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.6588235294117647,
         "g": 0.19607843137254902,
@@ -11482,7 +11482,7 @@
       },
       "Nickname": "Grand canot rouge",
       "Description": "Grand canot A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.",
-      "GMNotes": "{\"w\": 2.8, \"x\": -24.797, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.607}",
+      "GMNotes": "{\"w\": 2.8, \"x\": -24.797, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.607, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -11773,7 +11773,7 @@
       },
       "Nickname": "Moyen canot rouge",
       "Description": "Moyen canot A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.",
-      "GMNotes": "{\"w\": 1.8305, \"x\": -21.822, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6075}",
+      "GMNotes": "{\"w\": 1.8305, \"x\": -21.822, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6075, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -12064,7 +12064,7 @@
       },
       "Nickname": "Petit canot (coureurs des bois) rouge",
       "Description": "Petit canot (coureurs des bois) A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.",
-      "GMNotes": "{\"w\": 1.344, \"x\": -19.548, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6072}",
+      "GMNotes": "{\"w\": 1.344, \"x\": -19.548, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6072, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -12425,7 +12425,7 @@
       },
       "Nickname": "Expéditions · Grand canot (rouge)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
-      "GMNotes": "{\"w\": 2.17, \"x\": -10.762, \"z\": -23.905, \"h\": 0.6, \"y3\": true, \"d\": 1.55}",
+      "GMNotes": "{\"w\": 2.17, \"x\": -10.762, \"z\": -23.905, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -12596,7 +12596,7 @@
       },
       "Nickname": "Expéditions · Moyen canot (rouge)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
-      "GMNotes": "{\"w\": 2.17, \"x\": -10.762, \"z\": -26.285, \"h\": 0.6, \"y3\": true, \"d\": 1.55}",
+      "GMNotes": "{\"w\": 2.17, \"x\": -10.762, \"z\": -26.285, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -12767,7 +12767,7 @@
       },
       "Nickname": "Expéditions · Petit canot (coureurs des bois) (rouge)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
-      "GMNotes": "{\"w\": 2.17, \"x\": -10.762, \"z\": -28.665, \"h\": 0.6, \"y3\": true, \"d\": 1.55}",
+      "GMNotes": "{\"w\": 2.17, \"x\": -10.762, \"z\": -28.665, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -12923,6 +12923,38 @@
       ]
     },
     {
+      "GUID": "2d85d4",
+      "Name": "Counter",
+      "Transform": {
+        "posX": -15.075,
+        "posY": 2.0,
+        "posZ": -31.841,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Capital circulant rouge",
+      "Description": "Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Calculé automatiquement ; clic droit > Recalculer le capital.",
+      "GMNotes": "{\"w\": 1.9, \"x\": -15.075, \"z\": -31.841, \"h\": 0.3, \"y3\": true, \"lock\": true}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "Counter": {
+        "value": 0
+      }
+    },
+    {
       "GUID": "69e19a",
       "Name": "HandTrigger",
       "Transform": {
@@ -12963,7 +12995,7 @@
       },
       "Nickname": "Marchandises bleu",
       "Description": "Marchandises en nombre illimité",
-      "GMNotes": "{\"w\": 1.4, \"x\": -6.737, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.2698}",
+      "GMNotes": "{\"w\": 1.4, \"x\": -6.737, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.2698, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.1843137254901961,
         "g": 0.3686274509803922,
@@ -13049,7 +13081,7 @@
       },
       "Nickname": "Eau-de-vie bleu",
       "Description": "Eau-de-vie en nombre illimité",
-      "GMNotes": "{\"w\": 0.98, \"x\": -5.338, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.6878}",
+      "GMNotes": "{\"w\": 0.98, \"x\": -5.338, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.6878, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.1843137254901961,
         "g": 0.3686274509803922,
@@ -13135,7 +13167,7 @@
       },
       "Nickname": "Grand canot bleu",
       "Description": "Grand canot A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.",
-      "GMNotes": "{\"w\": 2.8, \"x\": -3.308, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.607}",
+      "GMNotes": "{\"w\": 2.8, \"x\": -3.308, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.607, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -13426,7 +13458,7 @@
       },
       "Nickname": "Moyen canot bleu",
       "Description": "Moyen canot A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.",
-      "GMNotes": "{\"w\": 1.8305, \"x\": -0.333, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6075}",
+      "GMNotes": "{\"w\": 1.8305, \"x\": -0.333, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6075, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -13717,7 +13749,7 @@
       },
       "Nickname": "Petit canot (coureurs des bois) bleu",
       "Description": "Petit canot (coureurs des bois) A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.",
-      "GMNotes": "{\"w\": 1.344, \"x\": 1.943, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6072}",
+      "GMNotes": "{\"w\": 1.344, \"x\": 1.943, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6072, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -14078,7 +14110,7 @@
       },
       "Nickname": "Expéditions · Grand canot (bleu)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
-      "GMNotes": "{\"w\": 2.17, \"x\": 10.728, \"z\": -23.905, \"h\": 0.6, \"y3\": true, \"d\": 1.55}",
+      "GMNotes": "{\"w\": 2.17, \"x\": 10.728, \"z\": -23.905, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -14249,7 +14281,7 @@
       },
       "Nickname": "Expéditions · Moyen canot (bleu)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
-      "GMNotes": "{\"w\": 2.17, \"x\": 10.728, \"z\": -26.285, \"h\": 0.6, \"y3\": true, \"d\": 1.55}",
+      "GMNotes": "{\"w\": 2.17, \"x\": 10.728, \"z\": -26.285, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -14420,7 +14452,7 @@
       },
       "Nickname": "Expéditions · Petit canot (coureurs des bois) (bleu)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
-      "GMNotes": "{\"w\": 2.17, \"x\": 10.728, \"z\": -28.665, \"h\": 0.6, \"y3\": true, \"d\": 1.55}",
+      "GMNotes": "{\"w\": 2.17, \"x\": 10.728, \"z\": -28.665, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -14576,6 +14608,38 @@
       ]
     },
     {
+      "GUID": "204aab",
+      "Name": "Counter",
+      "Transform": {
+        "posX": 6.414,
+        "posY": 2.0,
+        "posZ": -31.841,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Capital circulant bleu",
+      "Description": "Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Calculé automatiquement ; clic droit > Recalculer le capital.",
+      "GMNotes": "{\"w\": 1.9, \"x\": 6.414, \"z\": -31.841, \"h\": 0.3, \"y3\": true, \"lock\": true}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "Counter": {
+        "value": 0
+      }
+    },
+    {
       "GUID": "f23721",
       "Name": "HandTrigger",
       "Transform": {
@@ -14616,7 +14680,7 @@
       },
       "Nickname": "Marchandises vert",
       "Description": "Marchandises en nombre illimité",
-      "GMNotes": "{\"w\": 1.4, \"x\": 14.753, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.2698}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 14.753, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.2698, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.3058823529411765,
         "g": 0.47843137254901963,
@@ -14702,7 +14766,7 @@
       },
       "Nickname": "Eau-de-vie vert",
       "Description": "Eau-de-vie en nombre illimité",
-      "GMNotes": "{\"w\": 0.98, \"x\": 16.152, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.6878}",
+      "GMNotes": "{\"w\": 0.98, \"x\": 16.152, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 1.6878, \"lock\": true}",
       "ColorDiffuse": {
         "r": 0.3058823529411765,
         "g": 0.47843137254901963,
@@ -14788,7 +14852,7 @@
       },
       "Nickname": "Grand canot vert",
       "Description": "Grand canot A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.",
-      "GMNotes": "{\"w\": 2.8, \"x\": 18.183, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.607}",
+      "GMNotes": "{\"w\": 2.8, \"x\": 18.183, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.607, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -15079,7 +15143,7 @@
       },
       "Nickname": "Moyen canot vert",
       "Description": "Moyen canot A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.",
-      "GMNotes": "{\"w\": 1.8305, \"x\": 21.158, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6075}",
+      "GMNotes": "{\"w\": 1.8305, \"x\": 21.158, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6075, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -15370,7 +15434,7 @@
       },
       "Nickname": "Petit canot (coureurs des bois) vert",
       "Description": "Petit canot (coureurs des bois) A, B et C : chacun suit sa carte Expédition. Sortent dans l’ordre A, B, C.",
-      "GMNotes": "{\"w\": 1.344, \"x\": 23.433, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6072}",
+      "GMNotes": "{\"w\": 1.344, \"x\": 23.433, \"z\": -21.525, \"h\": 0.6, \"y3\": true, \"d\": 0.6072, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -15731,7 +15795,7 @@
       },
       "Nickname": "Expéditions · Grand canot (vert)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
-      "GMNotes": "{\"w\": 2.17, \"x\": 32.218, \"z\": -23.905, \"h\": 0.6, \"y3\": true, \"d\": 1.55}",
+      "GMNotes": "{\"w\": 2.17, \"x\": 32.218, \"z\": -23.905, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -15902,7 +15966,7 @@
       },
       "Nickname": "Expéditions · Moyen canot (vert)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
-      "GMNotes": "{\"w\": 2.17, \"x\": 32.218, \"z\": -26.285, \"h\": 0.6, \"y3\": true, \"d\": 1.55}",
+      "GMNotes": "{\"w\": 2.17, \"x\": 32.218, \"z\": -26.285, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16073,7 +16137,7 @@
       },
       "Nickname": "Expéditions · Petit canot (coureurs des bois) (vert)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
-      "GMNotes": "{\"w\": 2.17, \"x\": 32.218, \"z\": -28.665, \"h\": 0.6, \"y3\": true, \"d\": 1.55}",
+      "GMNotes": "{\"w\": 2.17, \"x\": 32.218, \"z\": -28.665, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16227,6 +16291,38 @@
           "SidewaysCard": true
         }
       ]
+    },
+    {
+      "GUID": "83fded",
+      "Name": "Counter",
+      "Transform": {
+        "posX": 27.905,
+        "posY": 2.0,
+        "posZ": -31.841,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Capital circulant vert",
+      "Description": "Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Calculé automatiquement ; clic droit > Recalculer le capital.",
+      "GMNotes": "{\"w\": 1.9, \"x\": 27.905, \"z\": -31.841, \"h\": 0.3, \"y3\": true, \"lock\": true}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "Counter": {
+        "value": 0
+      }
     },
     {
       "GUID": "e6d6ac",
@@ -17947,7 +18043,7 @@
       },
       "Nickname": "Zones fermées",
       "Description": "Jetons Zone fermée en nombre illimité",
-      "GMNotes": "{\"w\": 1.2, \"x\": 25.502, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.2}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 25.502, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.2, \"lock\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19251,7 +19347,7 @@
       "GUID": "242ef9",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": -27.379,
+        "posX": -27.667,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19263,7 +19359,7 @@
       },
       "Nickname": "Entrepôt · Marchandises (rouge)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": -27.379, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"marchandises\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": -27.667, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"marchandises\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19295,7 +19391,7 @@
       "GUID": "55932d",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": -26.206,
+        "posX": -25.918,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19307,7 +19403,7 @@
       },
       "Nickname": "Entrepôt · Eau-de-vie (rouge)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": -26.206, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"eau-de-vie\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": -25.918, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"eau-de-vie\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19339,7 +19435,7 @@
       "GUID": "1e3847",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": -23.424,
+        "posX": -23.712,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19351,7 +19447,7 @@
       },
       "Nickname": "Entrepôt · Moyens canots (rouge)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": -23.424, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"moyen canot\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": -23.712, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"moyen canot\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19383,7 +19479,7 @@
       "GUID": "e129f0",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": -22.251,
+        "posX": -21.962,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19395,7 +19491,7 @@
       },
       "Nickname": "Entrepôt · Grands canots (rouge)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": -22.251, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"grand canot\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": -21.962, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"grand canot\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19471,7 +19567,7 @@
       "GUID": "d18e13",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": -5.89,
+        "posX": -6.178,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19483,7 +19579,7 @@
       },
       "Nickname": "Entrepôt · Marchandises (bleu)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": -5.89, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"marchandises\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": -6.178, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"marchandises\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19515,7 +19611,7 @@
       "GUID": "5306b2",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": -4.717,
+        "posX": -4.428,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19527,7 +19623,7 @@
       },
       "Nickname": "Entrepôt · Eau-de-vie (bleu)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": -4.717, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"eau-de-vie\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": -4.428, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"eau-de-vie\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19559,7 +19655,7 @@
       "GUID": "5bef65",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": -1.935,
+        "posX": -2.224,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19571,7 +19667,7 @@
       },
       "Nickname": "Entrepôt · Moyens canots (bleu)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": -1.935, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"moyen canot\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": -2.224, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"moyen canot\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19603,7 +19699,7 @@
       "GUID": "2912a6",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": -0.762,
+        "posX": -0.474,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19615,7 +19711,7 @@
       },
       "Nickname": "Entrepôt · Grands canots (bleu)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": -0.762, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"grand canot\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": -0.474, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"grand canot\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19691,7 +19787,7 @@
       "GUID": "40403f",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 15.601,
+        "posX": 15.313,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19703,7 +19799,7 @@
       },
       "Nickname": "Entrepôt · Marchandises (vert)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": 15.601, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"marchandises\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": 15.313, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"marchandises\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19735,7 +19831,7 @@
       "GUID": "ac4655",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 16.774,
+        "posX": 17.062,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19747,7 +19843,7 @@
       },
       "Nickname": "Entrepôt · Eau-de-vie (vert)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": 16.774, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"eau-de-vie\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": 17.062, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"eau-de-vie\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19779,7 +19875,7 @@
       "GUID": "fdcd22",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 19.556,
+        "posX": 19.268,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19791,7 +19887,7 @@
       },
       "Nickname": "Entrepôt · Moyens canots (vert)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": 19.556, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"moyen canot\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": 19.268, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"moyen canot\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -19823,7 +19919,7 @@
       "GUID": "9bc6eb",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 20.729,
+        "posX": 21.018,
         "posY": 2.0,
         "posZ": -31.316,
         "rotX": 0,
@@ -19835,7 +19931,7 @@
       },
       "Nickname": "Entrepôt · Grands canots (vert)",
       "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
-      "GMNotes": "{\"w\": 1.05, \"x\": 20.729, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"grand canot\"}",
+      "GMNotes": "{\"w\": 1.05, \"x\": 21.018, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"grand canot\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
