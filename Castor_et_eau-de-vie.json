@@ -10401,13 +10401,13 @@
     },
     {
       "GUID": "06e086",
-      "Name": "Infinite_Bag",
+      "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 19.118,
         "posY": 2.0,
         "posZ": 13.744,
         "rotX": 0,
-        "rotY": 0,
+        "rotY": 180,
         "rotZ": 0,
         "scaleX": 0.77,
         "scaleY": 1.0,
@@ -10415,7 +10415,7 @@
       },
       "Nickname": "Forts français",
       "Description": "Forts français en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 19.118, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 19.118, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386}",
       "ColorDiffuse": {
         "r": 0.47843137254901963,
         "g": 0.3215686274509804,
@@ -10427,7 +10427,7 @@
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
-      "MaterialIndex": 0,
+      "MaterialIndex": 3,
       "ContainedObjects": [
         {
           "GUID": "78c0f2",
@@ -10470,17 +10470,30 @@
             }
           }
         }
-      ]
+      ],
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_fort_fr.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 7,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      }
     },
     {
       "GUID": "803ece",
-      "Name": "Infinite_Bag",
+      "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 20.714,
         "posY": 2.0,
         "posZ": 13.744,
         "rotX": 0,
-        "rotY": 0,
+        "rotY": 180,
         "rotZ": 0,
         "scaleX": 0.77,
         "scaleY": 1.0,
@@ -10488,7 +10501,7 @@
       },
       "Nickname": "Forts anglais",
       "Description": "Forts anglais en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 20.714, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 20.714, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386}",
       "ColorDiffuse": {
         "r": 0.00392156862745098,
         "g": 0.12941176470588237,
@@ -10500,7 +10513,7 @@
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
-      "MaterialIndex": 0,
+      "MaterialIndex": 3,
       "ContainedObjects": [
         {
           "GUID": "5e3ee1",
@@ -10543,17 +10556,30 @@
             }
           }
         }
-      ]
+      ],
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_fort_uk.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_uk_hex.png?v41",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 7,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      }
     },
     {
       "GUID": "5f42b2",
-      "Name": "Infinite_Bag",
+      "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 22.31,
         "posY": 2.0,
         "posZ": 13.744,
         "rotX": 0,
-        "rotY": 0,
+        "rotY": 180,
         "rotZ": 0,
         "scaleX": 0.77,
         "scaleY": 1.0,
@@ -10561,7 +10587,7 @@
       },
       "Nickname": "Missions",
       "Description": "Missions en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 22.31, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 22.31, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386}",
       "ColorDiffuse": {
         "r": 0.11764705882352941,
         "g": 0.10196078431372549,
@@ -10573,7 +10599,7 @@
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
-      "MaterialIndex": 0,
+      "MaterialIndex": 3,
       "ContainedObjects": [
         {
           "GUID": "7904c8",
@@ -10616,17 +10642,30 @@
             }
           }
         }
-      ]
+      ],
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_mission.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 7,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      }
     },
     {
       "GUID": "690bbf",
-      "Name": "Infinite_Bag",
+      "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 25.502,
         "posY": 2.0,
         "posZ": 13.744,
         "rotX": 0,
-        "rotY": 0,
+        "rotY": 180,
         "rotZ": 0,
         "scaleX": 0.77,
         "scaleY": 1.0,
@@ -10634,7 +10673,7 @@
       },
       "Nickname": "Marqueurs Ravagé",
       "Description": "Marqueurs Ravagé en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 25.502, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 25.502, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.2}",
       "ColorDiffuse": {
         "r": 0.47843137254901963,
         "g": 0.12156862745098039,
@@ -10646,7 +10685,7 @@
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
-      "MaterialIndex": 0,
+      "MaterialIndex": 3,
       "ContainedObjects": [
         {
           "GUID": "fa9375",
@@ -10689,17 +10728,30 @@
             }
           }
         }
-      ]
+      ],
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_ravage.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/ravage.png?v38",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 7,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      }
     },
     {
       "GUID": "a22721",
-      "Name": "Infinite_Bag",
+      "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 23.906,
         "posY": 2.0,
         "posZ": 13.744,
         "rotX": 0,
-        "rotY": 0,
+        "rotY": 180,
         "rotZ": 0,
         "scaleX": 0.77,
         "scaleY": 1.0,
@@ -10707,7 +10759,7 @@
       },
       "Nickname": "Jetons Abîmé",
       "Description": "Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé",
-      "GMNotes": "{\"w\": 1.54, \"x\": 23.906, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 23.906, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.2}",
       "ColorDiffuse": {
         "r": 0.6392156862745098,
         "g": 0.20784313725490197,
@@ -10719,7 +10771,7 @@
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
-      "MaterialIndex": 0,
+      "MaterialIndex": 3,
       "ContainedObjects": [
         {
           "GUID": "82f51c",
@@ -10762,7 +10814,20 @@
             }
           }
         }
-      ]
+      ],
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_abime.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/abime.png?v38",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 7,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      }
     },
     {
       "GUID": "385d51",
@@ -12912,7 +12977,7 @@
       "GUID": "69e19a",
       "Name": "HandTrigger",
       "Transform": {
-        "posX": -19.092,
+        "posX": -20.86,
         "posY": 4.0,
         "posZ": -36.435,
         "rotX": 0,
@@ -12924,7 +12989,7 @@
       },
       "Nickname": "",
       "Description": "",
-      "GMNotes": "{\"hand\": true, \"x\": -19.092, \"z\": -36.435, \"hw\": 20.65}",
+      "GMNotes": "{\"hand\": true, \"x\": -20.86, \"z\": -36.435, \"hw\": 20.65}",
       "ColorDiffuse": {
         "r": 0.6588235294117647,
         "g": 0.19607843137254902,
@@ -14597,7 +14662,7 @@
       "GUID": "f23721",
       "Name": "HandTrigger",
       "Transform": {
-        "posX": 2.398,
+        "posX": 0.629,
         "posY": 4.0,
         "posZ": -36.435,
         "rotX": 0,
@@ -14609,7 +14674,7 @@
       },
       "Nickname": "",
       "Description": "",
-      "GMNotes": "{\"hand\": true, \"x\": 2.398, \"z\": -36.435, \"hw\": 20.65}",
+      "GMNotes": "{\"hand\": true, \"x\": 0.629, \"z\": -36.435, \"hw\": 20.65}",
       "ColorDiffuse": {
         "r": 0.1843137254901961,
         "g": 0.3686274509803922,
@@ -16282,7 +16347,7 @@
       "GUID": "e6d6ac",
       "Name": "HandTrigger",
       "Transform": {
-        "posX": 23.888,
+        "posX": 22.12,
         "posY": 4.0,
         "posZ": -36.435,
         "rotX": 0,
@@ -16294,7 +16359,7 @@
       },
       "Nickname": "",
       "Description": "",
-      "GMNotes": "{\"hand\": true, \"x\": 23.888, \"z\": -36.435, \"hw\": 20.65}",
+      "GMNotes": "{\"hand\": true, \"x\": 22.12, \"z\": -36.435, \"hw\": 20.65}",
       "ColorDiffuse": {
         "r": 0.3058823529411765,
         "g": 0.47843137254901963,
@@ -16775,7 +16840,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -16816,7 +16881,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -16857,7 +16922,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -16898,7 +16963,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -16939,7 +17004,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -16980,7 +17045,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17021,7 +17086,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17062,7 +17127,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17103,7 +17168,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17144,7 +17209,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17185,7 +17250,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17226,7 +17291,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17267,7 +17332,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17308,7 +17373,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17349,7 +17414,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17390,7 +17455,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17431,7 +17496,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17472,7 +17537,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17513,7 +17578,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17554,7 +17619,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17595,7 +17660,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17636,7 +17701,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17677,7 +17742,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17718,7 +17783,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17759,7 +17824,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17800,7 +17865,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17841,7 +17906,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17882,7 +17947,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17923,7 +17988,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17964,7 +18029,7 @@
       },
       "Locked": false,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
@@ -17983,13 +18048,13 @@
     },
     {
       "GUID": "71247a",
-      "Name": "Infinite_Bag",
+      "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
         "posX": 25.502,
         "posY": 2.0,
         "posZ": 16.435,
         "rotX": 0,
-        "rotY": 0,
+        "rotY": 180,
         "rotZ": 0,
         "scaleX": 0.77,
         "scaleY": 1.0,
@@ -17997,7 +18062,7 @@
       },
       "Nickname": "Zones fermées",
       "Description": "Jetons Zone fermée en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 25.502, \"z\": 16.435, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 25.502, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.2}",
       "ColorDiffuse": {
         "r": 0.698,
         "g": 0.133,
@@ -18009,7 +18074,7 @@
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
-      "MaterialIndex": 0,
+      "MaterialIndex": 3,
       "ContainedObjects": [
         {
           "GUID": "ae8ab0",
@@ -18052,7 +18117,1250 @@
             }
           }
         }
-      ]
+      ],
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_zone_fermee.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_fermee.png?v39",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 7,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      }
+    },
+    {
+      "GUID": "f56be5",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 2.1,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "232e6e",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 2.2,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "2c9f7c",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 2.3,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "44e7bc",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 2.4,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "f8ce4b",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 2.5,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "43bba0",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 2.6,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "1c990e",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 2.7,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "de3826",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 2.8,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "3e1600",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 2.9,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "cdb06b",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": -14.857,
+        "posY": 3.0,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part rouge",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": -14.857, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.6588235294117647,
+        "g": 0.19607843137254902,
+        "b": 0.16470588235294117
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "71ef83",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 2.1,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "275005",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 2.2,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "fa4aee",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 2.3,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "71a878",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 2.4,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "45648a",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 2.5,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "a64fbe",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 2.6,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "09922a",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 2.7,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "8dedf5",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 2.8,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "72b470",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 2.9,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "a77a96",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 6.633,
+        "posY": 3.0,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part bleu",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 6.633, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.1843137254901961,
+        "g": 0.3686274509803922,
+        "b": 0.5568627450980392
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "fd9504",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 2.1,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "2f87ac",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 2.2,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "185f31",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 2.3,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "d5470a",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 2.4,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "513cf1",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 2.5,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "3db139",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 2.6,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "38e69f",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 2.7,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "ea1c9e",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 2.8,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "7edeea",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 2.9,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
+    },
+    {
+      "GUID": "146758",
+      "Name": "Custom_Token",
+      "Transform": {
+        "posX": 28.123,
+        "posY": 3.0,
+        "posZ": -21.525,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.055,
+        "scaleY": 1.0,
+        "scaleZ": 0.055
+      },
+      "Nickname": "Part vert",
+      "Description": "Part de navire ou de distillerie",
+      "GMNotes": "{\"w\": 0.35, \"x\": 28.123, \"z\": -21.525, \"d\": 0.35}",
+      "ColorDiffuse": {
+        "r": 0.3058823529411765,
+        "g": 0.47843137254901963,
+        "b": 0.17254901960784313
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomToken": {
+          "Thickness": 0.1,
+          "MergeDistancePixels": 15.0,
+          "StandUp": false,
+          "Stackable": true
+        }
+      }
     }
   ]
 }

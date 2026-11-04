@@ -107,6 +107,36 @@ retag('Castor sec',('tile_G3_sec.png','tile_G3_gras.png'),('tile_G1_sec.png','ti
 retag('Castor gras',('tile_gras_neutre.png','tile_S2_gras.png'),('tile_gras_neutre.png','tile_S1_gras.png'),2)
 retag('Tuiles secrètes',('hid_fur2.png','hid_back.png'),('hid_fur1.png','hid_back.png'),1)
 retag('Tuiles secrètes',('hid_fur3.png','hid_back.png'),('hid_fur1.png','hid_back.png'),1)
+# sacs de jetons en forme de jeton (comme les voyageurs et les coureurs)
+GH='https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/'
+MESH={'Forts français':('sac_fort_fr','fort_hex.png?v41',1.1547),'Forts anglais':('sac_fort_uk','fort_uk_hex.png?v41',1.1547),'Missions':('sac_mission','mission_hex.png?v41',1.1547),
+ 'Jetons Abîmé':('sac_abime','abime.png?v38',1.0),'Marqueurs Ravagé':('sac_ravage','ravage.png?v38',1.0),'Zones fermées':('sac_zone_fermee','zone_fermee.png?v39',1.0)}
+for q in objs:
+    nk=q.get('Nickname')
+    if nk in MESH and q['Name']=='Infinite_Bag':
+        m,img,asp=MESH[nk]
+        q['Name']='Custom_Model_Infinite_Bag'
+        q['CustomMesh']={'MeshURL':GH+m+'.obj','DiffuseURL':GH+img,'NormalURL':'','ColliderURL':'','Convex':True,'MaterialIndex':3,'TypeIndex':7,'CastShadows':True}
+        q['Bag']={'Order':0}; q['MaterialIndex']=3
+        n=json.loads(q['GMNotes']); n['w']=1.2; n['d']=round(1.2*asp,3); n.pop('ry',None); n['h']=0.6; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+        t=q['Transform']; t['rotY']=180
+    if (nk or '').startswith('Part '): q['Snap']=True
+# zones de main centrées sur les plateaux des joueurs
+PB={q['Nickname'].split()[-1]:q['Transform']['posX'] for q in objs if (q.get('Nickname') or '').startswith('Plateau du joueur')}
+CMAP={'Red':'rouge','Blue':'bleu','Green':'vert'}
+for q in objs:
+    if q['Name']=='HandTrigger' and CMAP.get(q.get('FogColor')) in PB:
+        x=PB[CMAP[q['FogColor']]]; q['Transform']['posX']=round(x,3)
+        n=json.loads(q['GMNotes']); n['x']=round(x,3); q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+# parts : 20 par joueur
+import hashlib
+used={q.get('GUID') for q in objs}
+for col in ('rouge','bleu','vert'):
+    parts=[q for q in objs if q.get('Nickname')==f'Part {col}']
+    for i in range(20-len(parts)):
+        c=copy.deepcopy(parts[0]); g=hashlib.md5(f'part{col}{i}'.encode()).hexdigest()[:6]
+        while g in used: g=hashlib.md5((g+'x').encode()).hexdigest()[:6]
+        used.add(g); c['GUID']=g; c['Transform']['posY']=round(c['Transform']['posY']+0.1*(i+1),3); objs.append(c)
 # points d'aimantation globaux (script Lua) : pistes, tours, rades
 lua=d['LuaScript']; line=[l for l in lua.split('\n') if l.startswith('local SNAP =')][0]
 old=[tuple(map(float,q)) for q in re.findall(r'\{(-?[\d.]+),(-?[\d.]+)\}', line)]
