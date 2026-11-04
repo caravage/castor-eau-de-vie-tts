@@ -8,6 +8,7 @@ def canot(n,w):
     cw=(w-24)/n; cells=''.join(f"<rect x='{12+i*cw+3:.1f}' y='8' width='{cw-6:.1f}' height='18' fill='#fff' stroke='#2A2418' stroke-width='2'/>" for i in range(n))
     return f"<svg width='{w}' height='36' viewBox='0 0 {w} 36'><path d='M2 4 L{w-2} 4 L{w-12} 32 L12 32 Z' fill='#F7F3EA' stroke='#2A2418' stroke-width='3'/>{cells}</svg>"
 castor=lambda c:f"<svg width='90' height='56' viewBox='0 0 150 90'><ellipse cx='80' cy='48' rx='48' ry='30' fill='{c}' stroke='#3E2A16' stroke-width='4'/><circle cx='124' cy='40' r='13' fill='{c}' stroke='#3E2A16' stroke-width='4'/><path d='M34 52 L4 72 L18 80 L40 62 Z' fill='#5C3A1A' stroke='#3E2A16' stroke-width='3'/></svg>"
+def slotbag(): return "<div class='pmbag' style='width:120px;height:120px'></div>"
 def bag(icon,lab,show):
     badge="<div style=\"position:absolute;left:40px;bottom:-52px;width:40px;height:40px;border-radius:50%;background:#2A2418;color:#F4EBD6;font:700 22px 'Alegreya Sans';display:flex;align-items:center;justify-content:center\">0</div>" if show else ''
     return f"<div style='display:flex;flex-direction:column;align-items:center;gap:4px'><div style='position:relative;width:120px;height:120px;border-radius:50%;background:#EFE6CC;box-shadow:inset 0 0 0 2px #8F8572;display:flex;align-items:center;justify-content:center'>{icon}{badge}</div></div>"
@@ -27,9 +28,10 @@ def html(name,col,dark,show):
  <div style='display:flex;justify-content:space-between'>{slot*4}</div>
  {title('Entrepôt à Québec')}
  <div style='flex:1;display:flex;justify-content:space-between;padding:7px 0'>
-  {box('Charges',bag(caisse,'marchandises',show)+bag(edv,'eau-de-vie',show),CW+452)}
-  {box('Fourrures',bag(castor('#8A5A2B'),'castor',show))}
-  <div style='width:{CW-14}px;margin:0 7px;box-sizing:border-box;background:#F6EFDC;border:4px solid {col};box-shadow:0 0 0 5px #F4EBD6,0 0 0 7px {col};padding:8px 18px;color:#2A2418;display:flex;flex-direction:column'><div style="font:400 36px 'IM Fell English';font-variant:small-caps;text-align:center;color:{col}">Capital</div><div style="font:italic 25px/1.28 'IM Fell English';display:grid;grid-template-columns:24px 1fr;margin-top:2px"><span></span><span>charges <span style='font-size:20px'>(10 max)</span></span><span>+</span><span>fourrures × prix</span><span>+</span><span>parts</span><span>+</span><span>livres</span></div><div style='display:flex;align-items:center;gap:10px;margin-top:6px;border-top:1.5px solid #BFAE7F;padding-top:8px'><span style="font:400 34px 'IM Fell English'">=</span><div class='ctr' style='width:250px;height:110px;box-sizing:border-box;border:2px dashed #BFAE7F;border-radius:12px'></div></div></div>
+  {box('Charges',slotbag()+slotbag())}
+  {box('Canots',bag(canot(3,84),'moyen',False)+bag(canot(5,92),'grand',False))}
+  {box('Fourrures',slotbag())}
+  <div style='width:{CW-14}px;margin:0 7px;box-sizing:border-box;background:#F6EFDC;border:4px solid {col};box-shadow:0 0 0 5px #F4EBD6,0 0 0 7px {col};padding:8px 18px;color:#2A2418;display:flex;flex-direction:column'><div style="font:400 36px 'IM Fell English';font-variant:small-caps;text-align:center;color:{col}">Capital</div><div style="font:italic 25px/1.28 'IM Fell English';display:grid;grid-template-columns:24px 1fr;margin-top:2px"><span></span><span>charges <span style='font-size:20px'>(10 max)</span></span><span>+</span><span>fourrures × prix</span><span>+</span><span>parts</span><span>+</span><span>livres</span></div><div style='display:flex;align-items:center;gap:10px;margin-top:6px;border-top:1.5px solid #BFAE7F;padding-top:8px'><span style="font:400 34px 'IM Fell English'">=</span><div class='ctr' style='width:110px;height:110px'></div></div></div>
  </div>
 </div></div></body></html>"""
 P=[('Famille Le Moyne','#A8322A','#6E1E18'),('Famille Gamelin','#2F5E8E','#1D3B5A'),('Famille Couagne','#4E7A2C','#2F4A1A')]
@@ -44,6 +46,6 @@ with sync_playwright() as p:
             geo=pg.evaluate("""()=>{const r=e=>{const b=e.getBoundingClientRect();return [b.x+b.width/2,b.y+b.height/2,b.width,b.height]};
               return {slots:[...document.querySelectorAll("div[style*='dashed']")].map(r),
                       souf:[...document.querySelectorAll("div[style*='width:72px']")].map(r),
-                      bags:[...document.querySelectorAll("div[style*='width:120px']")].map(r),ctr:[...document.querySelectorAll('.ctr')].map(r)}}""")
+                      bags:[...document.querySelectorAll('.pmbag')].map(r),ctr:[...document.querySelectorAll('.ctr')].map(r)}}""")
     b.close()
 json.dump(geo,open('pmat_geo.json','w')); print({k:len(v) for k,v in geo.items()}, geo['slots'][0])

@@ -29,7 +29,6 @@ S=240; circ=[(S/2+(S/2-2)*math.cos(2*math.pi*i/64),S/2+(S/2-2)*math.sin(2*math.p
 cwd=os.getcwd(); os.chdir(R)
 SLUG={'marchandises':'marchandises','eau-de-vie':'eaudevie','moyen canot':'moyen','grand canot':'grand','castor':'castor'}
 for k,(x,y,w,h) in zip(KINDS,geo['bags']):
-    im.crop((int(x-w/2),int(y-h/2),int(x+w/2),int(y+h/2))).resize((S,S),Image.LANCZOS).save(R+f'img/v18/pm_{SLUG[k]}.png')
     ns['mesh'](f'v18/sac_pm_{SLUG[k]}',f'v18/pm_{SLUG[k]}',circ,20,(S//2,3))
 os.chdir(cwd)
 
@@ -46,7 +45,7 @@ tpl=[q for q in objs if q.get('Nickname')=='Moyen canot rouge'][0]
 mats={c:[q for q in objs if q.get('Nickname')=='Plateau du joueur '+c][0] for c in COLS}
 for i,c in enumerate(COLS):
     m=mats[c]
-    for kk in ('ImageURL','ImageSecondaryURL'): m['CustomImage'][kk]=GH+f'pmat_v3_{i}.png?v42'
+    for kk in ('ImageURL','ImageSecondaryURL'): m['CustomImage'][kk]=GH+f'pmat_v3_{i}.png?v43'
     n=json.loads(m['GMNotes']); n['cap']=c; m['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
     # 3. points d'aimantation : 4 cartes (avec rotation) + 7 cases de soupçon
     sp=[]
@@ -66,20 +65,11 @@ for i,c in enumerate(COLS):
         b['CustomMesh']=dict(tpl['CustomMesh'],MeshURL=GH+f'sac_pm_{SLUG[k]}.obj',DiffuseURL=GH+f'pm_{SLUG[k]}.png?v42',TypeIndex=6)
         b['Transform'].update(posX=X,posZ=Z,posY=2.0,scaleX=dia,scaleY=dia,scaleZ=dia)
         b['Locked']=True; objs.append(b)
-# 5. compteurs de capital placés dans la case « = » ; plateaux, compteurs et sacs verrouillés
+# 5. capital : pastille à la couleur du joueur dans la case « = » (remplace les compteurs TTS)
+COUL={}
 for c in COLS:
-    m=mats[c]; cx,cz=m['Transform']['posX'],m['Transform']['posZ']
-    X,Z=world(cx,cz,geo['ctr'][0][0],geo['ctr'][0][1])
-    q=[o for o in objs if o.get('Nickname')=='Capital circulant '+c][0]
-    q['Description']='Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Calculé automatiquement ; clic droit > Recalculer le capital.'
-    q['Transform'].update(posX=X,posZ=Z)
-    q['GMNotes']=json.dumps({'w':1.9,'x':X,'z':Z,'h':0.6,'y3':True,'lock':True},ensure_ascii=False,separators=(', ',': '))
-for q in objs:
-    if q['Name'] in ('Bag','Custom_Model_Bag','Custom_Model_Infinite_Bag','Infinite_Bag','Counter') or (q.get('Nickname') or '').startswith('Plateau du joueur'):
-        q['Locked']=True
-        try: n=json.loads(q.get('GMNotes') or '')
-        except Exception: n=None
-        if isinstance(n,dict) and 'x' in n: n['lock']=True; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+    COUL[c]=[q for q in objs if q.get('Nickname')=='Part '+c][0]['ColorDiffuse']
+objs[:]=[q for q in objs if not (q.get('Name')=='Counter' and (q.get('Nickname') or '').startswith('Capital circulant'))]
 # 5b. parts : 20 par joueur dans un sac verrouillé (la pile tombait au chargement)
 os.chdir(R); circP=[(100+98*math.cos(2*math.pi*i/48),100+98*math.sin(2*math.pi*i/48)) for i in range(48)]
 ns['mesh']('v18/sac_part','v18/tok_disc',circP,16,(100,3)); os.chdir(cwd)
@@ -102,6 +92,36 @@ def face(os_):
             if isinstance(n,dict) and 'w' in n and 'x' not in n: n['face']='up'; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
         face(q.get('ContainedObjects',[]))
 face(objs)
+# 5d. pastilles du capital (hôte du nombre affiché)
+for c in COLS:
+    m=mats[c]; cx,cz=m['Transform']['posX'],m['Transform']['posZ']
+    X,Z=world(cx,cz,geo['ctr'][0][0],geo['ctr'][0][1])
+    h=copy.deepcopy(tpl); h.pop('ContainedObjects',None); h.pop('Bag',None); h['Name']='Custom_Model'; h['GUID']=guid('capd'+c)
+    h['Nickname']='Capital circulant '+c
+    h['Description']='Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Bouton « Calculer le capital » (haut droite) ou clic droit > Recalculer le capital.'
+    h['ColorDiffuse']=COUL[c]; h['CustomMesh']=dict(tpl['CustomMesh'],MeshURL=GH+'sac_part.obj',DiffuseURL=GH+'tok_disc.png?v38',TypeIndex=0)
+    h['GMNotes']=json.dumps({'w':0.6,'x':X,'z':Z,'h':0.4,'y3':True,'lock':True,'capd':c},ensure_ascii=False,separators=(', ',': '))
+    h['Transform'].update(posX=X,posZ=Z,scaleX=0.6,scaleY=0.6,scaleZ=0.6); h['Locked']=True; objs.append(h)
+# 5e. sac des congés en forme de congé
+exec(block('rrect'),ns)
+os.chdir(R); ns['mesh']('v18/sac_conge','v18/conge_back',ns['rrect'](4,4,396,396,40),36,(200,6)); os.chdir(cwd)
+sc=[q for q in objs if q.get('Nickname')=='Sac des congés'][0]
+sc['Name']='Custom_Model_Bag'; sc['CustomMesh']=dict(tpl['CustomMesh'],MeshURL=GH+'sac_conge.obj',DiffuseURL=GH+'conge_back.png?v43',TypeIndex=6)
+sc['ColorDiffuse']={'r':1.0,'g':1.0,'b':1.0}; sc['MaterialIndex']=3
+n=json.loads(sc['GMNotes']); n.pop('rnd',None); sc['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+# 5f. plateaux et sacs verrouillés, posés à plat : ils tombent sur la table au chargement puis se verrouillent
+for q in objs:
+    if q['Name'] in ('Bag','Custom_Model_Bag','Custom_Model_Infinite_Bag','Infinite_Bag','Custom_Model') and (q.get('Nickname') or '').startswith(('Capital circulant','Entrepôt','Parts ','Sac ','Expéditions','Marchandises','Eau-de-vie','Grand canot','Moyen canot','Petit canot','Castor','Tuiles','Forts','Missions','Jetons','Marqueurs','Zones','Coureurs','Guide','Interpr','Hivernant')) or q['Name'] in ('Bag','Custom_Model_Bag','Custom_Model_Infinite_Bag','Infinite_Bag') or (q.get('Nickname') or '').startswith('Plateau du joueur'):
+        q['Locked']=True
+        try: n=json.loads(q.get('GMNotes') or '')
+        except Exception: n=None
+        if isinstance(n,dict) and 'x' in n: n['lock']=True; n['drop']=True; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+# 5g. aimantation : marqueurs de soupçon et cartes
+def snapf(os_):
+    for q in os_:
+        if q['Name'] in ('Card','Deck') or (q.get('Nickname') or '').startswith('Soupçon'): q['Snap']=True
+        snapf(q.get('ContainedObjects',[]))
+snapf(objs)
 # 6. cartes au format 63,5 x 88
 def cards(os_):
     for q in os_:
@@ -122,6 +142,7 @@ LUA=f'''
 -- Ce qui est en expédition ne compte pas. Les sacs d'entrepôt affichent leur contenu à chaque entrée / sortie ;
 -- le capital se recalcule avec le bouton « Calculer le capital » (haut droite de l'écran) ou clic droit sur le compteur.
 local LIV0, PRIX4, PAS = {round(L+1096.9/k,3)}, {round(L+4019.6/k,3)}, {round(108.6/k,4)}
+local COUL = {{{', '.join(f'["{c}"] = {{{COUL[c]["r"]:.3f}, {COUL[c]["g"]:.3f}, {COUL[c]["b"]:.3f}}}' for c in COLS)}}}
 local NOMS = {{["marchandises"] = "Marchandises", ["eau-de-vie"] = "Eau-de-vie", ["moyen canot"] = "Moyens canots", ["grand canot"] = "Grands canots", ["castor"] = "Fourrures"}}
 local function palier(n) if n >= 25 then return 15 elseif n >= 20 then return 14 elseif n >= 15 then return 12 elseif n >= 10 then return 9 elseif n >= 5 then return 5 end return 0 end
 local function arrondi(v) return math.floor(v + 0.5) end
@@ -167,7 +188,16 @@ local function capital()
     end
     local nl = 0
     if livres[c] then nl = math.max(0, arrondi((livres[c].getPosition().x - LIV0 * F) / (PAS * F))) end
-    pcall(function() ct.Counter.setValue(charges + (q["castor"] or 0) * p + np + palier(nl)) end)
+    local total = tostring(charges + (q["castor"] or 0) * p + np + palier(nl))
+    local cc = COUL[c] or {{0.16, 0.14, 0.09}}
+    local ok, bs = pcall(function() return ct.getButtons() end)
+    if ok and bs and #bs > 0 then ct.editButton({{index = 0, label = total}})
+    else
+      local sc = 1 / ct.getScale().x
+      ct.createButton({{click_function = "boutonCapital", function_owner = Global, label = total, position = {{0, 0.25, 0}},
+        scale = {{sc, sc, sc}}, width = 520, height = 420, font_size = 340, tooltip = "Recalculer le capital",
+        color = cc, font_color = {{0.96, 0.92, 0.84}}, hover_color = cc, press_color = cc}})
+    end
   end
 end
 function majCapital() pcall(capital) end
@@ -183,6 +213,9 @@ local function menus()
 end
 Wait.time(function() menus(); majCapital() end, 4)
 '''
+OLD='      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end'
+assert OLD in d['LuaScript']
+d['LuaScript']=d['LuaScript'].replace(OLD,'      if not m[1].isDestroyed() and (not m[2].lock or m[2].drop) then m[1].setLock(false) end\n    end\n    Wait.time(function()\n      for _, m2 in ipairs(moved) do if m2[2].drop and not m2[1].isDestroyed() then m2[1].setLock(true) end end\n    end, 3)\n    for _, m in ipairs({}) do')
 d['LuaScript']=d['LuaScript'].rstrip('\n')+LUA
 d['XmlUI']='<Button id="capital" onClick="boutonCapital" rectAlignment="UpperRight" offsetXY="-20 -70" width="200" height="40" fontSize="18" color="#2A2418" textColor="#F4EBD6">Calculer le capital</Button>'
 json.dump(d,open(P,'w'),ensure_ascii=False,indent=2)
