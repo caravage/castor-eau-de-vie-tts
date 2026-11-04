@@ -51,7 +51,7 @@ for o in d['ObjectStates']:
     if n in ('Carte v15 (test)','Prendre le pas · 1er','Dé du marché'): continue
     if n.startswith('Carte de navire') or n.startswith('Carte de distillerie'):
         xs_=[523,657,791,926,1060] if 'navire' in n else [559,720,879,1040]
-        o['AttachedSnapPoints']=[{'Position':{'x':round(-((px/1200)*2-1),4),'y':0.05,'z':round(-(352/640*2-1)*640/1200,4)}} for px in xs_]
+        o['AttachedSnapPoints']=[{'Position':{'x':round(-((px/1200)*2-1),4),'y':0.05,'z':round((352/640*2-1)*640/1200,4)}} for px in xs_]
     if n=='Table du castor':
         for kk in ('ImageURL','ImageSecondaryURL'): o['CustomImage'][kk]='https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17.png?v41'
         t['scaleX']=t['scaleZ']=round(W/2,4); setx(o,*NC)

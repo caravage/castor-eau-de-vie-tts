@@ -37,7 +37,7 @@ def guid(seed):
     while g in used: g=hashlib.md5((g+'x').encode()).hexdigest()[:6]
     return g
 def local(px,py):   # pixel du plateau -> coordonnées locales de la tuile (rotY 180)
-    return round(-((px/IW)*2-1),4), round(-((py/IH)*2-1)*(IH/IW),4)
+    return round(-((px/IW)*2-1),4), round(((py/IH)*2-1)*(IH/IW),4)
 def world(cx,cz,px,py):
     return round(cx+(px-IW/2)/PX,3), round(cz-(py-IH/2)/PX,3)
 
@@ -95,7 +95,7 @@ face(objs)
 # 5d. pastilles du capital (hôte du nombre affiché)
 for c in COLS:
     m=mats[c]; cx,cz=m['Transform']['posX'],m['Transform']['posZ']
-    X,Z=world(cx,cz,geo['ctr'][0][0],geo['ctr'][0][1])
+    X,Z=world(cx,cz,geo['slots'][3][0],geo['ctr'][0][1])
     h=copy.deepcopy(tpl); h.pop('ContainedObjects',None); h.pop('Bag',None); h['Name']='Custom_Model'; h['GUID']=guid('capd'+c)
     h['Nickname']='Capital circulant '+c
     h['Description']='Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Bouton « Calculer le capital » (haut droite) ou clic droit > Recalculer le capital.'
@@ -108,7 +108,7 @@ os.chdir(R); ns['mesh']('v18/sac_conge','v18/conge_back',ns['rrect'](4,4,396,396
 sc=[q for q in objs if q.get('Nickname')=='Sac des congés'][0]
 sc['Name']='Custom_Model_Bag'; sc['CustomMesh']=dict(tpl['CustomMesh'],MeshURL=GH+'sac_conge.obj',DiffuseURL=GH+'conge_back.png?v43',TypeIndex=6)
 sc['ColorDiffuse']={'r':1.0,'g':1.0,'b':1.0}; sc['MaterialIndex']=3
-n=json.loads(sc['GMNotes']); n.pop('rnd',None); sc['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+n=json.loads(sc['GMNotes']); n.pop('rnd',None); n['w']=1.4; sc['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
 # 5f. plateaux et sacs verrouillés, posés à plat : ils tombent sur la table au chargement puis se verrouillent
 for q in objs:
     if q['Name'] in ('Bag','Custom_Model_Bag','Custom_Model_Infinite_Bag','Infinite_Bag','Custom_Model') and (q.get('Nickname') or '').startswith(('Capital circulant','Entrepôt','Parts ','Sac ','Expéditions','Marchandises','Eau-de-vie','Grand canot','Moyen canot','Petit canot','Castor','Tuiles','Forts','Missions','Jetons','Marqueurs','Zones','Coureurs','Guide','Interpr','Hivernant')) or q['Name'] in ('Bag','Custom_Model_Bag','Custom_Model_Infinite_Bag','Infinite_Bag') or (q.get('Nickname') or '').startswith('Plateau du joueur'):
@@ -122,6 +122,61 @@ def snapf(os_):
         if q['Name'] in ('Card','Deck') or (q.get('Nickname') or '').startswith('Soupçon'): q['Snap']=True
         snapf(q.get('ContainedObjects',[]))
 snapf(objs)
+# 5h. textures : ₶ sur les sacs de parts, œil sur les jetons de soupçon
+from PIL import ImageDraw, ImageFont
+base=Image.open(R+'img/v18/tok_disc.png').convert('RGBA')
+t=base.copy(); dr=ImageDraw.Draw(t); f=ImageFont.truetype('/usr/share/fonts/truetype/freefont/FreeSerif.ttf',120)
+dr.text((100,104),'₶',font=f,fill=(55,48,40,255),anchor='mm'); t.save(R+'img/v18/part_lt.png')
+for q in objs:
+    if (q.get('Nickname') or '').startswith('Parts '): q['CustomMesh']['DiffuseURL']=GH+'part_lt.png?v43'
+os.chdir(R); ns['mesh']('v18/sac_part_lt','v18/part_lt',circP,16,(100,3)); os.chdir(cwd)
+for q in objs:
+    if (q.get('Nickname') or '').startswith('Parts '): q['CustomMesh']['MeshURL']=GH+'sac_part_lt.obj'
+t=base.copy(); dr=ImageDraw.Draw(t); W2=6
+dr.arc((34,58,166,178),200,340,fill=(55,48,40,255),width=W2); dr.arc((34,22,166,142),20,160,fill=(55,48,40,255),width=W2)
+dr.ellipse((76,76,124,124),fill=(55,48,40,255)); dr.ellipse((90,86,102,98),fill=(244,244,244,255)); t.save(R+'img/v18/tok_oeil.png')
+for q in objs:
+    if (q.get('Nickname') or '').startswith('Soupçon'): q['CustomImage']['ImageURL']=GH+'tok_oeil.png?v43'
+# 5i. Rivière : cases ramenées à la taille des cartes (63,5 x 88)
+tb=Image.open(R+'img/v18/table_v17.png').convert('RGB'); BG=(35,27,21)
+CWp,CHp=round(3.5*94.0257),round(3.5*88/63.5*94.0257)
+for (x0,y0,x1,y1) in ((31,579,389,1128),(32,1192,388,1680),(32,1765,388,2252),(32,2337,388,2825),(31,2908,389,3399)):
+    cut=tb.crop((x0,y0,x1+1,y1+1)).resize((CWp,CHp),Image.LANCZOS); cx_,cy_=(x0+x1)//2,(y0+y1)//2
+    ImageDraw.Draw(tb).rectangle((x0-4,y0-4,x1+4,y1+4),fill=BG); tb.paste(cut,(cx_-CWp//2,cy_-CHp//2))
+tb.save(R+'img/v18/table_v17r.png')
+for q in objs:
+    if q.get('Nickname')=='Table du castor':
+        for kk in ('ImageURL','ImageSecondaryURL'): q['CustomImage'][kk]=GH+'table_v17r.png?v43'
+# 5j. congés v41 (taille du jeton coureur des bois, 1,4) et cartes Expédition v4
+import re as _re
+def maj(os_):
+    for q in os_:
+        ci=q.get('CustomImage')
+        if ci and 'c40_' in (ci.get('ImageURL') or ''):
+            for kk in ('ImageURL','ImageSecondaryURL'):
+                if ci.get(kk): ci[kk]=_re.sub(r'c40_([a-z0-9_]+)\.png\?v\d+',r'c41_\1.png?v43',ci[kk])
+            n=json.loads(q.get('GMNotes') or '{}'); n['w']=1.4; n['d']=1.4; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+        for cd in (q.get('CustomDeck') or {}).values():
+            m=_re.match(r'.*/exp_(rouge|bleu|vert)\.png\?v\d+$',cd.get('FaceURL',''))
+            if m: cd['FaceURL']=GH+f'exp_v4_{m.group(1)}.png?v43'
+        maj(q.get('ContainedObjects',[]))
+maj(objs)
+# 5k. canots v2 des joueurs (coque low-poly, lettre sur les flancs) et sacs de canots
+LB={'grand':150/692,'petit':116/452,'coureur':92/332}
+def canots(os_):
+    for q in os_:
+        for st in [q]+list((q.get('States') or {}).values()):
+            cm=st.get('CustomMesh') or {}
+            m=_re.search(r'/canot3d_(grand|petit|coureur)(_couche)?\.obj$',cm.get('MeshURL') or '')
+            if not m: continue
+            key=m.group(1); cm['MeshURL']=GH+f'canot4_{key}{m.group(2) or ""}.obj'
+            t=_re.search(r'/cn_(rouge|bleu|vert)_(grand|petit|coureur)(?:_([ABC]))?\.png',cm.get('DiffuseURL') or '')
+            if t: cm['DiffuseURL']=GH+(f'cn4_{t.group(1)}_{key}_{t.group(3)}.png?v43' if t.group(3) else f'cn4_{t.group(1)}_{key}_sac.png?v43')
+            try: n=json.loads(st.get('GMNotes') or '')
+            except Exception: n=None
+            if isinstance(n,dict) and 'w' in n: n['d']=round(n['w']*LB[key],4); st['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+        canots(q.get('ContainedObjects',[]))
+canots(objs)
 # 6. cartes au format 63,5 x 88
 def cards(os_):
     for q in os_:
@@ -195,7 +250,7 @@ local function capital()
     else
       local sc = 1 / ct.getScale().x
       ct.createButton({{click_function = "boutonCapital", function_owner = Global, label = total, position = {{0, 0.25, 0}},
-        scale = {{sc, sc, sc}}, width = 520, height = 420, font_size = 340, tooltip = "Recalculer le capital",
+        scale = {{sc, sc, sc}}, width = 1040, height = 840, font_size = 680, tooltip = "Recalculer le capital",
         color = cc, font_color = {{0.96, 0.92, 0.84}}, hover_color = cc, press_color = cc}})
     end
   end
@@ -203,15 +258,32 @@ end
 function majCapital() pcall(capital) end
 function boutonCapital() majCapital() end
 local function majSac(c) Wait.frames(function() if c and not c.isDestroyed() then local n = sac(c) if n then afficheSac(c, n) end end end, 1) end
+-- Cartes Expédition : points d'aimantation du congé (ou du coureur) et des voyageurs, posés quand la carte arrive sur la table.
+local EXPSNAP = {{grand = {{{{195.0, 283.0}}, {{493.0, 283.0}}, {{695.0, 283.0}}, {{897.0, 283.0}}}}, moyen = {{{{195.0, 283.0}}, {{560.3, 283.0}}, {{829.7, 283.0}}}}, coureur = {{{{191.0, 424.0}}}}}}
+local function snapsExp(o)
+  if not o or o.isDestroyed() or o.type ~= "Card" then return end
+  local nm = o.getName()
+  if not nm:find("^Expédition ") then return end
+  local pts = nm:find("Grand canot") and EXPSNAP.grand or (nm:find("Moyen canot") and EXPSNAP.moyen or EXPSNAP.coureur)
+  local b = o.getBounds(); local sp = {{}}
+  for _, p in ipairs(pts) do
+    local w = {{b.center.x + (p[1] / 1050 - 0.5) * b.size.x, b.center.y + b.size.y / 2, b.center.z - (p[2] / 750 - 0.5) * b.size.z}}
+    table.insert(sp, {{position = o.positionToLocal(w), rotation_snap = false}})
+  end
+  pcall(function() o.setSnapPoints(sp) end)
+end
+local function snapsTous() for _, o in ipairs(getObjects()) do pcall(snapsExp, o) end end
 local ancienSortie = onObjectLeaveContainer
-function onObjectLeaveContainer(c, o) if ancienSortie then ancienSortie(c, o) end majSac(c) end
+function onObjectLeaveContainer(c, o) if ancienSortie then ancienSortie(c, o) end majSac(c)
+  Wait.condition(function() Wait.time(function() pcall(snapsExp, o) end, 0.6) end, function() return o.isDestroyed() or not o.spawning end, 10)
+end
 function onObjectEnterContainer(c, o) majSac(c) end
 local function menus()
   for _, o in ipairs(getObjects()) do
     if o.getName():find("^Capital circulant ") then pcall(function() o.addContextMenuItem("Recalculer le capital", function() majCapital() end) end) end
   end
 end
-Wait.time(function() menus(); majCapital() end, 4)
+Wait.time(function() menus(); majCapital(); snapsTous() end, 4)
 '''
 OLD='      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end'
 assert OLD in d['LuaScript']

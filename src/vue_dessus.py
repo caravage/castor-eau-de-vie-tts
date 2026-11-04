@@ -39,7 +39,7 @@ for o in order:
 dr=ImageDraw.Draw(C)
 for o in d['ObjectStates']:
     for sp in o.get('AttachedSnapPoints',[]) or []:
-        t=o['Transform']; X=t['posX']-sp['Position']['x']*t['scaleX']; Z=t['posZ']+sp['Position']['z']*t['scaleZ']
+        t=o['Transform']; X=t['posX']-sp['Position']['x']*t['scaleX']; Z=t['posZ']-sp['Position']['z']*t['scaleZ']
         px,py=P(X,Z); dr.ellipse([px-5,py-5,px+5,py+5],outline=(220,0,0),width=2)
 
 import re as _re
