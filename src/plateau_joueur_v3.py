@@ -208,12 +208,20 @@ def carre(col,txt=None,S=160):
     dr.rounded_rectangle((22,22,S-23,S-23),radius=10,outline=tuple(min(255,int(v+(255-v)*.45)) for v in col[:3])+(255,),width=4)
     if txt: dr.text((S/2,S/2+2),txt,font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',40),fill=(255,255,255,255),anchor='mm')
     return t
-for c in COLS:
-    rgb=tuple(round(COUL[c][k]*255) for k in 'rgb')+(255,)
-    carre(rgb).save(R+f'img/v18/sq_livres_{c}.png'); carre(rgb,'+30').save(R+f'img/v18/sq_livres_{c}_30.png')
+from playwright.sync_api import sync_playwright
+with sync_playwright() as pw:
+    br=pw.chromium.launch(); pg=br.new_page(viewport={'width':160,'height':160})
+    for c in COLS:
+        hx='#%02x%02x%02x'%tuple(round(COUL[c][k]*255) for k in 'rgb')
+        for txt,fn in (('',f'sq_livres_{c}.png'),('+30',f'sq_livres_{c}_30.png')):
+            pg.set_content("<html><head><link href='https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@1&display=block' rel='stylesheet'></head>"
+                f"<body style='margin:0;background:transparent'><div style='width:160px;height:160px;border-radius:20px;background:{hx};display:flex;align-items:center;justify-content:center;"
+                f"font:italic 78px \"IM Fell English\";color:#F4EBD6;letter-spacing:-2px'>{txt}</div></body></html>")
+            pg.evaluate('document.fonts.ready'); pg.wait_for_timeout(800); pg.screenshot(path=R+'img/v18/'+fn,omit_background=True)
+    br.close()
     for q in objs:
         if q.get('Nickname')=='Livres '+c:
-            q['CustomImage']['ImageURL']=GH+f'sq_livres_{c}.png?v45'; q['CustomImage']['ImageSecondaryURL']=GH+f'sq_livres_{c}_30.png?v45'; q['CustomImage']['CustomTile']['Type']=3
+            q['CustomImage']['ImageURL']=GH+f'sq_livres_{c}.png?v46'; q['CustomImage']['ImageSecondaryURL']=GH+f'sq_livres_{c}_30.png?v46'; q['CustomImage']['CustomTile']['Type']=3
 carre((255,255,255,255)).save(R+'img/v18/tok_carre.png')
 for q in objs:
     if (q.get('Nickname') or '').startswith('Crédit '): q['CustomImage']['ImageURL']=GH+'tok_carre.png?v45'
@@ -299,7 +307,11 @@ local function capital()
       end
     end
     local nl = 0
-    if livres[c] then nl = math.max(0, arrondi((livres[c].getPosition().x - LIV0 * F) / (PAS * F))) end
+    if livres[c] then
+      nl = math.max(0, arrondi((livres[c].getPosition().x - LIV0 * F) / (PAS * F)))
+      local rz = livres[c].getRotation().z
+      if rz > 90 and rz < 270 then nl = nl + 30 end   -- face « +30 » : la piste repart de 0, le palier vaut 15
+    end
     local total = tostring(charges + (q["castor"] or 0) * p + np + palier(nl))
     local cc = COUL[c] or {{0.16, 0.14, 0.09}}
     local ok, bs = pcall(function() return ct.getButtons() end)
