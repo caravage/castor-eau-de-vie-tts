@@ -173,12 +173,12 @@ OBJ.append(token('Grand canot (comptoir)', 'canot_grand', 52, P(1316, 486 + 105)
 ROI = base('Custom_Model', 'Navire du roi', 40, P(1440, 486 + 105), WHITE, False, 0.8, y3=True, s0=1.0, desc='En rade dès avril les années I et II, 4 places publiques.')   # figurine fournie, en blanc
 ROI['CustomMesh'] = {'MeshURL': 'https://steamusercontent-a.akamaihd.net/ugc/952982844368369073/FB63C915DB2529E0210C26EEDFD717929BB7E7A6/', 'DiffuseURL': '', 'NormalURL': '', 'ColliderURL': '', 'Convex': True, 'MaterialIndex': 0, 'TypeIndex': 1, 'CastShadows': True}
 ROI['MaterialIndex'] = 0; OBJ.append(ROI); OBJ.append(stile('Navire de la compagnie', 'navire_compagnie', 34, P(1490, 486 + 105))); OBJ.append(stile('Le Profond (navire du roi)', 'navire_profond', 34, P(1440, 486 + 140), desc='Marqueur du navire du roi.'))
-CONGES = json.load(open('conges_v39.json'))
+CONGES = json.load(open('conges_v40.json'))   # v40 : style contrat [id, nom, prix, crédit, 2 ans, nombre]
 EVT45 = json.load(open('evt45.json'))   # v45 : sac d'événements du mois (tuiles)
 OBJ.append(bag('Événements du mois', 40, P(1140, -76), [tile(t, f'evt_{k}', 30, back='evt_back') for k, t, n in EVT45 for _ in range(n)], col('#3F6D78'), f"{sum(e[2] for e in EVT45)} tuiles : piochez-en une à la fin de chaque mois."))
 OBJ.append(deck('man', P(1250, -226)))
-OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(' '.join(nom), f'conge_{cid}', 32, back=(f'conge_{cid}' if cr else f'conge_np{p}')) for cid, nom, p, cr, canot, perso, nc, extra, nb in CONGES for _ in range(nb)],
-               col('#8E2F25'), f'{sum(c[8] for c in CONGES)} congés (permis seuls). Tirés au printemps : autant que de joueurs + 1. Payés en hiver ; posés face « non payé » sur le plateau joueur. Joueur le plus pauvre : −1 ₶ (minimum 1).'))
+OBJ.append(bag('Sac des congés', 40, P(1610, 486 + 170), [tile(nom, f'c40_{cid}', 32, back=(f'c40_{cid}' if cr else f'c40_np{p}')) for cid, nom, p, cr, a2, nb in CONGES for _ in range(nb)],
+               col('#8E2F25'), f'{sum(c[5] for c in CONGES)} congés (permis seuls). Tirés au printemps : autant que de joueurs + 1. Payés en hiver ; posés face « non payé » sur le plateau joueur. Joueur le plus pauvre : −1 ₶ (minimum 1).'))
 # Forts, missions et jetons Abîmé : réserves illimitées ; un fort aux Lacs d'en bas et une mission aux Lacs d'en haut à la mise en place
 def ibag(nick, pos, item, color, desc):
     o = base('Infinite_Bag', nick, 44, pos, color, False, 0.8, y3=True, desc=desc); o['MaterialIndex'] = 0
