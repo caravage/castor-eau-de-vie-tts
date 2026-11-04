@@ -9,7 +9,7 @@ d=json.load(open(P)); objs=d['ObjectStates']
 geo=json.load(open(V+'pmat_geo.json'))
 IW,IH=1860,1200; MW=16.275; PX=IW/MW
 COLS=['rouge','bleu','vert']
-KINDS=['marchandises','eau-de-vie','moyen canot','grand canot','castor']
+KINDS=['marchandises','eau-de-vie','castor']
 LABEL={'marchandises':'Marchandises','eau-de-vie':'Eau-de-vie','moyen canot':'Moyens canots','grand canot':'Grands canots','castor':'Fourrures'}
 
 # 1. images du plateau
@@ -73,13 +73,35 @@ for c in COLS:
     q=[o for o in objs if o.get('Nickname')=='Capital circulant '+c][0]
     q['Description']='Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Calculé automatiquement ; clic droit > Recalculer le capital.'
     q['Transform'].update(posX=X,posZ=Z)
-    q['GMNotes']=json.dumps({'w':1.9,'x':X,'z':Z,'h':0.3,'y3':True,'lock':True},ensure_ascii=False,separators=(', ',': '))
+    q['GMNotes']=json.dumps({'w':1.9,'x':X,'z':Z,'h':0.6,'y3':True,'lock':True},ensure_ascii=False,separators=(', ',': '))
 for q in objs:
     if q['Name'] in ('Bag','Custom_Model_Bag','Custom_Model_Infinite_Bag','Infinite_Bag','Counter') or (q.get('Nickname') or '').startswith('Plateau du joueur'):
         q['Locked']=True
         try: n=json.loads(q.get('GMNotes') or '')
         except Exception: n=None
         if isinstance(n,dict) and 'x' in n: n['lock']=True; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+# 5b. parts : 20 par joueur dans un sac verrouillé (la pile tombait au chargement)
+os.chdir(R); circP=[(100+98*math.cos(2*math.pi*i/48),100+98*math.sin(2*math.pi*i/48)) for i in range(48)]
+ns['mesh']('v18/sac_part','v18/tok_disc',circP,16,(100,3)); os.chdir(cwd)
+for c in COLS:
+    parts=[q for q in objs if q.get('Nickname')=='Part '+c]
+    objs[:]=[q for q in objs if q.get('Nickname')!='Part '+c]
+    X,Z=parts[0]['Transform']['posX'],parts[0]['Transform']['posZ']
+    b=copy.deepcopy(tpl); b['GUID']=guid('parts'+c); b['Nickname']='Parts '+c; b['Description']='20 parts de navire ou de distillerie.'
+    for q in parts: q['Transform'].update(posX=0,posY=0,posZ=0); q['Locked']=False
+    b['ContainedObjects']=parts; b['ColorDiffuse']=parts[0]['ColorDiffuse']
+    b['CustomMesh']=dict(tpl['CustomMesh'],MeshURL=GH+'sac_part.obj',DiffuseURL=GH+'tok_disc.png?v38',TypeIndex=6)
+    b['GMNotes']=json.dumps({'w':0.7,'x':X,'z':Z,'h':0.6,'y3':True,'lock':True},ensure_ascii=False,separators=(', ',': '))
+    b['Transform'].update(posX=X,posZ=Z,scaleX=0.7,scaleY=0.7,scaleZ=0.7); b['Locked']=True; objs.append(b)
+# 5c. jetons marchandises / eau-de-vie : sortent des sacs à l'endroit
+def face(os_):
+    for q in os_:
+        if (q.get('Nickname') or '').startswith(('Eau-de-vie','Marchandises')) or q.get('Name')=='Custom_Token' and 'tok_bouteille' in str(q.get('CustomImage')):
+            try: n=json.loads(q.get('GMNotes') or '')
+            except Exception: n=None
+            if isinstance(n,dict) and 'w' in n and 'x' not in n: n['face']='up'; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+        face(q.get('ContainedObjects',[]))
+face(objs)
 # 6. cartes au format 63,5 x 88
 def cards(os_):
     for q in os_:
@@ -111,7 +133,7 @@ local function afficheSac(b, n)
   local ok, bs = pcall(function() return b.getButtons() end)
   if ok and bs and #bs > 0 then b.editButton({{index = 0, label = tostring(q)}}) return q end
   local sc = 1 / b.getScale().x
-  b.createButton({{click_function = "rien", function_owner = Global, label = tostring(q), position = {{0, 0.25, -0.42}},
+  b.createButton({{click_function = "rien", function_owner = Global, label = tostring(q), position = {{0, 0.25, 0.77}},
     scale = {{sc, sc, sc}}, width = 340, height = 300, font_size = 260,
     color = {{0.16, 0.14, 0.09}}, font_color = {{0.96, 0.92, 0.84}}, hover_color = {{0.16, 0.14, 0.09}}, press_color = {{0.16, 0.14, 0.09}}}})
   return q

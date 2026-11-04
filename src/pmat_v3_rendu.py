@@ -9,12 +9,12 @@ def canot(n,w):
     return f"<svg width='{w}' height='36' viewBox='0 0 {w} 36'><path d='M2 4 L{w-2} 4 L{w-12} 32 L12 32 Z' fill='#F7F3EA' stroke='#2A2418' stroke-width='3'/>{cells}</svg>"
 castor=lambda c:f"<svg width='90' height='56' viewBox='0 0 150 90'><ellipse cx='80' cy='48' rx='48' ry='30' fill='{c}' stroke='#3E2A16' stroke-width='4'/><circle cx='124' cy='40' r='13' fill='{c}' stroke='#3E2A16' stroke-width='4'/><path d='M34 52 L4 72 L18 80 L40 62 Z' fill='#5C3A1A' stroke='#3E2A16' stroke-width='3'/></svg>"
 def bag(icon,lab,show):
-    badge="<div style=\"position:absolute;right:-10px;top:-10px;width:40px;height:40px;border-radius:50%;background:#2A2418;color:#F4EBD6;font:700 22px 'Alegreya Sans';display:flex;align-items:center;justify-content:center\">0</div>" if show else ''
+    badge="<div style=\"position:absolute;left:40px;bottom:-52px;width:40px;height:40px;border-radius:50%;background:#2A2418;color:#F4EBD6;font:700 22px 'Alegreya Sans';display:flex;align-items:center;justify-content:center\">0</div>" if show else ''
     return f"<div style='display:flex;flex-direction:column;align-items:center;gap:4px'><div style='position:relative;width:120px;height:120px;border-radius:50%;background:#EFE6CC;box-shadow:inset 0 0 0 2px #8F8572;display:flex;align-items:center;justify-content:center'>{icon}{badge}</div></div>"
 def html(name,col,dark,show):
     circ=''.join(f"<div style='display:flex;flex-direction:column;align-items:center;gap:3px'><div style='width:72px;height:72px;border-radius:50%;background:#F2EAD3;box-shadow:inset 0 0 0 2.5px #8F8572'></div><div style=\"font:700 22px 'Alegreya Sans';color:#6B5F45\">{i}</div></div>" for i in range(7))
     slot=f"<div style='width:{CW}px;height:{CH}px;box-sizing:border-box;border:2px dashed #BFAE7F;border-radius:16px;background:rgba(246,239,220,.6)'></div>"
-    def box(t,inner): return f"<div style='width:{CW-14}px;margin:0 7px;box-sizing:border-box;background:#F6EFDC;border:2px solid #2A2418;box-shadow:0 0 0 5px #F4EBD6,0 0 0 6.5px #2A2418;display:flex;flex-direction:column;align-items:center;padding:8px 6px'><div style=\"font:italic 30px 'IM Fell English';color:#2A2418\">{t}</div><div style='flex:1;display:flex;align-items:center;justify-content:center;gap:80px'>{inner}</div></div>"
+    def box(t,inner,w=None): return f"<div style='width:{(w or CW)-14}px;margin:0 7px;box-sizing:border-box;background:#F6EFDC;border:2px solid #2A2418;box-shadow:0 0 0 5px #F4EBD6,0 0 0 6.5px #2A2418;display:flex;flex-direction:column;align-items:center;padding:8px 6px'><div style=\"font:italic 30px 'IM Fell English';color:#2A2418\">{t}</div><div style='flex:1;width:100%;display:flex;align-items:center;justify-content:space-around;padding-bottom:50px;box-sizing:border-box'>{inner}</div></div>"
     title=lambda t:f"<div style='display:flex;align-items:center;gap:20px;height:34px'><div style='flex:1;height:1.5px;background:#BFAE7F'></div><div style=\"font:400 32px 'IM Fell English';font-variant:small-caps;color:#2A2418\">{t}</div><div style='flex:1;height:1.5px;background:#BFAE7F'></div></div>"
     return f"""<html><head><meta charset='utf-8'><link href='https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&family=IM+Fell+English:ital@0;1&display=block' rel='stylesheet'></head>
 <body style='margin:0'><div style='width:1860px;height:1200px;box-sizing:border-box;background:#22332F;border-radius:30px;padding:12px'>
@@ -27,8 +27,7 @@ def html(name,col,dark,show):
  <div style='display:flex;justify-content:space-between'>{slot*4}</div>
  {title('Entrepôt à Québec')}
  <div style='flex:1;display:flex;justify-content:space-between;padding:7px 0'>
-  {box('Charges',bag(caisse,'marchandises',show)+bag(edv,'eau-de-vie',show))}
-  {box('Canots',bag(canot(3,84),'moyen',show)+bag(canot(5,92),'grand',show))}
+  {box('Charges',bag(caisse,'marchandises',show)+bag(edv,'eau-de-vie',show),CW+452)}
   {box('Fourrures',bag(castor('#8A5A2B'),'castor',show))}
   <div style='width:{CW-14}px;margin:0 7px;box-sizing:border-box;background:#F6EFDC;border:4px solid {col};box-shadow:0 0 0 5px #F4EBD6,0 0 0 7px {col};padding:8px 18px;color:#2A2418;display:flex;flex-direction:column'><div style="font:400 36px 'IM Fell English';font-variant:small-caps;text-align:center;color:{col}">Capital</div><div style="font:italic 25px/1.28 'IM Fell English';display:grid;grid-template-columns:24px 1fr;margin-top:2px"><span></span><span>charges <span style='font-size:20px'>(10 max)</span></span><span>+</span><span>fourrures × prix</span><span>+</span><span>parts</span><span>+</span><span>livres</span></div><div style='display:flex;align-items:center;gap:10px;margin-top:6px;border-top:1.5px solid #BFAE7F;padding-top:8px'><span style="font:400 34px 'IM Fell English'">=</span><div class='ctr' style='width:250px;height:110px;box-sizing:border-box;border:2px dashed #BFAE7F;border-radius:12px'></div></div></div>
  </div>
