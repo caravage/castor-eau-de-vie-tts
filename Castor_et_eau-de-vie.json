@@ -3118,9 +3118,9 @@
       "Description": "14 tuiles grasses : 5 × 1, 8 × 2, 1 × 3 peaux. Face neutre (?) au lac Supérieur tant qu’il n’y a ni mission ni fort.",
       "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 7.968, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
       "ColorDiffuse": {
-        "r": 0.5411764705882353,
-        "g": 0.39215686274509803,
-        "b": 0.09411764705882353
+        "r": 0.7451,
+        "g": 0.6471,
+        "b": 0.4706
       },
       "Locked": true,
       "Grid": false,
@@ -5265,35 +5265,35 @@
           "Position": {
             "x": 0.1283,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.095,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.3183,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.5433,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7667,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -5384,35 +5384,35 @@
           "Position": {
             "x": 0.1283,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.095,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.3183,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.5433,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7667,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -5503,35 +5503,35 @@
           "Position": {
             "x": 0.1283,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.095,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.3183,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.5433,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7667,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -5622,35 +5622,35 @@
           "Position": {
             "x": 0.1283,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.095,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.3183,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.5433,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7667,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -5741,35 +5741,35 @@
           "Position": {
             "x": 0.1283,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.095,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.3183,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.5433,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7667,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -5860,35 +5860,35 @@
           "Position": {
             "x": 0.1283,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.095,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.3183,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.5433,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7667,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -9015,19 +9015,19 @@
       "GUID": "cf2b19",
       "Name": "Bag",
       "Transform": {
-        "posX": -27.069,
+        "posX": 11.547,
         "posY": 2.0,
-        "posZ": 3.068,
+        "posZ": 9.448,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 0.7,
+        "scaleX": 0.5,
         "scaleY": 1.0,
-        "scaleZ": 0.7
+        "scaleZ": 0.5
       },
       "Nickname": "Sac des congés",
       "Description": "33 congés (permis seuls). Tirés au printemps : autant que de joueurs + 1. Payés en hiver ; posés face « non payé » sur le plateau joueur. Joueur le plus pauvre : −1 ₶ (minimum 1).",
-      "GMNotes": "{\"w\": 1.4, \"x\": -27.069, \"z\": 3.068, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.0, \"x\": 11.547, \"z\": 9.448, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
       "ColorDiffuse": {
         "r": 0.5568627450980392,
         "g": 0.1843137254901961,
@@ -10417,9 +10417,9 @@
       "Description": "Forts français en nombre illimité",
       "GMNotes": "{\"w\": 1.2, \"x\": 19.118, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386}",
       "ColorDiffuse": {
-        "r": 0.47843137254901963,
-        "g": 0.3215686274509804,
-        "b": 0.19607843137254902
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
@@ -10445,7 +10445,7 @@
           },
           "Nickname": "Fort français",
           "Description": "",
-          "GMNotes": "{\"w\": 0.91, \"d\": 0.91}",
+          "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"face\": \"up\"}",
           "ColorDiffuse": {
             "r": 0.9490196078431372,
             "g": 0.9176470588235294,
@@ -10503,9 +10503,9 @@
       "Description": "Forts anglais en nombre illimité",
       "GMNotes": "{\"w\": 1.2, \"x\": 20.714, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386}",
       "ColorDiffuse": {
-        "r": 0.00392156862745098,
-        "g": 0.12941176470588237,
-        "b": 0.4117647058823529
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
@@ -10531,7 +10531,7 @@
           },
           "Nickname": "Fort anglais",
           "Description": "",
-          "GMNotes": "{\"w\": 0.91, \"d\": 0.91}",
+          "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"face\": \"up\"}",
           "ColorDiffuse": {
             "r": 0.9490196078431372,
             "g": 0.9176470588235294,
@@ -10589,9 +10589,9 @@
       "Description": "Missions en nombre illimité",
       "GMNotes": "{\"w\": 1.2, \"x\": 22.31, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.386}",
       "ColorDiffuse": {
-        "r": 0.11764705882352941,
-        "g": 0.10196078431372549,
-        "b": 0.0784313725490196
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
@@ -10617,7 +10617,7 @@
           },
           "Nickname": "Mission",
           "Description": "",
-          "GMNotes": "{\"w\": 0.91, \"d\": 0.91}",
+          "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"face\": \"up\"}",
           "ColorDiffuse": {
             "r": 0.11764705882352941,
             "g": 0.10196078431372549,
@@ -10675,9 +10675,9 @@
       "Description": "Marqueurs Ravagé en nombre illimité",
       "GMNotes": "{\"w\": 1.2, \"x\": 25.502, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.2}",
       "ColorDiffuse": {
-        "r": 0.47843137254901963,
-        "g": 0.12156862745098039,
-        "b": 0.09411764705882353
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
@@ -10703,7 +10703,7 @@
           },
           "Nickname": "Ravagé",
           "Description": "",
-          "GMNotes": "{\"w\": 0.91, \"d\": 0.91}",
+          "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"face\": \"up\"}",
           "ColorDiffuse": {
             "r": 0.47843137254901963,
             "g": 0.12156862745098039,
@@ -10761,9 +10761,9 @@
       "Description": "Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé",
       "GMNotes": "{\"w\": 1.2, \"x\": 23.906, \"z\": 13.744, \"h\": 0.6, \"y3\": true, \"d\": 1.2}",
       "ColorDiffuse": {
-        "r": 0.6392156862745098,
-        "g": 0.20784313725490197,
-        "b": 0.16470588235294117
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
@@ -10789,7 +10789,7 @@
           },
           "Nickname": "Abîmé",
           "Description": "",
-          "GMNotes": "{\"w\": 0.91, \"d\": 0.91}",
+          "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"face\": \"up\"}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -10828,322 +10828,6 @@
       "Bag": {
         "Order": 0
       }
-    },
-    {
-      "GUID": "385d51",
-      "Name": "Die_6_Rounded",
-      "Transform": {
-        "posX": 16.861,
-        "posY": 2.0,
-        "posZ": -12.173,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Dé du marché",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.7, \"x\": 16.861, \"z\": -12.173, \"h\": 0.7, \"y3\": true}",
-      "ColorDiffuse": {
-        "r": 0.0,
-        "g": 0.0,
-        "b": 0.0
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "RotationValues": [
-        {
-          "Value": "1",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "2",
-          "Rotation": {
-            "x": 90,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "3",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 90
-          }
-        },
-        {
-          "Value": "4",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": -90
-          }
-        },
-        {
-          "Value": "5",
-          "Rotation": {
-            "x": -90,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "6",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": -180
-          }
-        }
-      ]
-    },
-    {
-      "GUID": "f5c701",
-      "Name": "Die_6_Rounded",
-      "Transform": {
-        "posX": 18.661,
-        "posY": 2.0,
-        "posZ": -12.173,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Dé du marché",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.7, \"x\": 18.661, \"z\": -12.173, \"h\": 0.7, \"y3\": true}",
-      "ColorDiffuse": {
-        "r": 0.0,
-        "g": 0.0,
-        "b": 0.0
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "RotationValues": [
-        {
-          "Value": "1",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "2",
-          "Rotation": {
-            "x": 90,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "3",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 90
-          }
-        },
-        {
-          "Value": "4",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": -90
-          }
-        },
-        {
-          "Value": "5",
-          "Rotation": {
-            "x": -90,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "6",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": -180
-          }
-        }
-      ]
-    },
-    {
-      "GUID": "10b087",
-      "Name": "Die_6_Rounded",
-      "Transform": {
-        "posX": 20.461,
-        "posY": 2.0,
-        "posZ": -12.173,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Dé du marché",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.7, \"x\": 20.461, \"z\": -12.173, \"h\": 0.7, \"y3\": true}",
-      "ColorDiffuse": {
-        "r": 0.0,
-        "g": 0.0,
-        "b": 0.0
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "RotationValues": [
-        {
-          "Value": "1",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "2",
-          "Rotation": {
-            "x": 90,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "3",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 90
-          }
-        },
-        {
-          "Value": "4",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": -90
-          }
-        },
-        {
-          "Value": "5",
-          "Rotation": {
-            "x": -90,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "6",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": -180
-          }
-        }
-      ]
-    },
-    {
-      "GUID": "da988b",
-      "Name": "Die_6_Rounded",
-      "Transform": {
-        "posX": 22.261,
-        "posY": 2.0,
-        "posZ": -12.173,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Dé du marché",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.7, \"x\": 22.261, \"z\": -12.173, \"h\": 0.7, \"y3\": true}",
-      "ColorDiffuse": {
-        "r": 0.0,
-        "g": 0.0,
-        "b": 0.0
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "RotationValues": [
-        {
-          "Value": "1",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "2",
-          "Rotation": {
-            "x": 90,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "3",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 90
-          }
-        },
-        {
-          "Value": "4",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": -90
-          }
-        },
-        {
-          "Value": "5",
-          "Rotation": {
-            "x": -90,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "6",
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": -180
-          }
-        }
-      ]
     },
     {
       "GUID": "645dd8",
@@ -11286,7 +10970,7 @@
           },
           "Nickname": "Coureur des bois",
           "Description": "",
-          "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
+          "GMNotes": "{\"w\": 1.4, \"d\": 1.4, \"face\": \"up\"}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -16413,28 +16097,28 @@
           "Position": {
             "x": 0.0683,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.2,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.465,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7333,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -16525,28 +16209,28 @@
           "Position": {
             "x": 0.0683,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.2,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.465,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7333,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -16637,28 +16321,28 @@
           "Position": {
             "x": 0.0683,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.2,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.465,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7333,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -16749,28 +16433,28 @@
           "Position": {
             "x": 0.0683,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.2,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.465,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         },
         {
           "Position": {
             "x": -0.7333,
             "y": 0.05,
-            "z": 0.0533
+            "z": -0.0533
           }
         }
       ]
@@ -18064,9 +17748,9 @@
       "Description": "Jetons Zone fermée en nombre illimité",
       "GMNotes": "{\"w\": 1.2, \"x\": 25.502, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.2}",
       "ColorDiffuse": {
-        "r": 0.698,
-        "g": 0.133,
-        "b": 0.133
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
@@ -18092,7 +17776,7 @@
           },
           "Nickname": "Zone fermée",
           "Description": "",
-          "GMNotes": "{\"w\": 0.91, \"d\": 0.91}",
+          "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"face\": \"up\"}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,

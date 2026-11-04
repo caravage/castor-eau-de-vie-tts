@@ -48,10 +48,10 @@ BAGS={'Guides':(col(0),120),'Interprètes':(col(1),120),'Hivernants':(col(2),120
  'Forts français':(col(0),265),'Forts anglais':(col(1),265),'Missions':(col(2),265),'Jetons Abîmé':(col(3),265),'Marqueurs Ravagé':(col(4),265)}
 for o in d['ObjectStates']:
     n=o.get('Nickname',''); t=o['Transform']; X,Z=t['posX'],t['posZ']
-    if n in ('Carte v15 (test)','Prendre le pas · 1er'): continue
+    if n in ('Carte v15 (test)','Prendre le pas · 1er','Dé du marché'): continue
     if n.startswith('Carte de navire') or n.startswith('Carte de distillerie'):
         xs_=[523,657,791,926,1060] if 'navire' in n else [559,720,879,1040]
-        o['AttachedSnapPoints']=[{'Position':{'x':round(-((px/1200)*2-1),4),'y':0.05,'z':round((352/640*2-1)*640/1200,4)}} for px in xs_]
+        o['AttachedSnapPoints']=[{'Position':{'x':round(-((px/1200)*2-1),4),'y':0.05,'z':round(-(352/640*2-1)*640/1200,4)}} for px in xs_]
     if n=='Table du castor':
         for kk in ('ImageURL','ImageSecondaryURL'): o['CustomImage'][kk]='https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17.png?v41'
         t['scaleX']=t['scaleZ']=round(W/2,4); setx(o,*NC)
@@ -65,7 +65,9 @@ for o in d['ObjectStates']:
         tx,ty=old_px(X,Z); setx(o,*band(tx,ty,BOT,x0,ybot))
     elif n in BAGS:
         setx(o,*root_xz(*BAGS[n]))
-    elif n in ('Castor sec','Castor gras','Tuiles secrètes','Sac des congés'):
+    elif n=='Sac des congés':
+        setx(o,*root_xz(1977,496.5))
+    elif n in ('Castor sec','Castor gras','Tuiles secrètes'):
         tx,ty=old_px(X,Z); setx(o,*band(tx,ty,RIV,0,yriv))
     elif n in ('Fort français','Mission'):
         tpl[n]=o; continue
@@ -119,8 +121,14 @@ for q in objs:
         q['CustomMesh']={'MeshURL':GH+m+'.obj','DiffuseURL':GH+img,'NormalURL':'','ColliderURL':'','Convex':True,'MaterialIndex':3,'TypeIndex':7,'CastShadows':True}
         q['Bag']={'Order':0}; q['MaterialIndex']=3
         n=json.loads(q['GMNotes']); n['w']=1.2; n['d']=round(1.2*asp,3); n.pop('ry',None); n['h']=0.6; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
-        t=q['Transform']; t['rotY']=180
+        t=q['Transform']; t['rotY']=180; q['ColorDiffuse']={'r':1.0,'g':1.0,'b':1.0}
     if (nk or '').startswith('Part '): q['Snap']=True
+    if nk in MESH or nk=='Coureurs des bois':
+        for c in q.get('ContainedObjects') or []:
+            cn=json.loads(c.get('GMNotes') or '{}'); cn['face']='up'; c['GMNotes']=json.dumps(cn,ensure_ascii=False,separators=(', ',': '))
+    if nk=='Castor gras': q['ColorDiffuse']={'r':round(190/255,4),'g':round(165/255,4),'b':round(120/255,4)}
+    if nk=='Sac des congés':
+        n=json.loads(q['GMNotes']); n['w']=1.0; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': ')); q['Transform']['scaleX']=q['Transform']['scaleZ']=0.5
 # zones de main centrées sur les plateaux des joueurs
 PB={q['Nickname'].split()[-1]:q['Transform']['posX'] for q in objs if (q.get('Nickname') or '').startswith('Plateau du joueur')}
 CMAP={'Red':'rouge','Blue':'bleu','Green':'vert'}
