@@ -11506,7 +11506,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_sac.png?v43",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_sac.png?v44",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -11549,7 +11549,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_C.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_C.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -11589,7 +11589,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_C.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_C.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -11631,7 +11631,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_B.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_B.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -11671,7 +11671,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_B.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_B.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -11713,7 +11713,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_A.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_A.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -11753,7 +11753,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_A.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_grand_A.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -11797,7 +11797,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_sac.png?v43",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_sac.png?v44",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -11840,7 +11840,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_C.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_C.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -11880,7 +11880,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_C.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_C.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -11922,7 +11922,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_B.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_B.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -11962,7 +11962,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_B.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_B.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -12004,7 +12004,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_A.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_A.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -12044,7 +12044,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_A.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_petit_A.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -12088,7 +12088,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_sac.png?v43",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_sac.png?v44",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -12131,7 +12131,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_C.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_C.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -12171,7 +12171,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_C.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_C.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -12213,7 +12213,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_B.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_B.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -12253,7 +12253,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_B.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_B.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -12295,7 +12295,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_A.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_A.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -12335,7 +12335,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_A.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_rouge_coureur_A.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -13159,7 +13159,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_sac.png?v43",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_sac.png?v44",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -13202,7 +13202,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_C.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_C.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -13242,7 +13242,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_C.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_C.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -13284,7 +13284,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_B.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_B.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -13324,7 +13324,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_B.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_B.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -13366,7 +13366,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_A.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_A.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -13406,7 +13406,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_A.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_grand_A.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -13450,7 +13450,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_sac.png?v43",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_sac.png?v44",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -13493,7 +13493,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_C.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_C.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -13533,7 +13533,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_C.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_C.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -13575,7 +13575,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_B.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_B.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -13615,7 +13615,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_B.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_B.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -13657,7 +13657,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_A.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_A.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -13697,7 +13697,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_A.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_petit_A.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -13741,7 +13741,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_sac.png?v43",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_sac.png?v44",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -13784,7 +13784,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_C.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_C.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -13824,7 +13824,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_C.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_C.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -13866,7 +13866,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_B.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_B.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -13906,7 +13906,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_B.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_B.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -13948,7 +13948,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_A.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_A.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -13988,7 +13988,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_A.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_bleu_coureur_A.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -14812,7 +14812,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_sac.png?v43",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_sac.png?v44",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -14855,7 +14855,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_C.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_C.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -14895,7 +14895,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_C.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_C.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -14937,7 +14937,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_B.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_B.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -14977,7 +14977,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_B.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_B.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -15019,7 +15019,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_A.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_A.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -15059,7 +15059,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_grand_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_A.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_grand_A.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -15103,7 +15103,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_sac.png?v43",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_sac.png?v44",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -15146,7 +15146,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_C.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_C.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -15186,7 +15186,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_C.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_C.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -15228,7 +15228,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_B.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_B.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -15268,7 +15268,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_B.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_B.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -15310,7 +15310,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_A.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_A.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -15350,7 +15350,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_petit_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_A.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_petit_A.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -15394,7 +15394,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_sac.png?v43",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_sac.png?v44",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -15437,7 +15437,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_C.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_C.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -15477,7 +15477,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_C.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_C.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -15519,7 +15519,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_B.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_B.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -15559,7 +15559,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_B.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_B.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,
@@ -15601,7 +15601,7 @@
           "HideWhenFaceDown": false,
           "CustomMesh": {
             "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur.obj",
-            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_A.png?v43",
+            "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_A.png?v44",
             "NormalURL": "",
             "ColliderURL": "",
             "Convex": true,
@@ -15641,7 +15641,7 @@
               "HideWhenFaceDown": false,
               "CustomMesh": {
                 "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/canot4_coureur_couche.obj",
-                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_A.png?v43",
+                "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cn4_vert_coureur_A.png?v44",
                 "NormalURL": "",
                 "ColliderURL": "",
                 "Convex": true,

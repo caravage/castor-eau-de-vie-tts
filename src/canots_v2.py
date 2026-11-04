@@ -1,4 +1,4 @@
-# Canots v2 : coque low-poly (fond plat, flancs plats au milieu = pose stable à plat ET sur le flanc),
+# Canots v2 (4 nov. 2026 : fond intérieur à la couleur du canot, lettre blanche) : coque low-poly (fond plat, flancs plats au milieu = pose stable à plat ET sur le flanc),
 # proue et poupe identiques que la poupe + chevrons vers l'avant (sens de marche), lettre sur le fond intérieur et sur les deux flancs.
 # Axes OBJ : x = longueur (proue vers +x), y = haut, z = largeur. Longueur totale = 1 (comme canot3d).
 import math, os
@@ -141,11 +141,11 @@ def texture(key, col, letter, G):
     SI = [s for s in S if abs(s) <= S_IN]
     inner = [px('T', P['i', s, 1]) for s in SI] + [px('T', P['i', s, -1]) for s in reversed(SI)]
     d.polygon(outer, outline=RIM, width=round(k * .07 * B))
-    d.polygon(inner, fill=INNER, outline=RIM, width=round(k * .035 * B))
+    d.polygon(inner, fill=base, outline=RIM, width=round(k * .035 * B))   # fond intérieur à la couleur du canot
     flo = [px('T', P['f', s, 1]) for s in SI] + [px('T', P['f', s, -1]) for s in reversed(SI)]
     d.polygon(outer, outline=RIM, width=round(k * .045 * B))
     c = px('T', (0, 0, 0)); h = .55 * B * k
-    text(c, letter, h * 1.05, base, stroke=CREAM, sw=max(2, round(h * .07)))
+    text(c, letter, h * 1.05, (255, 255, 255), stroke=RIM, sw=max(2, round(h * .04)))   # lettre blanche
     xb = .87 * L / 2; hb = .05 * L                                               # flèche sur le pontet avant
     d.polygon([px('T', (xb + hb * .6, 0, 0)), px('T', (xb - hb * .4, 0, -hb * .55)), px('T', (xb - hb * .15, 0, 0)), px('T', (xb - hb * .4, 0, hb * .55))], fill=CREAM)
     # Dessous

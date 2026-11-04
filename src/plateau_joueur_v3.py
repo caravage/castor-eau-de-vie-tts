@@ -171,7 +171,7 @@ def canots(os_):
             if not m: continue
             key=m.group(1); cm['MeshURL']=GH+f'canot4_{key}{m.group(2) or ""}.obj'
             t=_re.search(r'/cn_(rouge|bleu|vert)_(grand|petit|coureur)(?:_([ABC]))?\.png',cm.get('DiffuseURL') or '')
-            if t: cm['DiffuseURL']=GH+(f'cn4_{t.group(1)}_{key}_{t.group(3)}.png?v43' if t.group(3) else f'cn4_{t.group(1)}_{key}_sac.png?v43')
+            if t: cm['DiffuseURL']=GH+(f'cn4_{t.group(1)}_{key}_{t.group(3)}.png?v44' if t.group(3) else f'cn4_{t.group(1)}_{key}_sac.png?v44')
             try: n=json.loads(st.get('GMNotes') or '')
             except Exception: n=None
             if isinstance(n,dict) and 'w' in n: n['d']=round(n['w']*LB[key],4); st['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
