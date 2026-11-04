@@ -266,7 +266,7 @@ local function afficheSac(b, n)
   local ok, bs = pcall(function() return b.getButtons() end)
   if ok and bs and #bs > 0 then b.editButton({{index = 0, label = tostring(q)}}) return q end
   local sc = 1 / b.getScale().x
-  b.createButton({{click_function = "rien", function_owner = Global, label = tostring(q), position = {{0, 0.25, 0.77}},
+  b.createButton({{click_function = "rien", function_owner = Global, label = tostring(q), position = {{0, 0.11, 0.77}},
     scale = {{sc, sc, sc}}, width = 340, height = 300, font_size = 260,
     color = {{0.16, 0.14, 0.09}}, font_color = {{0.96, 0.92, 0.84}}, hover_color = {{0.16, 0.14, 0.09}}, press_color = {{0.16, 0.14, 0.09}}}})
   return q
@@ -306,8 +306,8 @@ local function capital()
     if ok and bs and #bs > 0 then ct.editButton({{index = 0, label = total}})
     else
       local sc = 1 / ct.getScale().x
-      ct.createButton({{click_function = "boutonCapital", function_owner = Global, label = total, position = {{0, 0.25, 0}},
-        scale = {{sc, sc, sc}}, width = 0, height = 0, font_size = 600, tooltip = "Recalculer le capital",
+      ct.createButton({{click_function = "boutonCapital", function_owner = Global, label = total, position = {{0, 0.11, 0}},
+        scale = {{sc, sc, sc}}, width = 0, height = 0, font_size = 520, tooltip = "Recalculer le capital",
         color = cc, font_color = {{1, 1, 1}}, hover_color = cc, press_color = cc}})
     end
   end
