@@ -1,0 +1,117 @@
+import json, re, math, copy
+from PIL import Image, ImageDraw
+D='/tmp/claude-0/-home-claude/3c5a2878-065c-5165-9c41-6d23b49bdcf8/scratchpad/'
+R=D+'repo/'; IMG=R+'img/v18/'
+T=Image.open(IMG+'table_full.png').convert('RGB'); M=Image.open(D+'carte_etendue_2x.png').convert('RGB').crop((0,0,2800*2,3000))
+PU=4600/42.68; s=PU/(4401/51.34); k=2.934; OPU=4401/51.34
+def crop(b,f=1.0):
+    im=T.crop(b); return im.resize((round(im.width*s*f),round(im.height*s*f)),Image.LANCZOS)
+u=lambda v: round(v*PU)
+mapw=M.width/PU; maph=M.height/PU
+CAL=(int(255*k),int(30*k),int(1455*k),int(172*k)); f=(M.width-0.5*PU)/((CAL[2]-CAL[0])*s)
+cal=crop(CAL,f); TRK=(int(430*k),int(180*k),int(1290*k),int(258*k)); trk=crop(TRK)
+BOT=(740,2425,4120,2870); bot=crop(BOT); RIV=(0,0,600,2925); riv=crop(RIV)
+x0=7.6; y=0.5
+ycal=y; y+=cal.height/PU+0.3; ytrk=y; y+=trk.height/PU+0.5; ymap=y; y+=maph+0.4; ybot=y; y+=bot.height/PU+0.5
+H=y; W=x0+mapw; xtrk=x0+(mapw-0.5-trk.width/PU)/2; yriv=(H-riv.height/PU)/2
+C=Image.new('RGB',(u(W),u(H)),(34,51,47)); dr=ImageDraw.Draw(C)
+dr.rounded_rectangle([u(7.2),u(0.2),u(W)+u(1),u(H-0.2)],radius=u(0.5),fill=(230,218,182))
+rb=T.getpixel((60,2915)); dr.rectangle([0,0,riv.width-1,u(H)],fill=rb); C.paste(riv,(0,u(yriv)))
+C.paste(cal,(u(x0),u(ycal))); C.paste(trk,(u(xtrk),u(ytrk))); C.paste(M,(u(x0),u(ymap))); C.paste(bot,(u(x0),u(ybot)))
+C=C.resize((5600,round(5600*C.height/C.width)),Image.LANCZOS); C.save(IMG+'table_v17.png',optimize=True)
+print('plateau',round(W,2),round(H,2))
+# --- jetons hexagonaux (carré plein : la découpe hex de TTS donne le bord)
+lys=Image.open(D+'vision/fort_hex.png').convert('RGBA')
+def full(src,bg):
+    im=Image.new('RGBA',(256,256),bg); c=src.resize((236,236),Image.LANCZOS); im.alpha_composite(c,(10,10)); return im
+full(Image.open(D+'vision/fort_hex.png').convert('RGBA'),(255,255,255,255)).save(IMG+'fort_hex.png')
+full(Image.open(D+'vision/mission_hex.png').convert('RGBA'),(30,26,22,255)).save(IMG+'mission_hex.png')
+# --- module
+P=R+'Castor_et_eau-de-vie.json'; d=json.load(open(P))
+OL,OT=-2.96-51.34/2, 1.8+51.34*2925/4401/2
+NL=-2.96-W/2; NB=-15.26; NT=NB+H; NC=(NL+W/2, NT-H/2)
+def old_px(X,Z): return ((X-OL)*OPU,(OT-Z)*OPU)
+def new_xz(ux,uy): return (NL+ux, NT-uy)
+def band(tx,ty,b,ox,oy,ff=1.0): return new_xz(ox+(tx-b[0])*ff/OPU, oy+(ty-b[1])*ff/OPU)
+src=open(D+'artifact-files/f7b65138-ad7d-4d14-8f1a-e534080bf5d7/project/Main.dc.html').read()
+cart={}
+for m in re.finditer(r'<div style="position: absolute; left: ([-\d.]+)px; top: ([-\d.]+)px; width: 313.6px; height: 264.0px; box-sizing: border-box; border-radius: 15.1px;',src):
+    nm=re.search(r'>([^<>]{3,40})</div>',src[m.end():m.end()+3000]).group(1).strip()
+    cart[nm]=(float(m.group(1)),float(m.group(2)))
+print('comptoirs',cart)
+def root_xz(rx,ry): return new_xz(x0+rx*2/PU, ymap+ry*2/PU)
+setx=lambda o,X,Z:(o['Transform'].__setitem__('posX',round(X,3)),o['Transform'].__setitem__('posZ',round(Z,3)))
+objs=[]; tpl={}; DZ=round(NT-18.86+0.6,2); TAP=None
+# sacs de pions rangés au-dessus de la rade de Québec (px racine de la carte)
+col=lambda i:2385+i*86
+BAGS={'Guides':(col(0),120),'Interprètes':(col(1),120),'Hivernants':(col(2),120),'Coureurs des bois':(col(3),120),'Zones fermées':(col(4),120),
+ 'Forts français':(col(0),265),'Forts anglais':(col(1),265),'Missions':(col(2),265),'Jetons Abîmé':(col(3),265),'Marqueurs Ravagé':(col(4),265)}
+for o in d['ObjectStates']:
+    n=o.get('Nickname',''); t=o['Transform']; X,Z=t['posX'],t['posZ']
+    if n in ('Carte v15 (test)','Prendre le pas · 1er'): continue
+    if n.startswith('Carte de navire') or n.startswith('Carte de distillerie'):
+        xs_=[523,657,791,926,1060] if 'navire' in n else [559,720,879,1040]
+        o['AttachedSnapPoints']=[{'Position':{'x':round(-((px/1200)*2-1),4),'y':0.05,'z':round((352/640*2-1)*640/1200,4)}} for px in xs_]
+    if n=='Table du castor':
+        for kk in ('ImageURL','ImageSecondaryURL'): o['CustomImage'][kk]='https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17.png?v41'
+        t['scaleX']=t['scaleZ']=round(W/2,4); setx(o,*NC)
+    elif n=='Tapis de jeu':
+        TAP=o; continue
+    elif n in ('Année','Mois'):
+        tx,ty=old_px(X,Z); setx(o,*band(tx,ty,CAL,x0,ycal,f))
+    elif n in ('Ravages','Prix du castor'):
+        tx,ty=old_px(X,Z); setx(o,*band(tx,ty,TRK,xtrk,ytrk))
+    elif n.startswith('Livres ') or n.startswith('Crédit '):
+        tx,ty=old_px(X,Z); setx(o,*band(tx,ty,BOT,x0,ybot))
+    elif n in BAGS:
+        setx(o,*root_xz(*BAGS[n]))
+    elif n in ('Castor sec','Castor gras','Tuiles secrètes','Sac des congés'):
+        tx,ty=old_px(X,Z); setx(o,*band(tx,ty,RIV,0,yriv))
+    elif n in ('Fort français','Mission'):
+        tpl[n]=o; continue
+    elif n=='Dé du marché':
+        i=sum(1 for q in objs if q.get('Nickname')=='Dé du marché'); setx(o,*new_xz(x0+42+i*1.8, ybot+2.6))
+    elif n=='Navire de la compagnie':
+        setx(o,*root_xz(2376.5,491.5))
+    elif Z>=19.0: t['posZ']=round(Z+DZ,3)
+    elif X>=23.0 and Z>-20.5: t['posX']=round(X+5.5,3)
+    objs.append(o)
+# jetons fort / mission : images hex + mise en place sur les comptoirs
+def hexify(o,img):
+    o['CustomImage']['ImageURL']=o['CustomImage']['ImageSecondaryURL']=f'https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/{img}?v41'
+    o['CustomImage']['CustomTile']['Type']=1
+for o in objs:
+    if o.get('Nickname')=='Forts anglais':
+        for c in o['ContainedObjects']: hexify(c,'fort_uk_hex.png')
+    if o.get('Nickname') in ('Forts français','Missions'):
+        for c in o['ContainedObjects']: hexify(c,'fort_hex.png' if 'Fort' in c.get('Nickname','') else 'mission_hex.png')
+for n in tpl: hexify(tpl[n],'fort_hex.png' if n=='Fort français' else 'mission_hex.png')
+setup=[('Michilimackinac','Fort français',0),('Michilimackinac','Mission',1),('Fort Frontenac','Fort français',0),('Baie des Puants','Mission',0),('Nipigon','Mission',0)]
+for i,(c,n,slot) in enumerate(setup):
+    o=copy.deepcopy(tpl[n]); o['GUID']=f'{"f0" if n.startswith("Fort") else "m0"}{i:04x}'
+    lx,ly=cart[c]; setx(o,*root_xz(lx+48+slot*62, ly+214)); objs.append(o)
+# tapis rogné à droite sur le contenu
+xs=[q['Transform']['posX'] for q in objs if q['Name']!='HandTrigger']
+zs=[q['Transform']['posZ'] for q in objs if q['Name']!='HandTrigger']
+xl,xr=-34.5,max(xs)+3.5; zb,zt=-39.6,max(zs)+4.0
+TAP['Transform']['scaleX']=round((xr-xl)/2,3); TAP['Transform']['scaleZ']=round((zt-zb)/2/(1491/1600),3); setx(TAP,(xl+xr)/2,(zb+zt)/2)
+objs.insert(0,TAP)
+print('tapis',round(xl,1),round(xr,1),round(zb,1),round(zt,1),'DZ',DZ)
+# répartition des sacs de peaux (livret, Répartition des sacs ; Tuiles cachées)
+def retag(bag,src,dst,n):
+    for q in objs:
+        if q.get('Nickname')!=bag: continue
+        for c in q['ContainedObjects']:
+            if n==0: break
+            ci=c['CustomImage']; fr=ci['ImageURL'].split('/')[-1].split('?')[0]; bk=ci.get('ImageSecondaryURL','').split('/')[-1].split('?')[0]
+            if (fr,bk)==src:
+                ci['ImageURL']=ci['ImageURL'].replace(src[0],dst[0]); ci['ImageSecondaryURL']=ci['ImageSecondaryURL'].replace(src[1],dst[1]); n-=1
+retag('Castor sec',('tile_G2_sec.png','tile_G2_gras.png'),('tile_G1_sec.png','tile_G1_gras.png'),3)
+retag('Castor sec',('tile_G3_sec.png','tile_G3_gras.png'),('tile_G1_sec.png','tile_G1_gras.png'),1)
+retag('Castor gras',('tile_gras_neutre.png','tile_S2_gras.png'),('tile_gras_neutre.png','tile_S1_gras.png'),2)
+retag('Tuiles secrètes',('hid_fur2.png','hid_back.png'),('hid_fur1.png','hid_back.png'),1)
+retag('Tuiles secrètes',('hid_fur3.png','hid_back.png'),('hid_fur1.png','hid_back.png'),1)
+d['ObjectStates']=objs
+json.dump(d,open(P,'w'),ensure_ascii=False,indent=2)
+json.dump({'W':W,'H':H,'NL':NL,'NT':NT},open(D+'v17_geom.json','w'))
+print('ok', len(objs))

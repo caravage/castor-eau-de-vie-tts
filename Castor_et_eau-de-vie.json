@@ -34,15 +34,15 @@
       "GUID": "d4396d",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 0.63,
+        "posX": 2.843,
         "posY": 2.0,
-        "posZ": -1.348,
+        "posZ": 1.297,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 34.37,
+        "scaleX": 37.343,
         "scaleY": 1.0,
-        "scaleZ": 34.37
+        "scaleZ": 43.887
       },
       "Nickname": "Tapis de jeu",
       "Description": "",
@@ -198,15 +198,15 @@
       "GUID": "d37a68",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": -2.958,
+        "posX": -2.96,
         "posY": 2.0,
-        "posZ": 1.803,
+        "posZ": 6.721,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 25.6725,
+        "scaleX": 29.7791,
         "scaleY": 1.0,
-        "scaleZ": 25.6725
+        "scaleZ": 29.7791
       },
       "Nickname": "Table du castor",
       "Description": "",
@@ -223,8 +223,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_full.png?v39",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_full.png?v39",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17.png?v41",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -241,7 +241,7 @@
       "Transform": {
         "posX": -21.35,
         "posY": 2.0,
-        "posZ": 27.755,
+        "posZ": 38.195,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 180,
@@ -915,7 +915,7 @@
       "Transform": {
         "posX": 17.5,
         "posY": 2.0,
-        "posZ": 27.755,
+        "posZ": 38.195,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 180,
@@ -1589,7 +1589,7 @@
       "Transform": {
         "posX": 21.35,
         "posY": 2.0,
-        "posZ": 22.505,
+        "posZ": 32.945,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 180,
@@ -1757,9 +1757,9 @@
       "GUID": "6ffc52",
       "Name": "Bag",
       "Transform": {
-        "posX": -22.96,
+        "posX": -27.069,
         "posY": 2.0,
-        "posZ": 5.495,
+        "posZ": 10.418,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -1815,8 +1815,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G3_sec.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G3_gras.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G1_sec.png?v38",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G1_gras.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -1897,8 +1897,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G2_sec.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G2_gras.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G1_sec.png?v38",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G1_gras.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -1979,8 +1979,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G2_sec.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G2_gras.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G1_sec.png?v38",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G1_gras.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -2061,8 +2061,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G2_sec.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G2_gras.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G1_sec.png?v38",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_G1_gras.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -3104,9 +3104,9 @@
       "GUID": "aac4dd",
       "Name": "Bag",
       "Transform": {
-        "posX": -22.96,
+        "posX": -27.069,
         "posY": 2.0,
-        "posZ": 3.045,
+        "posZ": 7.968,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -3204,7 +3204,7 @@
           "HideWhenFaceDown": false,
           "CustomImage": {
             "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_gras_neutre.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_S2_gras.png?v38",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_S1_gras.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -3286,7 +3286,7 @@
           "HideWhenFaceDown": false,
           "CustomImage": {
             "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_gras_neutre.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_S2_gras.png?v38",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tile_S1_gras.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -3713,9 +3713,9 @@
       "GUID": "c52d62",
       "Name": "Bag",
       "Transform": {
-        "posX": -22.96,
+        "posX": -27.069,
         "posY": 2.0,
-        "posZ": 0.595,
+        "posZ": 5.518,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -3771,7 +3771,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/hid_fur2.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/hid_fur1.png?v38",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/hid_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -4181,7 +4181,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/hid_fur3.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/hid_fur1.png?v38",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/hid_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -5060,9 +5060,9 @@
       "GUID": "350498",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": -16.8,
+        "posX": -21.249,
         "posY": 2.0,
-        "posZ": 13.615,
+        "posZ": 22.914,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -5101,9 +5101,9 @@
       "GUID": "565d5c",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": -14.035,
+        "posX": -17.784,
         "posY": 2.0,
-        "posZ": 17.29,
+        "posZ": 27.519,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -5142,9 +5142,9 @@
       "GUID": "faec0a",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": -13.02,
+        "posX": -13.226,
         "posY": 2.0,
-        "posZ": 11.235,
+        "posZ": 20.358,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -5183,9 +5183,9 @@
       "GUID": "b0e276",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 10.238,
+        "posX": 10.032,
         "posY": 2.0,
-        "posZ": 11.235,
+        "posZ": 20.358,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -5224,7 +5224,7 @@
       "GUID": "ec8f77",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 25.585,
+        "posX": 31.085,
         "posY": 2.0,
         "posZ": 10.675,
         "rotX": 0,
@@ -5259,13 +5259,50 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.1283,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.095,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.3183,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.5433,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7667,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "c9bf04",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 24.29,
+        "posX": 29.79,
         "posY": 2.0,
         "posZ": 10.57,
         "rotX": 0,
@@ -5306,7 +5343,7 @@
       "GUID": "cf79c3",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 30.485,
+        "posX": 35.985,
         "posY": 2.0,
         "posZ": 10.675,
         "rotX": 0,
@@ -5341,13 +5378,50 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.1283,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.095,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.3183,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.5433,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7667,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "d1ce16",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 29.19,
+        "posX": 34.69,
         "posY": 2.0,
         "posZ": 10.57,
         "rotX": 0,
@@ -5388,7 +5462,7 @@
       "GUID": "018f1c",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 25.585,
+        "posX": 31.085,
         "posY": 2.0,
         "posZ": 8.225,
         "rotX": 0,
@@ -5423,13 +5497,50 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.1283,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.095,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.3183,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.5433,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7667,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "c58810",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 24.29,
+        "posX": 29.79,
         "posY": 2.0,
         "posZ": 8.12,
         "rotX": 0,
@@ -5470,7 +5581,7 @@
       "GUID": "5a21fe",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 30.485,
+        "posX": 35.985,
         "posY": 2.0,
         "posZ": 8.225,
         "rotX": 0,
@@ -5505,13 +5616,50 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.1283,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.095,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.3183,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.5433,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7667,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "99e8b5",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 29.19,
+        "posX": 34.69,
         "posY": 2.0,
         "posZ": 8.12,
         "rotX": 0,
@@ -5552,7 +5700,7 @@
       "GUID": "e4f382",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 25.585,
+        "posX": 31.085,
         "posY": 2.0,
         "posZ": 5.775,
         "rotX": 0,
@@ -5587,13 +5735,50 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.1283,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.095,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.3183,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.5433,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7667,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "d0d6f3",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 24.29,
+        "posX": 29.79,
         "posY": 2.0,
         "posZ": 5.67,
         "rotX": 0,
@@ -5634,7 +5819,7 @@
       "GUID": "e8ca89",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 30.485,
+        "posX": 35.985,
         "posY": 2.0,
         "posZ": 5.775,
         "rotX": 0,
@@ -5669,13 +5854,50 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.1283,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.095,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.3183,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.5433,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7667,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "dd0b92",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 29.19,
+        "posX": 34.69,
         "posY": 2.0,
         "posZ": 5.67,
         "rotX": 0,
@@ -5713,133 +5935,10 @@
       }
     },
     {
-      "GUID": "b678e8",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": 29.26,
-        "posY": 2.0,
-        "posZ": 18.095,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.595,
-        "scaleY": 1.0,
-        "scaleZ": 0.595
-      },
-      "Nickname": "Prendre le pas · 1er",
-      "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 29.26, \"z\": 18.095, \"h\": 0.5, \"d\": 0.7781}",
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_pas.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_pas.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "2cf349",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": 30.835,
-        "posY": 2.0,
-        "posZ": 18.095,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.595,
-        "scaleY": 1.0,
-        "scaleZ": 0.595
-      },
-      "Nickname": "Prendre le pas · 1er",
-      "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 30.835, \"z\": 18.095, \"h\": 0.5, \"d\": 0.7781}",
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_pas.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_pas.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "681faf",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": 32.41,
-        "posY": 2.0,
-        "posZ": 18.095,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.595,
-        "scaleY": 1.0,
-        "scaleZ": 0.595
-      },
-      "Nickname": "Prendre le pas · 1er",
-      "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 32.41, \"z\": 18.095, \"h\": 0.5, \"d\": 0.7781}",
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_pas.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_pas.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
       "GUID": "a72851",
       "Name": "Die_6",
       "Transform": {
-        "posX": 24.01,
+        "posX": 29.51,
         "posY": 2.0,
         "posZ": 18.095,
         "rotX": 0,
@@ -5868,7 +5967,7 @@
       "GUID": "577ef0",
       "Name": "Die_6",
       "Transform": {
-        "posX": 25.41,
+        "posX": 30.91,
         "posY": 2.0,
         "posZ": 18.095,
         "rotX": 0,
@@ -5897,7 +5996,7 @@
       "GUID": "3763bf",
       "Name": "Die_6",
       "Transform": {
-        "posX": 26.81,
+        "posX": 32.31,
         "posY": 2.0,
         "posZ": 18.095,
         "rotX": 0,
@@ -5926,9 +6025,9 @@
       "GUID": "b1b026",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": -15.995,
+        "posX": -21.137,
         "posY": 2.0,
-        "posZ": -10.71,
+        "posZ": -10.855,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -5967,9 +6066,9 @@
       "GUID": "266e75",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": -4.445,
+        "posX": -9.587,
         "posY": 2.0,
-        "posZ": -12.67,
+        "posZ": -12.815,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -6008,9 +6107,9 @@
       "GUID": "111c93",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": -15.575,
+        "posX": -20.717,
         "posY": 2.0,
-        "posZ": -10.71,
+        "posZ": -10.855,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -6049,9 +6148,9 @@
       "GUID": "b057be",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": -4.025,
+        "posX": -9.167,
         "posY": 2.0,
-        "posZ": -12.67,
+        "posZ": -12.815,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -6090,9 +6189,9 @@
       "GUID": "4503b5",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": -15.995,
+        "posX": -21.137,
         "posY": 2.0,
-        "posZ": -11.2,
+        "posZ": -11.345,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -6131,9 +6230,9 @@
       "GUID": "ce34c5",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": -4.445,
+        "posX": -9.587,
         "posY": 2.0,
-        "posZ": -13.16,
+        "posZ": -13.305,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -6172,7 +6271,7 @@
       "GUID": "72689a",
       "Name": "Deck",
       "Transform": {
-        "posX": 24.71,
+        "posX": 30.21,
         "posY": 2.0,
         "posZ": -2.135,
         "rotX": 0,
@@ -6594,7 +6693,7 @@
       "GUID": "d75765",
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
-        "posX": 23.835,
+        "posX": 29.335,
         "posY": 2.0,
         "posZ": -5.18,
         "rotX": 0,
@@ -6680,7 +6779,7 @@
       "GUID": "94a463",
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
-        "posX": 25.41,
+        "posX": 30.91,
         "posY": 2.0,
         "posZ": -5.18,
         "rotX": 0,
@@ -6766,9 +6865,9 @@
       "GUID": "0a0bdd",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 24.01,
+        "posX": 19.118,
         "posY": 2.0,
-        "posZ": 15.645,
+        "posZ": 16.435,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -7057,9 +7156,9 @@
       "GUID": "404510",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 25.935,
+        "posX": 20.714,
         "posY": 2.0,
-        "posZ": 15.645,
+        "posZ": 16.435,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -7348,9 +7447,9 @@
       "GUID": "6fc297",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 27.86,
+        "posX": 22.31,
         "posY": 2.0,
-        "posZ": 15.645,
+        "posZ": 16.435,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -7639,7 +7738,7 @@
       "GUID": "4db7ff",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": 27.335,
+        "posX": 32.835,
         "posY": 2.0,
         "posZ": -5.18,
         "rotX": 0,
@@ -7680,7 +7779,7 @@
       "GUID": "463be8",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": 29.435,
+        "posX": 34.935,
         "posY": 2.0,
         "posZ": -5.18,
         "rotX": 0,
@@ -7721,7 +7820,7 @@
       "GUID": "7f5273",
       "Name": "Custom_Model",
       "Transform": {
-        "posX": 31.185,
+        "posX": 36.685,
         "posY": 2.0,
         "posZ": -5.18,
         "rotX": 0,
@@ -7761,9 +7860,9 @@
       "GUID": "b46e09",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 32.935,
+        "posX": 18.96,
         "posY": 2.0,
-        "posZ": -5.18,
+        "posZ": 9.541,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -7802,7 +7901,7 @@
       "GUID": "f0427d",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 31.185,
+        "posX": 36.685,
         "posY": 2.0,
         "posZ": -6.93,
         "rotX": 0,
@@ -7845,7 +7944,7 @@
       "Transform": {
         "posX": 17.5,
         "posY": 2.0,
-        "posZ": 22.505,
+        "posZ": 32.945,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -8454,7 +8553,7 @@
       "Transform": {
         "posX": 21.35,
         "posY": 2.0,
-        "posZ": 27.755,
+        "posZ": 38.195,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 180,
@@ -8916,9 +9015,9 @@
       "GUID": "cf2b19",
       "Name": "Bag",
       "Transform": {
-        "posX": -22.96,
+        "posX": -27.069,
         "posY": 2.0,
-        "posZ": -1.855,
+        "posZ": 3.068,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -10304,9 +10403,9 @@
       "GUID": "06e086",
       "Name": "Infinite_Bag",
       "Transform": {
-        "posX": 24.01,
+        "posX": 19.118,
         "posY": 2.0,
-        "posZ": 13.195,
+        "posZ": 13.744,
         "rotX": 0,
         "rotY": 0,
         "rotZ": 0,
@@ -10359,12 +10458,12 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_fr.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_fr.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
-              "Type": 3,
+              "Type": 1,
               "Thickness": 0.1,
               "Stackable": false,
               "Stretch": false
@@ -10377,9 +10476,9 @@
       "GUID": "803ece",
       "Name": "Infinite_Bag",
       "Transform": {
-        "posX": 25.935,
+        "posX": 20.714,
         "posY": 2.0,
-        "posZ": 13.195,
+        "posZ": 13.744,
         "rotX": 0,
         "rotY": 0,
         "rotZ": 0,
@@ -10432,12 +10531,12 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_uk.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_uk.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_uk_hex.png?v41",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_uk_hex.png?v41",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
-              "Type": 3,
+              "Type": 1,
               "Thickness": 0.1,
               "Stackable": false,
               "Stretch": false
@@ -10450,9 +10549,9 @@
       "GUID": "5f42b2",
       "Name": "Infinite_Bag",
       "Transform": {
-        "posX": 27.86,
+        "posX": 22.31,
         "posY": 2.0,
-        "posZ": 13.195,
+        "posZ": 13.744,
         "rotX": 0,
         "rotY": 0,
         "rotZ": 0,
@@ -10505,12 +10604,12 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
-              "Type": 3,
+              "Type": 1,
               "Thickness": 0.1,
               "Stackable": false,
               "Stretch": false
@@ -10523,9 +10622,9 @@
       "GUID": "690bbf",
       "Name": "Infinite_Bag",
       "Transform": {
-        "posX": 42.735,
+        "posX": 25.502,
         "posY": 2.0,
-        "posZ": -1.855,
+        "posZ": 13.744,
         "rotX": 0,
         "rotY": 0,
         "rotZ": 0,
@@ -10596,9 +10695,9 @@
       "GUID": "a22721",
       "Name": "Infinite_Bag",
       "Transform": {
-        "posX": 29.785,
+        "posX": 23.906,
         "posY": 2.0,
-        "posZ": 13.195,
+        "posZ": 13.744,
         "rotX": 0,
         "rotY": 0,
         "rotZ": 0,
@@ -10666,94 +10765,12 @@
       ]
     },
     {
-      "GUID": "cb2ed8",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": -4.795,
-        "posY": 2.0,
-        "posZ": -6.055,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.455,
-        "scaleY": 1.0,
-        "scaleZ": 0.455
-      },
-      "Nickname": "Fort français",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.91, \"x\": -4.795, \"z\": -6.055, \"h\": 0.5, \"d\": 0.91}",
-      "ColorDiffuse": {
-        "r": 0.9490196078431372,
-        "g": 0.9176470588235294,
-        "b": 0.8274509803921568
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": true,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_fr.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_fr.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "241225",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": -18.095,
-        "posY": 2.0,
-        "posZ": 0.158,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.455,
-        "scaleY": 1.0,
-        "scaleZ": 0.455
-      },
-      "Nickname": "Mission",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.91, \"x\": -18.095, \"z\": 0.158, \"h\": 0.5, \"d\": 0.91}",
-      "ColorDiffuse": {
-        "r": 0.11764705882352941,
-        "g": 0.10196078431372549,
-        "b": 0.0784313725490196
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": true,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
       "GUID": "385d51",
       "Name": "Die_6_Rounded",
       "Transform": {
-        "posX": 5.237,
+        "posX": 16.861,
         "posY": 2.0,
-        "posZ": -7.105,
+        "posZ": -12.173,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -10830,9 +10847,9 @@
       "GUID": "f5c701",
       "Name": "Die_6_Rounded",
       "Transform": {
-        "posX": 10.802,
+        "posX": 18.661,
         "posY": 2.0,
-        "posZ": -7.105,
+        "posZ": -12.173,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -10909,9 +10926,9 @@
       "GUID": "10b087",
       "Name": "Die_6_Rounded",
       "Transform": {
-        "posX": 5.237,
+        "posX": 20.461,
         "posY": 2.0,
-        "posZ": -8.155,
+        "posZ": -12.173,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -10988,9 +11005,9 @@
       "GUID": "da988b",
       "Name": "Die_6_Rounded",
       "Transform": {
-        "posX": 10.802,
+        "posX": 22.261,
         "posY": 2.0,
-        "posZ": -8.155,
+        "posZ": -12.173,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -11069,7 +11086,7 @@
       "Transform": {
         "posX": -7.875,
         "posY": 2.0,
-        "posZ": 24.955,
+        "posZ": 35.395,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -11110,7 +11127,7 @@
       "Transform": {
         "posX": 7.875,
         "posY": 2.0,
-        "posZ": 24.955,
+        "posZ": 35.395,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -11149,9 +11166,9 @@
       "GUID": "44c2d3",
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
-        "posX": 29.96,
+        "posX": 23.906,
         "posY": 2.0,
-        "posZ": 15.645,
+        "posZ": 16.435,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -16290,7 +16307,7 @@
       "GUID": "c1bd99",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 25.585,
+        "posX": 31.085,
         "posY": 2.0,
         "posZ": 3.325,
         "rotX": 0,
@@ -16325,13 +16342,43 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.0683,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.2,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.465,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7333,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "3e8f95",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": 24.29,
+        "posX": 29.79,
         "posY": 2.0,
         "posZ": 3.22,
         "rotX": 0,
@@ -16372,7 +16419,7 @@
       "GUID": "f05542",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 30.485,
+        "posX": 35.985,
         "posY": 2.0,
         "posZ": 3.325,
         "rotX": 0,
@@ -16407,13 +16454,43 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.0683,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.2,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.465,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7333,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "70b5ef",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": 29.19,
+        "posX": 34.69,
         "posY": 2.0,
         "posZ": 3.22,
         "rotX": 0,
@@ -16454,7 +16531,7 @@
       "GUID": "771905",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 25.585,
+        "posX": 31.085,
         "posY": 2.0,
         "posZ": 0.875,
         "rotX": 0,
@@ -16489,13 +16566,43 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.0683,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.2,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.465,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7333,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "26c71b",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": 24.29,
+        "posX": 29.79,
         "posY": 2.0,
         "posZ": 0.77,
         "rotX": 0,
@@ -16536,7 +16643,7 @@
       "GUID": "5dd670",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 30.485,
+        "posX": 35.985,
         "posY": 2.0,
         "posZ": 0.875,
         "rotX": 0,
@@ -16571,13 +16678,43 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.0683,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.2,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.465,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        },
+        {
+          "Position": {
+            "x": -0.7333,
+            "y": 0.05,
+            "z": 0.0533
+          }
+        }
+      ]
     },
     {
       "GUID": "566d21",
       "Name": "Custom_Token",
       "Transform": {
-        "posX": 29.19,
+        "posX": 34.69,
         "posY": 2.0,
         "posZ": 0.77,
         "rotX": 0,
@@ -16611,47 +16748,6 @@
           "MergeDistancePixels": 15.0,
           "StandUp": false,
           "Stackable": true
-        }
-      }
-    },
-    {
-      "GUID": "c15a01",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": -2.958,
-        "posY": 2.0,
-        "posZ": 45.31,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 21.335,
-        "scaleY": 1.0,
-        "scaleZ": 21.335
-      },
-      "Nickname": "Carte v15 (test)",
-      "Description": "",
-      "GMNotes": "{\"w\": 42.67, \"x\": -2.958, \"z\": 45.31, \"h\": 0.1, \"lock\": true, \"d\": 27.83}",
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": false,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/carte_v15.png?v16",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/carte_v15.png?v16",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 0,
-          "Thickness": 0.2,
-          "Stackable": false,
-          "Stretch": false
         }
       }
     },
@@ -17889,9 +17985,9 @@
       "GUID": "71247a",
       "Name": "Infinite_Bag",
       "Transform": {
-        "posX": 31.71,
+        "posX": 25.502,
         "posY": 2.0,
-        "posZ": 13.195,
+        "posZ": 16.435,
         "rotX": 0,
         "rotY": 0,
         "rotZ": 0,
@@ -17957,6 +18053,211 @@
           }
         }
       ]
+    },
+    {
+      "GUID": "f00000",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -9.867,
+        "posY": 2.0,
+        "posZ": 1.07,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.455,
+        "scaleY": 1.0,
+        "scaleZ": 0.455
+      },
+      "Nickname": "Fort français",
+      "Description": "",
+      "GMNotes": "{\"w\": 0.91, \"x\": -4.795, \"z\": -6.055, \"h\": 0.5, \"d\": 0.91}",
+      "ColorDiffuse": {
+        "r": 0.9490196078431372,
+        "g": 0.9176470588235294,
+        "b": 0.8274509803921568
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "m00001",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -8.717,
+        "posY": 2.0,
+        "posZ": 1.07,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.455,
+        "scaleY": 1.0,
+        "scaleZ": 0.455
+      },
+      "Nickname": "Mission",
+      "Description": "",
+      "GMNotes": "{\"w\": 0.91, \"x\": -18.095, \"z\": 0.158, \"h\": 0.5, \"d\": 0.91}",
+      "ColorDiffuse": {
+        "r": 0.11764705882352941,
+        "g": 0.10196078431372549,
+        "b": 0.0784313725490196
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "f00002",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": 9.933,
+        "posY": 2.0,
+        "posZ": -3.458,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.455,
+        "scaleY": 1.0,
+        "scaleZ": 0.455
+      },
+      "Nickname": "Fort français",
+      "Description": "",
+      "GMNotes": "{\"w\": 0.91, \"x\": -4.795, \"z\": -6.055, \"h\": 0.5, \"d\": 0.91}",
+      "ColorDiffuse": {
+        "r": 0.9490196078431372,
+        "g": 0.9176470588235294,
+        "b": 0.8274509803921568
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "m00003",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -17.197,
+        "posY": 2.0,
+        "posZ": 1.088,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.455,
+        "scaleY": 1.0,
+        "scaleZ": 0.455
+      },
+      "Nickname": "Mission",
+      "Description": "",
+      "GMNotes": "{\"w\": 0.91, \"x\": -18.095, \"z\": 0.158, \"h\": 0.5, \"d\": 0.91}",
+      "ColorDiffuse": {
+        "r": 0.11764705882352941,
+        "g": 0.10196078431372549,
+        "b": 0.0784313725490196
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "m00004",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -14.191,
+        "posY": 2.0,
+        "posZ": 12.816,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.455,
+        "scaleY": 1.0,
+        "scaleZ": 0.455
+      },
+      "Nickname": "Mission",
+      "Description": "",
+      "GMNotes": "{\"w\": 0.91, \"x\": -18.095, \"z\": 0.158, \"h\": 0.5, \"d\": 0.91}",
+      "ColorDiffuse": {
+        "r": 0.11764705882352941,
+        "g": 0.10196078431372549,
+        "b": 0.0784313725490196
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
     }
   ]
 }
