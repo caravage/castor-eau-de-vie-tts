@@ -86,10 +86,6 @@ for o in objs:
     if o.get('Nickname') in ('Forts français','Missions'):
         for c in o['ContainedObjects']: hexify(c,'fort_hex.png' if 'Fort' in c.get('Nickname','') else 'mission_hex.png')
 for n in tpl: hexify(tpl[n],'fort_hex.png' if n=='Fort français' else 'mission_hex.png')
-setup=[('Michilimackinac','Fort français',0),('Michilimackinac','Mission',1),('Fort Frontenac','Fort français',0),('Baie des Puants','Mission',0),('Nipigon','Mission',0)]
-for i,(c,n,slot) in enumerate(setup):
-    o=copy.deepcopy(tpl[n]); o['GUID']=f'{"f0" if n.startswith("Fort") else "m0"}{i:04x}'
-    lx,ly=cart[c]; setx(o,*root_xz(lx+48+slot*62, ly+214)); objs.append(o)
 # tapis rogné à droite sur le contenu
 xs=[q['Transform']['posX'] for q in objs if q['Name']!='HandTrigger']
 zs=[q['Transform']['posZ'] for q in objs if q['Name']!='HandTrigger']
@@ -111,6 +107,29 @@ retag('Castor sec',('tile_G3_sec.png','tile_G3_gras.png'),('tile_G1_sec.png','ti
 retag('Castor gras',('tile_gras_neutre.png','tile_S2_gras.png'),('tile_gras_neutre.png','tile_S1_gras.png'),2)
 retag('Tuiles secrètes',('hid_fur2.png','hid_back.png'),('hid_fur1.png','hid_back.png'),1)
 retag('Tuiles secrètes',('hid_fur3.png','hid_back.png'),('hid_fur1.png','hid_back.png'),1)
+# points d'aimantation globaux (script Lua) : pistes, tours, rades
+lua=d['LuaScript']; line=[l for l in lua.split('\n') if l.startswith('local SNAP =')][0]
+old=[tuple(map(float,q)) for q in re.findall(r'\{(-?[\d.]+),(-?[\d.]+)\}', line)]
+new=[]
+for X,Z in old:
+    tx,ty=old_px(X,Z)
+    if TRK[0]<=tx<=TRK[2] and TRK[1]<=ty<=TRK[3]: new.append(band(tx,ty,TRK,xtrk,ytrk))
+    elif CAL[0]<=tx<=CAL[2] and CAL[1]<=ty<=CAL[3]: new.append(band(tx,ty,CAL,x0,ycal,f))
+    elif 2720<=tx<=3452 and 1552<=ty<=2146: new.append(root_xz(2325+(tx-2726)*452.6/720, 396+(ty-1558)*452.6/720))
+    elif 3510<=tx<=4244 and 1552<=ty<=2146:
+        if tx-3510<380: new.append(root_xz(2534.9+(tx-3516)*242.7/386, 817+(ty-1558)*242.7/386))
+newline=line.split('=')[0]+'= {'+','.join('{%.3f,%.3f}'%q for q in new)+'}'+(line[line.index('}   --'):][1:] if '}   --' in line else '')
+d['LuaScript']=lua.replace(line,newline); print('snaps',len(old),'->',len(new))
+# notes de mise en place (GMNotes) alignées sur les nouvelles positions
+for q in objs:
+    g=q.get('GMNotes') or ''
+    try: n=json.loads(g)
+    except Exception: continue
+    if not isinstance(n,dict) or 'x' not in n: continue
+    n['x']=round(q['Transform']['posX'],3); n['z']=round(q['Transform']['posZ'],3)
+    if q.get('Nickname')=='Table du castor': n['w']=round(W,3); n['d']=round(H,3)
+    if q.get('Nickname')=='Tapis de jeu': n['w']=round(xr-xl,3); n['d']=round(zt-zb,3)
+    q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
 d['ObjectStates']=objs
 json.dump(d,open(P,'w'),ensure_ascii=False,indent=2)
 json.dump({'W':W,'H':H,'NL':NL,'NT':NT},open(D+'v17_geom.json','w'))

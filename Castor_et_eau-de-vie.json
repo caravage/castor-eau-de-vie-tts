@@ -26,7 +26,7 @@
       "id": 0
     }
   },
-  "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 70.0, 68.25     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\nlocal SNAP = {{-13.02,11.235},{-11.865,11.235},{-10.71,11.235},{-9.555,11.235},{-8.4,11.235},{-7.245,11.235},{-6.09,11.235},{6.773,11.235},{7.928,11.235},{9.083,11.235},{10.238,11.235},{11.393,11.235},{12.548,11.235},{13.703,11.235},{14.858,11.235},{-14.035,17.29},{-12.985,17.29},{-11.935,17.29},{-10.885,17.29},{-9.835,17.29},{-8.785,17.29},{-7.735,17.29},{-6.685,17.29},{-5.32,7.595},{-5.32,6.475},{-18.095,0.158},{-18.095,-0.963},{-4.795,-4.935},{-4.795,-6.055},{4.117,-1.066},{5.5,-1.066},{6.795,-1.066},{8.09,-1.066},{9.385,-1.066},{10.68,-1.066},{4.117,-2.466},{5.5,-2.466},{6.795,-2.466},{8.09,-2.466},{9.385,-2.466},{10.68,-2.466},{4.117,-3.866},{5.5,-3.866},{6.795,-3.866},{8.09,-3.866},{9.385,-3.866},{10.68,-3.866},{4.117,-5.266},{5.5,-5.266},{6.795,-5.266},{8.09,-5.266},{9.385,-5.266},{10.68,-5.266},{13.37,-1.066},{14.753,-1.066},{16.048,-1.066},{17.343,-1.066},{18.638,-1.066},{19.933,-1.066},{13.37,-2.466},{14.753,-2.466},{16.048,-2.466},{17.343,-2.466},{18.638,-2.466},{19.933,-2.466},{13.37,-3.866},{14.753,-3.866},{16.048,-3.866},{17.343,-3.866},{18.638,-3.866},{19.933,-3.866},{13.37,-5.266},{14.753,-5.266},{16.048,-5.266},{17.343,-5.266},{18.638,-5.266},{19.933,-5.266}}   -- points d'accroche : pistes Ravages et Prix du castor, cases Tour, emplacements Mission/Fort\n\nlocal function snaps(top)\n  local pts = {}\n  for _, p in ipairs(SNAP) do table.insert(pts, {position = {p[1] * F, top + 0.2, p[2] * F}, rotation_snap = false}) end\n  pcall(function() Global.setSnapPoints(pts) end)\nend\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local kx = n.w * F / b.x\n  local kz = kx\n  if n.d and b.z > 0.001 then kz = n.d * F / b.z end   -- profondeur mesurée et corrigée : aucune pièce étirée\n  if n.y3 then o.setScale({s.x * kx, s.y * kx, s.z * kx}) else o.setScale({s.x * kx, s.y, s.z * kz}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = LW / 0.97, LD / 0.97, 1.0   -- pas de table TTS : le tapis de jeu sert de table, à l'échelle 1\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    if b.size.x > 5 then tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2 end\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, n.ry or 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      else\n        h.destruct()                -- mains par défaut de la table : retirées\n      end\n    end\n  end\n  snaps(top)\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; local _, _, top = tableInfo(); snaps(top); return end\n  end\n  Wait.condition(layout, allLoaded, 30, layout)\nend\n\n\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n",
+  "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 70.0, 68.25     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\nlocal SNAP = {{-13.226,20.358},{-12.071,20.358},{-10.916,20.358},{-9.761,20.358},{-8.606,20.358},{-7.451,20.358},{-6.296,20.358},{6.567,20.358},{7.722,20.358},{8.877,20.358},{10.032,20.358},{11.187,20.358},{12.342,20.358},{13.497,20.358},{14.652,20.358},{-17.784,27.519},{-16.468,27.519},{-15.152,27.519},{-13.837,27.519},{-12.521,27.519},{-11.205,27.519},{-9.889,27.519},{-8.573,27.519},{18.951,9.561},{20.334,9.561},{21.629,9.561},{22.924,9.561},{24.219,9.561},{25.514,9.561},{18.951,8.161},{20.334,8.161},{21.629,8.161},{22.924,8.161},{24.219,8.161},{25.514,8.161},{18.951,6.761},{20.334,6.761},{21.629,6.761},{22.924,6.761},{24.219,6.761},{25.514,6.761},{18.951,5.361},{20.334,5.361},{21.629,5.361},{22.924,5.361},{24.219,5.361},{25.514,5.361},{22.884,1.748},{24.267,1.748},{25.562,1.748},{22.884,0.348},{24.267,0.348},{25.562,0.348},{22.884,-1.052},{24.267,-1.052},{25.562,-1.052},{22.884,-2.452},{24.267,-2.452},{25.562,-2.452}}   -- points d'accroche : pistes Ravages et Prix du castor, cases Tour, emplacements Mission/Fort\n\nlocal function snaps(top)\n  local pts = {}\n  for _, p in ipairs(SNAP) do table.insert(pts, {position = {p[1] * F, top + 0.2, p[2] * F}, rotation_snap = false}) end\n  pcall(function() Global.setSnapPoints(pts) end)\nend\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local kx = n.w * F / b.x\n  local kz = kx\n  if n.d and b.z > 0.001 then kz = n.d * F / b.z end   -- profondeur mesurée et corrigée : aucune pièce étirée\n  if n.y3 then o.setScale({s.x * kx, s.y * kx, s.z * kx}) else o.setScale({s.x * kx, s.y, s.z * kz}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = LW / 0.97, LD / 0.97, 1.0   -- pas de table TTS : le tapis de jeu sert de table, à l'échelle 1\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    if b.size.x > 5 then tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2 end\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, n.ry or 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      else\n        h.destruct()                -- mains par défaut de la table : retirées\n      end\n    end\n  end\n  snaps(top)\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; local _, _, top = tableInfo(); snaps(top); return end\n  end\n  Wait.condition(layout, allLoaded, 30, layout)\nend\n\n\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n",
   "LuaScriptState": "",
   "XmlUI": "",
   "ObjectStates": [
@@ -46,7 +46,7 @@
       },
       "Nickname": "Tapis de jeu",
       "Description": "",
-      "GMNotes": "{\"w\": 68.74, \"x\": 0.63, \"z\": -1.348, \"h\": -0.2, \"lock\": true, \"d\": 64.0571}",
+      "GMNotes": "{\"w\": 74.685, \"x\": 2.843, \"z\": 1.297, \"h\": -0.2, \"lock\": true, \"d\": 81.795}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -210,7 +210,7 @@
       },
       "Nickname": "Table du castor",
       "Description": "",
-      "GMNotes": "{\"w\": 51.345, \"x\": -2.958, \"z\": 1.803, \"h\": 0.1, \"lock\": true, \"d\": 34.125}",
+      "GMNotes": "{\"w\": 59.558, \"x\": -2.96, \"z\": 6.721, \"h\": 0.1, \"lock\": true, \"d\": 43.961}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -251,7 +251,7 @@
       },
       "Nickname": "Rivière de recrutement",
       "Description": "",
-      "GMNotes": "{\"w\": 3.5, \"x\": -21.35, \"z\": 27.755, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
+      "GMNotes": "{\"w\": 3.5, \"x\": -21.35, \"z\": 38.195, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -925,7 +925,7 @@
       },
       "Nickname": "Associés",
       "Description": "",
-      "GMNotes": "{\"w\": 3.5, \"x\": 17.5, \"z\": 27.755, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
+      "GMNotes": "{\"w\": 3.5, \"x\": 17.5, \"z\": 38.195, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -1599,7 +1599,7 @@
       },
       "Nickname": "Grands événements",
       "Description": "",
-      "GMNotes": "{\"w\": 3.5, \"x\": 21.35, \"z\": 22.505, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
+      "GMNotes": "{\"w\": 3.5, \"x\": 21.35, \"z\": 32.945, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -1769,7 +1769,7 @@
       },
       "Nickname": "Castor sec",
       "Description": "32 tuiles sèches : 18 × 1, 12 × 2, 2 × 3 peaux ; côté gras (★) au verso.",
-      "GMNotes": "{\"w\": 1.61, \"x\": -22.96, \"z\": 5.495, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 10.418, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
       "ColorDiffuse": {
         "r": 0.5411764705882353,
         "g": 0.41568627450980394,
@@ -3116,7 +3116,7 @@
       },
       "Nickname": "Castor gras",
       "Description": "14 tuiles grasses : 5 × 1, 8 × 2, 1 × 3 peaux. Face neutre (?) au lac Supérieur tant qu’il n’y a ni mission ni fort.",
-      "GMNotes": "{\"w\": 1.61, \"x\": -22.96, \"z\": 3.045, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 7.968, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
       "ColorDiffuse": {
         "r": 0.5411764705882353,
         "g": 0.39215686274509803,
@@ -3725,7 +3725,7 @@
       },
       "Nickname": "Tuiles secrètes",
       "Description": "32 tuiles secrètes, posées face cachée sur les lacs (2 au plus par lac).",
-      "GMNotes": "{\"w\": 1.61, \"x\": -22.96, \"z\": 0.595, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.61, \"x\": -27.069, \"z\": 5.518, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
       "ColorDiffuse": {
         "r": 0.22745098039215686,
         "g": 0.14901960784313725,
@@ -5072,7 +5072,7 @@
       },
       "Nickname": "Mois",
       "Description": "",
-      "GMNotes": "{\"w\": 0.84, \"x\": -16.8, \"z\": 13.615, \"h\": 0.5, \"d\": 0.84}",
+      "GMNotes": "{\"w\": 0.84, \"x\": -21.249, \"z\": 22.914, \"h\": 0.5, \"d\": 0.84}",
       "ColorDiffuse": {
         "r": 0.16470588235294117,
         "g": 0.1411764705882353,
@@ -5113,7 +5113,7 @@
       },
       "Nickname": "Année",
       "Description": "",
-      "GMNotes": "{\"w\": 0.77, \"x\": -14.035, \"z\": 17.29, \"h\": 0.5, \"d\": 0.77}",
+      "GMNotes": "{\"w\": 0.77, \"x\": -17.784, \"z\": 27.519, \"h\": 0.5, \"d\": 0.77}",
       "ColorDiffuse": {
         "r": 0.16470588235294117,
         "g": 0.1411764705882353,
@@ -5154,7 +5154,7 @@
       },
       "Nickname": "Ravages",
       "Description": "",
-      "GMNotes": "{\"w\": 0.98, \"x\": -13.02, \"z\": 11.235, \"h\": 0.5, \"d\": 0.98}",
+      "GMNotes": "{\"w\": 0.98, \"x\": -13.226, \"z\": 20.358, \"h\": 0.5, \"d\": 0.98}",
       "ColorDiffuse": {
         "r": 0.5568627450980392,
         "g": 0.1843137254901961,
@@ -5195,7 +5195,7 @@
       },
       "Nickname": "Prix du castor",
       "Description": "",
-      "GMNotes": "{\"w\": 0.98, \"x\": 10.238, \"z\": 11.235, \"h\": 0.5, \"d\": 0.98}",
+      "GMNotes": "{\"w\": 0.98, \"x\": 10.032, \"z\": 20.358, \"h\": 0.5, \"d\": 0.98}",
       "ColorDiffuse": {
         "r": 0.788235294117647,
         "g": 0.5843137254901961,
@@ -5236,7 +5236,7 @@
       },
       "Nickname": "Carte de navire · L’Aigle d’Or",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 25.585, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5314,7 +5314,7 @@
       },
       "Nickname": "Navire · L’Aigle d’Or",
       "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 24.29, \"z\": 10.57, \"h\": 0.7, \"d\": 1.0413}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 29.79, \"z\": 10.57, \"h\": 0.7, \"d\": 1.0413}",
       "ColorDiffuse": {
         "r": 0.2901960784313726,
         "g": 0.2,
@@ -5355,7 +5355,7 @@
       },
       "Nickname": "Carte de navire · Le Courageux",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 30.485, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5433,7 +5433,7 @@
       },
       "Nickname": "Navire · Le Courageux",
       "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 29.19, \"z\": 10.57, \"h\": 0.7, \"d\": 1.0413}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 34.69, \"z\": 10.57, \"h\": 0.7, \"d\": 1.0413}",
       "ColorDiffuse": {
         "r": 0.2901960784313726,
         "g": 0.2,
@@ -5474,7 +5474,7 @@
       },
       "Nickname": "Carte de navire · Le Jardin de Hollande",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 25.585, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5552,7 +5552,7 @@
       },
       "Nickname": "Navire · Le Jardin de Hollande",
       "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 24.29, \"z\": 8.12, \"h\": 0.7, \"d\": 1.0413}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 29.79, \"z\": 8.12, \"h\": 0.7, \"d\": 1.0413}",
       "ColorDiffuse": {
         "r": 0.2901960784313726,
         "g": 0.2,
@@ -5593,7 +5593,7 @@
       },
       "Nickname": "Carte de navire · Le Saint-Jean-Baptiste",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 30.485, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5671,7 +5671,7 @@
       },
       "Nickname": "Navire · Le Saint-Jean-Baptiste",
       "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 29.19, \"z\": 8.12, \"h\": 0.7, \"d\": 1.0413}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 34.69, \"z\": 8.12, \"h\": 0.7, \"d\": 1.0413}",
       "ColorDiffuse": {
         "r": 0.2901960784313726,
         "g": 0.2,
@@ -5712,7 +5712,7 @@
       },
       "Nickname": "Carte de navire · La Famille",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 25.585, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5790,7 +5790,7 @@
       },
       "Nickname": "Navire · La Famille",
       "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 24.29, \"z\": 5.67, \"h\": 0.7, \"d\": 1.0413}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 29.79, \"z\": 5.67, \"h\": 0.7, \"d\": 1.0413}",
       "ColorDiffuse": {
         "r": 0.2901960784313726,
         "g": 0.2,
@@ -5831,7 +5831,7 @@
       },
       "Nickname": "Carte de navire · Le Vieux Siméon",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 30.485, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5909,7 +5909,7 @@
       },
       "Nickname": "Navire · Le Vieux Siméon",
       "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 29.19, \"z\": 5.67, \"h\": 0.7, \"d\": 1.0413}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 34.69, \"z\": 5.67, \"h\": 0.7, \"d\": 1.0413}",
       "ColorDiffuse": {
         "r": 0.2901960784313726,
         "g": 0.2,
@@ -5950,7 +5950,7 @@
       },
       "Nickname": "Dé",
       "Description": "",
-      "GMNotes": "{\"w\": 0.84, \"x\": 24.01, \"z\": 18.095, \"h\": 0.7, \"y3\": true}",
+      "GMNotes": "{\"w\": 0.84, \"x\": 29.51, \"z\": 18.095, \"h\": 0.7, \"y3\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5979,7 +5979,7 @@
       },
       "Nickname": "Dé",
       "Description": "",
-      "GMNotes": "{\"w\": 0.84, \"x\": 25.41, \"z\": 18.095, \"h\": 0.7, \"y3\": true}",
+      "GMNotes": "{\"w\": 0.84, \"x\": 30.91, \"z\": 18.095, \"h\": 0.7, \"y3\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -6008,7 +6008,7 @@
       },
       "Nickname": "Dé de traversée",
       "Description": "",
-      "GMNotes": "{\"w\": 0.84, \"x\": 26.81, \"z\": 18.095, \"h\": 0.7, \"y3\": true}",
+      "GMNotes": "{\"w\": 0.84, \"x\": 32.31, \"z\": 18.095, \"h\": 0.7, \"y3\": true}",
       "ColorDiffuse": {
         "r": 0.5568627450980392,
         "g": 0.1843137254901961,
@@ -6037,7 +6037,7 @@
       },
       "Nickname": "Livres rouge",
       "Description": "",
-      "GMNotes": "{\"w\": 0.49, \"x\": -15.995, \"z\": -10.71, \"h\": 0.5, \"d\": 0.49}",
+      "GMNotes": "{\"w\": 0.49, \"x\": -21.137, \"z\": -10.855, \"h\": 0.5, \"d\": 0.49}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -6078,7 +6078,7 @@
       },
       "Nickname": "Crédit rouge",
       "Description": "",
-      "GMNotes": "{\"w\": 0.385, \"x\": -4.445, \"z\": -12.67, \"h\": 0.5, \"d\": 0.385}",
+      "GMNotes": "{\"w\": 0.385, \"x\": -9.587, \"z\": -12.815, \"h\": 0.5, \"d\": 0.385}",
       "ColorDiffuse": {
         "r": 0.6588235294117647,
         "g": 0.19607843137254902,
@@ -6119,7 +6119,7 @@
       },
       "Nickname": "Livres bleu",
       "Description": "",
-      "GMNotes": "{\"w\": 0.49, \"x\": -15.575, \"z\": -10.71, \"h\": 0.5, \"d\": 0.49}",
+      "GMNotes": "{\"w\": 0.49, \"x\": -20.717, \"z\": -10.855, \"h\": 0.5, \"d\": 0.49}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -6160,7 +6160,7 @@
       },
       "Nickname": "Crédit bleu",
       "Description": "",
-      "GMNotes": "{\"w\": 0.385, \"x\": -4.025, \"z\": -12.67, \"h\": 0.5, \"d\": 0.385}",
+      "GMNotes": "{\"w\": 0.385, \"x\": -9.167, \"z\": -12.815, \"h\": 0.5, \"d\": 0.385}",
       "ColorDiffuse": {
         "r": 0.1843137254901961,
         "g": 0.3686274509803922,
@@ -6201,7 +6201,7 @@
       },
       "Nickname": "Livres vert",
       "Description": "",
-      "GMNotes": "{\"w\": 0.49, \"x\": -15.995, \"z\": -11.2, \"h\": 0.5, \"d\": 0.49}",
+      "GMNotes": "{\"w\": 0.49, \"x\": -21.137, \"z\": -11.345, \"h\": 0.5, \"d\": 0.49}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -6242,7 +6242,7 @@
       },
       "Nickname": "Crédit vert",
       "Description": "",
-      "GMNotes": "{\"w\": 0.385, \"x\": -4.445, \"z\": -13.16, \"h\": 0.5, \"d\": 0.385}",
+      "GMNotes": "{\"w\": 0.385, \"x\": -9.587, \"z\": -13.305, \"h\": 0.5, \"d\": 0.385}",
       "ColorDiffuse": {
         "r": 0.3058823529411765,
         "g": 0.47843137254901963,
@@ -6283,7 +6283,7 @@
       },
       "Nickname": "Matériel de départ",
       "Description": "",
-      "GMNotes": "{\"w\": 2.45, \"x\": 24.71, \"z\": -2.135, \"h\": 0.5, \"fz\": 180, \"d\": 3.43}",
+      "GMNotes": "{\"w\": 2.45, \"x\": 30.21, \"z\": -2.135, \"h\": 0.5, \"fz\": 180, \"d\": 3.43}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -6705,7 +6705,7 @@
       },
       "Nickname": "Marchandises (comptoir)",
       "Description": "Marchandises génériques, en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 23.835, \"z\": -5.18, \"h\": 0.6, \"y3\": true, \"d\": 1.3968}",
+      "GMNotes": "{\"w\": 1.54, \"x\": 29.335, \"z\": -5.18, \"h\": 0.6, \"y3\": true, \"d\": 1.3968}",
       "ColorDiffuse": {
         "r": 0.5490196078431373,
         "g": 0.5294117647058824,
@@ -6791,7 +6791,7 @@
       },
       "Nickname": "Eau-de-vie (comptoir)",
       "Description": "Eau-de-vie générique, en nombre illimité",
-      "GMNotes": "{\"w\": 1.05, \"x\": 25.41, \"z\": -5.18, \"h\": 0.6, \"y3\": true, \"d\": 1.8083}",
+      "GMNotes": "{\"w\": 1.05, \"x\": 30.91, \"z\": -5.18, \"h\": 0.6, \"y3\": true, \"d\": 1.8083}",
       "ColorDiffuse": {
         "r": 0.5490196078431373,
         "g": 0.5294117647058824,
@@ -6877,7 +6877,7 @@
       },
       "Nickname": "Guides",
       "Description": "6 guides",
-      "GMNotes": "{\"w\": 1.4, \"x\": 24.01, \"z\": 15.645, \"h\": 0.6, \"y3\": true, \"d\": 1.4}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 19.118, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.4}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -7168,7 +7168,7 @@
       },
       "Nickname": "Interprètes",
       "Description": "6 interprètes",
-      "GMNotes": "{\"w\": 1.4, \"x\": 25.935, \"z\": 15.645, \"h\": 0.6, \"y3\": true, \"d\": 1.4}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 20.714, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.4}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -7459,7 +7459,7 @@
       },
       "Nickname": "Hivernants",
       "Description": "6 hivernants",
-      "GMNotes": "{\"w\": 1.4, \"x\": 27.86, \"z\": 15.645, \"h\": 0.6, \"y3\": true, \"d\": 1.4}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 22.31, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.4}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -7750,7 +7750,7 @@
       },
       "Nickname": "Grand canot (comptoir)",
       "Description": "",
-      "GMNotes": "{\"w\": 1.82, \"x\": 27.335, \"z\": -5.18, \"h\": 0.5, \"d\": 0.5308}",
+      "GMNotes": "{\"w\": 1.82, \"x\": 32.835, \"z\": -5.18, \"h\": 0.5, \"d\": 0.5308}",
       "ColorDiffuse": {
         "r": 0.5490196078431373,
         "g": 0.5294117647058824,
@@ -7791,7 +7791,7 @@
       },
       "Nickname": "Moyen canot (comptoir)",
       "Description": "",
-      "GMNotes": "{\"w\": 1.4, \"x\": 29.435, \"z\": -5.18, \"h\": 0.5, \"d\": 0.6125}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 34.935, \"z\": -5.18, \"h\": 0.5, \"d\": 0.6125}",
       "ColorDiffuse": {
         "r": 0.5490196078431373,
         "g": 0.5294117647058824,
@@ -7832,7 +7832,7 @@
       },
       "Nickname": "Navire du roi",
       "Description": "",
-      "GMNotes": "{\"w\": 1.4, \"x\": 31.185, \"z\": -5.18, \"h\": 0.8, \"y3\": true}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 36.685, \"z\": -5.18, \"h\": 0.8, \"y3\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -7872,7 +7872,7 @@
       },
       "Nickname": "Navire de la compagnie",
       "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 32.935, \"z\": -5.18, \"h\": 0.5, \"d\": 1.0413}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 18.96, \"z\": 9.541, \"h\": 0.5, \"d\": 1.0413}",
       "ColorDiffuse": {
         "r": 0.2901960784313726,
         "g": 0.2,
@@ -7913,7 +7913,7 @@
       },
       "Nickname": "Le Profond (navire du roi)",
       "Description": "",
-      "GMNotes": "{\"w\": 1.19, \"x\": 31.185, \"z\": -6.93, \"h\": 0.5, \"d\": 1.0413}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 36.685, \"z\": -6.93, \"h\": 0.5, \"d\": 1.0413}",
       "ColorDiffuse": {
         "r": 0.2901960784313726,
         "g": 0.2,
@@ -7954,7 +7954,7 @@
       },
       "Nickname": "Événements du mois",
       "Description": "14 tuiles : piochez-en une à la fin de chaque mois.",
-      "GMNotes": "{\"w\": 1.4, \"x\": 17.5, \"z\": 22.505, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 17.5, \"z\": 32.945, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
       "ColorDiffuse": {
         "r": 0.24705882352941178,
         "g": 0.42745098039215684,
@@ -8563,7 +8563,7 @@
       },
       "Nickname": "Manigances",
       "Description": "",
-      "GMNotes": "{\"w\": 3.5, \"x\": 21.35, \"z\": 27.755, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
+      "GMNotes": "{\"w\": 3.5, \"x\": 21.35, \"z\": 38.195, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -9027,7 +9027,7 @@
       },
       "Nickname": "Sac des congés",
       "Description": "33 congés (permis seuls). Tirés au printemps : autant que de joueurs + 1. Payés en hiver ; posés face « non payé » sur le plateau joueur. Joueur le plus pauvre : −1 ₶ (minimum 1).",
-      "GMNotes": "{\"w\": 1.4, \"x\": -22.96, \"z\": -1.855, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
+      "GMNotes": "{\"w\": 1.4, \"x\": -27.069, \"z\": 3.068, \"h\": 0.8, \"y3\": true, \"rnd\": true}",
       "ColorDiffuse": {
         "r": 0.5568627450980392,
         "g": 0.1843137254901961,
@@ -10415,7 +10415,7 @@
       },
       "Nickname": "Forts français",
       "Description": "Forts français en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 24.01, \"z\": 13.195, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.54, \"x\": 19.118, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
       "ColorDiffuse": {
         "r": 0.47843137254901963,
         "g": 0.3215686274509804,
@@ -10488,7 +10488,7 @@
       },
       "Nickname": "Forts anglais",
       "Description": "Forts anglais en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 25.935, \"z\": 13.195, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.54, \"x\": 20.714, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
       "ColorDiffuse": {
         "r": 0.00392156862745098,
         "g": 0.12941176470588237,
@@ -10561,7 +10561,7 @@
       },
       "Nickname": "Missions",
       "Description": "Missions en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 27.86, \"z\": 13.195, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.54, \"x\": 22.31, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
       "ColorDiffuse": {
         "r": 0.11764705882352941,
         "g": 0.10196078431372549,
@@ -10634,7 +10634,7 @@
       },
       "Nickname": "Marqueurs Ravagé",
       "Description": "Marqueurs Ravagé en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 42.735, \"z\": -1.855, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.54, \"x\": 25.502, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
       "ColorDiffuse": {
         "r": 0.47843137254901963,
         "g": 0.12156862745098039,
@@ -10707,7 +10707,7 @@
       },
       "Nickname": "Jetons Abîmé",
       "Description": "Jetons Abîmé en nombre illimité : sur la carte Expédition du canot abîmé",
-      "GMNotes": "{\"w\": 1.54, \"x\": 29.785, \"z\": 13.195, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.54, \"x\": 23.906, \"z\": 13.744, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
       "ColorDiffuse": {
         "r": 0.6392156862745098,
         "g": 0.20784313725490197,
@@ -10780,7 +10780,7 @@
       },
       "Nickname": "Dé du marché",
       "Description": "",
-      "GMNotes": "{\"w\": 0.7, \"x\": 5.237, \"z\": -7.105, \"h\": 0.7, \"y3\": true}",
+      "GMNotes": "{\"w\": 0.7, \"x\": 16.861, \"z\": -12.173, \"h\": 0.7, \"y3\": true}",
       "ColorDiffuse": {
         "r": 0.0,
         "g": 0.0,
@@ -10859,7 +10859,7 @@
       },
       "Nickname": "Dé du marché",
       "Description": "",
-      "GMNotes": "{\"w\": 0.7, \"x\": 10.802, \"z\": -7.105, \"h\": 0.7, \"y3\": true}",
+      "GMNotes": "{\"w\": 0.7, \"x\": 18.661, \"z\": -12.173, \"h\": 0.7, \"y3\": true}",
       "ColorDiffuse": {
         "r": 0.0,
         "g": 0.0,
@@ -10938,7 +10938,7 @@
       },
       "Nickname": "Dé du marché",
       "Description": "",
-      "GMNotes": "{\"w\": 0.7, \"x\": 5.237, \"z\": -8.155, \"h\": 0.7, \"y3\": true}",
+      "GMNotes": "{\"w\": 0.7, \"x\": 20.461, \"z\": -12.173, \"h\": 0.7, \"y3\": true}",
       "ColorDiffuse": {
         "r": 0.0,
         "g": 0.0,
@@ -11017,7 +11017,7 @@
       },
       "Nickname": "Dé du marché",
       "Description": "",
-      "GMNotes": "{\"w\": 0.7, \"x\": 10.802, \"z\": -8.155, \"h\": 0.7, \"y3\": true}",
+      "GMNotes": "{\"w\": 0.7, \"x\": 22.261, \"z\": -12.173, \"h\": 0.7, \"y3\": true}",
       "ColorDiffuse": {
         "r": 0.0,
         "g": 0.0,
@@ -11096,7 +11096,7 @@
       },
       "Nickname": "Aide de jeu (recto)",
       "Description": "",
-      "GMNotes": "{\"w\": 15.05, \"x\": -7.875, \"z\": 24.955, \"h\": 0.5, \"d\": 10.8172}",
+      "GMNotes": "{\"w\": 15.05, \"x\": -7.875, \"z\": 35.395, \"h\": 0.5, \"d\": 10.8172}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -11137,7 +11137,7 @@
       },
       "Nickname": "Aide de jeu (verso)",
       "Description": "",
-      "GMNotes": "{\"w\": 15.05, \"x\": 7.875, \"z\": 24.955, \"h\": 0.5, \"d\": 10.8172}",
+      "GMNotes": "{\"w\": 15.05, \"x\": 7.875, \"z\": 35.395, \"h\": 0.5, \"d\": 10.8172}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -11178,7 +11178,7 @@
       },
       "Nickname": "Coureurs des bois",
       "Description": "Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.",
-      "GMNotes": "{\"w\": 1.19, \"x\": 29.96, \"z\": 15.645, \"h\": 0.6, \"y3\": true, \"d\": 1.19}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 23.906, \"z\": 16.435, \"h\": 0.6, \"y3\": true, \"d\": 1.19}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16319,7 +16319,7 @@
       },
       "Nickname": "Carte de distillerie · Fonds-Saint-Jacques",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 25.585, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16390,7 +16390,7 @@
       },
       "Nickname": "Distillerie · Fonds-Saint-Jacques",
       "Description": "",
-      "GMNotes": "{\"w\": 0.77, \"x\": 24.29, \"z\": 3.22, \"h\": 0.7, \"d\": 1.05}",
+      "GMNotes": "{\"w\": 0.77, \"x\": 29.79, \"z\": 3.22, \"h\": 0.7, \"d\": 1.05}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16431,7 +16431,7 @@
       },
       "Nickname": "Carte de distillerie · La Lise",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 30.485, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16502,7 +16502,7 @@
       },
       "Nickname": "Distillerie · La Lise",
       "Description": "",
-      "GMNotes": "{\"w\": 0.77, \"x\": 29.19, \"z\": 3.22, \"h\": 0.7, \"d\": 1.05}",
+      "GMNotes": "{\"w\": 0.77, \"x\": 34.69, \"z\": 3.22, \"h\": 0.7, \"d\": 1.05}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16543,7 +16543,7 @@
       },
       "Nickname": "Carte de distillerie · Petit-Goâve",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 25.585, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16614,7 +16614,7 @@
       },
       "Nickname": "Distillerie · Petit-Goâve",
       "Description": "",
-      "GMNotes": "{\"w\": 0.77, \"x\": 24.29, \"z\": 0.77, \"h\": 0.7, \"d\": 1.05}",
+      "GMNotes": "{\"w\": 0.77, \"x\": 29.79, \"z\": 0.77, \"h\": 0.7, \"d\": 1.05}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16655,7 +16655,7 @@
       },
       "Nickname": "Carte de distillerie · Saint-Louis",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 30.485, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16726,7 +16726,7 @@
       },
       "Nickname": "Distillerie · Saint-Louis",
       "Description": "",
-      "GMNotes": "{\"w\": 0.77, \"x\": 29.19, \"z\": 0.77, \"h\": 0.7, \"d\": 1.05}",
+      "GMNotes": "{\"w\": 0.77, \"x\": 34.69, \"z\": 0.77, \"h\": 0.7, \"d\": 1.05}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -17997,7 +17997,7 @@
       },
       "Nickname": "Zones fermées",
       "Description": "Jetons Zone fermée en nombre illimité",
-      "GMNotes": "{\"w\": 1.54, \"x\": 31.71, \"z\": 13.195, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
+      "GMNotes": "{\"w\": 1.54, \"x\": 25.502, \"z\": 16.435, \"h\": 0.8, \"y3\": true, \"ry\": 0}",
       "ColorDiffuse": {
         "r": 0.698,
         "g": 0.133,
@@ -18053,211 +18053,6 @@
           }
         }
       ]
-    },
-    {
-      "GUID": "f00000",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": -9.867,
-        "posY": 2.0,
-        "posZ": 1.07,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.455,
-        "scaleY": 1.0,
-        "scaleZ": 0.455
-      },
-      "Nickname": "Fort français",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.91, \"x\": -4.795, \"z\": -6.055, \"h\": 0.5, \"d\": 0.91}",
-      "ColorDiffuse": {
-        "r": 0.9490196078431372,
-        "g": 0.9176470588235294,
-        "b": 0.8274509803921568
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": true,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 1,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "m00001",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": -8.717,
-        "posY": 2.0,
-        "posZ": 1.07,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.455,
-        "scaleY": 1.0,
-        "scaleZ": 0.455
-      },
-      "Nickname": "Mission",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.91, \"x\": -18.095, \"z\": 0.158, \"h\": 0.5, \"d\": 0.91}",
-      "ColorDiffuse": {
-        "r": 0.11764705882352941,
-        "g": 0.10196078431372549,
-        "b": 0.0784313725490196
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": true,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 1,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "f00002",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": 9.933,
-        "posY": 2.0,
-        "posZ": -3.458,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.455,
-        "scaleY": 1.0,
-        "scaleZ": 0.455
-      },
-      "Nickname": "Fort français",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.91, \"x\": -4.795, \"z\": -6.055, \"h\": 0.5, \"d\": 0.91}",
-      "ColorDiffuse": {
-        "r": 0.9490196078431372,
-        "g": 0.9176470588235294,
-        "b": 0.8274509803921568
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": true,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 1,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "m00003",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": -17.197,
-        "posY": 2.0,
-        "posZ": 1.088,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.455,
-        "scaleY": 1.0,
-        "scaleZ": 0.455
-      },
-      "Nickname": "Mission",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.91, \"x\": -18.095, \"z\": 0.158, \"h\": 0.5, \"d\": 0.91}",
-      "ColorDiffuse": {
-        "r": 0.11764705882352941,
-        "g": 0.10196078431372549,
-        "b": 0.0784313725490196
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": true,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 1,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "m00004",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": -14.191,
-        "posY": 2.0,
-        "posZ": 12.816,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.455,
-        "scaleY": 1.0,
-        "scaleZ": 0.455
-      },
-      "Nickname": "Mission",
-      "Description": "",
-      "GMNotes": "{\"w\": 0.91, \"x\": -18.095, \"z\": 0.158, \"h\": 0.5, \"d\": 0.91}",
-      "ColorDiffuse": {
-        "r": 0.11764705882352941,
-        "g": 0.10196078431372549,
-        "b": 0.0784313725490196
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": true,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 1,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
     }
   ]
 }

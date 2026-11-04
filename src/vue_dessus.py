@@ -35,10 +35,15 @@ for o in order:
         else: dr.ellipse([px-r,py-r,px+r,py+r],fill=col,outline='black')
         if nm in ('Deck','Bag','Infinite_Bag') or (nm.startswith('Custom_Model') and 'canot' not in n.lower()):
             dr.text((px-30,py+12),n[:18],fill='white',font=F)
-C.save(sys.argv[1]); C.resize((Wp//2,Hp//2),Image.LANCZOS).save(sys.argv[1].replace('.png','_small.png'))
+
 dr=ImageDraw.Draw(C)
 for o in d['ObjectStates']:
     for sp in o.get('AttachedSnapPoints',[]) or []:
         t=o['Transform']; X=t['posX']-sp['Position']['x']*t['scaleX']; Z=t['posZ']-sp['Position']['z']*t['scaleZ']
         px,py=P(X,Z); dr.ellipse([px-5,py-5,px+5,py+5],outline=(220,0,0),width=2)
+
+import re as _re
+line=[l for l in d['LuaScript'].split('\n') if l.startswith('local SNAP')][0]
+for x,z in _re.findall(r'\{(-?[\d.]+),(-?[\d.]+)\}',line):
+    px,py=P(float(x),float(z)); dr.ellipse([px-5,py-5,px+5,py+5],outline=(0,90,255),width=2)
 C.save(sys.argv[1]); C.resize((Wp//2,Hp//2),Image.LANCZOS).save(sys.argv[1].replace('.png','_small.png'))
