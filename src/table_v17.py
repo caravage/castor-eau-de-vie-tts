@@ -134,8 +134,10 @@ PB={q['Nickname'].split()[-1]:q['Transform']['posX'] for q in objs if (q.get('Ni
 CMAP={'Red':'rouge','Blue':'bleu','Green':'vert'}
 for q in objs:
     if q['Name']=='HandTrigger' and CMAP.get(q.get('FogColor')) in PB:
-        x=PB[CMAP[q['FogColor']]]; q['Transform']['posX']=round(x,3)
-        n=json.loads(q['GMNotes']); n['x']=round(x,3); q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+        pb=[r for r in objs if r.get('Nickname')=='Plateau du joueur '+CMAP[q['FogColor']]][0]; pn=json.loads(pb['GMNotes'])
+        x=pn['x']; z=round(pn['z']-pn['d']/2-2.0,3)   # zone de 4 de profondeur collée sous le plateau, de sa largeur
+        q['Transform']['posX']=round(x,3); q['Transform']['posZ']=z; q['Transform']['scaleX']=pn['w']
+        n=json.loads(q['GMNotes']); n['x']=round(x,3); n['z']=z; n['hw']=pn['w']; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
 # parts : 20 par joueur
 import hashlib
 used={q.get('GUID') for q in objs}

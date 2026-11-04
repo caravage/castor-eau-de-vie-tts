@@ -26,7 +26,7 @@
       "id": 0
     }
   },
-  "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 70.0, 68.25     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\nlocal SNAP = {{-13.226,20.358},{-12.071,20.358},{-10.916,20.358},{-9.761,20.358},{-8.606,20.358},{-7.451,20.358},{-6.296,20.358},{6.567,20.358},{7.722,20.358},{8.877,20.358},{10.032,20.358},{11.187,20.358},{12.342,20.358},{13.497,20.358},{14.652,20.358},{-17.784,27.519},{-16.468,27.519},{-15.152,27.519},{-13.837,27.519},{-12.521,27.519},{-11.205,27.519},{-9.889,27.519},{-8.573,27.519},{18.951,9.561},{20.334,9.561},{21.629,9.561},{22.924,9.561},{24.219,9.561},{25.514,9.561},{18.951,8.161},{20.334,8.161},{21.629,8.161},{22.924,8.161},{24.219,8.161},{25.514,8.161},{18.951,6.761},{20.334,6.761},{21.629,6.761},{22.924,6.761},{24.219,6.761},{25.514,6.761},{18.951,5.361},{20.334,5.361},{21.629,5.361},{22.924,5.361},{24.219,5.361},{25.514,5.361},{22.884,1.748},{24.267,1.748},{25.562,1.748},{22.884,0.348},{24.267,0.348},{25.562,0.348},{22.884,-1.052},{24.267,-1.052},{25.562,-1.052},{22.884,-2.452},{24.267,-2.452},{25.562,-2.452}}   -- points d'accroche : pistes Ravages et Prix du castor, cases Tour, emplacements Mission/Fort\n\nlocal function snaps(top)\n  local pts = {}\n  for _, p in ipairs(SNAP) do table.insert(pts, {position = {p[1] * F, top + 0.2, p[2] * F}, rotation_snap = false}) end\n  pcall(function() Global.setSnapPoints(pts) end)\nend\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local kx = n.w * F / b.x\n  local kz = kx\n  if n.d and b.z > 0.001 then kz = n.d * F / b.z end   -- profondeur mesurée et corrigée : aucune pièce étirée\n  if n.y3 then o.setScale({s.x * kx, s.y * kx, s.z * kx}) else o.setScale({s.x * kx, s.y, s.z * kz}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = LW / 0.97, LD / 0.97, 1.0   -- pas de table TTS : le tapis de jeu sert de table, à l'échelle 1\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    if b.size.x > 5 then tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2 end\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, n.ry or 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      else\n        h.destruct()                -- mains par défaut de la table : retirées\n      end\n    end\n  end\n  snaps(top)\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; local _, _, top = tableInfo(); snaps(top); return end\n  end\n  Wait.condition(layout, allLoaded, 30, layout)\nend\n\n\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n",
+  "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 70.0, 68.25     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\nlocal SNAP = {{-13.226,20.358},{-12.071,20.358},{-10.916,20.358},{-9.761,20.358},{-8.606,20.358},{-7.451,20.358},{-6.296,20.358},{6.567,20.358},{7.722,20.358},{8.877,20.358},{10.032,20.358},{11.187,20.358},{12.342,20.358},{13.497,20.358},{14.652,20.358},{-17.784,27.519},{-16.468,27.519},{-15.152,27.519},{-13.837,27.519},{-12.521,27.519},{-11.205,27.519},{-9.889,27.519},{-8.573,27.519},{18.951,9.561},{20.334,9.561},{21.629,9.561},{22.924,9.561},{24.219,9.561},{25.514,9.561},{18.951,8.161},{20.334,8.161},{21.629,8.161},{22.924,8.161},{24.219,8.161},{25.514,8.161},{18.951,6.761},{20.334,6.761},{21.629,6.761},{22.924,6.761},{24.219,6.761},{25.514,6.761},{18.951,5.361},{20.334,5.361},{21.629,5.361},{22.924,5.361},{24.219,5.361},{25.514,5.361},{22.884,1.748},{24.267,1.748},{25.562,1.748},{22.884,0.348},{24.267,0.348},{25.562,0.348},{22.884,-1.052},{24.267,-1.052},{25.562,-1.052},{22.884,-2.452},{24.267,-2.452},{25.562,-2.452}}   -- points d'accroche : pistes Ravages et Prix du castor, cases Tour, emplacements Mission/Fort\n\nlocal function snaps(top)\n  local pts = {}\n  for _, p in ipairs(SNAP) do table.insert(pts, {position = {p[1] * F, top + 0.2, p[2] * F}, rotation_snap = false}) end\n  pcall(function() Global.setSnapPoints(pts) end)\nend\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local kx = n.w * F / b.x\n  local kz = kx\n  if n.d and b.z > 0.001 then kz = n.d * F / b.z end   -- profondeur mesurée et corrigée : aucune pièce étirée\n  if n.y3 then o.setScale({s.x * kx, s.y * kx, s.z * kx}) else o.setScale({s.x * kx, s.y, s.z * kz}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = LW / 0.97, LD / 0.97, 1.0   -- pas de table TTS : le tapis de jeu sert de table, à l'échelle 1\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    if b.size.x > 5 then tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2 end\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, n.ry or 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      else\n        h.destruct()                -- mains par défaut de la table : retirées\n      end\n    end\n  end\n  snaps(top)\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; local _, _, top = tableInfo(); snaps(top); return end\n  end\n  Wait.condition(layout, allLoaded, 30, layout)\nend\n\n\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n\n-- Capital circulant (livret) : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres.\n-- Ce qui est en expédition ne compte pas. Calcul automatique, affiché dans la case « = » du plateau du joueur.\nlocal LIV0, PRIX4, PAS = -21.073, 10.011, 1.155\nlocal CAPPOS, MATSC = {-0.711, 0.15, -0.4935}, 8.1375\nlocal function palier(n) if n >= 25 then return 15 elseif n >= 20 then return 14 elseif n >= 15 then return 12 elseif n >= 10 then return 9 elseif n >= 5 then return 5 end return 0 end\nlocal function arrondi(v) return math.floor(v + 0.5) end\nlocal function etiquette(o, txt, pos, taille, sc)\n  local ok, bs = pcall(function() return o.getButtons() end)\n  if ok and bs and #bs > 0 then o.editButton({index = 0, label = txt}) return end\n  o.createButton({click_function = \"rien\", function_owner = Global, label = txt, position = pos, rotation = {0, 0, 0},\n    scale = {sc, sc, sc}, width = taille * 1.3, height = taille * 1.1, font_size = taille,\n    color = {0.16, 0.14, 0.09}, font_color = {0.96, 0.92, 0.84}, hover_color = {0.16, 0.14, 0.09}, press_color = {0.16, 0.14, 0.09}})\nend\nfunction rien() end\nlocal function capital()\n  local sacs, mats, parts, cartes, livres, prix = {}, {}, {}, {}, {}, nil\n  for _, o in ipairs(getObjects()) do\n    local nm, g = o.getName(), o.getGMNotes() or \"\"\n    if g:find('\"pm\"', 1, true) or g:find('\"cap\"', 1, true) then\n      local n = notes(o)\n      if n and n.pm then sacs[n.pm] = sacs[n.pm] or {}; sacs[n.pm][n.k] = o elseif n and n.cap then mats[n.cap] = o end\n    end\n    if nm:find(\"^Part \") then table.insert(parts, o)\n    elseif nm:find(\"^Carte de navire\") or nm:find(\"^Carte de distillerie\") then table.insert(cartes, o)\n    elseif nm:find(\"^Livres \") then livres[nm:sub(8)] = o\n    elseif nm == \"Prix du castor\" then prix = o end\n  end\n  local p = 0\n  if prix then p = math.max(1, math.min(8, 4 + arrondi((prix.getPosition().x - PRIX4 * F) / (PAS * F)))) end\n  for c, mat in pairs(mats) do\n    local s, q = sacs[c] or {}, {}\n    for kind, b in pairs(s) do\n      q[kind] = b.getQuantity()\n      etiquette(b, tostring(q[kind]), {0, 0.25, -0.42}, 260, 1 / b.getScale().x)\n    end\n    local charges = math.min(10, (q[\"marchandises\"] or 0) + (q[\"eau-de-vie\"] or 0))\n    local np = 0\n    for _, pt in ipairs(parts) do\n      if pt.getName() == \"Part \" .. c then\n        local pp = pt.getPosition()\n        for _, ca in ipairs(cartes) do\n          local bb = ca.getBounds()\n          if math.abs(pp.x - bb.center.x) <= bb.size.x / 2 and math.abs(pp.z - bb.center.z) <= bb.size.z / 2 then np = np + 1 break end\n        end\n      end\n    end\n    local nl = 0\n    if livres[c] then nl = math.max(0, arrondi((livres[c].getPosition().x - LIV0 * F) / (PAS * F))) end\n    local total = charges + (q[\"castor\"] or 0) * p + np + palier(nl)\n    etiquette(mat, tostring(total), CAPPOS, 420, 1 / MATSC)\n  end\nend\nWait.time(function() pcall(capital) end, 1.5, -1)\n",
   "LuaScriptState": "",
   "XmlUI": "",
   "ObjectStates": [
@@ -87,7 +87,7 @@
       },
       "Nickname": "Plateau du joueur rouge",
       "Description": "",
-      "GMNotes": "{\"w\": 16.275, \"x\": -20.86, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5}",
+      "GMNotes": "{\"w\": 16.275, \"x\": -20.86, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"rouge\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -100,8 +100,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_0.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_0.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_v3_0.png?v42",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_v3_0.png?v42",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -110,7 +110,106 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.729,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": 0.243,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": -0.243,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": -0.729,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": -0.3763,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.4645,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.5527,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.6409,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.729,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.8172,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.9054,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        }
+      ]
     },
     {
       "GUID": "1e70fe",
@@ -128,7 +227,7 @@
       },
       "Nickname": "Plateau du joueur bleu",
       "Description": "",
-      "GMNotes": "{\"w\": 16.275, \"x\": 0.629, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5}",
+      "GMNotes": "{\"w\": 16.275, \"x\": 0.629, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"bleu\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -141,8 +240,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_1.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_1.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_v3_1.png?v42",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_v3_1.png?v42",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -151,7 +250,106 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.729,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": 0.243,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": -0.243,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": -0.729,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": -0.3763,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.4645,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.5527,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.6409,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.729,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.8172,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.9054,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        }
+      ]
     },
     {
       "GUID": "a9bc4c",
@@ -169,7 +367,7 @@
       },
       "Nickname": "Plateau du joueur vert",
       "Description": "",
-      "GMNotes": "{\"w\": 16.275, \"x\": 22.12, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5}",
+      "GMNotes": "{\"w\": 16.275, \"x\": 22.12, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"vert\"}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -182,8 +380,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_2.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_2.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_v3_2.png?v42",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pmat_v3_2.png?v42",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -192,7 +390,106 @@
           "Stackable": false,
           "Stretch": false
         }
-      }
+      },
+      "AttachedSnapPoints": [
+        {
+          "Position": {
+            "x": 0.729,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": 0.243,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": -0.243,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": -0.729,
+            "y": 0.05,
+            "z": 0.1473
+          },
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Position": {
+            "x": -0.3763,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.4645,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.5527,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.6409,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.729,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.8172,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        },
+        {
+          "Position": {
+            "x": -0.9054,
+            "y": 0.05,
+            "z": 0.5769
+          }
+        }
+      ]
     },
     {
       "GUID": "d37a68",
@@ -251,7 +548,7 @@
       },
       "Nickname": "Rivière de recrutement",
       "Description": "",
-      "GMNotes": "{\"w\": 3.5, \"x\": -21.35, \"z\": 38.195, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
+      "GMNotes": "{\"w\": 3.5, \"x\": -21.35, \"z\": 38.195, \"h\": 0.5, \"fz\": 180, \"d\": 4.85}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -308,7 +605,7 @@
           },
           "Nickname": "Mariage avec un officier",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -349,7 +646,7 @@
           },
           "Nickname": "Rumeurs des Pays d’en Haut",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -390,7 +687,7 @@
           },
           "Nickname": "Banc à l’église Notre-Dame",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -431,7 +728,7 @@
           },
           "Nickname": "Dot de votre fille",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -472,7 +769,7 @@
           },
           "Nickname": "Créance recouvrée",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -513,7 +810,7 @@
           },
           "Nickname": "Marguillier de Notre-Dame",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -554,7 +851,7 @@
           },
           "Nickname": "Tapisserie de haute lice",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -595,7 +892,7 @@
           },
           "Nickname": "Rumeurs des Pays d’en Haut",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -636,7 +933,7 @@
           },
           "Nickname": "Capitaine de milice de la côte",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -677,7 +974,7 @@
           },
           "Nickname": "Canot neuf",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -718,7 +1015,7 @@
           },
           "Nickname": "Parts d’un navire",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -759,7 +1056,7 @@
           },
           "Nickname": "Commission d’officier pour votre fils",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -800,7 +1097,7 @@
           },
           "Nickname": "Vente après décès",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -841,7 +1138,7 @@
           },
           "Nickname": "Protection du gouverneur",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -882,7 +1179,7 @@
           },
           "Nickname": "Rumeurs des Pays d’en Haut",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -925,7 +1222,7 @@
       },
       "Nickname": "Associés",
       "Description": "",
-      "GMNotes": "{\"w\": 3.5, \"x\": 17.5, \"z\": 38.195, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
+      "GMNotes": "{\"w\": 3.5, \"x\": 17.5, \"z\": 38.195, \"h\": 0.5, \"fz\": 180, \"d\": 4.85}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -982,7 +1279,7 @@
           },
           "Nickname": "Nicolas Perrot, interprète et commandant",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1023,7 +1320,7 @@
           },
           "Nickname": "Tonty, homme de l’Ouest",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1064,7 +1361,7 @@
           },
           "Nickname": "Riverin, directeur de la Compagnie de la colonie",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1105,7 +1402,7 @@
           },
           "Nickname": "Jean-Baptiste Migeon, bailli et marchand",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1146,7 +1443,7 @@
           },
           "Nickname": "Les engagés, de la compagnie de la colonie",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1187,7 +1484,7 @@
           },
           "Nickname": "Pierre Lestage, gros équipeur de Montréal",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1228,7 +1525,7 @@
           },
           "Nickname": "Simon Réaume, voyageur et diplomate",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1269,7 +1566,7 @@
           },
           "Nickname": "Le cabaretier, des Trois-Rivières",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1310,7 +1607,7 @@
           },
           "Nickname": "Bouchard, Coton et Bigras, société de voyageurs",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1351,7 +1648,7 @@
           },
           "Nickname": "Jean-Jérôme Patron, bourgeois du congé",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1392,7 +1689,7 @@
           },
           "Nickname": "Milot, marchand de Lachine",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1433,7 +1730,7 @@
           },
           "Nickname": "Daniel Greysolon Dulhut, commerçant et diplomate",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1474,7 +1771,7 @@
           },
           "Nickname": "Médard Chouart Des Groseilliers, coureur des bois",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1515,7 +1812,7 @@
           },
           "Nickname": "Le confesseur, récollet",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1556,7 +1853,7 @@
           },
           "Nickname": "Jean Soumande, gros marchand",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1599,7 +1896,7 @@
       },
       "Nickname": "Grands événements",
       "Description": "",
-      "GMNotes": "{\"w\": 3.5, \"x\": 21.35, \"z\": 32.945, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
+      "GMNotes": "{\"w\": 3.5, \"x\": 21.35, \"z\": 32.945, \"h\": 0.5, \"fz\": 180, \"d\": 4.85}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -1644,7 +1941,7 @@
           },
           "Nickname": "Une nation refuse l’alcool",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1685,7 +1982,7 @@
           },
           "Nickname": "Refus des sacrements",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1726,7 +2023,7 @@
           },
           "Nickname": "Ordonnance royale",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -6283,7 +6580,7 @@
       },
       "Nickname": "Matériel de départ",
       "Description": "",
-      "GMNotes": "{\"w\": 2.45, \"x\": 30.21, \"z\": -2.135, \"h\": 0.5, \"fz\": 180, \"d\": 3.43}",
+      "GMNotes": "{\"w\": 2.45, \"x\": 30.21, \"z\": -2.135, \"h\": 0.5, \"fz\": 180, \"d\": 3.395}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -6334,7 +6631,7 @@
           },
           "Nickname": "Matériel de départ",
           "Description": "",
-          "GMNotes": "{\"w\": 2.45, \"d\": 3.43}",
+          "GMNotes": "{\"w\": 2.45, \"d\": 3.395}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -6375,7 +6672,7 @@
           },
           "Nickname": "Matériel de départ",
           "Description": "",
-          "GMNotes": "{\"w\": 2.45, \"d\": 3.43}",
+          "GMNotes": "{\"w\": 2.45, \"d\": 3.395}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -6416,7 +6713,7 @@
           },
           "Nickname": "Matériel de départ",
           "Description": "",
-          "GMNotes": "{\"w\": 2.45, \"d\": 3.43}",
+          "GMNotes": "{\"w\": 2.45, \"d\": 3.395}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -6457,7 +6754,7 @@
           },
           "Nickname": "Matériel de départ",
           "Description": "",
-          "GMNotes": "{\"w\": 2.45, \"d\": 3.43}",
+          "GMNotes": "{\"w\": 2.45, \"d\": 3.395}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -6498,7 +6795,7 @@
           },
           "Nickname": "Matériel de départ",
           "Description": "",
-          "GMNotes": "{\"w\": 2.45, \"d\": 3.43}",
+          "GMNotes": "{\"w\": 2.45, \"d\": 3.395}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -6539,7 +6836,7 @@
           },
           "Nickname": "Matériel de départ",
           "Description": "",
-          "GMNotes": "{\"w\": 2.45, \"d\": 3.43}",
+          "GMNotes": "{\"w\": 2.45, \"d\": 3.395}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -6580,7 +6877,7 @@
           },
           "Nickname": "Matériel de départ",
           "Description": "",
-          "GMNotes": "{\"w\": 2.45, \"d\": 3.43}",
+          "GMNotes": "{\"w\": 2.45, \"d\": 3.395}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -6621,7 +6918,7 @@
           },
           "Nickname": "Matériel de départ",
           "Description": "",
-          "GMNotes": "{\"w\": 2.45, \"d\": 3.43}",
+          "GMNotes": "{\"w\": 2.45, \"d\": 3.395}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -6662,7 +6959,7 @@
           },
           "Nickname": "Matériel de départ",
           "Description": "",
-          "GMNotes": "{\"w\": 2.45, \"d\": 3.43}",
+          "GMNotes": "{\"w\": 2.45, \"d\": 3.395}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8563,7 +8860,7 @@
       },
       "Nickname": "Manigances",
       "Description": "",
-      "GMNotes": "{\"w\": 3.5, \"x\": 21.35, \"z\": 38.195, \"h\": 0.5, \"fz\": 180, \"d\": 4.9}",
+      "GMNotes": "{\"w\": 3.5, \"x\": 21.35, \"z\": 38.195, \"h\": 0.5, \"fz\": 180, \"d\": 4.85}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -8615,7 +8912,7 @@
           },
           "Nickname": "Dans le sillage",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8656,7 +8953,7 @@
           },
           "Nickname": "Eau-de-vie coupée",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8697,7 +8994,7 @@
           },
           "Nickname": "En sous-main",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8738,7 +9035,7 @@
           },
           "Nickname": "Fausse dénonciation",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8779,7 +9076,7 @@
           },
           "Nickname": "Pillage",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8820,7 +9117,7 @@
           },
           "Nickname": "Commandant complaisant",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8861,7 +9158,7 @@
           },
           "Nickname": "Faussaire",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8902,7 +9199,7 @@
           },
           "Nickname": "Canotée de trop",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8943,7 +9240,7 @@
           },
           "Nickname": "Rafler la traite",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8984,7 +9281,7 @@
           },
           "Nickname": "Société secrète",
           "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.9}",
+          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -12626,54 +12923,22 @@
       ]
     },
     {
-      "GUID": "2d85d4",
-      "Name": "Counter",
-      "Transform": {
-        "posX": -10.762,
-        "posY": 2.0,
-        "posZ": -31.745,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Capital circulant rouge",
-      "Description": "Capital circulant : livres + charges (5 max) + canots + fourrures + parts.",
-      "GMNotes": "{\"w\": 1.75, \"x\": -10.762, \"z\": -31.745, \"h\": 0.6, \"y3\": true}",
-      "ColorDiffuse": {
-        "r": 0.6588235294117647,
-        "g": 0.19607843137254902,
-        "b": 0.16470588235294117
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "Counter": {
-        "value": 0
-      }
-    },
-    {
       "GUID": "69e19a",
       "Name": "HandTrigger",
       "Transform": {
         "posX": -20.86,
         "posY": 4.0,
-        "posZ": -36.435,
+        "posZ": -35.075,
         "rotX": 0,
         "rotY": 0,
         "rotZ": 0,
-        "scaleX": 20.65,
+        "scaleX": 16.275,
         "scaleY": 5.0,
         "scaleZ": 4.0
       },
       "Nickname": "",
       "Description": "",
-      "GMNotes": "{\"hand\": true, \"x\": -20.86, \"z\": -36.435, \"hw\": 20.65}",
+      "GMNotes": "{\"hand\": true, \"x\": -20.86, \"z\": -35.075, \"hw\": 16.275}",
       "ColorDiffuse": {
         "r": 0.6588235294117647,
         "g": 0.19607843137254902,
@@ -14311,54 +14576,22 @@
       ]
     },
     {
-      "GUID": "204aab",
-      "Name": "Counter",
-      "Transform": {
-        "posX": 10.728,
-        "posY": 2.0,
-        "posZ": -31.745,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Capital circulant bleu",
-      "Description": "Capital circulant : livres + charges (5 max) + canots + fourrures + parts.",
-      "GMNotes": "{\"w\": 1.75, \"x\": 10.728, \"z\": -31.745, \"h\": 0.6, \"y3\": true}",
-      "ColorDiffuse": {
-        "r": 0.1843137254901961,
-        "g": 0.3686274509803922,
-        "b": 0.5568627450980392
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "Counter": {
-        "value": 0
-      }
-    },
-    {
       "GUID": "f23721",
       "Name": "HandTrigger",
       "Transform": {
         "posX": 0.629,
         "posY": 4.0,
-        "posZ": -36.435,
+        "posZ": -35.075,
         "rotX": 0,
         "rotY": 0,
         "rotZ": 0,
-        "scaleX": 20.65,
+        "scaleX": 16.275,
         "scaleY": 5.0,
         "scaleZ": 4.0
       },
       "Nickname": "",
       "Description": "",
-      "GMNotes": "{\"hand\": true, \"x\": 0.629, \"z\": -36.435, \"hw\": 20.65}",
+      "GMNotes": "{\"hand\": true, \"x\": 0.629, \"z\": -35.075, \"hw\": 16.275}",
       "ColorDiffuse": {
         "r": 0.1843137254901961,
         "g": 0.3686274509803922,
@@ -15996,54 +16229,22 @@
       ]
     },
     {
-      "GUID": "83fded",
-      "Name": "Counter",
-      "Transform": {
-        "posX": 32.218,
-        "posY": 2.0,
-        "posZ": -31.745,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Capital circulant vert",
-      "Description": "Capital circulant : livres + charges (5 max) + canots + fourrures + parts.",
-      "GMNotes": "{\"w\": 1.75, \"x\": 32.218, \"z\": -31.745, \"h\": 0.6, \"y3\": true}",
-      "ColorDiffuse": {
-        "r": 0.3058823529411765,
-        "g": 0.47843137254901963,
-        "b": 0.17254901960784313
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "Counter": {
-        "value": 0
-      }
-    },
-    {
       "GUID": "e6d6ac",
       "Name": "HandTrigger",
       "Transform": {
         "posX": 22.12,
         "posY": 4.0,
-        "posZ": -36.435,
+        "posZ": -35.075,
         "rotX": 0,
         "rotY": 0,
         "rotZ": 0,
-        "scaleX": 20.65,
+        "scaleX": 16.275,
         "scaleY": 5.0,
         "scaleZ": 4.0
       },
       "Nickname": "",
       "Description": "",
-      "GMNotes": "{\"hand\": true, \"x\": 22.12, \"z\": -36.435, \"hw\": 20.65}",
+      "GMNotes": "{\"hand\": true, \"x\": 22.12, \"z\": -35.075, \"hw\": 16.275}",
       "ColorDiffuse": {
         "r": 0.3058823529411765,
         "g": 0.47843137254901963,
@@ -19045,6 +19246,666 @@
           "Stackable": true
         }
       }
+    },
+    {
+      "GUID": "242ef9",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": -27.379,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Marchandises (rouge)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": -27.379, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"marchandises\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_marchandises.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_marchandises.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "55932d",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": -26.206,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Eau-de-vie (rouge)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": -26.206, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"eau-de-vie\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_eaudevie.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_eaudevie.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "1e3847",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": -23.424,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Moyens canots (rouge)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": -23.424, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"moyen canot\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_moyen.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_moyen.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "e129f0",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": -22.251,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Grands canots (rouge)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": -22.251, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"grand canot\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_grand.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_grand.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "384fa7",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": -18.883,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Fourrures (rouge)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": -18.883, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"rouge\", \"k\": \"castor\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_castor.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_castor.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "d18e13",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": -5.89,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Marchandises (bleu)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": -5.89, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"marchandises\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_marchandises.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_marchandises.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "5306b2",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": -4.717,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Eau-de-vie (bleu)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": -4.717, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"eau-de-vie\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_eaudevie.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_eaudevie.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "5bef65",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": -1.935,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Moyens canots (bleu)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": -1.935, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"moyen canot\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_moyen.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_moyen.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "2912a6",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": -0.762,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Grands canots (bleu)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": -0.762, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"grand canot\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_grand.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_grand.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "3b1822",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 2.606,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Fourrures (bleu)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": 2.606, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"bleu\", \"k\": \"castor\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_castor.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_castor.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "40403f",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 15.601,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Marchandises (vert)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": 15.601, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"marchandises\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_marchandises.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_marchandises.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "ac4655",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 16.774,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Eau-de-vie (vert)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": 16.774, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"eau-de-vie\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_eaudevie.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_eaudevie.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "fdcd22",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 19.556,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Moyens canots (vert)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": 19.556, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"moyen canot\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_moyen.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_moyen.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "9bc6eb",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 20.729,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Grands canots (vert)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": 20.729, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"grand canot\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_grand.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_grand.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
+    },
+    {
+      "GUID": "392f03",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 24.098,
+        "posY": 2.0,
+        "posZ": -31.316,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
+      },
+      "Nickname": "Entrepôt · Fourrures (vert)",
+      "Description": "Propriétés du joueur à Québec. Le nombre affiché se met à jour seul.",
+      "GMNotes": "{\"w\": 1.05, \"x\": 24.098, \"z\": -31.316, \"h\": 0.3, \"y3\": true, \"lock\": true, \"pm\": \"vert\", \"k\": \"castor\"}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_pm_castor.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/pm_castor.png?v42",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": []
     }
   ]
 }
