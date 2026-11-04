@@ -53,7 +53,9 @@ for i,c in enumerate(COLS):
         lx,lz=local(x,y); sp.append({'Position':{'x':lx,'y':0.05,'z':lz},'Rotation':{'x':0,'y':0,'z':0}})
     for (x,y,w,h) in geo['souf']:
         lx,lz=local(x,y); sp.append({'Position':{'x':lx,'y':0.05,'z':lz}})
-    m['AttachedSnapPoints']=sp
+    m.pop('AttachedSnapPoints',None)
+    sw=[[round((x-IW/2)/PX,3),round(-(y-IH/2)/PX,3),1] for (x,y,w,h) in geo['slots'][:4]]+[[round((x-IW/2)/PX,3),round(-(y-IH/2)/PX,3),0] for (x,y,w,h) in geo['souf']]
+    n=json.loads(m['GMNotes']); n['snapw']=sw; m['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
     # 4. mini-sacs de l'entrepôt (vides au départ)
     cx,cz=m['Transform']['posX'],m['Transform']['posZ']
     for k,(x,y,w,h) in zip(KINDS,geo['bags']):
@@ -177,6 +179,61 @@ def canots(os_):
             if isinstance(n,dict) and 'w' in n: n['d']=round(n['w']*LB[key],4); st['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
         canots(q.get('ContainedObjects',[]))
 canots(objs)
+# 5l. cartes navire et distillerie : points d'aimantation posés par le script (positions monde)
+for q in objs:
+    nk=q.get('Nickname') or ''
+    if nk.startswith(('Carte de navire','Carte de distillerie')):
+        xs_=[523,657,791,926,1060] if 'navire' in nk else [559,720,879,1040]
+        q.pop('AttachedSnapPoints',None)
+        n=json.loads(q['GMNotes']); n['snapw']=[[round((px/1200-0.5)*4.2,3),round(-(352/640-0.5)*2.24,3),0] for px in xs_]
+        q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+# 5m. jetons de soupçon : œil blanc (celui de la carte « +1 soupçon ») sur fond de couleur
+def oeil(col):
+    t=Image.new('RGBA',(200,200),(0,0,0,0)); dr=ImageDraw.Draw(t)
+    dr.ellipse((4,4,196,196),fill=col,outline=(42,36,24,255),width=8)
+    def q(p0,p1,p2,n=24): return [((1-u)**2*p0[0]+2*(1-u)*u*p1[0]+u*u*p2[0],(1-u)**2*p0[1]+2*(1-u)*u*p1[1]+u*u*p2[1]) for u in [i/n for i in range(n+1)]]
+    k=2.3; ox,oy=100-35*k,100-22*k; P=lambda x,y:(ox+x*k,oy+y*k)
+    dr.polygon(q(P(4,22),P(35,-6),P(66,22))+q(P(66,22),P(35,50),P(4,22))[1:],fill=(247,240,220,255))
+    c=P(35,22); r=10*k; dr.ellipse((c[0]-r,c[1]-r,c[0]+r,c[1]+r),fill=tuple(int(v*.55) for v in col[:3])+(255,))
+    return t
+for c in COLS:
+    rgb=tuple(round(COUL[c][k]*255) for k in 'rgb')+(255,)
+    oeil(rgb).save(R+f'img/v18/tok_oeil_{c}.png')
+    for q in objs:
+        if q.get('Nickname')=='Soupçon '+c: q['CustomImage']['ImageURL']=GH+f'tok_oeil_{c}.png?v45'; q['ColorDiffuse']={'r':1.0,'g':1.0,'b':1.0}
+# 5n. marqueurs Livres et Crédit carrés
+def carre(col,txt=None,S=160):
+    t=Image.new('RGBA',(S,S),(0,0,0,0)); dr=ImageDraw.Draw(t)
+    dr.rounded_rectangle((3,3,S-4,S-4),radius=18,fill=col,outline=tuple(int(v*.5) for v in col[:3])+(255,),width=9)
+    dr.rounded_rectangle((22,22,S-23,S-23),radius=10,outline=tuple(min(255,int(v+(255-v)*.45)) for v in col[:3])+(255,),width=4)
+    if txt: dr.text((S/2,S/2+2),txt,font=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',40),fill=(255,255,255,255),anchor='mm')
+    return t
+for c in COLS:
+    rgb=tuple(round(COUL[c][k]*255) for k in 'rgb')+(255,)
+    carre(rgb).save(R+f'img/v18/sq_livres_{c}.png'); carre(rgb,'+30').save(R+f'img/v18/sq_livres_{c}_30.png')
+    for q in objs:
+        if q.get('Nickname')=='Livres '+c:
+            q['CustomImage']['ImageURL']=GH+f'sq_livres_{c}.png?v45'; q['CustomImage']['ImageSecondaryURL']=GH+f'sq_livres_{c}_30.png?v45'; q['CustomImage']['CustomTile']['Type']=3
+carre((255,255,255,255)).save(R+'img/v18/tok_carre.png')
+for q in objs:
+    if (q.get('Nickname') or '').startswith('Crédit '): q['CustomImage']['ImageURL']=GH+'tok_carre.png?v45'
+# 5o. pastille du capital : tuile carrée de la taille d'une tuile castor (1,05), à la couleur du joueur
+os.chdir(R); ns['mesh']('v18/sac_carre','v18/tok_carre',ns['rrect'](3,3,154,154,18),14,(80,6)); os.chdir(cwd)
+for q in objs:
+    if (q.get('Nickname') or '').startswith('Capital circulant '):
+        q['CustomMesh']['MeshURL']=GH+'sac_carre.obj'; q['CustomMesh']['DiffuseURL']=GH+'tok_carre.png?v45'
+        n=json.loads(q['GMNotes']); n['w']=1.05; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+        q['Transform'].update(scaleX=1.05,scaleY=1.05,scaleZ=1.05)
+# 5p. jetons Guide / Interprète / Hivernant agrandis pour remplir l'ovale Voyageur ; sac Expéditions des coureurs renommé
+def voy(os_):
+    for q in os_:
+        if q.get('Nickname') in ('Guide','Interprète','Hivernant'):
+            n=json.loads(q['GMNotes']); n['w']=0.82; n['d']=1.18; q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+        voy(q.get('ContainedObjects',[]))
+voy(objs)
+for q in objs:
+    nk=q.get('Nickname') or ''
+    if nk.startswith('Expéditions · Petit canot (coureurs des bois)'): q['Nickname']=nk.replace('Petit canot (coureurs des bois)','Coureurs des bois')
 # 6. cartes au format 63,5 x 88
 def cards(os_):
     for q in os_:
@@ -250,8 +307,8 @@ local function capital()
     else
       local sc = 1 / ct.getScale().x
       ct.createButton({{click_function = "boutonCapital", function_owner = Global, label = total, position = {{0, 0.25, 0}},
-        scale = {{sc, sc, sc}}, width = 1040, height = 840, font_size = 680, tooltip = "Recalculer le capital",
-        color = cc, font_color = {{0.96, 0.92, 0.84}}, hover_color = cc, press_color = cc}})
+        scale = {{sc, sc, sc}}, width = 0, height = 0, font_size = 600, tooltip = "Recalculer le capital",
+        color = cc, font_color = {{1, 1, 1}}, hover_color = cc, press_color = cc}})
     end
   end
 end
@@ -259,7 +316,7 @@ function majCapital() pcall(capital) end
 function boutonCapital() majCapital() end
 local function majSac(c) Wait.frames(function() if c and not c.isDestroyed() then local n = sac(c) if n then afficheSac(c, n) end end end, 1) end
 -- Cartes Expédition : points d'aimantation du congé (ou du coureur) et des voyageurs, posés quand la carte arrive sur la table.
-local EXPSNAP = {{grand = {{{{195.0, 283.0}}, {{493.0, 283.0}}, {{695.0, 283.0}}, {{897.0, 283.0}}}}, moyen = {{{{195.0, 283.0}}, {{560.3, 283.0}}, {{829.7, 283.0}}}}, coureur = {{{{191.0, 424.0}}}}}}
+local EXPSNAP = {{grand = {{{{195.0, 283.0}}, {{493.0, 283.0}}, {{695.0, 283.0}}, {{897.0, 283.0}}, {{165.0, 585.5}}, {{345.0, 585.5}}, {{525.0, 585.5}}, {{705.0, 585.5}}, {{885.0, 585.5}}}}, moyen = {{{{195.0, 283.0}}, {{560.3, 283.0}}, {{829.7, 283.0}}, {{345.0, 585.5}}, {{525.0, 585.5}}, {{705.0, 585.5}}}}, coureur = {{{{191.0, 424.0}}}}}}
 local function snapsExp(o)
   if not o or o.isDestroyed() or o.type ~= "Card" then return end
   local nm = o.getName()
@@ -273,6 +330,22 @@ local function snapsExp(o)
   pcall(function() o.setSnapPoints(sp) end)
 end
 local function snapsTous() for _, o in ipairs(getObjects()) do pcall(snapsExp, o) end end
+local function snapsW()
+  for _, o in ipairs(getObjects()) do
+    local g = o.getGMNotes() or ""
+    if g:find('"snapw"', 1, true) then
+      local n = notes(o)
+      if n and n.snapw then
+        local p, sp = o.getPosition(), {{}}
+        local bb = o.getBounds(); local top = bb.center.y + bb.size.y / 2
+        for _, v in ipairs(n.snapw) do
+          table.insert(sp, {{position = o.positionToLocal({{p.x + v[1] * F, top, p.z + v[2] * F}}), rotation = {{0, 0, 0}}, rotation_snap = v[3] == 1}})
+        end
+        pcall(function() o.setSnapPoints(sp) end)
+      end
+    end
+  end
+end
 local ancienSortie = onObjectLeaveContainer
 function onObjectLeaveContainer(c, o) if ancienSortie then ancienSortie(c, o) end majSac(c)
   Wait.condition(function() Wait.time(function() pcall(snapsExp, o) end, 0.6) end, function() return o.isDestroyed() or not o.spawning end, 10)
@@ -283,7 +356,7 @@ local function menus()
     if o.getName():find("^Capital circulant ") then pcall(function() o.addContextMenuItem("Recalculer le capital", function() majCapital() end) end) end
   end
 end
-Wait.time(function() menus(); majCapital(); snapsTous() end, 4)
+Wait.time(function() menus(); majCapital(); snapsTous(); snapsW() end, 4)
 '''
 OLD='      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) end'
 assert OLD in d['LuaScript']

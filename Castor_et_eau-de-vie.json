@@ -26,7 +26,7 @@
       "id": 0
     }
   },
-  "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 70.0, 68.25     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\nlocal SNAP = {{-13.226,20.358},{-12.071,20.358},{-10.916,20.358},{-9.761,20.358},{-8.606,20.358},{-7.451,20.358},{-6.296,20.358},{6.567,20.358},{7.722,20.358},{8.877,20.358},{10.032,20.358},{11.187,20.358},{12.342,20.358},{13.497,20.358},{14.652,20.358},{-17.784,27.519},{-16.468,27.519},{-15.152,27.519},{-13.837,27.519},{-12.521,27.519},{-11.205,27.519},{-9.889,27.519},{-8.573,27.519},{18.951,9.561},{20.334,9.561},{21.629,9.561},{22.924,9.561},{24.219,9.561},{25.514,9.561},{18.951,8.161},{20.334,8.161},{21.629,8.161},{22.924,8.161},{24.219,8.161},{25.514,8.161},{18.951,6.761},{20.334,6.761},{21.629,6.761},{22.924,6.761},{24.219,6.761},{25.514,6.761},{18.951,5.361},{20.334,5.361},{21.629,5.361},{22.924,5.361},{24.219,5.361},{25.514,5.361},{22.884,1.748},{24.267,1.748},{25.562,1.748},{22.884,0.348},{24.267,0.348},{25.562,0.348},{22.884,-1.052},{24.267,-1.052},{25.562,-1.052},{22.884,-2.452},{24.267,-2.452},{25.562,-2.452}}   -- points d'accroche : pistes Ravages et Prix du castor, cases Tour, emplacements Mission/Fort\n\nlocal function snaps(top)\n  local pts = {}\n  for _, p in ipairs(SNAP) do table.insert(pts, {position = {p[1] * F, top + 0.2, p[2] * F}, rotation_snap = false}) end\n  pcall(function() Global.setSnapPoints(pts) end)\nend\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local kx = n.w * F / b.x\n  local kz = kx\n  if n.d and b.z > 0.001 then kz = n.d * F / b.z end   -- profondeur mesurée et corrigée : aucune pièce étirée\n  if n.y3 then o.setScale({s.x * kx, s.y * kx, s.z * kx}) else o.setScale({s.x * kx, s.y, s.z * kz}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = LW / 0.97, LD / 0.97, 1.0   -- pas de table TTS : le tapis de jeu sert de table, à l'échelle 1\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    if b.size.x > 5 then tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2 end\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, n.ry or 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      else\n        h.destruct()                -- mains par défaut de la table : retirées\n      end\n    end\n  end\n  snaps(top)\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and (not m[2].lock or m[2].drop) then m[1].setLock(false) end\n    end\n    Wait.time(function()\n      for _, m2 in ipairs(moved) do if m2[2].drop and not m2[1].isDestroyed() then m2[1].setLock(true) end end\n    end, 3)\n    for _, m in ipairs({}) do\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; local _, _, top = tableInfo(); snaps(top); return end\n  end\n  Wait.condition(layout, allLoaded, 30, layout)\nend\n\n\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n\n-- Capital circulant (livret) : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres.\n-- Ce qui est en expédition ne compte pas. Les sacs d'entrepôt affichent leur contenu à chaque entrée / sortie ;\n-- le capital se recalcule avec le bouton « Calculer le capital » (haut droite de l'écran) ou clic droit sur le compteur.\nlocal LIV0, PRIX4, PAS = -21.073, 10.011, 1.155\nlocal COUL = {[\"rouge\"] = {0.659, 0.196, 0.165}, [\"bleu\"] = {0.184, 0.369, 0.557}, [\"vert\"] = {0.306, 0.478, 0.173}}\nlocal NOMS = {[\"marchandises\"] = \"Marchandises\", [\"eau-de-vie\"] = \"Eau-de-vie\", [\"moyen canot\"] = \"Moyens canots\", [\"grand canot\"] = \"Grands canots\", [\"castor\"] = \"Fourrures\"}\nlocal function palier(n) if n >= 25 then return 15 elseif n >= 20 then return 14 elseif n >= 15 then return 12 elseif n >= 10 then return 9 elseif n >= 5 then return 5 end return 0 end\nlocal function arrondi(v) return math.floor(v + 0.5) end\nfunction rien() end\nlocal function sac(o) local g = o.getGMNotes() or \"\" if g:find('\"pm\"', 1, true) then local n = notes(o) if n and n.pm then return n end end end\nlocal function afficheSac(b, n)\n  local q = b.getQuantity()\n  b.setName(\"Entrepôt · \" .. (NOMS[n.k] or n.k) .. \" (\" .. n.pm .. \") : \" .. q)\n  local ok, bs = pcall(function() return b.getButtons() end)\n  if ok and bs and #bs > 0 then b.editButton({index = 0, label = tostring(q)}) return q end\n  local sc = 1 / b.getScale().x\n  b.createButton({click_function = \"rien\", function_owner = Global, label = tostring(q), position = {0, 0.25, 0.77},\n    scale = {sc, sc, sc}, width = 340, height = 300, font_size = 260,\n    color = {0.16, 0.14, 0.09}, font_color = {0.96, 0.92, 0.84}, hover_color = {0.16, 0.14, 0.09}, press_color = {0.16, 0.14, 0.09}})\n  return q\nend\nlocal function capital()\n  local sacs, cpt, parts, cartes, livres, prix = {}, {}, {}, {}, {}, nil\n  for _, o in ipairs(getObjects()) do\n    local nm = o.getName()\n    local n = sac(o)\n    if n then sacs[n.pm] = sacs[n.pm] or {}; sacs[n.pm][n.k] = afficheSac(o, n)\n    elseif nm:find(\"^Capital circulant \") then cpt[nm:sub(19)] = o\n    elseif nm:find(\"^Part \") then table.insert(parts, o)\n    elseif nm:find(\"^Carte de navire\") or nm:find(\"^Carte de distillerie\") then table.insert(cartes, o)\n    elseif nm:find(\"^Livres \") then livres[nm:sub(8)] = o\n    elseif nm == \"Prix du castor\" then prix = o end\n  end\n  local p = 0\n  if prix then p = math.max(1, math.min(8, 4 + arrondi((prix.getPosition().x - PRIX4 * F) / (PAS * F)))) end\n  for c, ct in pairs(cpt) do\n    local q = sacs[c] or {}\n    local charges = math.min(10, (q[\"marchandises\"] or 0) + (q[\"eau-de-vie\"] or 0))\n    local np = 0\n    for _, pt in ipairs(parts) do\n      if pt.getName() == \"Part \" .. c then\n        local pp = pt.getPosition()\n        for _, ca in ipairs(cartes) do\n          local bb = ca.getBounds()\n          if math.abs(pp.x - bb.center.x) <= bb.size.x / 2 and math.abs(pp.z - bb.center.z) <= bb.size.z / 2 then np = np + 1 break end\n        end\n      end\n    end\n    local nl = 0\n    if livres[c] then nl = math.max(0, arrondi((livres[c].getPosition().x - LIV0 * F) / (PAS * F))) end\n    local total = tostring(charges + (q[\"castor\"] or 0) * p + np + palier(nl))\n    local cc = COUL[c] or {0.16, 0.14, 0.09}\n    local ok, bs = pcall(function() return ct.getButtons() end)\n    if ok and bs and #bs > 0 then ct.editButton({index = 0, label = total})\n    else\n      local sc = 1 / ct.getScale().x\n      ct.createButton({click_function = \"boutonCapital\", function_owner = Global, label = total, position = {0, 0.25, 0},\n        scale = {sc, sc, sc}, width = 1040, height = 840, font_size = 680, tooltip = \"Recalculer le capital\",\n        color = cc, font_color = {0.96, 0.92, 0.84}, hover_color = cc, press_color = cc})\n    end\n  end\nend\nfunction majCapital() pcall(capital) end\nfunction boutonCapital() majCapital() end\nlocal function majSac(c) Wait.frames(function() if c and not c.isDestroyed() then local n = sac(c) if n then afficheSac(c, n) end end end, 1) end\n-- Cartes Expédition : points d'aimantation du congé (ou du coureur) et des voyageurs, posés quand la carte arrive sur la table.\nlocal EXPSNAP = {grand = {{195.0, 283.0}, {493.0, 283.0}, {695.0, 283.0}, {897.0, 283.0}}, moyen = {{195.0, 283.0}, {560.3, 283.0}, {829.7, 283.0}}, coureur = {{191.0, 424.0}}}\nlocal function snapsExp(o)\n  if not o or o.isDestroyed() or o.type ~= \"Card\" then return end\n  local nm = o.getName()\n  if not nm:find(\"^Expédition \") then return end\n  local pts = nm:find(\"Grand canot\") and EXPSNAP.grand or (nm:find(\"Moyen canot\") and EXPSNAP.moyen or EXPSNAP.coureur)\n  local b = o.getBounds(); local sp = {}\n  for _, p in ipairs(pts) do\n    local w = {b.center.x + (p[1] / 1050 - 0.5) * b.size.x, b.center.y + b.size.y / 2, b.center.z - (p[2] / 750 - 0.5) * b.size.z}\n    table.insert(sp, {position = o.positionToLocal(w), rotation_snap = false})\n  end\n  pcall(function() o.setSnapPoints(sp) end)\nend\nlocal function snapsTous() for _, o in ipairs(getObjects()) do pcall(snapsExp, o) end end\nlocal ancienSortie = onObjectLeaveContainer\nfunction onObjectLeaveContainer(c, o) if ancienSortie then ancienSortie(c, o) end majSac(c)\n  Wait.condition(function() Wait.time(function() pcall(snapsExp, o) end, 0.6) end, function() return o.isDestroyed() or not o.spawning end, 10)\nend\nfunction onObjectEnterContainer(c, o) majSac(c) end\nlocal function menus()\n  for _, o in ipairs(getObjects()) do\n    if o.getName():find(\"^Capital circulant \") then pcall(function() o.addContextMenuItem(\"Recalculer le capital\", function() majCapital() end) end) end\n  end\nend\nWait.time(function() menus(); majCapital(); snapsTous() end, 4)\n",
+  "LuaScript": "-- Castor et eau-de-vie : mise en place (une seule fois) et remise à taille des pièces.\n-- Aucune règle n'est automatisée.\nlocal LW, LD = 70.0, 68.25     -- taille du plan, en unités de plan\nlocal F = 1                 -- facteur plan -> table\nlocal DONE = false\nlocal SNAP = {{-13.226,20.358},{-12.071,20.358},{-10.916,20.358},{-9.761,20.358},{-8.606,20.358},{-7.451,20.358},{-6.296,20.358},{6.567,20.358},{7.722,20.358},{8.877,20.358},{10.032,20.358},{11.187,20.358},{12.342,20.358},{13.497,20.358},{14.652,20.358},{-17.784,27.519},{-16.468,27.519},{-15.152,27.519},{-13.837,27.519},{-12.521,27.519},{-11.205,27.519},{-9.889,27.519},{-8.573,27.519},{18.951,9.561},{20.334,9.561},{21.629,9.561},{22.924,9.561},{24.219,9.561},{25.514,9.561},{18.951,8.161},{20.334,8.161},{21.629,8.161},{22.924,8.161},{24.219,8.161},{25.514,8.161},{18.951,6.761},{20.334,6.761},{21.629,6.761},{22.924,6.761},{24.219,6.761},{25.514,6.761},{18.951,5.361},{20.334,5.361},{21.629,5.361},{22.924,5.361},{24.219,5.361},{25.514,5.361},{22.884,1.748},{24.267,1.748},{25.562,1.748},{22.884,0.348},{24.267,0.348},{25.562,0.348},{22.884,-1.052},{24.267,-1.052},{25.562,-1.052},{22.884,-2.452},{24.267,-2.452},{25.562,-2.452}}   -- points d'accroche : pistes Ravages et Prix du castor, cases Tour, emplacements Mission/Fort\n\nlocal function snaps(top)\n  local pts = {}\n  for _, p in ipairs(SNAP) do table.insert(pts, {position = {p[1] * F, top + 0.2, p[2] * F}, rotation_snap = false}) end\n  pcall(function() Global.setSnapPoints(pts) end)\nend\n\nlocal function notes(o)\n  local ok, n = pcall(JSON.decode, o.getGMNotes() or \"\")\n  if ok and type(n) == \"table\" then return n end\nend\n\nlocal function fit(o, n)\n  if not n.w then return end\n  local b = o.getBoundsNormalized().size\n  if b.x <= 0.001 then return end\n  local s = o.getScale()\n  local kx = n.w * F / b.x\n  local kz = kx\n  if n.d and b.z > 0.001 then kz = n.d * F / b.z end   -- profondeur mesurée et corrigée : aucune pièce étirée\n  if n.y3 then o.setScale({s.x * kx, s.y * kx, s.z * kx}) else o.setScale({s.x * kx, s.y, s.z * kz}) end\nend\n\nlocal function tableInfo()\n  local tw, td, top = LW / 0.97, LD / 0.97, 1.0   -- pas de table TTS : le tapis de jeu sert de table, à l'échelle 1\n  local ok, t = pcall(function() return Tables.getTableObject() end)\n  if ok and t then\n    local b = t.getBounds()\n    if b.size.x > 5 then tw, td, top = b.size.x, b.size.z, b.center.y + b.size.y / 2 end\n  end\n  return tw, td, top\nend\n\nlocal function layout()\n  local tw, td, top = tableInfo()\n  F = math.min(tw * 0.97 / LW, td * 0.97 / LD)\n  local moved = {}\n  for _, o in ipairs(getObjects()) do\n    local n = notes(o)\n    if n and n.x then\n      o.setLock(true)\n      o.setRotation({0, n.ry or 180, n.fz or 0})\n      fit(o, n)\n      o.setPosition({n.x * F, top + (n.h or 0.5), n.z * F})\n      table.insert(moved, {o, n})\n    end\n  end\n  local okH, hands = pcall(function() return Hands.getHands() end)\n  if okH and hands then\n    for _, h in ipairs(hands) do\n      local n = notes(h)\n      if n and n.hand then\n        h.setPosition({n.x * F, top + 2.5, n.z * F})\n        h.setScale({n.hw * F, 5, 4 * F})\n        h.setRotation({0, 0, 0})\n      else\n        h.destruct()                -- mains par défaut de la table : retirées\n      end\n    end\n  end\n  snaps(top)\n  Wait.time(function()\n    for _, m in ipairs(moved) do\n      if not m[1].isDestroyed() and (not m[2].lock or m[2].drop) then m[1].setLock(false) end\n    end\n    Wait.time(function()\n      for _, m2 in ipairs(moved) do if m2[2].drop and not m2[1].isDestroyed() then m2[1].setLock(true) end end\n    end, 3)\n    for _, m in ipairs({}) do\n    end\n    DONE = true\n    broadcastToAll(\"Castor et eau-de-vie : table en place.\", {0.9, 0.8, 0.5})\n  end, 1.5)\nend\n\nlocal function allLoaded()\n  for _, o in ipairs(getObjects()) do\n    if o.loading_custom or o.spawning then return false end\n  end\n  return true\nend\n\nfunction onLoad(state)\n  if state and state ~= \"\" then\n    local ok, d = pcall(JSON.decode, state)\n    if ok and d and d.done then DONE = true; F = d.F or 1; local _, _, top = tableInfo(); snaps(top); return end\n  end\n  Wait.condition(layout, allLoaded, 30, layout)\nend\n\n\n\nfunction onSave()\n  return JSON.encode({done = DONE, F = F})\nend\n\n-- Une pièce qui sort d'un sac ou d'un paquet reprend sa taille.\nfunction onObjectLeaveContainer(container, o)\n  local n = notes(o)\n  if not (n and n.w) then return end\n  if n.face == \"down\" then o.setRotation({0, 180, 180}) elseif n.face == \"up\" then o.setRotation({0, 180, 0}) end\n  Wait.condition(function() if not o.isDestroyed() then fit(o, n) end end,\n    function() return o.isDestroyed() or (not o.spawning and not o.loading_custom) end, 10)\nend\n\n-- Capital circulant (livret) : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres.\n-- Ce qui est en expédition ne compte pas. Les sacs d'entrepôt affichent leur contenu à chaque entrée / sortie ;\n-- le capital se recalcule avec le bouton « Calculer le capital » (haut droite de l'écran) ou clic droit sur le compteur.\nlocal LIV0, PRIX4, PAS = -21.073, 10.011, 1.155\nlocal COUL = {[\"rouge\"] = {0.659, 0.196, 0.165}, [\"bleu\"] = {0.184, 0.369, 0.557}, [\"vert\"] = {0.306, 0.478, 0.173}}\nlocal NOMS = {[\"marchandises\"] = \"Marchandises\", [\"eau-de-vie\"] = \"Eau-de-vie\", [\"moyen canot\"] = \"Moyens canots\", [\"grand canot\"] = \"Grands canots\", [\"castor\"] = \"Fourrures\"}\nlocal function palier(n) if n >= 25 then return 15 elseif n >= 20 then return 14 elseif n >= 15 then return 12 elseif n >= 10 then return 9 elseif n >= 5 then return 5 end return 0 end\nlocal function arrondi(v) return math.floor(v + 0.5) end\nfunction rien() end\nlocal function sac(o) local g = o.getGMNotes() or \"\" if g:find('\"pm\"', 1, true) then local n = notes(o) if n and n.pm then return n end end end\nlocal function afficheSac(b, n)\n  local q = b.getQuantity()\n  b.setName(\"Entrepôt · \" .. (NOMS[n.k] or n.k) .. \" (\" .. n.pm .. \") : \" .. q)\n  local ok, bs = pcall(function() return b.getButtons() end)\n  if ok and bs and #bs > 0 then b.editButton({index = 0, label = tostring(q)}) return q end\n  local sc = 1 / b.getScale().x\n  b.createButton({click_function = \"rien\", function_owner = Global, label = tostring(q), position = {0, 0.25, 0.77},\n    scale = {sc, sc, sc}, width = 340, height = 300, font_size = 260,\n    color = {0.16, 0.14, 0.09}, font_color = {0.96, 0.92, 0.84}, hover_color = {0.16, 0.14, 0.09}, press_color = {0.16, 0.14, 0.09}})\n  return q\nend\nlocal function capital()\n  local sacs, cpt, parts, cartes, livres, prix = {}, {}, {}, {}, {}, nil\n  for _, o in ipairs(getObjects()) do\n    local nm = o.getName()\n    local n = sac(o)\n    if n then sacs[n.pm] = sacs[n.pm] or {}; sacs[n.pm][n.k] = afficheSac(o, n)\n    elseif nm:find(\"^Capital circulant \") then cpt[nm:sub(19)] = o\n    elseif nm:find(\"^Part \") then table.insert(parts, o)\n    elseif nm:find(\"^Carte de navire\") or nm:find(\"^Carte de distillerie\") then table.insert(cartes, o)\n    elseif nm:find(\"^Livres \") then livres[nm:sub(8)] = o\n    elseif nm == \"Prix du castor\" then prix = o end\n  end\n  local p = 0\n  if prix then p = math.max(1, math.min(8, 4 + arrondi((prix.getPosition().x - PRIX4 * F) / (PAS * F)))) end\n  for c, ct in pairs(cpt) do\n    local q = sacs[c] or {}\n    local charges = math.min(10, (q[\"marchandises\"] or 0) + (q[\"eau-de-vie\"] or 0))\n    local np = 0\n    for _, pt in ipairs(parts) do\n      if pt.getName() == \"Part \" .. c then\n        local pp = pt.getPosition()\n        for _, ca in ipairs(cartes) do\n          local bb = ca.getBounds()\n          if math.abs(pp.x - bb.center.x) <= bb.size.x / 2 and math.abs(pp.z - bb.center.z) <= bb.size.z / 2 then np = np + 1 break end\n        end\n      end\n    end\n    local nl = 0\n    if livres[c] then nl = math.max(0, arrondi((livres[c].getPosition().x - LIV0 * F) / (PAS * F))) end\n    local total = tostring(charges + (q[\"castor\"] or 0) * p + np + palier(nl))\n    local cc = COUL[c] or {0.16, 0.14, 0.09}\n    local ok, bs = pcall(function() return ct.getButtons() end)\n    if ok and bs and #bs > 0 then ct.editButton({index = 0, label = total})\n    else\n      local sc = 1 / ct.getScale().x\n      ct.createButton({click_function = \"boutonCapital\", function_owner = Global, label = total, position = {0, 0.25, 0},\n        scale = {sc, sc, sc}, width = 0, height = 0, font_size = 600, tooltip = \"Recalculer le capital\",\n        color = cc, font_color = {1, 1, 1}, hover_color = cc, press_color = cc})\n    end\n  end\nend\nfunction majCapital() pcall(capital) end\nfunction boutonCapital() majCapital() end\nlocal function majSac(c) Wait.frames(function() if c and not c.isDestroyed() then local n = sac(c) if n then afficheSac(c, n) end end end, 1) end\n-- Cartes Expédition : points d'aimantation du congé (ou du coureur) et des voyageurs, posés quand la carte arrive sur la table.\nlocal EXPSNAP = {grand = {{195.0, 283.0}, {493.0, 283.0}, {695.0, 283.0}, {897.0, 283.0}, {165.0, 585.5}, {345.0, 585.5}, {525.0, 585.5}, {705.0, 585.5}, {885.0, 585.5}}, moyen = {{195.0, 283.0}, {560.3, 283.0}, {829.7, 283.0}, {345.0, 585.5}, {525.0, 585.5}, {705.0, 585.5}}, coureur = {{191.0, 424.0}}}\nlocal function snapsExp(o)\n  if not o or o.isDestroyed() or o.type ~= \"Card\" then return end\n  local nm = o.getName()\n  if not nm:find(\"^Expédition \") then return end\n  local pts = nm:find(\"Grand canot\") and EXPSNAP.grand or (nm:find(\"Moyen canot\") and EXPSNAP.moyen or EXPSNAP.coureur)\n  local b = o.getBounds(); local sp = {}\n  for _, p in ipairs(pts) do\n    local w = {b.center.x + (p[1] / 1050 - 0.5) * b.size.x, b.center.y + b.size.y / 2, b.center.z - (p[2] / 750 - 0.5) * b.size.z}\n    table.insert(sp, {position = o.positionToLocal(w), rotation_snap = false})\n  end\n  pcall(function() o.setSnapPoints(sp) end)\nend\nlocal function snapsTous() for _, o in ipairs(getObjects()) do pcall(snapsExp, o) end end\nlocal function snapsW()\n  for _, o in ipairs(getObjects()) do\n    local g = o.getGMNotes() or \"\"\n    if g:find('\"snapw\"', 1, true) then\n      local n = notes(o)\n      if n and n.snapw then\n        local p, sp = o.getPosition(), {}\n        local bb = o.getBounds(); local top = bb.center.y + bb.size.y / 2\n        for _, v in ipairs(n.snapw) do\n          table.insert(sp, {position = o.positionToLocal({p.x + v[1] * F, top, p.z + v[2] * F}), rotation = {0, 0, 0}, rotation_snap = v[3] == 1})\n        end\n        pcall(function() o.setSnapPoints(sp) end)\n      end\n    end\n  end\nend\nlocal ancienSortie = onObjectLeaveContainer\nfunction onObjectLeaveContainer(c, o) if ancienSortie then ancienSortie(c, o) end majSac(c)\n  Wait.condition(function() Wait.time(function() pcall(snapsExp, o) end, 0.6) end, function() return o.isDestroyed() or not o.spawning end, 10)\nend\nfunction onObjectEnterContainer(c, o) majSac(c) end\nlocal function menus()\n  for _, o in ipairs(getObjects()) do\n    if o.getName():find(\"^Capital circulant \") then pcall(function() o.addContextMenuItem(\"Recalculer le capital\", function() majCapital() end) end) end\n  end\nend\nWait.time(function() menus(); majCapital(); snapsTous(); snapsW() end, 4)\n",
   "LuaScriptState": "",
   "XmlUI": "<Button id=\"capital\" onClick=\"boutonCapital\" rectAlignment=\"UpperRight\" offsetXY=\"-20 -70\" width=\"200\" height=\"40\" fontSize=\"18\" color=\"#2A2418\" textColor=\"#F4EBD6\">Calculer le capital</Button>",
   "ObjectStates": [
@@ -87,7 +87,7 @@
       },
       "Nickname": "Plateau du joueur rouge",
       "Description": "",
-      "GMNotes": "{\"w\": 16.275, \"x\": -20.86, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"rouge\", \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 16.275, \"x\": -20.86, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"rouge\", \"snapw\": [[-5.933, 1.199, 1], [-1.977, 1.199, 1], [1.977, 1.199, 1], [5.933, 1.199, 1], [3.062, 4.694, 0], [3.78, 4.694, 0], [4.497, 4.694, 0], [5.215, 4.694, 0], [5.933, 4.694, 0], [6.65, 4.694, 0], [7.367, 4.694, 0]], \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -110,106 +110,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.729,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": 0.243,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": -0.243,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": -0.729,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": -0.3763,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.4645,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.5527,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.6409,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.729,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.8172,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.9054,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "1e70fe",
@@ -227,7 +128,7 @@
       },
       "Nickname": "Plateau du joueur bleu",
       "Description": "",
-      "GMNotes": "{\"w\": 16.275, \"x\": 0.629, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"bleu\", \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 16.275, \"x\": 0.629, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"bleu\", \"snapw\": [[-5.933, 1.199, 1], [-1.977, 1.199, 1], [1.977, 1.199, 1], [5.933, 1.199, 1], [3.062, 4.694, 0], [3.78, 4.694, 0], [4.497, 4.694, 0], [5.215, 4.694, 0], [5.933, 4.694, 0], [6.65, 4.694, 0], [7.367, 4.694, 0]], \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -250,106 +151,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.729,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": 0.243,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": -0.243,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": -0.729,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": -0.3763,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.4645,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.5527,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.6409,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.729,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.8172,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.9054,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "a9bc4c",
@@ -367,7 +169,7 @@
       },
       "Nickname": "Plateau du joueur vert",
       "Description": "",
-      "GMNotes": "{\"w\": 16.275, \"x\": 22.12, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"vert\", \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 16.275, \"x\": 22.12, \"z\": -27.825, \"h\": 0.15, \"d\": 10.5, \"cap\": \"vert\", \"snapw\": [[-5.933, 1.199, 1], [-1.977, 1.199, 1], [1.977, 1.199, 1], [5.933, 1.199, 1], [3.062, 4.694, 0], [3.78, 4.694, 0], [4.497, 4.694, 0], [5.215, 4.694, 0], [5.933, 4.694, 0], [6.65, 4.694, 0], [7.367, 4.694, 0]], \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -390,106 +192,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.729,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": 0.243,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": -0.243,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": -0.729,
-            "y": 0.05,
-            "z": -0.1473
-          },
-          "Rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Position": {
-            "x": -0.3763,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.4645,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.5527,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.6409,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.729,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.8172,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        },
-        {
-          "Position": {
-            "x": -0.9054,
-            "y": 0.05,
-            "z": -0.5769
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "d37a68",
@@ -5533,7 +5236,7 @@
       },
       "Nickname": "Carte de navire · L’Aigle d’Or",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5556,44 +5259,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.1283,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.095,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.3183,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.5433,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7667,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "c9bf04",
@@ -5652,7 +5318,7 @@
       },
       "Nickname": "Carte de navire · Le Courageux",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5675,44 +5341,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.1283,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.095,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.3183,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.5433,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7667,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "d1ce16",
@@ -5771,7 +5400,7 @@
       },
       "Nickname": "Carte de navire · Le Jardin de Hollande",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5794,44 +5423,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.1283,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.095,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.3183,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.5433,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7667,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "c58810",
@@ -5890,7 +5482,7 @@
       },
       "Nickname": "Carte de navire · Le Saint-Jean-Baptiste",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5913,44 +5505,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.1283,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.095,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.3183,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.5433,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7667,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "99e8b5",
@@ -6009,7 +5564,7 @@
       },
       "Nickname": "Carte de navire · La Famille",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -6032,44 +5587,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.1283,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.095,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.3183,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.5433,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7667,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "d0d6f3",
@@ -6128,7 +5646,7 @@
       },
       "Nickname": "Carte de navire · Le Vieux Siméon",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -6151,44 +5669,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.1283,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.095,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.3183,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.5433,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7667,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "dd0b92",
@@ -6347,12 +5828,12 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_rouge.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_rouge_30.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_rouge.png?v45",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_rouge_30.png?v45",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
-          "Type": 2,
+          "Type": 3,
           "Thickness": 0.12,
           "Stackable": false,
           "Stretch": false
@@ -6388,7 +5869,7 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_carre.png?v45",
         "ImageSecondaryURL": "",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
@@ -6429,12 +5910,12 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_bleu.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_bleu_30.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_bleu.png?v45",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_bleu_30.png?v45",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
-          "Type": 2,
+          "Type": 3,
           "Thickness": 0.12,
           "Stackable": false,
           "Stretch": false
@@ -6470,7 +5951,7 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_carre.png?v45",
         "ImageSecondaryURL": "",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
@@ -6511,12 +5992,12 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_vert.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_vert_30.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_vert.png?v45",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_vert_30.png?v45",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
-          "Type": 2,
+          "Type": 3,
           "Thickness": 0.12,
           "Stackable": false,
           "Stretch": false
@@ -6552,7 +6033,7 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_carre.png?v45",
         "ImageSecondaryURL": "",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
@@ -7217,7 +6698,7 @@
           },
           "Nickname": "Guide",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7258,7 +6739,7 @@
           },
           "Nickname": "Guide",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7299,7 +6780,7 @@
           },
           "Nickname": "Guide",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7340,7 +6821,7 @@
           },
           "Nickname": "Guide",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7381,7 +6862,7 @@
           },
           "Nickname": "Guide",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7422,7 +6903,7 @@
           },
           "Nickname": "Guide",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7508,7 +6989,7 @@
           },
           "Nickname": "Interprète",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7549,7 +7030,7 @@
           },
           "Nickname": "Interprète",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7590,7 +7071,7 @@
           },
           "Nickname": "Interprète",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7631,7 +7112,7 @@
           },
           "Nickname": "Interprète",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7672,7 +7153,7 @@
           },
           "Nickname": "Interprète",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7713,7 +7194,7 @@
           },
           "Nickname": "Interprète",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7799,7 +7280,7 @@
           },
           "Nickname": "Hivernant",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7840,7 +7321,7 @@
           },
           "Nickname": "Hivernant",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7881,7 +7362,7 @@
           },
           "Nickname": "Hivernant",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7922,7 +7403,7 @@
           },
           "Nickname": "Hivernant",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -7963,7 +7444,7 @@
           },
           "Nickname": "Hivernant",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -8004,7 +7485,7 @@
           },
           "Nickname": "Hivernant",
           "Description": "",
-          "GMNotes": "{\"w\": 0.7, \"d\": 1.008}",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -12396,9 +11877,9 @@
       "Description": "",
       "GMNotes": "{\"w\": 0.63, \"x\": -20.107, \"z\": -23.24, \"h\": 0.5, \"d\": 0.63}",
       "ColorDiffuse": {
-        "r": 0.6588235294117647,
-        "g": 0.19607843137254902,
-        "b": 0.16470588235294117
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
@@ -12407,7 +11888,7 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_oeil.png?v43",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_oeil_rouge.png?v45",
         "ImageSecondaryURL": "",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
@@ -12775,7 +12256,7 @@
         "scaleY": 1.0,
         "scaleZ": 2.17
       },
-      "Nickname": "Expéditions · Petit canot (coureurs des bois) (rouge)",
+      "Nickname": "Expéditions · Coureurs des bois (rouge)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
       "GMNotes": "{\"w\": 2.17, \"x\": -10.762, \"z\": -28.665, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
@@ -14049,9 +13530,9 @@
       "Description": "",
       "GMNotes": "{\"w\": 0.63, \"x\": 1.383, \"z\": -23.24, \"h\": 0.5, \"d\": 0.63}",
       "ColorDiffuse": {
-        "r": 0.1843137254901961,
-        "g": 0.3686274509803922,
-        "b": 0.5568627450980392
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
@@ -14060,7 +13541,7 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_oeil.png?v43",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_oeil_bleu.png?v45",
         "ImageSecondaryURL": "",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
@@ -14428,7 +13909,7 @@
         "scaleY": 1.0,
         "scaleZ": 2.17
       },
-      "Nickname": "Expéditions · Petit canot (coureurs des bois) (bleu)",
+      "Nickname": "Expéditions · Coureurs des bois (bleu)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
       "GMNotes": "{\"w\": 2.17, \"x\": 10.728, \"z\": -28.665, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
@@ -15702,9 +15183,9 @@
       "Description": "",
       "GMNotes": "{\"w\": 0.63, \"x\": 22.873, \"z\": -23.24, \"h\": 0.5, \"d\": 0.63}",
       "ColorDiffuse": {
-        "r": 0.3058823529411765,
-        "g": 0.47843137254901963,
-        "b": 0.17254901960784313
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
@@ -15713,7 +15194,7 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_oeil.png?v43",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_oeil_vert.png?v45",
         "ImageSecondaryURL": "",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
@@ -16081,7 +15562,7 @@
         "scaleY": 1.0,
         "scaleZ": 2.17
       },
-      "Nickname": "Expéditions · Petit canot (coureurs des bois) (vert)",
+      "Nickname": "Expéditions · Coureurs des bois (vert)",
       "Description": "Cartes Expédition A, B, C, dans cet ordre.",
       "GMNotes": "{\"w\": 2.17, \"x\": 32.218, \"z\": -28.665, \"h\": 0.6, \"y3\": true, \"d\": 1.55, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
@@ -16279,7 +15760,7 @@
       },
       "Nickname": "Carte de distillerie · Fonds-Saint-Jacques",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16302,37 +15783,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.0683,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.2,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.465,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7333,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "3e8f95",
@@ -16391,7 +15842,7 @@
       },
       "Nickname": "Carte de distillerie · La Lise",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16414,37 +15865,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.0683,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.2,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.465,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7333,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "70b5ef",
@@ -16503,7 +15924,7 @@
       },
       "Nickname": "Carte de distillerie · Petit-Goâve",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16526,37 +15947,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.0683,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.2,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.465,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7333,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "26c71b",
@@ -16615,7 +16006,7 @@
       },
       "Nickname": "Carte de distillerie · Saint-Louis",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16638,37 +16029,7 @@
           "Stackable": false,
           "Stretch": false
         }
-      },
-      "AttachedSnapPoints": [
-        {
-          "Position": {
-            "x": 0.0683,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.2,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.465,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        },
-        {
-          "Position": {
-            "x": -0.7333,
-            "y": 0.05,
-            "z": 0.0533
-          }
-        }
-      ]
+      }
     },
     {
       "GUID": "566d21",
@@ -19798,13 +19159,13 @@
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 0.6,
-        "scaleY": 0.6,
-        "scaleZ": 0.6
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
       },
       "Nickname": "Capital circulant rouge",
       "Description": "Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Bouton « Calculer le capital » (haut droite) ou clic droit > Recalculer le capital.",
-      "GMNotes": "{\"w\": 0.6, \"x\": -14.927, \"z\": -31.841, \"h\": 0.4, \"y3\": true, \"lock\": true, \"capd\": \"rouge\", \"drop\": true}",
+      "GMNotes": "{\"w\": 1.05, \"x\": -14.927, \"z\": -31.841, \"h\": 0.4, \"y3\": true, \"lock\": true, \"capd\": \"rouge\", \"drop\": true}",
       "ColorDiffuse": {
         "r": 0.6588235294117647,
         "g": 0.19607843137254902,
@@ -19817,8 +19178,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomMesh": {
-        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_part.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_carre.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_carre.png?v45",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -19838,13 +19199,13 @@
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 0.6,
-        "scaleY": 0.6,
-        "scaleZ": 0.6
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
       },
       "Nickname": "Capital circulant bleu",
       "Description": "Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Bouton « Calculer le capital » (haut droite) ou clic droit > Recalculer le capital.",
-      "GMNotes": "{\"w\": 0.6, \"x\": 6.562, \"z\": -31.841, \"h\": 0.4, \"y3\": true, \"lock\": true, \"capd\": \"bleu\", \"drop\": true}",
+      "GMNotes": "{\"w\": 1.05, \"x\": 6.562, \"z\": -31.841, \"h\": 0.4, \"y3\": true, \"lock\": true, \"capd\": \"bleu\", \"drop\": true}",
       "ColorDiffuse": {
         "r": 0.1843137254901961,
         "g": 0.3686274509803922,
@@ -19857,8 +19218,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomMesh": {
-        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_part.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_carre.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_carre.png?v45",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -19878,13 +19239,13 @@
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 0.6,
-        "scaleY": 0.6,
-        "scaleZ": 0.6
+        "scaleX": 1.05,
+        "scaleY": 1.05,
+        "scaleZ": 1.05
       },
       "Nickname": "Capital circulant vert",
       "Description": "Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Bouton « Calculer le capital » (haut droite) ou clic droit > Recalculer le capital.",
-      "GMNotes": "{\"w\": 0.6, \"x\": 28.053, \"z\": -31.841, \"h\": 0.4, \"y3\": true, \"lock\": true, \"capd\": \"vert\", \"drop\": true}",
+      "GMNotes": "{\"w\": 1.05, \"x\": 28.053, \"z\": -31.841, \"h\": 0.4, \"y3\": true, \"lock\": true, \"capd\": \"vert\", \"drop\": true}",
       "ColorDiffuse": {
         "r": 0.3058823529411765,
         "g": 0.47843137254901963,
@@ -19897,8 +19258,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomMesh": {
-        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_part.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_disc.png?v38",
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_carre.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/tok_carre.png?v45",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
