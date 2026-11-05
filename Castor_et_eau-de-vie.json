@@ -5236,7 +5236,7 @@
       },
       "Nickname": "Carte de navire · L’Aigle d’Or",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5318,7 +5318,7 @@
       },
       "Nickname": "Carte de navire · Le Courageux",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 10.675, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5400,7 +5400,7 @@
       },
       "Nickname": "Carte de navire · Le Jardin de Hollande",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5482,7 +5482,7 @@
       },
       "Nickname": "Carte de navire · Le Saint-Jean-Baptiste",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 8.225, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5564,7 +5564,7 @@
       },
       "Nickname": "Carte de navire · La Famille",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5646,7 +5646,7 @@
       },
       "Nickname": "Carte de navire · Le Vieux Siméon",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 5.775, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.269, -0.112, 0], [0.199, -0.112, 0], [0.669, -0.112, 0], [1.141, -0.112, 0], [1.61, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5803,9 +5803,9 @@
       "GUID": "b1b026",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": -21.137,
+        "posX": -21.073,
         "posY": 2.0,
-        "posZ": -10.855,
+        "posZ": -10.918,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -5815,7 +5815,7 @@
       },
       "Nickname": "Livres rouge",
       "Description": "",
-      "GMNotes": "{\"w\": 0.49, \"x\": -21.137, \"z\": -10.855, \"h\": 0.5, \"d\": 0.49}",
+      "GMNotes": "{\"w\": 1.0, \"x\": -21.073, \"z\": -10.918, \"h\": 0.5, \"d\": 1.0}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5828,12 +5828,12 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_rouge.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_rouge_30.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_rouge.png?v47",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_rouge_30.png?v47",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
-          "Type": 2,
+          "Type": 3,
           "Thickness": 0.12,
           "Stackable": false,
           "Stretch": false
@@ -5885,9 +5885,9 @@
       "GUID": "111c93",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": -20.717,
+        "posX": -21.073,
         "posY": 2.0,
-        "posZ": -10.855,
+        "posZ": -10.918,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -5897,7 +5897,7 @@
       },
       "Nickname": "Livres bleu",
       "Description": "",
-      "GMNotes": "{\"w\": 0.49, \"x\": -20.717, \"z\": -10.855, \"h\": 0.5, \"d\": 0.49}",
+      "GMNotes": "{\"w\": 1.0, \"x\": -21.073, \"z\": -10.918, \"h\": 0.75, \"d\": 1.0}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5910,12 +5910,12 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_bleu.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/disc_livres_bleu_30.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_bleu.png?v47",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_bleu_30.png?v47",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
-          "Type": 2,
+          "Type": 3,
           "Thickness": 0.12,
           "Stackable": false,
           "Stretch": false
@@ -5967,9 +5967,9 @@
       "GUID": "4503b5",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": -21.137,
+        "posX": -21.073,
         "posY": 2.0,
-        "posZ": -11.345,
+        "posZ": -10.918,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -5979,7 +5979,7 @@
       },
       "Nickname": "Livres vert",
       "Description": "",
-      "GMNotes": "{\"w\": 0.49, \"x\": -21.137, \"z\": -11.345, \"h\": 0.5, \"d\": 0.49}",
+      "GMNotes": "{\"w\": 1.0, \"x\": -21.073, \"z\": -10.918, \"h\": 1.0, \"d\": 1.0}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -5992,8 +5992,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_vert.png?v46",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_vert_30.png?v46",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_vert.png?v47",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sq_livres_vert_30.png?v47",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -15760,7 +15760,7 @@
       },
       "Nickname": "Carte de distillerie · Fonds-Saint-Jacques",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -15842,7 +15842,7 @@
       },
       "Nickname": "Carte de distillerie · La Lise",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 3.325, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -15924,7 +15924,7 @@
       },
       "Nickname": "Carte de distillerie · Petit-Goâve",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 31.085, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16006,7 +16006,7 @@
       },
       "Nickname": "Carte de distillerie · Saint-Louis",
       "Description": "",
-      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
+      "GMNotes": "{\"w\": 4.2, \"x\": 35.985, \"z\": 0.875, \"h\": 0.5, \"d\": 2.24, \"snapw\": [[-1.302, -0.098, 1], [-0.144, -0.112, 0], [0.42, -0.112, 0], [0.977, -0.112, 0], [1.54, -0.112, 0]]}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,

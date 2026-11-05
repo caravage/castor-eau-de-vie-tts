@@ -185,7 +185,7 @@ for q in objs:
     if nk.startswith(('Carte de navire','Carte de distillerie')):
         xs_=[523,657,791,926,1060] if 'navire' in nk else [559,720,879,1040]
         q.pop('AttachedSnapPoints',None)
-        n=json.loads(q['GMNotes']); n['snapw']=[[round((px/1200-0.5)*4.2,3),round(-(352/640-0.5)*2.24,3),0] for px in xs_]
+        n=json.loads(q['GMNotes']); n['snapw']=[[round((228/1200-0.5)*4.2,3),round(-(348/640-0.5)*2.24,3),1]]+[[round((px/1200-0.5)*4.2,3),round(-(352/640-0.5)*2.24,3),0] for px in xs_]
         q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
 # 5m. jetons de soupçon : œil blanc (celui de la carte « +1 soupçon ») sur fond de couleur
 def oeil(col):
@@ -219,9 +219,15 @@ with sync_playwright() as pw:
                 f"font:italic 78px \"IM Fell English\";color:#F4EBD6;letter-spacing:-2px'>{txt}</div></body></html>")
             pg.evaluate('document.fonts.ready'); pg.wait_for_timeout(800); pg.screenshot(path=R+'img/v18/'+fn,omit_background=True)
     br.close()
+# marqueurs Livres : les trois carrés, de la taille d'une case de la piste (1,0), empilés sur la case 0
+tt=[o for o in objs if o.get('Nickname')=='Table du castor'][0]['Transform']; TWd=2*tt['scaleX']; Ltab=tt['posX']-TWd/2; Ttab=tt['posZ']+TWd*4133/5600/2; kk=5600/TWd
+X0,Z0=round(Ltab+1096.9/kk,3),round(Ttab-3725/kk,3)
+for i,c in enumerate(COLS):
     for q in objs:
         if q.get('Nickname')=='Livres '+c:
-            q['CustomImage']['ImageURL']=GH+f'sq_livres_{c}.png?v46'; q['CustomImage']['ImageSecondaryURL']=GH+f'sq_livres_{c}_30.png?v46'; q['CustomImage']['CustomTile']['Type']=3
+            q['CustomImage']['ImageURL']=GH+f'sq_livres_{c}.png?v47'; q['CustomImage']['ImageSecondaryURL']=GH+f'sq_livres_{c}_30.png?v47'; q['CustomImage']['CustomTile']['Type']=3
+            q['Transform'].update(posX=X0,posZ=Z0)
+            n=json.loads(q['GMNotes']); n.update(w=1.0,d=1.0,x=X0,z=Z0,h=round(0.5+0.25*i,2)); q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
 carre((255,255,255,255)).save(R+'img/v18/tok_carre.png')
 for q in objs:
     if (q.get('Nickname') or '').startswith('Crédit '): q['CustomImage']['ImageURL']=GH+'tok_carre.png?v45'
