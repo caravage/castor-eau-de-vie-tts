@@ -248,6 +248,14 @@ voy(objs)
 for q in objs:
     nk=q.get('Nickname') or ''
     if nk.startswith('Expéditions · Petit canot (coureurs des bois)'): q['Nickname']=nk.replace('Petit canot (coureurs des bois)','Coureurs des bois')
+# 5q. congés et coureurs des bois aimantables (cases des cartes Expédition) ; cartes sans nom au survol
+def flags(os_):
+    for q in os_:
+        nk=q.get('Nickname') or ''
+        if q['Name']=='Custom_Tile' and (nk.startswith('Congé') or nk in ('Veuve d\'officier','Gentilhomme','Seigneur','Fabrique Notre-Dame',"Faveur de l'intendant",'Fournisseur de La Rochelle','Fournisseur de Bordeaux','Coureur des bois')): q['Snap']=True
+        if q['Name'] in ('Card','Deck'): q['Tooltip']=False
+        flags(q.get('ContainedObjects',[]))
+flags(objs)
 # 6. cartes au format 63,5 x 88
 def cards(os_):
     for q in os_:
@@ -286,13 +294,15 @@ local function afficheSac(b, n)
   return q
 end
 local function capital()
-  local sacs, cpt, parts, cartes, livres, prix = {{}}, {{}}, {{}}, {{}}, {{}}, nil
+  local sacs, cpt, parts, cartes, livres, prix, jch, exps = {{}}, {{}}, {{}}, {{}}, {{}}, nil, {{}}, {{}}
   for _, o in ipairs(getObjects()) do
     local nm = o.getName()
     local n = sac(o)
     if n then sacs[n.pm] = sacs[n.pm] or {{}}; sacs[n.pm][n.k] = afficheSac(o, n)
     elseif nm:find("^Capital circulant ") then cpt[nm:sub(19)] = o
     elseif nm:find("^Part ") then table.insert(parts, o)
+    elseif (nm:find("^Marchandise ") or nm:find("^Eau%-de%-vie ")) and o.getQuantity() == -1 then table.insert(jch, o)
+    elseif nm:find("^Expédition ") and o.type == "Card" then table.insert(exps, o)
     elseif nm:find("^Carte de navire") or nm:find("^Carte de distillerie") then table.insert(cartes, o)
     elseif nm:find("^Livres ") then livres[nm:sub(8)] = o
     elseif nm == "Prix du castor" then prix = o end
@@ -301,7 +311,17 @@ local function capital()
   if prix then p = math.max(1, math.min(8, 4 + arrondi((prix.getPosition().x - PRIX4 * F) / (PAS * F)))) end
   for c, ct in pairs(cpt) do
     local q = sacs[c] or {{}}
-    local charges = math.min(10, (q["marchandises"] or 0) + (q["eau-de-vie"] or 0))
+    local transit = 0   -- charges du joueur hors entrepôt et hors expédition : navires, rades
+    for _, j in ipairs(jch) do
+      local nj = j.getName()
+      if nj == "Marchandise " .. c or nj == "Eau-de-vie " .. c then
+        local jp, dedans = j.getPosition(), false
+        for _, e in ipairs(exps) do local eb = e.getBounds()
+          if math.abs(jp.x - eb.center.x) <= eb.size.x / 2 and math.abs(jp.z - eb.center.z) <= eb.size.z / 2 then dedans = true break end end
+        if not dedans then transit = transit + 1 end
+      end
+    end
+    local charges = math.min(10, (q["marchandises"] or 0) + (q["eau-de-vie"] or 0) + transit)
     local np = 0
     for _, pt in ipairs(parts) do
       if pt.getName() == "Part " .. c then
@@ -334,7 +354,7 @@ function majCapital() pcall(capital) end
 function boutonCapital() majCapital() end
 local function majSac(c) Wait.frames(function() if c and not c.isDestroyed() then local n = sac(c) if n then afficheSac(c, n) end end end, 1) end
 -- Cartes Expédition : points d'aimantation du congé (ou du coureur) et des voyageurs, posés quand la carte arrive sur la table.
-local EXPSNAP = {{grand = {{{{195.0, 283.0}}, {{493.0, 283.0}}, {{695.0, 283.0}}, {{897.0, 283.0}}, {{165.0, 585.5}}, {{345.0, 585.5}}, {{525.0, 585.5}}, {{705.0, 585.5}}, {{885.0, 585.5}}}}, moyen = {{{{195.0, 283.0}}, {{560.3, 283.0}}, {{829.7, 283.0}}, {{345.0, 585.5}}, {{525.0, 585.5}}, {{705.0, 585.5}}}}, coureur = {{{{191.0, 424.0}}}}}}
+local EXPSNAP = {{grand = {{{{195.0, 283.0}}, {{493.0, 283.0}}, {{695.0, 283.0}}, {{897.0, 283.0}}}}, moyen = {{{{195.0, 283.0}}, {{560.3, 283.0}}, {{829.7, 283.0}}}}, coureur = {{{{191.0, 424.0}}}}}}
 local function snapsExp(o)
   if not o or o.isDestroyed() or o.type ~= "Card" then return end
   local nm = o.getName()
