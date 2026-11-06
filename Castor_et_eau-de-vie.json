@@ -223,8 +223,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17r.png?v56",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17r.png?v56",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17r.png?v60",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17r.png?v60",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -19839,7 +19839,7 @@
         }
       ],
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cdice_zones.png?v59",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cdice_zones.png?v60",
         "ImageSecondaryURL": "",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
