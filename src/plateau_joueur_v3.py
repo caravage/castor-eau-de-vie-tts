@@ -148,7 +148,7 @@ for (x0,y0,x1,y1) in ((31,579,389,1128),(32,1192,388,1680),(32,1765,388,2252),(3
 tb.save(R+'img/v18/table_v17r.png')
 for q in objs:
     if q.get('Nickname')=='Table du castor':
-        for kk in ('ImageURL','ImageSecondaryURL'): q['CustomImage'][kk]=GH+'table_v17r.png?v52'
+        for kk in ('ImageURL','ImageSecondaryURL'): q['CustomImage'][kk]=GH+'table_v17r.png?v53'
 # 5j. congés v41 (taille du jeton coureur des bois, 1,4) et cartes Expédition v4
 import re as _re
 def maj(os_):
@@ -270,7 +270,7 @@ pl=copy.deepcopy([q for q in objs if q.get('Nickname')=='Plateau du joueur rouge
 pl['GUID']=guid('ferme'); pl['Nickname']='Ferme du castor'; pl['Description']=''
 pl['CustomImage'].update(ImageURL=GH+'ferme_recto.png?v50',ImageSecondaryURL=GH+'ferme_recto.png?v50')
 fw=lambda px,py:[round((px-FW/2)/FPX,3),round(-(py-FH/2)/FPX,3)]
-pl['GMNotes']=json.dumps({'w':FW/FPX,'d':FH/FPX,'x':FX,'z':FZ,'h':0.15,'lock':True,'drop':True,
+pl['GMNotes']=json.dumps({'w':FW/FPX,'d':FH/FPX,'x':FX,'z':FZ,'h':0.15,'lock':True,'drop':True,'sg':1,
     'snapw':[fw(*c)+[0] for c in fg['pfr']]+[fw(*c)+[0] for c in fg['pol']]+[fw(*c)+[0] for c in fg['pro']]},ensure_ascii=False,separators=(', ',': '))
 pl['Transform'].update(posX=FX,posZ=FZ,scaleX=FW/FPX/2,scaleZ=FW/FPX/2); pl['Locked']=True; objs.append(pl)
 mk=[q for q in objs if q.get('Nickname')=='Prix du castor'][0]
@@ -398,6 +398,16 @@ local function snapsW()
       local n = notes(o)
       if n and n.snapw then
         local p, sp = o.getPosition(), {{}}
+        if n.sg then
+          local gs = Global.getSnapPoints() or {{}}
+          local y = o.getBounds().center.y + o.getBounds().size.y / 2
+          for _, v in ipairs(n.snapw) do
+            local x, z, ok = p.x + v[1] * F, p.z + v[2] * F, true
+            for _, q in ipairs(gs) do if math.abs(q.position.x - x) < 0.05 and math.abs(q.position.z - z) < 0.05 then ok = false end end
+            if ok then table.insert(gs, {{position = {{x, y, z}}, rotation = {{0, 0, 0}}, rotation_snap = false}}) end
+          end
+          pcall(function() o.setSnapPoints({{}}) end); Global.setSnapPoints(gs)
+        else
         local bb = o.getBounds(); local top = bb.center.y + bb.size.y / 2
         for _, v in ipairs(n.snapw) do
           local lp = o.positionToLocal({{p.x + v[1] * F, top, p.z + v[2] * F}})
@@ -405,6 +415,7 @@ local function snapsW()
           table.insert(sp, {{position = lp, rotation = {{0, 0, 0}}, rotation_snap = v[3] == 1}})
         end
         pcall(function() o.setSnapPoints(sp) end)
+        end
       end
     end
   end
@@ -434,8 +445,8 @@ def lt(l):
     return '{nom = "%s", sac = "%s", %sslots = {%s}}'%(l['nom'],l['sac'],fm,sl)
 SETUP_LUA="""
 
--- Mise en place du plateau (bouton en haut à gauche) : chaque lieu ouvert reçoit 1 tuile visible,
--- +1 par mission, +2 et 1 jeton caché par fort (au plus 4 visibles, 2 cachés) ; le lac Supérieur tire dans Castor gras.
+-- Mise en place du plateau (bouton en haut à gauche) : seuls les comptoirs avec fort ou mission sont garnis :
+-- 1 tuile visible, +1 par mission, +2 et 1 jeton caché par fort (au plus 4 visibles, 2 cachés) ; le lac Supérieur tire dans Castor gras.
 local LIEUX = {""" + ',\n  '.join(lt(l) for l in lieux) + """}
 local SETUP_FAIT = false
 local function objNom(n) for _, o in ipairs(getObjects()) do if o.getName() == n then return o end end end
@@ -463,6 +474,7 @@ function setupPlateau()
   for _, l in ipairs(LIEUX) do
     local f, m = presences(l)
     local vis, cach, i = math.min(4, 1 + m + 2 * f), math.min(2, f), 1
+    if f + m == 0 then vis = 0 end   -- campement : aucune tuile
     local src = (l.sac == "gras") and gras or sec
     for _ = 1, vis do local s = l.slots[i]; i = i + 1
       if src and s then src.takeObject({position = {s[1] * F, 3, s[2] * F}, rotation = {0, 180, 0}, smooth = false}) end end

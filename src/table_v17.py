@@ -181,7 +181,7 @@ used_={q.get('GUID') for q in objs}
 for lieu,bags in POSE.items():
     L_,T_=CART[lieu]
     for k,b in enumerate(bags):
-        rx,ry=(L_+70, T_+108+k*92) if len(bags)>1 else (L_+70, T_+150)
+        rx,ry=(L_+40+k*56, T_+222)   # en bas à gauche du cartouche
         x,z=root_xz(rx,ry); t=_cp.deepcopy(tpl_[b])
         g=_hl.md5((lieu+b).encode()).hexdigest()[:6]
         while g in used_: g=_hl.md5((g+'x').encode()).hexdigest()[:6]
@@ -195,12 +195,11 @@ CARTS={'Nipigon':(542.0,101.0,'gras'),'Michipicoten':(933.0,211.0,'gras'),'Chago
  'Saint-Joseph':(523.0,1082.0,'sec'),'Fort Frontenac':(1842,978,'sec'),'Baie des Puants':(380.0,733.0,'sec'),'Michilimackinac':(775.0,734.0,'sec'),'Niagara':(1444,982,'sec')}
 lieux=[]
 for nom,(L_,T_,sac) in CARTS.items():
-    sl=[root_xz(L_+dx,T_+dy) for dy in (112,172) for dx in (140,200,260)]
+    sl=[root_xz(L_+dx,T_+dy) for dy in (95,155) for dx in (130,190,250)]
     lieux.append({'nom':nom,'sac':sac,'cx':L_,'cy':T_,'slots':[[round(a,3),round(b,3)] for a,b in sl],'fm':[list(map(lambda v:round(v,3),root_xz(L_+156,T_+132))),5.9,4.9]})
 PAYS={'Mer de l’Ouest':[(30,180),(90,180),(30,240)],'Pays des Illinois':[(220,1455),(280,1455),(340,1455)],'Belle Rivière':[(1500,1345),(1560,1345),(1620,1345)]}
-for nom,pts in PAYS.items():
-    sl=[root_xz(a,b) for a,b in pts]
-    lieux.append({'nom':nom,'sac':'sec','slots':[[round(a,3),round(b,3)] for a,b in sl]})
+# Pays et Témiscamingue : aucune tuile à la mise en place
+lieux=[l for l in lieux if l['nom']!='Témiscamingue']
 json.dump(lieux,open(D+'setup_lieux.json','w'),ensure_ascii=False)
 json.dump(d,open(P,'w'),ensure_ascii=False,indent=2)
 json.dump({'W':W,'H':H,'NL':NL,'NT':NT},open(D+'v17_geom.json','w'))
