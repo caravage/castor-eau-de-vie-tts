@@ -19,7 +19,7 @@ for v, k in REG.items():
     c, r = POS[v]; D.paste(f.rotate(180) if v in (1, 6) else f, (c*C, 2048-2*C+r*C))
 D.save(R+'img/v18/cdice_zones.png')
 # --- 2. cartouches (plateau table_v17r.png, coordonnées en px du plateau)
-T = Image.open(R+'img/v18/table_v17r.png').convert('RGB')
+T = Image.open(R+'img/v18/table_v3_22.png').convert('RGB')
 W, H = 547, 461; BAND = 79; BG = np.array((243, 238, 226)); INNER = (201, 192, 174)
 CART = [((1660, 1120), '#2F4373', 'mishipeshu'), ((2342, 1312), '#2F4373', 'mishipeshu'), ((779, 1745), '#2F4373', 'mishipeshu'),
         ((1627, 2832), '#6A9A48', 'tortue'), ((1378, 2223), '#6A9A48', 'tortue'), ((2067, 2225), '#6A9A48', 'tortue'),
@@ -51,5 +51,5 @@ for (x, y), col, k in CART:
     mk = Image.new('L', (W, H), 0); ImageDraw.Draw(mk).rounded_rectangle((2, 2, W-3, H-3), radius=24, fill=255); mk = np.array(mk)[..., None]/255
     o = o*mk+orig*(1-mk)
     T.paste(Image.fromarray(o.clip(0, 255).astype('uint8')), (x, y))
-T.save(R+'img/v18/table_v17r.png')
+T.save(R+'img/v18/table_v3_22.png')
 print('ok')
