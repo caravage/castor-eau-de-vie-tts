@@ -158,6 +158,7 @@ for X,Z in old:
     elif 2720<=tx<=3452 and 1552<=ty<=2146: new.append(root_xz(2325+(tx-2726)*452.6/720, 396+(ty-1558)*452.6/720))
     elif 3510<=tx<=4244 and 1552<=ty<=2146:
         if tx-3510<380: new.append(root_xz(2534.9+(tx-3516)*242.7/386, 817+(ty-1558)*242.7/386))
+new+=[root_xz(x,725) for x in (2077.5,2135,2191.5)]   # Montréal : ordre du tour (3 pions)
 newline=line.split('=')[0]+'= {'+','.join('{%.3f,%.3f}'%q for q in new)+'}'+(line[line.index('}   --'):][1:] if '}   --' in line else '')
 d['LuaScript']=lua.replace(line,newline); print('snaps',len(old),'->',len(new))
 # notes de mise en place (GMNotes) alignées sur les nouvelles positions

@@ -148,7 +148,7 @@ for (x0,y0,x1,y1) in ((31,579,389,1128),(32,1192,388,1680),(32,1765,388,2252),(3
 tb.save(R+'img/v18/table_v17r.png')
 for q in objs:
     if q.get('Nickname')=='Table du castor':
-        for kk in ('ImageURL','ImageSecondaryURL'): q['CustomImage'][kk]=GH+'table_v17r.png?v43'
+        for kk in ('ImageURL','ImageSecondaryURL'): q['CustomImage'][kk]=GH+'table_v17r.png?v50'
 # 5j. congés v41 (taille du jeton coureur des bois, 1,4) et cartes Expédition v4
 import re as _re
 def maj(os_):
@@ -264,6 +264,21 @@ for i,c in enumerate(COLS):
     n=json.loads(old['GMNotes']); n.pop('w',None); n.pop('y3',None); nw['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
     nw['Transform'].update(posX=old['Transform']['posX'],posZ=old['Transform']['posZ'],posY=2.0,rotX=0,rotY=180,rotZ=0)
     objs[objs.index(old)]=nw
+# 5s. plaquette « Ferme du castor » / « La Compagnie » (livret), avec marqueurs Prix FR et Politique d'achat
+fg=json.load(open(V+'ferme_geo.json')); FW,FH,FPX=1500,960,150.0; FX,FZ=34.5,-13.5
+pl=copy.deepcopy([q for q in objs if q.get('Nickname')=='Plateau du joueur rouge'][0]); pl.pop('AttachedSnapPoints',None)
+pl['GUID']=guid('ferme'); pl['Nickname']='Ferme du castor'; pl['Description']=''
+pl['CustomImage'].update(ImageURL=GH+'ferme_recto.png?v50',ImageSecondaryURL=GH+'ferme_recto.png?v50')
+fw=lambda px,py:[round((px-FW/2)/FPX,3),round(-(py-FH/2)/FPX,3)]
+pl['GMNotes']=json.dumps({'w':FW/FPX,'d':FH/FPX,'x':FX,'z':FZ,'h':0.15,'lock':True,'drop':True,
+    'snapw':[fw(*c)+[0] for c in fg['pfr']]+[fw(*c)+[0] for c in fg['pol']]+[fw(*c)+[0] for c in fg['pro']]},ensure_ascii=False,separators=(', ',': '))
+pl['Transform'].update(posX=FX,posZ=FZ,scaleX=FW/FPX/2,scaleZ=FW/FPX/2); pl['Locked']=True; objs.append(pl)
+mk=[q for q in objs if q.get('Nickname')=='Prix du castor'][0]
+for nom,(px,py) in (('Prix en France',fg['pfr'][4]),('Politique d’achat',fg['pol'][0]),('Prospérité',fg['pro'][0])):
+    m2=copy.deepcopy(mk); m2['GUID']=guid('m'+nom); m2['Nickname']=nom
+    dx,dz=fw(px,py); X,Z=round(FX+dx,3),round(FZ+dz,3)
+    n=json.loads(mk['GMNotes']); n.update(x=X,z=Z,h=0.5,w=0.62,d=0.62); m2['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+    m2['Transform'].update(posX=X,posZ=Z); m2['Snap']=True; objs.append(m2)
 # 6. cartes au format 63,5 x 88
 def cards(os_):
     for q in os_:
