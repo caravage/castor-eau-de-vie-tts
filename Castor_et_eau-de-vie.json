@@ -223,8 +223,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17r.png?v53",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17r.png?v53",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17r.png?v56",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v17r.png?v56",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -8078,7 +8078,7 @@
           }
         },
         {
-          "GUID": "5adeb5",
+          "GUID": "7e80b8",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -8106,7 +8106,89 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid1.png?v56",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "bddf8d",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Raid iroquois",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid2.png?v56",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "6ad58a",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Raid iroquois",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid3.png?v56",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -8148,47 +8230,6 @@
           "HideWhenFaceDown": false,
           "CustomImage": {
             "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
-        },
-        {
-          "GUID": "7a3a58",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 0,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Raid iroquois",
-          "Description": "",
-          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": false,
-          "Tooltip": false,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid.png?v38",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
