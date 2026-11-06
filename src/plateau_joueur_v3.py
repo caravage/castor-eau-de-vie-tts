@@ -148,7 +148,7 @@ for (x0,y0,x1,y1) in ((31,579,389,1128),(32,1192,388,1680),(32,1765,388,2252),(3
 tb.save(R+'img/v18/table_v17r.png')
 for q in objs:
     if q.get('Nickname')=='Table du castor':
-        for kk in ('ImageURL','ImageSecondaryURL'): q['CustomImage'][kk]=GH+'table_v17r.png?v50'
+        for kk in ('ImageURL','ImageSecondaryURL'): q['CustomImage'][kk]=GH+'table_v17r.png?v52'
 # 5j. congés v41 (taille du jeton coureur des bois, 1,4) et cartes Expédition v4
 import re as _re
 def maj(os_):
@@ -400,7 +400,9 @@ local function snapsW()
         local p, sp = o.getPosition(), {{}}
         local bb = o.getBounds(); local top = bb.center.y + bb.size.y / 2
         for _, v in ipairs(n.snapw) do
-          table.insert(sp, {{position = o.positionToLocal({{p.x + v[1] * F, top, p.z + v[2] * F}}), rotation = {{0, 0, 0}}, rotation_snap = v[3] == 1}})
+          local lp = o.positionToLocal({{p.x + v[1] * F, top, p.z + v[2] * F}})
+          if o.type == "Tile" and bb.size.z > 0 then lp.z = lp.z * bb.size.x / bb.size.z end   -- tuiles : TTS lit le z local sur la largeur
+          table.insert(sp, {{position = lp, rotation = {{0, 0, 0}}, rotation_snap = v[3] == 1}})
         end
         pcall(function() o.setSnapPoints(sp) end)
       end
@@ -423,6 +425,61 @@ OLD='      if not m[1].isDestroyed() and not m[2].lock then m[1].setLock(false) 
 assert OLD in d['LuaScript']
 d['LuaScript']=d['LuaScript'].replace(OLD,'      if not m[1].isDestroyed() and (not m[2].lock or m[2].drop) then m[1].setLock(false) end\n    end\n    Wait.time(function()\n      for _, m2 in ipairs(moved) do if m2[2].drop and not m2[1].isDestroyed() then m2[1].setLock(true) end end\n    end, 3)\n    for _, m in ipairs({}) do')
 d['LuaScript']=d['LuaScript'].rstrip('\n')+LUA
-d['XmlUI']='<Button id="capital" onClick="boutonCapital" rectAlignment="UpperRight" offsetXY="-20 -70" width="200" height="40" fontSize="18" color="#2A2418" textColor="#F4EBD6">Calculer le capital</Button>'
+d['XmlUI']='<Button id="setup" onClick="setupPlateau" rectAlignment="UpperLeft" offsetXY="20 -70" width="200" height="40" fontSize="18" color="#2A2418" textColor="#F4EBD6">Set up du plateau</Button><Button id="capital" onClick="boutonCapital" rectAlignment="UpperRight" offsetXY="-20 -70" width="200" height="40" fontSize="18" color="#2A2418" textColor="#F4EBD6">Calculer le capital</Button>'
+# Bouton « Set up du plateau » : lacs garnis (livret), paquets et sacs mélangés, 3 associés par joueur
+lieux=json.load(open(D+'setup_lieux.json'))
+def lt(l):
+    sl=', '.join('{%s, %s}'%(a,b) for a,b in l['slots'])
+    fm=('fm = {%s, %s, 5.9, 4.9}, '%(l['fm'][0][0],l['fm'][0][1])) if 'fm' in l else ''
+    return '{nom = "%s", sac = "%s", %sslots = {%s}}'%(l['nom'],l['sac'],fm,sl)
+SETUP_LUA="""
+
+-- Mise en place du plateau (bouton en haut à gauche) : chaque lieu ouvert reçoit 1 tuile visible,
+-- +1 par mission, +2 et 1 jeton caché par fort (au plus 4 visibles, 2 cachés) ; le lac Supérieur tire dans Castor gras.
+local LIEUX = {""" + ',\n  '.join(lt(l) for l in lieux) + """}
+local SETUP_FAIT = false
+local function objNom(n) for _, o in ipairs(getObjects()) do if o.getName() == n then return o end end end
+local function presences(l)
+  local f, m = 0, 0
+  if not l.fm then return 0, 0 end
+  for _, o in ipairs(getObjects()) do
+    local nm = o.getName()
+    if nm == "Fort français" or nm == "Mission" then
+      local p = o.getPosition()
+      if math.abs(p.x - l.fm[1] * F) <= l.fm[3] * F / 2 and math.abs(p.z - l.fm[2] * F) <= l.fm[4] * F / 2 then
+        if nm == "Fort français" then f = f + 1 else m = m + 1 end
+      end
+    end
+  end
+  return f, m
+end
+function setupPlateau()
+  if SETUP_FAIT then broadcastToAll("La mise en place du plateau a déjà été faite.") return end
+  SETUP_FAIT = true
+  for _, n in ipairs({"Castor sec", "Castor gras", "Tuiles secrètes", "Événements du mois", "Associés", "Rivière de recrutement", "Grands événements", "Matériel de départ", "Manigances"}) do
+    local o = objNom(n) if o then pcall(function() o.shuffle() end) end
+  end
+  local sec, gras, secr = objNom("Castor sec"), objNom("Castor gras"), objNom("Tuiles secrètes")
+  for _, l in ipairs(LIEUX) do
+    local f, m = presences(l)
+    local vis, cach, i = math.min(4, 1 + m + 2 * f), math.min(2, f), 1
+    local src = (l.sac == "gras") and gras or sec
+    for _ = 1, vis do local s = l.slots[i]; i = i + 1
+      if src and s then src.takeObject({position = {s[1] * F, 3, s[2] * F}, rotation = {0, 180, 0}, smooth = false}) end end
+    for _ = 1, cach do local s = l.slots[i]; i = i + 1
+      if secr and s then secr.takeObject({position = {s[1] * F, 3, s[2] * F}, rotation = {0, 180, 180}, smooth = false}) end end
+  end
+  local asso = objNom("Associés")
+  if asso then Wait.time(function() for _, c in ipairs({"Red", "Blue", "Green"}) do pcall(function() asso.deal(3, c) end) end end, 1) end
+  UI.setAttribute("setup", "active", "false")
+  broadcastToAll("Plateau mis en place : lacs garnis, paquets mélangés, 3 associés dans chaque main.")
+end
+Wait.time(function()   -- partie déjà mise en place (sac Castor sec entamé) : bouton masqué
+  local sec = objNom("Castor sec")
+  if sec and sec.getQuantity() < 32 then SETUP_FAIT = true; UI.setAttribute("setup", "active", "false") end
+end, 5)
+"""
+d['LuaScript']=d['LuaScript'].rstrip('\n')+SETUP_LUA
+
 json.dump(d,open(P,'w'),ensure_ascii=False,indent=2)
 print('ok',len(objs),'LIV0',round(L+1096.9/k,3),'PRIX4',round(L+4019.6/k,3),'PAS',round(108.6/k,4))

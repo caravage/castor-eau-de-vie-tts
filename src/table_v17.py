@@ -190,6 +190,18 @@ for lieu,bags in POSE.items():
         n=json.loads(t['GMNotes']); n.update(x=round(x,3),z=round(z,3),h=0.4); n.pop('face',None)
         t['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': ')); t['Description']=f'Mise en place : {lieu}.'
         objs.append(t)
+# Mise en place automatique : emplacements des tuiles de chaque lieu ouvert (coordonnées monde)
+CARTS={'Nipigon':(542.0,101.0,'gras'),'Michipicoten':(933.0,211.0,'gras'),'Chagouamigon':(37.0,459.0,'gras'),'Témiscamingue':(1500.2,302.0,'sec'),
+ 'Saint-Joseph':(523.0,1082.0,'sec'),'Fort Frontenac':(1842,978,'sec'),'Baie des Puants':(380.0,733.0,'sec'),'Michilimackinac':(775.0,734.0,'sec'),'Niagara':(1444,982,'sec')}
+lieux=[]
+for nom,(L_,T_,sac) in CARTS.items():
+    sl=[root_xz(L_+dx,T_+dy) for dy in (112,172) for dx in (140,200,260)]
+    lieux.append({'nom':nom,'sac':sac,'cx':L_,'cy':T_,'slots':[[round(a,3),round(b,3)] for a,b in sl],'fm':[list(map(lambda v:round(v,3),root_xz(L_+156,T_+132))),5.9,4.9]})
+PAYS={'Mer de l’Ouest':[(30,180),(90,180),(30,240)],'Pays des Illinois':[(220,1455),(280,1455),(340,1455)],'Belle Rivière':[(1500,1345),(1560,1345),(1620,1345)]}
+for nom,pts in PAYS.items():
+    sl=[root_xz(a,b) for a,b in pts]
+    lieux.append({'nom':nom,'sac':'sec','slots':[[round(a,3),round(b,3)] for a,b in sl]})
+json.dump(lieux,open(D+'setup_lieux.json','w'),ensure_ascii=False)
 json.dump(d,open(P,'w'),ensure_ascii=False,indent=2)
 json.dump({'W':W,'H':H,'NL':NL,'NT':NT},open(D+'v17_geom.json','w'))
 print('ok', len(objs))
