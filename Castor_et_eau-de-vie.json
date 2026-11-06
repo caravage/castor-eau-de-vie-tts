@@ -223,8 +223,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_22.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_22.png",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_23.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_23.png",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -5739,7 +5739,14 @@
       "Snap": false,
       "Tooltip": true,
       "Hands": false,
-      "HideWhenFaceDown": false
+      "HideWhenFaceDown": false,
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.3,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
+      }
     },
     {
       "GUID": "577ef0",
@@ -5768,7 +5775,14 @@
       "Snap": false,
       "Tooltip": true,
       "Hands": false,
-      "HideWhenFaceDown": false
+      "HideWhenFaceDown": false,
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.3,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
+      }
     },
     {
       "GUID": "3763bf",
@@ -5797,7 +5811,14 @@
       "Snap": false,
       "Tooltip": true,
       "Hands": false,
-      "HideWhenFaceDown": false
+      "HideWhenFaceDown": false,
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.3,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
+      }
     },
     {
       "GUID": "b1b026",
@@ -19770,9 +19791,9 @@
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 0.9,
-        "scaleY": 0.9,
-        "scaleZ": 0.9
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
       },
       "Nickname": "Dé des zones",
       "Description": "",
@@ -19839,13 +19860,20 @@
         }
       ],
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cdice_zones.png?v60",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cdice_zones.png?v61",
         "ImageSecondaryURL": "",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomDice": {
           "Type": 1
         }
+      },
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.3,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
       }
     },
     {
@@ -19858,9 +19886,9 @@
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 0.9,
-        "scaleY": 0.9,
-        "scaleZ": 0.9
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
       },
       "Nickname": "Dé sec / gras",
       "Description": "",
@@ -19934,6 +19962,13 @@
         "CustomDice": {
           "Type": 1
         }
+      },
+      "PhysicsMaterial": {
+        "StaticFriction": 0.4,
+        "DynamicFriction": 0.4,
+        "Bounciness": 0.3,
+        "FrictionCombine": 0,
+        "BounceCombine": 0
       }
     }
   ]

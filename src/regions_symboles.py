@@ -14,12 +14,12 @@ C = 2048//3; POS = {2: (0, 0), 4: (1, 0), 5: (2, 0), 1: (0, 1), 3: (1, 1), 6: (2
 REG = {1: 'mishipeshu', 6: 'mishipeshu', 2: 'tortue', 5: 'tortue', 3: 'oniare', 4: 'oniare'}
 D = Image.new('RGB', (2048, 2048), (60, 60, 60))
 for v, k in REG.items():
-    f = Image.new('RGBA', (C, C), fond(MED[k]) + (255,)); m = MED[k].resize((C-40, C-40), Image.LANCZOS)
-    f.alpha_composite(m, (20, 20)); f = f.convert('RGB')
+    f = Image.new('RGBA', (C, C), (243, 238, 226, 255)); m = MED[k].resize((C-110, C-110), Image.LANCZOS)   # fond beige des cartouches
+    f.alpha_composite(m, (55, 55)); f = f.convert('RGB')
     c, r = POS[v]; D.paste(f.rotate(180) if v in (1, 6) else f, (c*C, 2048-2*C+r*C))
 D.save(R+'img/v18/cdice_zones.png')
 # --- 2. cartouches (plateau table_v17r.png, coordonnées en px du plateau)
-T = Image.open(R+'img/v18/table_v3_22.png').convert('RGB')
+T = Image.open(R+'img/v18/table_v3_23.png').convert('RGB')
 W, H = 547, 461; BAND = 79; BG = np.array((243, 238, 226)); INNER = (201, 192, 174)
 CART = [((1660, 1120), '#2F4373', 'mishipeshu'), ((2342, 1312), '#2F4373', 'mishipeshu'), ((779, 1745), '#2F4373', 'mishipeshu'),
         ((1627, 2832), '#6A9A48', 'tortue'), ((1378, 2223), '#6A9A48', 'tortue'), ((2067, 2225), '#6A9A48', 'tortue'),
@@ -28,7 +28,7 @@ def rgb(h): return np.array([int(h[i:i+2], 16) for i in (1, 3, 5)])
 def figure(k, h):                          # silhouette crème du médaillon -> masque
     a = np.array(MED[k]).astype(int); m = (a[:, :, 0] > 190) & (a[:, :, 1] > 180) & (a[:, :, 3] > 200)
     ys, xs = np.nonzero(m); m = Image.fromarray((m*255).astype('uint8')).crop((xs.min(), ys.min(), xs.max()+1, ys.max()+1))
-    s = h/m.height; return m.resize((round(m.width*s), h), Image.LANCZOS)
+    s = min(h/m.height, 300/m.width); return m.resize((round(m.width*s), round(m.height*s)), Image.LANCZOS)
 for (x, y), col, k in CART:
     card = np.array(T.crop((x, y, x+W, y+H))).astype(float); orig = card.copy()
     band = 0.4*rgb(col)+0.6*BG; lum = card.mean(2)
@@ -37,9 +37,9 @@ for (x, y), col, k in CART:
     card[:BAND][~keep] = band
     # corps : fond uni + filigrane du symbole (sépia, 18 %)
     card[BAND+9:] = BG
-    m = np.array(figure(k, 300)).astype(float)/255; mh, mw = m.shape
-    ox, oy = (W-mw)//2, BAND+9+(H-BAND-9-mh)//2; ink = np.array((107, 90, 69))
-    reg = card[oy:oy+mh, ox:ox+mw]; card[oy:oy+mh, ox:ox+mw] = reg*(1-0.18*m[..., None])+ink*0.18*m[..., None]
+    m = np.array(figure(k, 230)).astype(float)/255; mh, mw = m.shape
+    ox, oy = (W-mw)//2, BAND+9+(H-BAND-9-mh)//2; ink = rgb({'#2F4373': '#4A6CC0', '#6A9A48': '#5E9440', '#963A26': '#B5452C'}[col])   # teinte claire et saturée de la Région
+    reg = card[oy:oy+mh, ox:ox+mw]; card[oy:oy+mh, ox:ox+mw] = reg*(1-0.26*m[..., None])+ink*0.26*m[..., None]
     out = Image.fromarray(card.clip(0, 255).astype('uint8')); d = ImageDraw.Draw(out)
     d.rounded_rectangle((13, 13, W-14, H-14), radius=18, outline=INNER, width=2)
     o = np.array(out).astype(float)
@@ -51,5 +51,5 @@ for (x, y), col, k in CART:
     mk = Image.new('L', (W, H), 0); ImageDraw.Draw(mk).rounded_rectangle((2, 2, W-3, H-3), radius=24, fill=255); mk = np.array(mk)[..., None]/255
     o = o*mk+orig*(1-mk)
     T.paste(Image.fromarray(o.clip(0, 255).astype('uint8')), (x, y))
-T.save(R+'img/v18/table_v3_22.png')
+T.save(R+'img/v18/table_v3_23.png')
 print('ok')
