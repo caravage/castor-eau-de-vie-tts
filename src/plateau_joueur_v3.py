@@ -270,8 +270,7 @@ pl=copy.deepcopy([q for q in objs if q.get('Nickname')=='Plateau du joueur rouge
 pl['GUID']=guid('ferme'); pl['Nickname']='Ferme du castor'; pl['Description']=''
 pl['CustomImage'].update(ImageURL=GH+'ferme_recto.png?v50',ImageSecondaryURL=GH+'ferme_recto.png?v50')
 fw=lambda px,py:[round((px-FW/2)/FPX,3),round(-(py-FH/2)/FPX,3)]
-pl['GMNotes']=json.dumps({'w':FW/FPX,'d':FH/FPX,'x':FX,'z':FZ,'h':0.15,'lock':True,'drop':True,'sg':1,
-    'snapw':[fw(*c)+[0] for c in fg['pfr']]+[fw(*c)+[0] for c in fg['pol']]+[fw(*c)+[0] for c in fg['pro']]},ensure_ascii=False,separators=(', ',': '))
+pl['GMNotes']=json.dumps({'w':FW/FPX,'d':FH/FPX,'x':FX,'z':FZ,'h':0.15,'lock':True,'drop':True},ensure_ascii=False,separators=(', ',': '))
 pl['Transform'].update(posX=FX,posZ=FZ,scaleX=FW/FPX/2,scaleZ=FW/FPX/2); pl['Locked']=True; objs.append(pl)
 mk=[q for q in objs if q.get('Nickname')=='Prix du castor'][0]
 for nom,(px,py) in (('Prix en France',fg['pfr'][4]),('Politique d’achat',fg['pol'][0]),('Prospérité',fg['pro'][0])):
@@ -398,24 +397,12 @@ local function snapsW()
       local n = notes(o)
       if n and n.snapw then
         local p, sp = o.getPosition(), {{}}
-        if n.sg then
-          local gs = Global.getSnapPoints() or {{}}
-          local y = o.getBounds().center.y + o.getBounds().size.y / 2
-          for _, v in ipairs(n.snapw) do
-            local x, z, ok = p.x + v[1] * F, p.z + v[2] * F, true
-            for _, q in ipairs(gs) do if math.abs(q.position.x - x) < 0.05 and math.abs(q.position.z - z) < 0.05 then ok = false end end
-            if ok then table.insert(gs, {{position = {{x, y, z}}, rotation = {{0, 0, 0}}, rotation_snap = false}}) end
-          end
-          pcall(function() o.setSnapPoints({{}}) end); Global.setSnapPoints(gs)
-        else
         local bb = o.getBounds(); local top = bb.center.y + bb.size.y / 2
         for _, v in ipairs(n.snapw) do
           local lp = o.positionToLocal({{p.x + v[1] * F, top, p.z + v[2] * F}})
-          if o.type == "Tile" and bb.size.z > 0 then lp.z = lp.z * bb.size.x / bb.size.z end   -- tuiles : TTS lit le z local sur la largeur
           table.insert(sp, {{position = lp, rotation = {{0, 0, 0}}, rotation_snap = v[3] == 1}})
         end
         pcall(function() o.setSnapPoints(sp) end)
-        end
       end
     end
   end
