@@ -7774,7 +7774,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -7815,7 +7815,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -7856,7 +7856,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -7897,7 +7897,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -7938,7 +7938,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -7979,7 +7979,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -8020,7 +8020,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -8061,7 +8061,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -8102,7 +8102,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -8143,7 +8143,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -8184,7 +8184,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -8225,7 +8225,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -8266,7 +8266,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -8307,7 +8307,7 @@
           "Locked": false,
           "Grid": false,
           "Snap": false,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
@@ -19718,6 +19718,186 @@
           "Stretch": false
         }
       }
+    },
+    {
+      "GUID": "41522f",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 33.71,
+        "posY": 2.0,
+        "posZ": 18.095,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.9,
+        "scaleY": 0.9,
+        "scaleZ": 0.9
+      },
+      "Nickname": "Dé des zones",
+      "Description": "",
+      "GMNotes": "{\"x\": 33.71, \"z\": 18.095, \"h\": 0.7, \"y3\": true}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/de_zones.obj?v55",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/de_zones.png?v55",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 2,
+        "CastShadows": true
+      },
+      "RotationValues": [
+        {
+          "Value": "Lac Supérieur",
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Lac Supérieur",
+          "Rotation": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Lacs d’en haut",
+          "Rotation": {
+            "x": 270,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Lacs d’en haut",
+          "Rotation": {
+            "x": 90,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Lacs d’en bas",
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 90
+          }
+        },
+        {
+          "Value": "Lacs d’en bas",
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 270
+          }
+        }
+      ],
+      "MaterialIndex": 0
+    },
+    {
+      "GUID": "53b272",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 35.11,
+        "posY": 2.0,
+        "posZ": 18.095,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.9,
+        "scaleY": 0.9,
+        "scaleZ": 0.9
+      },
+      "Nickname": "Dé sec / gras",
+      "Description": "",
+      "GMNotes": "{\"x\": 35.11, \"z\": 18.095, \"h\": 0.7, \"y3\": true}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/de_zones.obj?v55",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/de_castor.png?v55",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 0,
+        "TypeIndex": 2,
+        "CastShadows": true
+      },
+      "RotationValues": [
+        {
+          "Value": "Gras",
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Gras",
+          "Rotation": {
+            "x": 180,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Sec",
+          "Rotation": {
+            "x": 270,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Sec",
+          "Rotation": {
+            "x": 90,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Sec",
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 90
+          }
+        },
+        {
+          "Value": "Sec",
+          "Rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 270
+          }
+        }
+      ],
+      "MaterialIndex": 0
     }
   ]
 }

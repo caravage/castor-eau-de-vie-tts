@@ -1,3 +1,4 @@
+import subprocess
 # geo (pmat_geo.json) : [centre x, centre y, largeur, hauteur] en pixels de l'image du plateau.
 # Plateau du joueur v3 : images, points d'aimantation, mini-sacs de l'entrepôt, calcul du capital (Lua), cartes 63,5 x 88.
 # À lancer après build_v17.py, sur Castor_et_eau-de-vie.json.
@@ -256,6 +257,9 @@ def flags(os_):
         if q['Name'] in ('Card','Deck'): q['Tooltip']=False
         flags(q.get('ContainedObjects',[]))
 flags(objs)
+for q in objs:   # tuiles Événements du mois : sans nom au survol
+    if q.get('Nickname')=='Événements du mois':
+        for c in q.get('ContainedObjects',[]): c['Tooltip']=False
 # 5r. pions des joueurs : pions castor (portraits gravés, objets sauvegardés de l'auteur) teintés à la couleur du joueur
 pc=json.load(open(R+'src/pions_castor.json'))['ObjectStates']
 for i,c in enumerate(COLS):
@@ -278,6 +282,17 @@ for nom,(px,py) in (('Prix en France',fg['pfr'][4]),('Politique d’achat',fg['p
     dx,dz=fw(px,py); X,Z=round(FX+dx,3),round(FZ+dz,3)
     n=json.loads(mk['GMNotes']); n.update(x=X,z=Z,h=0.5,w=0.62,d=0.62); m2['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
     m2['Transform'].update(posX=X,posZ=Z); m2['Snap']=True; objs.append(m2)
+# 5t. dé des zones (2 faces par zone) et dé sec / gras (1-4 sec, 5-6 gras), même cube
+subprocess.run(['python3',V+'de_zones.py',R],check=True)
+ROT=[(0,0,0),(180,0,0),(270,0,0),(90,0,0),(0,0,90),(0,0,270)]   # face OBJ +Y, -Y, +Z, -Z, +X, -X vers le haut
+def de(nom,tex,vals,x):
+    objs.append({'GUID':guid(tex),'Name':'Custom_Model','Transform':{'posX':x,'posY':2.0,'posZ':18.095,'rotX':0,'rotY':180,'rotZ':0,'scaleX':0.9,'scaleY':0.9,'scaleZ':0.9},
+      'Nickname':nom,'Description':'','GMNotes':json.dumps({'x':x,'z':18.095,'h':0.7,'y3':True},ensure_ascii=False,separators=(', ',': ')),
+      'ColorDiffuse':{'r':1.0,'g':1.0,'b':1.0},'Locked':False,'Grid':False,'Snap':False,'Tooltip':True,'Hands':False,'HideWhenFaceDown':False,
+      'CustomMesh':{'MeshURL':GH+'de_zones.obj?v55','DiffuseURL':GH+f'{tex}.png?v55','NormalURL':'','ColliderURL':'','Convex':True,'MaterialIndex':0,'TypeIndex':2,'CastShadows':True},
+      'RotationValues':[{'Value':v,'Rotation':{'x':r[0],'y':r[1],'z':r[2]}} for v,r in zip(vals,ROT)],'MaterialIndex':0})
+de('Dé des zones','de_zones',['Lac Supérieur']*2+['Lacs d’en haut']*2+['Lacs d’en bas']*2,33.71)
+de('Dé sec / gras','de_castor',['Gras']*2+['Sec']*4,35.11)
 # 6. cartes au format 63,5 x 88
 def cards(os_):
     for q in os_:
