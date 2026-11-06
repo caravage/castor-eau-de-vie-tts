@@ -256,6 +256,14 @@ def flags(os_):
         if q['Name'] in ('Card','Deck'): q['Tooltip']=False
         flags(q.get('ContainedObjects',[]))
 flags(objs)
+# 5r. pions des joueurs : pions castor (portraits gravés, objets sauvegardés de l'auteur) teintés à la couleur du joueur
+pc=json.load(open(R+'src/pions_castor.json'))['ObjectStates']
+for i,c in enumerate(COLS):
+    old=[q for q in objs if q.get('Nickname')=='Pion '+c][0]
+    nw=copy.deepcopy(pc[i]); nw['GUID']=old['GUID']; nw['Nickname']='Pion '+c; nw['ColorDiffuse']=COUL[c]; nw['Tags']=[]
+    n=json.loads(old['GMNotes']); n.pop('w',None); n.pop('y3',None); nw['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
+    nw['Transform'].update(posX=old['Transform']['posX'],posZ=old['Transform']['posZ'],posY=2.0,rotX=0,rotY=180,rotZ=0)
+    objs[objs.index(old)]=nw
 # 6. cartes au format 63,5 x 88
 def cards(os_):
     for q in os_:

@@ -11832,7 +11832,7 @@
     },
     {
       "GUID": "3b09f4",
-      "Name": "PlayerPawn",
+      "Name": "Custom_Model",
       "Transform": {
         "posX": -15.978,
         "posY": 2.0,
@@ -11840,24 +11840,51 @@
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
+        "scaleX": 0.4250005,
+        "scaleY": 0.4250005,
+        "scaleZ": 0.4250005
       },
       "Nickname": "Pion rouge",
       "Description": "",
-      "GMNotes": "{\"w\": 0.63, \"x\": -15.978, \"z\": -21.525, \"h\": 0.6, \"y3\": true}",
+      "GMNotes": "{\"x\": -15.978, \"z\": -21.525, \"h\": 0.6}",
+      "AltLookAngle": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
       "ColorDiffuse": {
         "r": 0.6588235294117647,
         "g": 0.19607843137254902,
         "b": 0.16470588235294117
       },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
+      "Tags": [],
+      "LayoutGroupSortIndex": 2,
+      "Value": 0,
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
       "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
       "Hands": false,
-      "HideWhenFaceDown": false
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/2323362844677718050/3D27D1F732F283BB9B1D87A69D2984F222BC84AD/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/2323362844677720401/BAF377566ABDE0D9662F85C93114F53AFECA073D/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 0,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
     },
     {
       "GUID": "b17ac8",
@@ -13485,7 +13512,7 @@
     },
     {
       "GUID": "d59692",
-      "Name": "PlayerPawn",
+      "Name": "Custom_Model",
       "Transform": {
         "posX": 5.513,
         "posY": 2.0,
@@ -13493,24 +13520,51 @@
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
+        "scaleX": 0.4250005,
+        "scaleY": 0.4250005,
+        "scaleZ": 0.4250005
       },
       "Nickname": "Pion bleu",
       "Description": "",
-      "GMNotes": "{\"w\": 0.63, \"x\": 5.513, \"z\": -21.525, \"h\": 0.6, \"y3\": true}",
+      "GMNotes": "{\"x\": 5.513, \"z\": -21.525, \"h\": 0.6}",
+      "AltLookAngle": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
       "ColorDiffuse": {
         "r": 0.1843137254901961,
         "g": 0.3686274509803922,
         "b": 0.5568627450980392
       },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
+      "Tags": [],
+      "LayoutGroupSortIndex": 15,
+      "Value": 0,
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
       "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
       "Hands": false,
-      "HideWhenFaceDown": false
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/2323362844677718050/3D27D1F732F283BB9B1D87A69D2984F222BC84AD/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/2323362844677721302/3ECA8AAF953E33598F1A246B39C3E3B6F0EE596F/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 0,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
     },
     {
       "GUID": "1bf4a0",
@@ -15138,7 +15192,7 @@
     },
     {
       "GUID": "b6b074",
-      "Name": "PlayerPawn",
+      "Name": "Custom_Model",
       "Transform": {
         "posX": 27.003,
         "posY": 2.0,
@@ -15146,24 +15200,51 @@
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
+        "scaleX": 0.4250005,
+        "scaleY": 0.4250005,
+        "scaleZ": 0.4250005
       },
       "Nickname": "Pion vert",
       "Description": "",
-      "GMNotes": "{\"w\": 0.63, \"x\": 27.003, \"z\": -21.525, \"h\": 0.6, \"y3\": true}",
+      "GMNotes": "{\"x\": 27.003, \"z\": -21.525, \"h\": 0.6}",
+      "AltLookAngle": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
       "ColorDiffuse": {
         "r": 0.3058823529411765,
         "g": 0.47843137254901963,
         "b": 0.17254901960784313
       },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
+      "Tags": [],
+      "LayoutGroupSortIndex": 14,
+      "Value": 0,
+      "Locked": false,
+      "Grid": true,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
       "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
       "Hands": false,
-      "HideWhenFaceDown": false
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/2323362844677718050/3D27D1F732F283BB9B1D87A69D2984F222BC84AD/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/2323362844677721193/5901B1FA43104F4C089959AB31BA2EE5C510F3D4/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 0,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
     },
     {
       "GUID": "5d41a5",
@@ -16156,6 +16237,211 @@
       },
       "Bag": {
         "Order": 0
+      }
+    },
+    {
+      "GUID": "a80db5",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -9.459,
+        "posY": 2.0,
+        "posZ": 3.037,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Fort français",
+      "Description": "Mise en place : Michilimackinac.",
+      "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"x\": -9.459, \"z\": 3.037, \"h\": 0.4}",
+      "ColorDiffuse": {
+        "r": 0.9490196078431372,
+        "g": 0.9176470588235294,
+        "b": 0.8274509803921568
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "95d715",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -9.459,
+        "posY": 2.0,
+        "posZ": 1.33,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Mission",
+      "Description": "Mise en place : Michilimackinac.",
+      "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"x\": -9.459, \"z\": 1.33, \"h\": 0.4}",
+      "ColorDiffuse": {
+        "r": 0.11764705882352941,
+        "g": 0.10196078431372549,
+        "b": 0.0784313725490196
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "56dd72",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": 10.341,
+        "posY": 2.0,
+        "posZ": -2.27,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Fort français",
+      "Description": "Mise en place : Fort Frontenac.",
+      "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"x\": 10.341, \"z\": -2.27, \"h\": 0.4}",
+      "ColorDiffuse": {
+        "r": 0.9490196078431372,
+        "g": 0.9176470588235294,
+        "b": 0.8274509803921568
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/fort_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "39654f",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -16.789,
+        "posY": 2.0,
+        "posZ": 2.276,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Mission",
+      "Description": "Mise en place : Baie des Puants.",
+      "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"x\": -16.789, \"z\": 2.276, \"h\": 0.4}",
+      "ColorDiffuse": {
+        "r": 0.11764705882352941,
+        "g": 0.10196078431372549,
+        "b": 0.0784313725490196
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "96e0c1",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -13.783,
+        "posY": 2.0,
+        "posZ": 14.004,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Mission",
+      "Description": "Mise en place : Nipigon.",
+      "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"x\": -13.783, \"z\": 14.004, \"h\": 0.4}",
+      "ColorDiffuse": {
+        "r": 0.11764705882352941,
+        "g": 0.10196078431372549,
+        "b": 0.0784313725490196
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/mission_hex.png?v41",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 1,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
       }
     },
     {

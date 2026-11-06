@@ -171,6 +171,24 @@ for q in objs:
     if q.get('Nickname')=='Tapis de jeu': n['w']=round(xr-xl,3); n['d']=round(zt-zb,3)
     q['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': '))
 d['ObjectStates']=objs
+# Forts et missions de la mise en place (livret) : posés dans les cartouches des comptoirs
+import copy as _cp, hashlib as _hl
+CART={'Michilimackinac':(775.0,734.0),'Fort Frontenac':(1842,978),'Baie des Puants':(380.0,733.0),'Nipigon':(542.0,101.0)}
+POSE={'Michilimackinac':['Forts français','Missions'],'Fort Frontenac':['Forts français'],'Baie des Puants':['Missions'],'Nipigon':['Missions']}
+tpl_={b:[q for q in objs if q.get('Nickname')==b][0]['ContainedObjects'][0] for b in ('Forts français','Missions')}
+used_={q.get('GUID') for q in objs}
+for lieu,bags in POSE.items():
+    L_,T_=CART[lieu]
+    for k,b in enumerate(bags):
+        rx,ry=(L_+70, T_+108+k*92) if len(bags)>1 else (L_+70, T_+150)
+        x,z=root_xz(rx,ry); t=_cp.deepcopy(tpl_[b])
+        g=_hl.md5((lieu+b).encode()).hexdigest()[:6]
+        while g in used_: g=_hl.md5((g+'x').encode()).hexdigest()[:6]
+        used_.add(g); t['GUID']=g
+        t['Transform'].update(posX=round(x,3),posZ=round(z,3),posY=2.0)
+        n=json.loads(t['GMNotes']); n.update(x=round(x,3),z=round(z,3),h=0.4); n.pop('face',None)
+        t['GMNotes']=json.dumps(n,ensure_ascii=False,separators=(', ',': ')); t['Description']=f'Mise en place : {lieu}.'
+        objs.append(t)
 json.dump(d,open(P,'w'),ensure_ascii=False,indent=2)
 json.dump({'W':W,'H':H,'NL':NL,'NT':NT},open(D+'v17_geom.json','w'))
 print('ok', len(objs))
