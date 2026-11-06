@@ -19762,7 +19762,7 @@
     },
     {
       "GUID": "41522f",
-      "Name": "Custom_Model",
+      "Name": "Custom_Dice",
       "Transform": {
         "posX": 33.71,
         "posY": 2.0,
@@ -19788,19 +19788,17 @@
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
-      "CustomMesh": {
-        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/de_zones.obj?v55",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/de_zones.png?v55",
-        "NormalURL": "",
-        "ColliderURL": "",
-        "Convex": true,
-        "MaterialIndex": 0,
-        "TypeIndex": 2,
-        "CastShadows": true
-      },
       "RotationValues": [
         {
           "Value": "Lac Supérieur",
+          "Rotation": {
+            "x": -90,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Lacs d’en haut",
           "Rotation": {
             "x": 0,
             "y": 0,
@@ -19808,27 +19806,11 @@
           }
         },
         {
-          "Value": "Lac Supérieur",
+          "Value": "Lacs d’en bas",
           "Rotation": {
-            "x": 180,
+            "x": 0,
             "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "Lacs d’en haut",
-          "Rotation": {
-            "x": 270,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "Lacs d’en haut",
-          "Rotation": {
-            "x": 90,
-            "y": 0,
-            "z": 0
+            "z": -90
           }
         },
         {
@@ -19840,19 +19822,35 @@
           }
         },
         {
-          "Value": "Lacs d’en bas",
+          "Value": "Lacs d’en haut",
           "Rotation": {
             "x": 0,
             "y": 0,
-            "z": 270
+            "z": -180
+          }
+        },
+        {
+          "Value": "Lac Supérieur",
+          "Rotation": {
+            "x": 90,
+            "y": 0,
+            "z": 0
           }
         }
       ],
-      "MaterialIndex": 0
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cdice_zones.png?v57",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomDice": {
+          "Type": 1
+        }
+      }
     },
     {
       "GUID": "53b272",
-      "Name": "Custom_Model",
+      "Name": "Custom_Dice",
       "Transform": {
         "posX": 35.11,
         "posY": 2.0,
@@ -19878,19 +19876,17 @@
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
-      "CustomMesh": {
-        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/de_zones.obj?v55",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/de_castor.png?v55",
-        "NormalURL": "",
-        "ColliderURL": "",
-        "Convex": true,
-        "MaterialIndex": 0,
-        "TypeIndex": 2,
-        "CastShadows": true
-      },
       "RotationValues": [
         {
           "Value": "Gras",
+          "Rotation": {
+            "x": -90,
+            "y": 0,
+            "z": 0
+          }
+        },
+        {
+          "Value": "Sec",
           "Rotation": {
             "x": 0,
             "y": 0,
@@ -19898,27 +19894,11 @@
           }
         },
         {
-          "Value": "Gras",
-          "Rotation": {
-            "x": 180,
-            "y": 0,
-            "z": 0
-          }
-        },
-        {
           "Value": "Sec",
           "Rotation": {
-            "x": 270,
+            "x": 0,
             "y": 0,
-            "z": 0
-          }
-        },
-        {
-          "Value": "Sec",
-          "Rotation": {
-            "x": 90,
-            "y": 0,
-            "z": 0
+            "z": -90
           }
         },
         {
@@ -19934,11 +19914,27 @@
           "Rotation": {
             "x": 0,
             "y": 0,
-            "z": 270
+            "z": -180
+          }
+        },
+        {
+          "Value": "Gras",
+          "Rotation": {
+            "x": 90,
+            "y": 0,
+            "z": 0
           }
         }
       ],
-      "MaterialIndex": 0
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cdice_castor.png?v57",
+        "ImageSecondaryURL": "",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomDice": {
+          "Type": 1
+        }
+      }
     }
   ]
 }
