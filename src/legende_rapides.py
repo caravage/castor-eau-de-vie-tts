@@ -1,4 +1,4 @@
-# v3.29 : flèche de remontée dans chaque rapide (le dé ne se lance qu'en remontant, vers l'ouest)
+# v3.29-v3.30 : flèche de remontée dans chaque rapide (le dé ne se lance qu'en remontant, vers l'ouest)
 # et légende Rapide / Raccourci en bas de la carte, entre la Belle Rivière et l'encart des Antilles.
 # Usage : python3 legende_rapides.py <image source> <image cible> <dossier des polices>
 import sys, math
@@ -14,6 +14,7 @@ fi = ImageFont.truetype(FD + '/alegreya400i.ttf', 40)
 # sens de la remontée (x, y écran), en s'éloignant de Montréal
 RAP = {'Saint-Laurent': ((4262, 2490), (-0.87, 0.5)), 'Rivière des Outaouais': ((4048, 2217), (-1, 0)),
        'Sault Sainte-Marie': ((2440, 1930), (-0.8, -0.6)), 'Chutes du Niagara': ((3107, 2875), (-1, 0))}
+DEUX_SENS = {'Chutes du Niagara'}
 
 def fleche(d, cx, cy, ux, uy, L, w, head):
     n = math.hypot(ux, uy); ux, uy = ux / n, uy / n; px, py = -uy, ux
@@ -31,7 +32,10 @@ for name, ((ax, ay), (ux, uy)) in RAP.items():
     ys, xs = np.nonzero((lum < 90) & (rr > 94) & (rr < 108))
     cx, cy, _ = np.linalg.lstsq(np.c_[2 * xs, 2 * ys, np.ones(len(xs))], xs ** 2 + ys ** 2, rcond=None)[0]
     cx, cy = ax - 170 + cx, ay - 170 + cy
-    fleche(d, cx, cy - 64, ux, uy, 60, 6, 20)
+    if name in DEUX_SENS:   # chute : jet dans les deux sens (v3.30)
+        fleche(d, cx - 18, cy - 64, -1, 0, 36, 6, 18); fleche(d, cx + 18, cy - 64, 1, 0, 36, 6, 18)
+    else:
+        fleche(d, cx, cy - 64, ux, uy, 60, 6, 20)
     print(name, round(cx), round(cy))
 
 # légende
