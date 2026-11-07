@@ -1,5 +1,6 @@
 # Tuiles « Événements du mois » v2 (7 nov. 2026) : d'après le tableau de « Cartes et tuiles ».
 # Rouge = acte de guerre ou de violence. Flèche en boucle = la tuile retourne au sac (« +1 » : on ajoute une copie).
+# v3 : titres seuls (le texte complet est dans la description TTS et l'aide de jeu) ; images evt3_*.
 # Usage : python3 evenements_v2.py <racine du dépôt> <dossier node_modules/@fontsource>
 import sys, html, math
 from PIL import Image, ImageDraw
@@ -21,7 +22,7 @@ CSS = (FONTS + "*{box-sizing:border-box;margin:0}body{width:300px;height:300px;o
        ".e{width:300px;height:300px;border-radius:22px;background:#F2EAD3;border:4px solid var(--k);display:flex;flex-direction:column;overflow:hidden;position:relative}"
        ".h{background:var(--k);color:#F6EFDC;font:400 20px 'IM Fell English SC',serif;letter-spacing:2px;text-align:center;padding:8px 0 6px}"
        ".b{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4px 12px 10px;gap:6px}"
-       ".t{font:italic 44px/1.0 'IM Fell English',serif;color:var(--k)}.x{font:700 30px/1.12 'Alegreya Sans',sans-serif;color:#2A2418}"
+       ".t{font:italic 62px/1.0 'IM Fell English',serif;color:var(--k)}.x{font:700 30px/1.12 'Alegreya Sans',sans-serif;color:#2A2418}"
        ".lp{position:absolute;right:68px;bottom:34px;display:flex;align-items:center;gap:2px;color:var(--k);font:700 26px 'Alegreya Sans',sans-serif}")
 def boucle(path, c):
     # même flèche que les tuiles Raid (raid_boucle.py)
@@ -41,9 +42,9 @@ with sync_playwright() as p:
     for k, t, x, c, lp in EVT:
         extra = "<div class='lp'>+1</div>" if lp == 'plus1' else ''
         open('/tmp/evt2.html','w').write(f"<!doctype html><html><head><meta charset='utf-8'><style>{CSS}</style></head><body><div class='e' style='--k:{c}'>"
-                       f"<div class='h'>Événement du mois</div><div class='b'{" style='padding-bottom:54px'" if lp else ''}><div class='t'>{E(t)}</div><div class='x'>{E(x)}</div></div>{extra}</div></body></html>"); pg.goto('file:///tmp/evt2.html')
-        pg.evaluate('document.fonts.ready'); s = pg.evaluate(FIT)
-        pg.screenshot(path=f'{R}img/v18/evt2_{k}.png', omit_background=False)
-        if lp: boucle(f'{R}img/v18/evt2_{k}.png', c)
+                       f"<div class='h'>Événement du mois</div><div class='b'{" style='padding-bottom:40px'" if lp else ''}><div class='t'>{E(t)}</div></div>{extra}</div></body></html>"); pg.goto('file:///tmp/evt2.html')
+        pg.evaluate('document.fonts.ready'); s = 62
+        pg.screenshot(path=f'{R}img/v18/evt3_{k}.png', omit_background=False)
+        if lp: boucle(f'{R}img/v18/evt3_{k}.png', c)
         print(k, s)
     br.close()
