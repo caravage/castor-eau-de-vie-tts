@@ -6,7 +6,7 @@
 #  5. pistes Ravages et Prix du castor dans un cartouche ; rouge vif → rouge brique
 #  6. étendues : hachures remplacées par une teinte pleine, ancres en brun
 #  7. rose des vents
-#  8. encarts Domaine du Roi / La Rochelle / Antilles : même cadre double que la carte
+#  8. encarts Domaine du Roi / La Rochelle / Antilles : cadre d'origine conservé (v3.32 : second cadre retiré)
 # Usage : python3 plateau_v3_31.py <image source> <image cible> <police Alegreya Sans 500 .ttf>
 import sys, math
 import numpy as np
@@ -84,9 +84,7 @@ def cadre(x0, y0, x1, y1):
     d.rectangle((x0, y0, x1, y1), outline=DARK, width=7)
     d.rectangle((x0 + 14, y0 + 14, x1 - 14, y1 - 14), outline=DARK, width=2)
 cadre(X0 + 6, Y0 + 6, X1 - 7, Y1 - 7)
-# ---- 8. encarts, même cadre (dessinés par-dessus le cadre de la carte)
-for (x0, y0, x1, y1) in [(4085, 970, 4800, 1480), (4975, 2290, 5593, 3090), (4975, 3115, 5593, 3480)]:
-    cadre(x0, y0, x1, y1)
+# ---- 8. encarts : on garde leur cadre d'origine (déjà le même pour les trois), pas de second cadre
 
 # ---- 6. ancres des étendues (rond orange → brun)
 for (ax, ay) in [(856, 1387), (949, 3266), (3163, 3370), (4460, 1136)]:
