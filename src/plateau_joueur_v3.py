@@ -101,7 +101,7 @@ for c in COLS:
     X,Z=world(cx,cz,geo['slots'][3][0],geo['ctr'][0][1])
     h=copy.deepcopy(tpl); h.pop('ContainedObjects',None); h.pop('Bag',None); h['Name']='Custom_Model'; h['GUID']=guid('capd'+c)
     h['Nickname']='Capital circulant '+c
-    h['Description']='Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres. Bouton « Calculer le capital » (haut droite) ou clic droit > Recalculer le capital.'
+    h['Description']='Capital circulant : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + valeur « capital » de la piste Livres. Bouton « Calculer le capital » (haut droite) ou clic droit > Recalculer le capital.'
     h['ColorDiffuse']=COUL[c]; h['CustomMesh']=dict(tpl['CustomMesh'],MeshURL=GH+'sac_part.obj',DiffuseURL=GH+'tok_disc.png?v38',TypeIndex=0)
     h['GMNotes']=json.dumps({'w':0.6,'x':X,'z':Z,'h':0.4,'y3':True,'lock':True,'capd':c},ensure_ascii=False,separators=(', ',': '))
     h['Transform'].update(posX=X,posZ=Z,scaleX=0.6,scaleY=0.6,scaleZ=0.6); h['Locked']=True; objs.append(h)
@@ -309,13 +309,14 @@ t=[q for q in objs if q.get('Nickname')=='Table du castor'][0]['Transform']
 im2=Image.open(R+'img/v18/table_v17.png'); TW=2*t['scaleX']; L=t['posX']-TW/2; k=im2.size[0]/TW
 LUA=f'''
 
--- Capital circulant (livret) : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + palier de la piste Livres.
+-- Capital circulant (livret) : charges (10 au plus) + tuiles de fourrure x prix du castor + parts + valeur « capital » de la piste Livres.
 -- Ce qui est en expédition ne compte pas. Les sacs d'entrepôt affichent leur contenu à chaque entrée / sortie ;
 -- le capital se recalcule avec le bouton « Calculer le capital » (haut droite de l'écran) ou clic droit sur le compteur.
 local LIV0, PRIX4, PAS = {round(L+1096.9/k,3)}, {round(L+4019.6/k,3)}, {round(108.6/k,4)}
 local COUL = {{{', '.join(f'["{c}"] = {{{COUL[c]["r"]:.3f}, {COUL[c]["g"]:.3f}, {COUL[c]["b"]:.3f}}}' for c in COLS)}}}
 local NOMS = {{["marchandises"] = "Marchandises", ["eau-de-vie"] = "Eau-de-vie", ["moyen canot"] = "Moyens canots", ["grand canot"] = "Grands canots", ["castor"] = "Fourrures"}}
-local function palier(n) if n >= 25 then return 15 elseif n >= 20 then return 14 elseif n >= 15 then return 12 elseif n >= 10 then return 9 elseif n >= 5 then return 5 end return 0 end
+local CAPL = {{0,1,2,3,4,5,6,7,7,8,9,10,10,11,11,12,12,13,13,14,14,14,14,15,15,15,15,15,15,15,15}}   -- valeur « capital » imprimée sous chaque case de la piste Livres (0 à 30+)
+local function palier(n) if n >= 30 then return 15 end return CAPL[n + 1] or 0 end
 local function arrondi(v) return math.floor(v + 0.5) end
 function rien() end
 local function sac(o) local g = o.getGMNotes() or "" if g:find('"pm"', 1, true) then local n = notes(o) if n and n.pm then return n end end end
