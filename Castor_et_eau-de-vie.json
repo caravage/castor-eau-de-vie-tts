@@ -223,8 +223,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_23.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_23.png",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_24.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_24.png",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -8127,7 +8127,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid1.png?v56",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid1_b.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -8168,7 +8168,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid2.png?v56",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid2_b.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -8209,7 +8209,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid3.png?v56",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_raid3_b.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
