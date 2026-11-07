@@ -7752,7 +7752,7 @@
         "scaleZ": 0.7
       },
       "Nickname": "Événements du mois",
-      "Description": "14 tuiles : piochez-en une à la fin de chaque mois.",
+      "Description": "22 tuiles : piochez-en une à la fin de chaque mois.",
       "GMNotes": "{\"w\": 1.4, \"x\": 17.5, \"z\": 32.945, \"h\": 0.8, \"y3\": true, \"rnd\": true, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 0.24705882352941178,
@@ -7771,130 +7771,7 @@
       },
       "ContainedObjects": [
         {
-          "GUID": "ed3a79",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 0,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Baie d’Hudson",
-          "Description": "",
-          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": false,
-          "Tooltip": false,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_hudson.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
-        },
-        {
-          "GUID": "300820",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 0,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Baie d’Hudson",
-          "Description": "",
-          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": false,
-          "Tooltip": false,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_hudson.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
-        },
-        {
-          "GUID": "51e735",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 0,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Saison abondante",
-          "Description": "",
-          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": false,
-          "Tooltip": false,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_abondante.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
-        },
-        {
-          "GUID": "8d85d7",
+          "GUID": "802148",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -7922,7 +7799,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -7935,7 +7812,7 @@
           }
         },
         {
-          "GUID": "dd16de",
+          "GUID": "b3a463",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -7963,7 +7840,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -7976,48 +7853,7 @@
           }
         },
         {
-          "GUID": "70f617",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 0,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Le Profond est réquisitionné par le roi",
-          "Description": "",
-          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": false,
-          "Tooltip": false,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_profond.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
-        },
-        {
-          "GUID": "01a965",
+          "GUID": "4e2d82",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -8045,7 +7881,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -8058,7 +7894,7 @@
           }
         },
         {
-          "GUID": "114a3a",
+          "GUID": "2be6c9",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -8086,7 +7922,458 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "7a9bb1",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "268e03",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "2a47f5",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "d909a5",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "bc1624",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "ee3ca1",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "1342a0",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "8aba14",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "4e489b",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "37d707",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "8d48bf",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Rivière calme",
+          "Description": "",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -8222,7 +8509,7 @@
           }
         },
         {
-          "GUID": "3e5509",
+          "GUID": "e75ef3",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -8235,8 +8522,8 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Rivière calme",
-          "Description": "",
+          "Nickname": "Baie d’Hudson",
+          "Description": "Dé de région : on retire une peau de chaque zone de traite sans fort.",
           "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -8250,7 +8537,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt2_hudson.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -8263,7 +8550,7 @@
           }
         },
         {
-          "GUID": "c9517d",
+          "GUID": "97ed95",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -8276,8 +8563,8 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Rivière calme",
-          "Description": "",
+          "Nickname": "Saison abondante",
+          "Description": "Dé de région : on remplit chaque zone en peaux comme au printemps.",
           "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -8291,7 +8578,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt2_abondante.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -8304,7 +8591,7 @@
           }
         },
         {
-          "GUID": "de25c5",
+          "GUID": "b084af",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -8317,8 +8604,8 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "La Compagnie affrète son navire",
-          "Description": "",
+          "Nickname": "Le Profond",
+          "Description": "Si le Profond n'a pas été mis en jeu, faites-le partir de La Rochelle au prochain mois sans frasil. S'il est en jeu, retirez-le du plateau ainsi que la tuile événement.",
           "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -8332,7 +8619,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_compagnie.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt2_profond.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -8345,7 +8632,7 @@
           }
         },
         {
-          "GUID": "8f1e37",
+          "GUID": "a22efc",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -8358,8 +8645,8 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Rivière calme",
-          "Description": "",
+          "Nickname": "Grand Hiver",
+          "Description": "Le prochain ou l'actuel mois d'octobre ET le prochain ou l'actuel mois de mai deviennent des mois de frasil.",
           "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -8373,7 +8660,197 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_calme.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt2_hiver.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "GUID": "e0327d",
+      "Name": "Bag",
+      "Transform": {
+        "posX": 16.6,
+        "posY": 2.0,
+        "posZ": 30.9,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.7,
+        "scaleY": 1.0,
+        "scaleZ": 0.7
+      },
+      "Nickname": "Sac Ravage",
+      "Description": "Tuiles de Ravage, ajoutées au sac Événements du mois.",
+      "GMNotes": "{\"w\": 1.4, \"x\": 16.6, \"z\": 30.9, \"h\": 0.8, \"y3\": true, \"lock\": true, \"drop\": true}",
+      "ColorDiffuse": {
+        "r": 0.5568627450980392,
+        "g": 0.1843137254901961,
+        "b": 0.1450980392156863
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "MaterialIndex": 0,
+      "Bag": {
+        "Order": 2
+      },
+      "ContainedObjects": [
+        {
+          "GUID": "bcafb8",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Épidémie",
+          "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. Retourne dans le sac et on rajoute une copie dans le sac.",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt2_epidemie.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        },
+        {
+          "GUID": "a83d86",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Lac épuisé",
+          "Description": "Dé de région : s'il y a une zone de traite en Ravage, elle ferme puis Ravage dans la zone de traite avec le moins de peaux dans la région. Sinon Ravage dans la zone de traite la moins fournie en peaux. Retourne dans le sac.",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt2_epuise.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "GUID": "6f8764",
+      "Name": "Infinite_Bag",
+      "Transform": {
+        "posX": 18.5,
+        "posY": 2.0,
+        "posZ": 30.9,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.7,
+        "scaleY": 1.0,
+        "scaleZ": 0.7
+      },
+      "Nickname": "Réserve Épidémie",
+      "Description": "Copies illimitées de la tuile Épidémie.",
+      "GMNotes": "{\"w\": 1.4, \"x\": 18.5, \"z\": 30.9, \"h\": 0.8, \"y3\": true, \"lock\": true, \"drop\": true}",
+      "ColorDiffuse": {
+        "r": 0.5568627450980392,
+        "g": 0.1843137254901961,
+        "b": 0.1450980392156863
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "MaterialIndex": 0,
+      "ContainedObjects": [
+        {
+          "GUID": "2893fd",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Épidémie",
+          "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. Retourne dans le sac et on rajoute une copie dans le sac.",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt2_epidemie.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
