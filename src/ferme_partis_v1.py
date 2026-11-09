@@ -23,13 +23,13 @@ for nom,(px,py) in cibles.items():
     X,Z=fw(px,py); nn=json.loads(m['GMNotes']); nn.update(x=X,z=Z); m['GMNotes']=note(nn); m['Transform'].update(posX=X,posZ=Z,posY=2.0)
 # 2. Partis
 pg=json.load(open(S+'partis_geo_v1.json')); PW,PH=560,960
-x0=FX+FW/FPX/2+0.5+PW/FPX/2
+x0=20.7  # sous l’encart des Antilles (v3.35)
 for i,(nom,fich,desc) in enumerate((('Château','parti_chateau_v1.png','Parti du gouverneur : 1 · attribue le premier congé de chaque joueur ; 2 · pour 1 ₶, ajoute un officier à son expédition. Par membre : 1 congé de plus émis. Milice : 2 ₶, +1 défense dans un fort.'),
                                      ('Palais','parti_palais_v1.png','Parti de l’intendant : 1 · attribue le budget de la colonie ; 2 · pour 1 ₶, ajoute un missionnaire à son expédition. Par membre : +1 dé de vérification de la contrebande à Albany. Caisse de la colonie.'))):
     old=[q for q in objs if q.get('Nickname')==nom]
     t=copy.deepcopy(pl); t['GUID']=guid('parti'+nom); t['Nickname']=nom; t['Description']=desc
     t['CustomImage'].update(ImageURL=GH+fich,ImageSecondaryURL=GH+fich)
-    X=round(x0+i*(PW/FPX+0.4),3); Z=FZ
+    X=round(x0+i*(PW/FPX+0.3),3); Z=-12.5
     t['GMNotes']=note({'w':PW/FPX,'d':PH/FPX,'x':X,'z':Z,'h':0.15,'lock':True,'drop':True})
     t['Transform'].update(posX=X,posZ=Z,scaleX=PW/FPX/2,scaleY=1.0,scaleZ=PW/FPX/2); t['Locked']=True
     t.pop('AttachedSnapPoints',None)

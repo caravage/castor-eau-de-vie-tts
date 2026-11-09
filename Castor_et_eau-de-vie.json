@@ -20666,9 +20666,9 @@
       "GUID": "415cad",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 41.867,
-        "posY": 2.0,
-        "posZ": -13.5,
+        "posX": 20.7,
+        "posY": 2.5,
+        "posZ": -12.5,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -20678,7 +20678,7 @@
       },
       "Nickname": "Château",
       "Description": "Parti du gouverneur : 1 · attribue le premier congé de chaque joueur ; 2 · pour 1 ₶, ajoute un officier à son expédition. Par membre : 1 congé de plus émis. Milice : 2 ₶, +1 défense dans un fort.",
-      "GMNotes": "{\"w\": 3.7333333333333334, \"d\": 6.4, \"x\": 41.867, \"z\": -13.5, \"h\": 0.15, \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 3.7333333333333334, \"d\": 6.4, \"x\": 20.7, \"z\": -12.5, \"h\": 0.15, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -20707,9 +20707,9 @@
       "GUID": "f625d9",
       "Name": "Custom_Tile",
       "Transform": {
-        "posX": 46.0,
-        "posY": 2.0,
-        "posZ": -13.5,
+        "posX": 24.73,
+        "posY": 2.5,
+        "posZ": -12.5,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -20719,7 +20719,7 @@
       },
       "Nickname": "Palais",
       "Description": "Parti de l’intendant : 1 · attribue le budget de la colonie ; 2 · pour 1 ₶, ajoute un missionnaire à son expédition. Par membre : +1 dé de vérification de la contrebande à Albany. Caisse de la colonie.",
-      "GMNotes": "{\"w\": 3.7333333333333334, \"d\": 6.4, \"x\": 46.0, \"z\": -13.5, \"h\": 0.15, \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 3.7333333333333334, \"d\": 6.4, \"x\": 24.73, \"z\": -12.5, \"h\": 0.15, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
