@@ -1,0 +1,10 @@
+@font-face{font-family:"IM Fell English";font-style:normal;src:url(node_modules/@fontsource/im-fell-english/files/im-fell-english-latin-400-normal.woff2)}
+@font-face{font-family:"IM Fell English";font-style:italic;src:url(node_modules/@fontsource/im-fell-english/files/im-fell-english-latin-400-italic.woff2)}
+@font-face{font-family:"IM Fell English SC";src:url(node_modules/@fontsource/im-fell-english-sc/files/im-fell-english-sc-latin-400-normal.woff2)}
+@font-face{font-family:"Alegreya Sans";font-weight:400;src:url(node_modules/@fontsource/alegreya-sans/files/alegreya-sans-latin-400-normal.woff2)}
+@font-face{font-family:"Alegreya Sans";font-weight:400;font-style:italic;src:url(node_modules/@fontsource/alegreya-sans/files/alegreya-sans-latin-400-italic.woff2)}
+@font-face{font-family:"Alegreya Sans";font-weight:500;src:url(node_modules/@fontsource/alegreya-sans/files/alegreya-sans-latin-500-normal.woff2)}
+@font-face{font-family:"Alegreya Sans";font-weight:700;src:url(node_modules/@fontsource/alegreya-sans/files/alegreya-sans-latin-700-normal.woff2)}
+@font-face{font-family:"Libre Bodoni";font-weight:400;src:url(node_modules/@fontsource/libre-bodoni/files/libre-bodoni-latin-400-normal.woff2)}
+@font-face{font-family:"Libre Bodoni";font-weight:400;font-style:italic;src:url(node_modules/@fontsource/libre-bodoni/files/libre-bodoni-latin-400-italic.woff2)}
+@font-face{font-family:"Libre Bodoni";font-weight:600;src:url(node_modules/@fontsource/libre-bodoni/files/libre-bodoni-latin-600-normal.woff2)}
