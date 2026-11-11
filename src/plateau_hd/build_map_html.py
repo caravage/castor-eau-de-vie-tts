@@ -202,6 +202,16 @@ for yy, word, dd in ((ly, 'Rapide', '2+'), (y2, 'Raccourci', '3+')):
 leg += '</div>'
 OVER += [ROSE, leg]
 
+exec(open('bloc_v3.py').read())
+OVER=[it for it in OVER if not (it.startswith('<div') and ('>Congés</div>' in it or '>Québec</div>' in it) and 'card' not in it and 'Montréal' not in it)]
+OVER=[it for it in OVER if 'M2135 311 L2135 636' not in it]                 # ancien pointillé Domaine–Montréal
+mi=next(i for i,it in enumerate(OVER) if '>Montréal</div>' in it)
+OVER[mi]=BLOC                                                              # remplace l'ancienne capsule Montréal
+mv=lambda it,dx,dy:f'<div style="position:absolute;left:0;top:0;transform:translate({dx}px,{dy}px)">{it}</div>'
+for i,it in enumerate(OVER):
+    if 'viewBox="1773 40 367 304"' in it or ('left: 1937px; top: 19px' in it and 'Domaine du Roi' in it): OVER[i]=mv(it,-352,-8)
+    elif 'left: 2447.6px; top: 780px' in it or 'left: 2447.6px; top: 1250px' in it or 'left: 2534.9px; top: 817' in it or 'left: 2534.9px; top: 1280' in it: OVER[i]=mv(it,0,30)
+OVER.append('<svg viewBox="0 0 3215 1500" style="position:absolute;left:0;top:0;width:3215px;height:1500px;overflow:visible"><path d="M1982 150 L2003 150" stroke="#4A4640" stroke-width="3.02" stroke-dasharray="9 7"/></svg>')
 # ---- pages
 HEAD = ('<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="fonts.css"><style>'
         'html,body{margin:0;background:transparent} .root{position:relative;width:2800px;height:1510px;overflow:hidden;font-family:"Liberation Serif",serif}'
