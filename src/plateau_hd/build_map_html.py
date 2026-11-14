@@ -180,7 +180,7 @@ for i in range(16):
 g += f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="{R + 10 / K:.2f}" fill="none" stroke="#2A2418" stroke-width="{2 / K:.2f}"/>'
 g += f'<text x="{cx:.2f}" y="{cy - R - 16 / K:.2f}" text-anchor="middle" font-family="Alegreya Sans" font-weight="500" font-size="{30 / K:.2f}" fill="#2A2418">N</text>'
 ROSE = f'<svg viewBox="0 0 2800 1500" style="position: absolute; left: 0; top: 0; width: 2800px; height: 1500px; overflow: visible; pointer-events: none">{g}</svg>'
-X0, Y0 = css(3990, 3215); X1, Y1 = css(4680, 3495)
+X0, Y0 = css(3850, 3215); X1, Y1 = css(4740, 3495)
 lc, ly = 95 / K, 75 / K
 leg = (f'<div style="position: absolute; left: {X0:.1f}px; top: {Y0:.1f}px; width: {X1 - X0:.1f}px; height: {Y1 - Y0:.1f}px; box-sizing: border-box; background: #F3EFE2; '
        f'border: {3 / K:.2f}px solid #968C78; border-radius: {18 / K:.1f}px; font-family: \'Alegreya Sans\', sans-serif; color: #2A2418">')
@@ -195,10 +195,10 @@ while x < xe:
 dash += f'<polyline points="{83 / K:.2f},{y2 - 11 / K:.2f} {97 / K:.2f},{y2:.2f} {83 / K:.2f},{y2 + 11 / K:.2f}" fill="none" stroke="#2A2418" stroke-width="{4 / K:.2f}" stroke-linejoin="round"/>'
 leg += f'<svg style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible">{gl}{dash}</svg>'
 fs, fi = 46 / K, 40 / K
-for yy, word, dd in ((ly, 'Rapide', '2+'), (y2, 'Raccourci', '3+')):
+for yy, word, dd, ech in ((ly, 'Rapide', '2+', '1 : abîmé'), (y2, 'Raccourci', '3+', '1 : abîmé et reste sur place')):
     leg += (f'<div style="position: absolute; left: {185 / K:.1f}px; top: {yy - fs * 0.62:.1f}px; font-size: {fs:.2f}px; font-weight: 500; line-height: 1.2; white-space: nowrap">{word}</div>'
             f'<div style="position: absolute; left: {375 / K:.1f}px; top: {yy - fs * 0.62:.1f}px; font-size: {fs:.2f}px; font-weight: 500; line-height: 1.2">{dd}</div>'
-            f'<div style="position: absolute; left: {450 / K:.1f}px; top: {yy - fi * 0.60:.1f}px; font-size: {fi:.2f}px; font-style: italic; line-height: 1.2; white-space: nowrap">1 : abîmé</div>')
+            f'<div style="position: absolute; left: {450 / K:.1f}px; top: {yy - fi * 0.60:.1f}px; font-size: {fi:.2f}px; font-style: italic; line-height: 1.2; white-space: nowrap">{ech}</div>')
 leg += '</div>'
 OVER += [ROSE, leg]
 

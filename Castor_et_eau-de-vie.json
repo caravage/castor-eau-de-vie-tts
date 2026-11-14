@@ -223,8 +223,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_39_hd.jpg",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_39_hd.jpg",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_40_hd.jpg",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_40_hd.jpg",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -6664,7 +6664,7 @@
       "GUID": "0a0bdd",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 17.2,
+        "posX": 17.0,
         "posY": 2.0,
         "posZ": 20.36,
         "rotX": 0,
@@ -6675,8 +6675,8 @@
         "scaleZ": 1.4
       },
       "Nickname": "Guides",
-      "Description": "6 guides. +1 au jet de raccourci et à l’action Traverser. 1 ₶.",
-      "GMNotes": "{\"w\": 1.4, \"x\": 17.2, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 2.016, \"lock\": true, \"drop\": true}",
+      "Description": "6 guides. +1 au jet de raccourci et aux traversées. 2 ₶.",
+      "GMNotes": "{\"w\": 1.4, \"x\": 17.0, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 2.016, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -6718,7 +6718,7 @@
             "scaleZ": 1.0
           },
           "Nickname": "Guide",
-          "Description": "+1 au jet de raccourci et à l’action Traverser. 1 ₶.",
+          "Description": "+1 au jet de raccourci et aux traversées. 2 ₶.",
           "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -6759,7 +6759,7 @@
             "scaleZ": 1.0
           },
           "Nickname": "Guide",
-          "Description": "+1 au jet de raccourci et à l’action Traverser. 1 ₶.",
+          "Description": "+1 au jet de raccourci et aux traversées. 2 ₶.",
           "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -6800,7 +6800,7 @@
             "scaleZ": 1.0
           },
           "Nickname": "Guide",
-          "Description": "+1 au jet de raccourci et à l’action Traverser. 1 ₶.",
+          "Description": "+1 au jet de raccourci et aux traversées. 2 ₶.",
           "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -6841,7 +6841,7 @@
             "scaleZ": 1.0
           },
           "Nickname": "Guide",
-          "Description": "+1 au jet de raccourci et à l’action Traverser. 1 ₶.",
+          "Description": "+1 au jet de raccourci et aux traversées. 2 ₶.",
           "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -6882,7 +6882,7 @@
             "scaleZ": 1.0
           },
           "Nickname": "Guide",
-          "Description": "+1 au jet de raccourci et à l’action Traverser. 1 ₶.",
+          "Description": "+1 au jet de raccourci et aux traversées. 2 ₶.",
           "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -6923,7 +6923,7 @@
             "scaleZ": 1.0
           },
           "Nickname": "Guide",
-          "Description": "+1 au jet de raccourci et à l’action Traverser. 1 ₶.",
+          "Description": "+1 au jet de raccourci et aux traversées. 2 ₶.",
           "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -6955,7 +6955,7 @@
       "GUID": "404510",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 19.15,
+        "posX": 18.5,
         "posY": 2.0,
         "posZ": 20.36,
         "rotX": 0,
@@ -6967,7 +6967,7 @@
       },
       "Nickname": "Pilotes",
       "Description": "6 pilotes. Passe les rapides sans jet. 1 ₶.",
-      "GMNotes": "{\"w\": 1.4, \"x\": 19.15, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 2.016, \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 18.5, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 2.016, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -7246,7 +7246,7 @@
       "GUID": "6fc297",
       "Name": "Custom_Model_Bag",
       "Transform": {
-        "posX": 21.1,
+        "posX": 20.0,
         "posY": 2.0,
         "posZ": 20.36,
         "rotX": 0,
@@ -7258,7 +7258,7 @@
       },
       "Nickname": "Forgerons",
       "Description": "6 forgerons. Usage unique : répare un canot, ou compte comme une marchandise pour un troc. 1 ₶.",
-      "GMNotes": "{\"w\": 1.4, \"x\": 21.1, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 2.016, \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 1.4, \"x\": 20.0, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 2.016, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -7521,6 +7521,588 @@
           "CustomImage": {
             "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_artisan.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_artisan_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "GUID": "57435c",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 21.5,
+        "posY": 2.0,
+        "posZ": 20.36,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.4,
+        "scaleY": 1.0,
+        "scaleZ": 1.4
+      },
+      "Nickname": "Interprètes",
+      "Description": "6 interprètes. +1 dé au troc. 2 ₶.",
+      "GMNotes": "{\"w\": 1.4, \"x\": 21.5, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 2.016, \"lock\": true, \"drop\": true}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_voy2_interprete.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": [
+        {
+          "GUID": "add489",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Interprète",
+          "Description": "+1 dé au troc. 2 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "0e6f41",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Interprète",
+          "Description": "+1 dé au troc. 2 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "1ec16a",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Interprète",
+          "Description": "+1 dé au troc. 2 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "87fe71",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Interprète",
+          "Description": "+1 dé au troc. 2 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "1051ea",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Interprète",
+          "Description": "+1 dé au troc. 2 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "c563cb",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Interprète",
+          "Description": "+1 dé au troc. 2 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_interprete_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "GUID": "ffb378",
+      "Name": "Custom_Model_Bag",
+      "Transform": {
+        "posX": 23.0,
+        "posY": 2.0,
+        "posZ": 20.36,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.4,
+        "scaleY": 1.0,
+        "scaleZ": 1.4
+      },
+      "Nickname": "Miliciens",
+      "Description": "6 miliciens. Compte pour 2 voyageurs dans les jets de combat (défense du canot, trafic). 1 ₶.",
+      "GMNotes": "{\"w\": 1.4, \"x\": 23.0, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 2.016, \"lock\": true, \"drop\": true}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_voy2_milicien.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 6,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      },
+      "MaterialIndex": 3,
+      "ContainedObjects": [
+        {
+          "GUID": "07db79",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Milicien",
+          "Description": "Compte pour 2 voyageurs dans les jets de combat (défense du canot, trafic). 1 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "9e23de",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Milicien",
+          "Description": "Compte pour 2 voyageurs dans les jets de combat (défense du canot, trafic). 1 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "acbc70",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Milicien",
+          "Description": "Compte pour 2 voyageurs dans les jets de combat (défense du canot, trafic). 1 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "e7222c",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Milicien",
+          "Description": "Compte pour 2 voyageurs dans les jets de combat (défense du canot, trafic). 1 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "c2fea7",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Milicien",
+          "Description": "Compte pour 2 voyageurs dans les jets de combat (défense du canot, trafic). 1 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien_used.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": true
+            }
+          }
+        },
+        {
+          "GUID": "bb77e9",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Milicien",
+          "Description": "Compte pour 2 voyageurs dans les jets de combat (défense du canot, trafic). 1 ₶.",
+          "GMNotes": "{\"w\": 0.82, \"d\": 1.18}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_milicien_used.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11140,7 +11722,7 @@
       },
       "Nickname": "Aide de jeu (recto)",
       "Description": "",
-      "GMNotes": "{\"w\": 15.05, \"x\": -7.875, \"z\": 35.395, \"h\": 0.5, \"d\": 10.8172}",
+      "GMNotes": "{\"w\": 15.05, \"x\": -7.875, \"z\": 35.395, \"h\": 0.5, \"d\": 11.7296}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -11153,8 +11735,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_a.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_b.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_a_v40.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_b_v40.png",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -11181,7 +11763,7 @@
       },
       "Nickname": "Aide de jeu (verso)",
       "Description": "",
-      "GMNotes": "{\"w\": 15.05, \"x\": 7.875, \"z\": 35.395, \"h\": 0.5, \"d\": 10.8172}",
+      "GMNotes": "{\"w\": 15.05, \"x\": 7.875, \"z\": 35.395, \"h\": 0.5, \"d\": 11.7296}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -11194,8 +11776,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_b.png?v38",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_a.png?v38",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_b_v40.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_a_v40.png",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -11210,7 +11792,7 @@
       "GUID": "44c2d3",
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
-        "posX": 23.05,
+        "posX": 24.5,
         "posY": 2.0,
         "posZ": 20.36,
         "rotX": 0,
@@ -11222,7 +11804,7 @@
       },
       "Nickname": "Coureurs des bois",
       "Description": "Jetons Coureur des bois en nombre illimité : un sur la carte Expédition des coureurs, à la place du congé.",
-      "GMNotes": "{\"w\": 1.19, \"x\": 23.05, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 1.19, \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 1.19, \"x\": 24.5, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 1.19, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -16664,7 +17246,7 @@
       "GUID": "71247a",
       "Name": "Custom_Model_Infinite_Bag",
       "Transform": {
-        "posX": 25.0,
+        "posX": 26.0,
         "posY": 2.0,
         "posZ": 20.36,
         "rotX": 0,
@@ -16676,7 +17258,7 @@
       },
       "Nickname": "Zones fermées",
       "Description": "Jetons Zone fermée en nombre illimité",
-      "GMNotes": "{\"w\": 1.2, \"x\": 25.0, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 1.2, \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 1.2, \"x\": 26.0, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 1.2, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,

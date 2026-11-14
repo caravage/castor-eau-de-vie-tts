@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Aide de jeu des actions</title>
+<!-- Copie de rendu du canevas « Plaquette des actions » (https://claude.ai/artifact/XVm9Mxkwq7TB8h1hvRRttg, version 1794639932-eb83).
+     Polices locales (@fontsource via ../plateau_hd/fonts.css), images du jeu dans img/v18. Rendu : node shot2.js ou Chrome headless, 1600 × 1247 css. -->
+<link rel="stylesheet" href="../plateau_hd/fonts.css">
+<style>
+body{margin:0}
+img{mix-blend-mode:multiply;display:block;flex:none}
+svg{display:block;flex:none}
+</style>
+</head>
+<body>
+<div style="position: relative; width: 1600px; height: 1247px; overflow: hidden; background: #E6DAB6; color: #2A2418; font-family: 'Alegreya Sans', sans-serif; font-size: 20px; line-height: 1.2">
+<div style="position: absolute; left: 0px; top: 0px; width: 1600px; height: 1247px; box-sizing: border-box; background: rgb(230, 218, 182)"></div>
+<div style="position: absolute; left: 10px; top: 10px; width: 1580px; height: 1231px; box-sizing: border-box; border: 3px solid rgb(42, 36, 24); border-radius: 22px"></div>
+<div style="position: absolute; left: 27px; top: 27px; width: 1007.66px; height: 1197px; box-sizing: border-box; background: rgb(239, 230, 204); border: 2px solid rgb(183, 166, 117); border-radius: 14px"></div>
+<div style="position: absolute; left: 43px; top: 51.84px; width: 375.52px; height: 1.5px; background: rgb(183, 166, 117)"></div>
+<div style="position: absolute; left: 434.52px; top: 35px; width: 192.61px; box-sizing: border-box; font-family: 'IM Fell English SC', serif; font-size: 32px; line-height: 35.2px; color: rgb(52, 48, 42)">En expédition</div>
+<div style="position: absolute; left: 643.13px; top: 51.84px; width: 375.53px; height: 1.5px; background: rgb(183, 166, 117)"></div>
+<div style="position: absolute; left: 43px; top: 78.19px; width: 975.66px; height: 65.91px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(52, 48, 42); border-radius: 12px"></div>
+<svg width="42" height="39" viewBox="0 0 60 56" style="position: absolute; left: 50px; top: 90.19px"><g fill="none" stroke="#34302A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 32Q24 42 44 32Q24 36 4 32Z"/><path d="M32 6L22 34"/><path d="M8 46H54M48 40L54 46L48 52"/></g></svg>
+<div style="position: absolute; left: 101px; top: 86.19px; width: 903.66px; font-family: 'IM Fell English SC', serif; font-size: 26px; line-height: 27.3px; color: rgb(52, 48, 42)">Voyager</div>
+<div style="position: absolute; left: 101px; top: 113.48px; width: 903.66px; font-size: 19.5px; line-height: 22.62px">Avancez une expédition vers un lieu adjacent.</div>
+<div style="position: absolute; left: 43px; top: 152.09px; width: 975.66px; height: 89px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(52, 48, 42); border-radius: 12px"></div>
+<svg width="42" height="39" viewBox="0 0 60 56" style="position: absolute; left: 50px; top: 164.09px"><g fill="none" stroke="#34302A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 42Q10 33 22 33Q30 29 40 32Q52 33 50 43Q48 52 30 51Q12 52 10 42Z"/><path d="M20 42q4-3 8 0t8 0" stroke-width="2"/><path d="M4 28Q30 -2 56 26" stroke-dasharray="6 5"/><path d="M47.4 23.4L56 26L54 17.3"/></g></svg>
+<div style="position: absolute; left: 101px; top: 160.09px; width: 903.66px; font-family: 'IM Fell English SC', serif; font-size: 26px; line-height: 27.3px; color: rgb(52, 48, 42)">Traverser</div>
+<div style="position: absolute; left: 101px; top: 187.39px; width: 903.66px; font-size: 19.5px; line-height: 22.62px">Avancez une expédition vers une autre zone de traite de même couleur. Lancez 1 dé&nbsp;:<br>sur 2 et +, elle passe&nbsp;; sur 1, elle passe mais le canot est abîmé.</div>
+<div style="position: absolute; left: 0px; top: 97px; width: 1600px; height: 1000px">
+<div style="position: absolute; left: 43px; top: 152.09px; width: 975.66px; height: 746.13px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(52, 48, 42); border-radius: 12px"></div>
+<svg width="42" height="39" viewBox="0 0 60 56" style="position: absolute; left: 50px; top: 162.09px"><g fill="none" stroke="#34302A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 20H46M39 12L47 20L39 28"/><path d="M50 38H14M21 30L13 38L21 46"/></g></svg>
+<div style="position: absolute; left: 101px; top: 160.09px; width: 903.66px; font-family: 'IM Fell English SC', serif; font-size: 26px; line-height: 27.3px; color: rgb(52, 48, 42)">Troquer</div>
+<div style="position: absolute; left: 101px; top: 187.39px; width: 903.66px; font-size: 19.5px; line-height: 22.62px">Dans une zone de traite, une expédition essaye d’échanger ses charges contre les tuiles présentes.<br><b>Mission&nbsp;:</b> Coureur des bois interdit</div>
+<div style="position: absolute; left: 101px; top: 236.61px; width: 28px; height: 28px; font-size: 18px; line-height: 28px; color: rgb(241, 231, 201); font-weight: 700; text-align: center; background: rgb(34, 51, 46); border-radius: 50px">1</div>
+<div style="position: absolute; left: 138px; top: 239.11px; width: 158.44px; font-family: 'IM Fell English SC', serif; font-size: 23px; line-height: 23px; color: rgb(52, 48, 42)">Comptez vos dés</div>
+<div style="position: absolute; left: 305.44px; top: 250.11px; width: 699.22px; height: 1px; background: rgb(221, 208, 172)"></div>
+<div style="position: absolute; left: 101px; top: 280.48px; width: 98px; height: 108.78px; box-sizing: border-box; background: rgb(236, 231, 216); border: 1px solid rgb(34, 51, 46); border-radius: 10px"></div>
+<div style="position: absolute; left: 102px; top: 281.48px; width: 96px; height: 24px; font-size: 17px; line-height: 24px; color: rgb(255, 253, 246); font-weight: 700; text-align: center; background: rgb(34, 51, 46); border-radius: 9px 9px 0 0">BASE</div>
+<svg width="32" height="32" viewBox="0 0 40 40" style="position: absolute; left: 116.5px; top: 317.47px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/></svg>
+<svg width="32" height="32" viewBox="0 0 40 40" style="position: absolute; left: 151.5px; top: 317.47px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/></svg>
+<div style="position: absolute; left: 131.28px; top: 353.47px; width: 37.42px; font-size: 19px; line-height: 22.8px">2 dés</div>
+<div style="position: absolute; left: 205px; top: 280.48px; width: 421px; height: 108.78px; box-sizing: border-box; background: rgb(238, 242, 226); border: 1px solid rgb(78, 107, 46); border-radius: 10px"></div>
+<div style="position: absolute; left: 206px; top: 281.48px; width: 419px; height: 24px; font-size: 17px; line-height: 24px; color: rgb(255, 253, 246); font-weight: 700; text-align: center; background: rgb(78, 107, 46); border-radius: 9px 9px 0 0">BONUS · +1 DÉ CHACUN</div>
+<svg width="52" height="36" viewBox="0 0 50 34" style="position: absolute; left: 222.38px; top: 308.48px"><circle cx="18" cy="17" r="12.5" fill="none" stroke="#B58420" stroke-width="4.2"/><circle cx="32" cy="17" r="12.5" fill="none" stroke="#B58420" stroke-width="4.2"/></svg>
+<div style="position: absolute; left: 216px; top: 347.48px; width: 64.77px; font-size: 18px; line-height: 18.9px; text-align: center">Nation alliée</div>
+<img src="../../img/v18/fort_fr.png" alt="" style="position: absolute; left: 295.67px; top: 312.92px; width: 46px; height: 46px">
+<div style="position: absolute; left: 304.97px; top: 361.92px; width: 27.39px; font-size: 18px; line-height: 18.9px; text-align: center">Fort</div>
+<svg width="34" height="48" viewBox="0 0 42 60" style="position: absolute; left: 379.36px; top: 311.92px"><rect x="1.5" y="1.5" width="39" height="57" rx="7" fill="#8A5A12"/><rect x="5.5" y="14" width="31" height="40.5" rx="4" fill="#F6EEDA"/><rect x="7" y="27.6" width="28" height="12.6" rx="1" fill="#E8DDC4" stroke="#2A2418" stroke-width="1.4"></rect><rect x="8.0" y="29.0" width="3.4" height="3.8" fill="#F6F0E2" stroke="#2A2418" stroke-width="0.6"></rect><rect x="8.0" y="33.6" width="3.4" height="3.8" fill="#4B2E5C" stroke="#2A2418" stroke-width="0.6"></rect><rect x="12.2" y="29.0" width="3.4" height="3.8" fill="#4B2E5C" stroke="#2A2418" stroke-width="0.6"></rect><rect x="12.2" y="33.6" width="3.4" height="3.8" fill="#F6F0E2" stroke="#2A2418" stroke-width="0.6"></rect><rect x="16.4" y="29.0" width="3.4" height="3.8" fill="#4B2E5C" stroke="#2A2418" stroke-width="0.6"></rect><rect x="16.4" y="33.6" width="3.4" height="3.8" fill="#F6F0E2" stroke="#2A2418" stroke-width="0.6"></rect><rect x="20.6" y="29.0" width="3.4" height="3.8" fill="#F6F0E2" stroke="#2A2418" stroke-width="0.6"></rect><rect x="20.6" y="33.6" width="3.4" height="3.8" fill="#4B2E5C" stroke="#2A2418" stroke-width="0.6"></rect><rect x="24.8" y="29.0" width="3.4" height="3.8" fill="#4B2E5C" stroke="#2A2418" stroke-width="0.6"></rect><rect x="24.8" y="33.6" width="3.4" height="3.8" fill="#F6F0E2" stroke="#2A2418" stroke-width="0.6"></rect><rect x="29.0" y="29.0" width="3.4" height="3.8" fill="#F6F0E2" stroke="#2A2418" stroke-width="0.6"></rect><rect x="29.0" y="33.6" width="3.4" height="3.8" fill="#4B2E5C" stroke="#2A2418" stroke-width="0.6"></rect></svg>
+<div style="position: absolute; left: 361.16px; top: 362.92px; width: 70.41px; font-size: 18px; line-height: 18.9px; text-align: center">Interprète</div>
+<img src="../../img/v18/tok_bouteille.png" alt="" style="position: absolute; left: 448.14px; top: 320.88px; width: 52px; height: 52px">
+<div style="position: absolute; left: 509.14px; top: 325.98px; width: 105.86px; font-size: 19px; line-height: 20.9px; white-space: nowrap">par eau-de-vie<br>utilisée</div>
+<div style="position: absolute; left: 632px; top: 280.48px; width: 372.66px; height: 108.78px; box-sizing: border-box; background: rgb(246, 230, 224); border: 1px solid rgb(140, 47, 31); border-radius: 10px"></div>
+<div style="position: absolute; left: 633px; top: 281.48px; width: 370.66px; height: 24px; font-size: 17px; line-height: 24px; color: rgb(255, 253, 246); font-weight: 700; text-align: center; background: rgb(140, 47, 31); border-radius: 9px 9px 0 0">MALUS · −1 DÉ CHACUN</div>
+<img src="../../img/v18/mission.png" alt="" style="position: absolute; left: 643px; top: 312.92px; width: 42px; height: 42px">
+<div style="position: absolute; left: 629px; top: 361.92px; width: 70px; font-size: 18px; line-height: 18.9px; text-align: center">Mission</div>
+<svg width="62" height="27" viewBox="0 0 64 28" style="position: absolute; left: 708px; top: 333.36px"><path d="M2 14Q32 -2 62 14Q32 30 2 14Z" fill="#2F5E9E" stroke="#2A2418" stroke-width="2"/><path d="M10 14Q32 5 54 14Q32 23 10 14Z" fill="none" stroke="#F6F0E0" stroke-width="1.6"/></svg>
+<div style="position: absolute; left: 778px; top: 315.53px; width: 215px; font-size: 19px; line-height: 20.9px">par expédition rivale active dans la même zone de traite <span style="font-size: 16.5px; color: rgb(74, 64, 48)">(sans surenchère)</span></div>
+<div style="position: absolute; left: 101px; top: 405.14px; width: 903.66px; box-sizing: border-box; font-size: 22px; line-height: 24.2px; padding: 0 5px">Note : Le minimum de dé est 1.</div>
+<div style="position: absolute; left: 101px; top: 445.22px; width: 28px; height: 28px; font-size: 18px; line-height: 28px; color: rgb(241, 231, 201); font-weight: 700; text-align: center; background: rgb(34, 51, 46); border-radius: 50px">2</div>
+<div style="position: absolute; left: 138px; top: 447.72px; width: 380.83px; font-family: 'IM Fell English SC', serif; font-size: 23px; line-height: 23px; color: rgb(52, 48, 42)">Lancez une fois · gardez le meilleur dé</div>
+<div style="position: absolute; left: 527.83px; top: 458.72px; width: 476.83px; height: 1px; background: rgb(221, 208, 172)"></div>
+<div style="position: absolute; left: 101px; top: 489.09px; width: 903.66px; height: 48.88px; box-sizing: border-box; background: rgb(255, 253, 246); border: 1px solid rgb(205, 187, 138); border-radius: 10px"></div>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 130.5px; top: 498.53px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><g fill="#F1E7C9"><circle cx="10" cy="10" r="3.2"/><circle cx="30" cy="10" r="3.2"/><circle cx="20" cy="20" r="3.2"/><circle cx="10" cy="30" r="3.2"/><circle cx="30" cy="30" r="3.2"/></g></svg>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 163.5px; top: 498.53px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><g fill="#F1E7C9"><circle cx="10" cy="10" r="3.2"/><circle cx="30" cy="10" r="3.2"/><circle cx="10" cy="20" r="3.2"/><circle cx="30" cy="20" r="3.2"/><circle cx="10" cy="30" r="3.2"/><circle cx="30" cy="30" r="3.2"/></g></svg>
+<div style="position: absolute; left: 222px; top: 501.53px; width: 96px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 24px; color: rgb(12, 138, 24)">Accord</div>
+<div style="position: absolute; left: 328px; top: 492.09px; width: 665.66px; font-size: 19.5px; line-height: 21.45px">Échangez vos charges contre autant de tuiles, au choix. <br>(+1 soupçon par eau-de-vie si dans une Mission)</div>
+<div style="position: absolute; left: 101px; top: 541.97px; width: 903.66px; height: 36px; box-sizing: border-box; background: rgb(255, 253, 246); border: 1px solid rgb(205, 187, 138); border-radius: 10px"></div>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 114px; top: 544.97px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><g fill="#F1E7C9"><circle cx="10" cy="10" r="3.2"/><circle cx="30" cy="30" r="3.2"/></g></svg>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 147px; top: 544.97px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><g fill="#F1E7C9"><circle cx="10" cy="10" r="3.2"/><circle cx="20" cy="20" r="3.2"/><circle cx="30" cy="30" r="3.2"/></g></svg>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 180px; top: 544.97px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><g fill="#F1E7C9"><circle cx="10" cy="10" r="3.2"/><circle cx="30" cy="10" r="3.2"/><circle cx="10" cy="30" r="3.2"/><circle cx="30" cy="30" r="3.2"/></g></svg>
+<div style="position: absolute; left: 222px; top: 547.97px; width: 96px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 24px; color: rgb(94, 82, 56)">Impasse</div>
+<div style="position: absolute; left: 328px; top: 549.25px; width: 665.66px; font-size: 19.5px; line-height: 21.45px">Pas d’échange.</div>
+<div style="position: absolute; left: 101px; top: 581.97px; width: 903.66px; height: 49.66px; box-sizing: border-box; background: rgb(255, 253, 246); border: 1px solid rgb(205, 187, 138); border-radius: 10px"></div>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 147px; top: 591.8px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><circle cx="20" cy="20" r="3.2" fill="#F1E7C9"/></svg>
+<div style="position: absolute; left: 222px; top: 594.8px; width: 96px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 24px; color: rgb(140, 47, 31)">Affront</div>
+<div style="position: absolute; left: 328px; top: 584.97px; width: 665.66px; font-size: 19.5px; line-height: 21.84px">Impasse, et la nation rompt l’alliance.<br>Si déjà neutre, la zone est fermée et les peaux sont envoyées à Albany.</div>
+<div style="position: absolute; left: 101px; top: 635.63px; width: 903.66px; height: 51.66px; box-sizing: border-box; background: rgb(251, 241, 214); border: 2px solid rgb(181, 132, 32); border-radius: 10px"></div>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 131.5px; top: 646.45px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><g fill="#F1E7C9"><circle cx="10" cy="10" r="3.2"/><circle cx="30" cy="10" r="3.2"/><circle cx="10" cy="20" r="3.2"/><circle cx="30" cy="20" r="3.2"/><circle cx="10" cy="30" r="3.2"/><circle cx="30" cy="30" r="3.2"/></g></svg>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 164.5px; top: 646.45px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><g fill="#F1E7C9"><circle cx="10" cy="10" r="3.2"/><circle cx="30" cy="10" r="3.2"/><circle cx="10" cy="20" r="3.2"/><circle cx="30" cy="20" r="3.2"/><circle cx="10" cy="30" r="3.2"/><circle cx="30" cy="30" r="3.2"/></g></svg>
+<div style="position: absolute; left: 223px; top: 649.45px; width: 96px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 24px; color: rgb(138, 90, 18)">Festin</div>
+<div style="position: absolute; left: 329px; top: 639.63px; width: 663.66px; font-size: 19.5px; line-height: 21.84px">La nation devient alliée. <br>Si déjà alliée, ajoutez une tuile de castor sec à la zone avant l’échange.</div>
+<div style="position: absolute; left: 101px; top: 703.16px; width: 903.66px; box-sizing: border-box; font-size: 19.5px; line-height: 22.62px; padding: 0 2px">Après le troc, s'il y a eu de l'eau-de-vie, on lance un dé. Sur 1, ravage +1.</div>
+<div style="position: absolute; left: 101px; top: 741.64px; width: 903.66px; height: 146.58px; box-sizing: border-box; background: rgb(241, 233, 210); border: 2px solid rgb(139, 123, 88); border-radius: 10px"></div>
+<svg width="52" height="23" viewBox="0 0 64 28" style="position: absolute; left: 112px; top: 751.64px"><path d="M2 14Q32 -2 62 14Q32 30 2 14Z" fill="#B23A2E" stroke="#2A2418" stroke-width="2"/><path d="M10 14Q32 5 54 14Q32 23 10 14Z" fill="none" stroke="#F6F0E0" stroke-width="1.6"/></svg>
+<svg width="52" height="23" viewBox="0 0 64 28" style="position: absolute; left: 112px; top: 779.64px"><path d="M2 14Q32 -2 62 14Q32 30 2 14Z" fill="#2F5E9E" stroke="#2A2418" stroke-width="2"/><path d="M10 14Q32 5 54 14Q32 23 10 14Z" fill="none" stroke="#F6F0E0" stroke-width="1.6"/></svg>
+<div style="position: absolute; left: 173px; top: 746.64px; width: 817.66px; font-family: 'IM Fell English SC', serif; font-size: 25px; line-height: 26.25px; color: rgb(52, 48, 42)">Surenchérir</div>
+<div style="position: absolute; left: 173px; top: 773.89px; width: 817.66px; font-size: 19px; line-height: 21.28px">Si un rival troque dans une zone de traite où vous avez un canot debout, <br>vous pouvez coucher votre canot et lancer vos dés en même temps que lui.</div>
+<div style="position: absolute; left: 173px; top: 817.42px; width: 817.66px; font-size: 19px; line-height: 21.28px"><b>Vos dés&nbsp;:</b> 1 de base (au lieu de 2), plus bonus et malus. Le joueur actif n’a alors pas le malus du rival.</div>
+<div style="position: absolute; left: 173px; top: 839.69px; width: 817.66px; font-size: 19px; line-height: 21.28px"><b>Partage&nbsp;:</b> on classe tous les dés du plus haut au plus bas (égalité&nbsp;: joueur actif). <br>Chaque dé prend 1 tuile contre 1 charge. On répète l’ordre autant de fois qu’il faut.</div>
+<div style="position: absolute; left: 43px; top: 906.22px; width: 975.66px; height: 208.78px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(52, 48, 42); border-radius: 12px"></div>
+<svg width="42" height="39" viewBox="0 0 60 56" style="position: absolute; left: 50px; top: 916.22px"><g fill="none" stroke="#34302A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M25 5H35V16L42 25V47Q42 51 38 51H22Q18 51 18 47V25L25 16Z"/><path d="M18 32H42"/></g></svg>
+<div style="position: absolute; left: 101px; top: 914.22px; width: 903.66px; font-family: 'IM Fell English SC', serif; font-size: 26px; line-height: 27.3px; color: rgb(52, 48, 42)">Trafiquer</div>
+<div style="position: absolute; left: 101px; top: 941.52px; width: 903.66px; font-size: 19.5px; line-height: 22.62px">Dans une zone de traite, une expédition essaye de trafiquer de la fourrure de castor contre 1 eau-de-vie. Lancez 1 dé.<br>Vous pouvez recommencer, avec 1 dé supplémentaire à chaque essai.</div>
+<div style="position: absolute; left: 101px; top: 986.73px; width: 903.66px; font-size: 19.5px; line-height: 22.62px"><b>Mission&nbsp;:</b> trafic interdit.</div>
+<div style="position: absolute; left: 101px; top: 1015.34px; width: 903.66px; height: 36px; box-sizing: border-box; background: rgb(255, 253, 246); border: 1px solid rgb(205, 187, 138); border-radius: 10px"></div>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 123.02px; top: 1018.34px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><g fill="#F1E7C9"><circle cx="10" cy="10" r="3.2"/><circle cx="30" cy="30" r="3.2"/></g></svg>
+<div style="position: absolute; left: 159.02px; top: 1021.34px; width: 41.95px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 24px; color: rgb(94, 82, 56)">et +</div>
+<div style="position: absolute; left: 222px; top: 1021.34px; width: 96px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 24px; color: rgb(12, 138, 24)">Accord</div>
+<div style="position: absolute; left: 328px; top: 1022.42px; width: 665.66px; font-size: 19.5px; line-height: 21.84px">Piochez une tuile de castor sec.</div>
+<div style="position: absolute; left: 101px; top: 1055.34px; width: 903.66px; height: 49.66px; box-sizing: border-box; background: rgb(255, 253, 246); border: 1px solid rgb(205, 187, 138); border-radius: 10px"></div>
+<svg width="30" height="30" viewBox="0 0 40 40" style="position: absolute; left: 147px; top: 1065.17px"><rect x="1.5" y="1.5" width="37" height="37" rx="8" fill="#1D1B17"/><circle cx="20" cy="20" r="3.2" fill="#F1E7C9"/></svg>
+<div style="position: absolute; left: 222px; top: 1068.17px; width: 96px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 24px; color: rgb(140, 47, 31)">Affront</div>
+<div style="position: absolute; left: 328px; top: 1058.34px; width: 665.66px; font-size: 19.5px; line-height: 21.84px">Perte de l’eau-de-vie, soupçon +1, ravage +1.<br>Si le nombre de dés lancés &gt; nombre de voyageurs de l’expédition, perte de l’expédition.</div>
+</div>
+<div style="position: absolute; left: 1047.66px; top: 27px; width: 525.34px; height: 621.17px; box-sizing: border-box; background: rgb(239, 230, 204); border: 2px solid rgb(183, 166, 117); border-radius: 14px"></div>
+<div style="position: absolute; left: 1061.66px; top: 51.84px; width: 148.77px; height: 1.5px; background: rgb(183, 166, 117)"></div>
+<div style="position: absolute; left: 1226.42px; top: 35px; width: 167.8px; font-family: 'IM Fell English SC', serif; font-size: 32px; line-height: 35.2px; color: rgb(122, 78, 42)">À Montréal</div>
+<div style="position: absolute; left: 1410.22px; top: 51.84px; width: 148.78px; height: 1.5px; background: rgb(183, 166, 117)"></div>
+<div style="position: absolute; left: 1061.66px; top: 78.19px; width: 497.34px; height: 164.09px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(122, 78, 42); border-radius: 12px"></div>
+<img src="../../img/v18/c41_lib.png" alt="" style="position: absolute; left: 1082.66px; top: 124.73px; width: 44px; height: 44px">
+<img src="../../img/v18/canot_petit.png" alt="" style="position: absolute; left: 1079.52px; top: 173.73px; width: 50.28px; height: 22px">
+<div style="position: absolute; left: 1149.66px; top: 101.36px; width: 395.34px; font-family: 'IM Fell English SC', serif; font-size: 26px; line-height: 27.3px; color: rgb(122, 78, 42)">Monter une expédition</div>
+<div style="position: absolute; left: 1149.66px; top: 128.66px; width: 395.34px; font-size: 19.5px; line-height: 22.62px">Composez une ou plusieurs expéditions&nbsp;: congé ou coureurs des bois, canot, charges, voyageurs. Payez, puis posez les canots sur un portage adjacent à Montréal.</div>
+<div style="position: absolute; left: 1061.66px; top: 250.28px; width: 497.34px; height: 134.48px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(122, 78, 42); border-radius: 12px"></div>
+<img src="../../img/v18/tok_peau_sec.png" alt="" style="position: absolute; left: 1071.66px; top: 301.52px; width: 32px; height: 32px">
+<img src="../../img/v18/part_lt.png" alt="" style="position: absolute; left: 1107.66px; top: 302.52px; width: 30px; height: 30px">
+<div style="position: absolute; left: 1149.66px; top: 281.27px; width: 395.34px; font-family: 'IM Fell English SC', serif; font-size: 26px; line-height: 27.3px; color: rgb(122, 78, 42)">Vendre des fourrures</div>
+<div style="position: absolute; left: 1149.66px; top: 308.56px; width: 395.34px; font-size: 19.5px; line-height: 22.62px">De votre entrepôt&nbsp;: à <b>Montréal</b>, au prix du castor&nbsp;; <br>à <b>Albany</b>, au prix du castor +1.</div>
+<div style="position: absolute; left: 1061.66px; top: 392.77px; width: 497.34px; height: 134.47px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(122, 78, 42); border-radius: 12px"></div>
+<img src="../../img/v18/tok_caisse.png" alt="" style="position: absolute; left: 1073.66px; top: 431px; width: 27px; height: 27px">
+<img src="../../img/v18/tok_bouteille.png" alt="" style="position: absolute; left: 1104.66px; top: 429px; width: 31px; height: 31px">
+<img src="../../img/v18/navire.png" alt="" style="position: absolute; left: 1073.45px; top: 465.5px; width: 33.64px; height: 24px">
+<img src="../../img/v18/alambic.png" alt="" style="position: absolute; left: 1111.09px; top: 464px; width: 24.75px; height: 27px">
+<div style="position: absolute; left: 1149.66px; top: 412.44px; width: 395.34px; font-family: 'IM Fell English SC', serif; font-size: 26px; line-height: 27.3px; color: rgb(122, 78, 42)">Investir</div>
+<div style="position: absolute; left: 1149.66px; top: 439.73px; width: 395.34px; font-size: 19.5px; line-height: 22.62px">Achetez un canot, des marchandises ou de l’eau-de-vie au Marché de Québec, ou des parts de navire ou de distillerie.</div>
+<div style="position: absolute; left: 1061.66px; top: 535.23px; width: 497.34px; height: 98.94px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(122, 78, 42); border-radius: 12px"></div>
+<img src="../../img/v18/deck_riv_back.png" alt="" style="position: absolute; left: 1086.8px; top: 559.7px; width: 35.7px; height: 50px">
+<div style="position: absolute; left: 1149.66px; top: 559.75px; width: 395.34px; font-family: 'IM Fell English SC', serif; font-size: 26px; line-height: 27.3px; color: rgb(122, 78, 42)">Recruter</div>
+<div style="position: absolute; left: 1149.66px; top: 587.05px; width: 395.34px; font-size: 19.5px; line-height: 22.62px">Achetez une carte de la Rivière.</div>
+<div style="position: absolute; left: 1047.66px; top: 661.17px; width: 525.34px; height: 562.83px; box-sizing: border-box; background: rgb(239, 230, 204); border: 2px solid rgb(183, 166, 117); border-radius: 14px"></div>
+<div style="position: absolute; left: 1061.66px; top: 684.92px; width: 116.77px; height: 1.5px; background: rgb(183, 166, 117)"></div>
+<div style="position: absolute; left: 1194.42px; top: 669.17px; width: 231.8px; font-family: 'IM Fell English SC', serif; font-size: 30px; line-height: 33px; color: rgb(94, 82, 56)">Actions gratuites</div>
+<div style="position: absolute; left: 1442.22px; top: 684.92px; width: 116.78px; height: 1.5px; background: rgb(183, 166, 117)"></div>
+<div style="position: absolute; left: 1061.66px; top: 702.17px; width: 497.34px; font-family: 'IM Fell English', serif; font-size: 20px; line-height: 22px; color: rgb(94, 82, 56); font-style: italic; text-align: center">une par tour, avant ou après votre action</div>
+<div style="position: absolute; left: 1061.66px; top: 731.17px; width: 497.34px; height: 122.61px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(139, 123, 88); border-radius: 12px"></div>
+<img src="../../img/v18/deck_man_back.png" alt="" style="position: absolute; left: 1083.23px; top: 769.47px; width: 32.84px; height: 46px">
+<div style="position: absolute; left: 1139.66px; top: 768.58px; width: 405.34px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 25.2px; color: rgb(94, 82, 56)">Jouer une carte</div>
+<div style="position: absolute; left: 1139.66px; top: 793.77px; width: 405.34px; font-size: 19.5px; line-height: 22.62px">De votre main, en respectant sa condition.</div>
+<div style="position: absolute; left: 1061.66px; top: 860.78px; width: 497.34px; height: 122.61px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(139, 123, 88); border-radius: 12px"></div>
+<img src="../../img/v18/navire.png" alt="" style="position: absolute; left: 1075.83px; top: 905.08px; width: 47.66px; height: 34px">
+<div style="position: absolute; left: 1139.66px; top: 898.19px; width: 405.34px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 25.2px; color: rgb(94, 82, 56)">Faire partir votre navire de Québec</div>
+<div style="position: absolute; left: 1139.66px; top: 923.38px; width: 405.34px; font-size: 19.5px; line-height: 22.62px">Avant octobre&nbsp;: 1 ₶ de faux fret par place vide.</div>
+<div style="position: absolute; left: 1061.66px; top: 990.39px; width: 497.34px; height: 122.61px; box-sizing: border-box; background: rgb(251, 247, 234); border: 2px solid rgb(139, 123, 88); border-radius: 12px"></div>
+<img src="../../img/v18/tok_caisse.png" alt="" style="position: absolute; left: 1072.66px; top: 1039.69px; width: 24px; height: 24px">
+<img src="../../img/v18/tok_peau_sec.png" alt="" style="position: absolute; left: 1100.66px; top: 1038.69px; width: 26px; height: 26px">
+<div style="position: absolute; left: 1139.66px; top: 1027.8px; width: 405.34px; font-family: 'IM Fell English SC', serif; font-size: 24px; line-height: 25.2px; color: rgb(94, 82, 56)">Échanger entre joueurs</div>
+<div style="position: absolute; left: 1139.66px; top: 1052.98px; width: 405.34px; font-size: 19.5px; line-height: 22.62px">À prix négocié&nbsp;: 1 canot, ou jusqu’à 5 charges ou peaux.</div>
+</div>
+<script>
+// contrôle des débordements : texte qui sort de son cadre
+document.fonts.ready.then(()=>{const out=[];document.querySelectorAll('div').forEach(d=>{if(!d.textContent.trim()||d.children.length>3)return;const r=document.createRange();r.selectNodeContents(d);for(const b of r.getClientRects()){const w=d.getBoundingClientRect();if(b.right>w.right+1||b.bottom>w.bottom+1)out.push(d.textContent.slice(0,40)+' → '+Math.round(b.right)+'/'+Math.round(w.right))}});document.title='OVF:'+out.join(' | ')});
+</script>
+</body>
+</html>
