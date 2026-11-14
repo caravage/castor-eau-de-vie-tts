@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Aide de jeu — Printemps et hiver</title>
+<!-- Verso de l'aide de jeu (v3.41), même style et même format que le recto (plaquette_actions.html). Texte tiré du livret. -->
+<link rel="stylesheet" href="../plateau_hd/fonts.css">
+<style>
+*{box-sizing:border-box;margin:0}
+body{background:#E6DAB6}
+.page{position:relative;width:1600px;height:1247px;background:#E6DAB6;color:#2A2418;font-family:'Alegreya Sans',sans-serif;padding:27px;display:flex;gap:13px}
+.page::before{content:'';position:absolute;left:10px;top:10px;right:10px;bottom:10px;border:3px solid #2A2418;border-radius:22px;pointer-events:none}
+.col{background:#EFE6CC;border:2px solid #B7A675;border-radius:14px;padding:8px 16px 16px;display:flex;flex-direction:column;gap:9px}
+.h{display:flex;align-items:center;gap:16px;font-family:'IM Fell English SC',serif;font-size:32px;line-height:35px;margin-bottom:4px}
+.h::before,.h::after{content:'';flex:1;height:1.5px;background:#B7A675}
+.spr .h{color:#4E6B2E}.hiv .h{color:#2F4E6E}
+.flow{column-count:2;column-gap:12px;column-fill:auto;height:1110px}.flow .s{break-inside:avoid;margin-bottom:9px}
+.stack{display:flex;flex-direction:column;gap:9px;flex:1}
+.s{background:#FBF7EA;border:2px solid #34302A;border-radius:12px;padding:9px 12px 10px 50px;position:relative}
+.s i{position:absolute;left:11px;top:10px;width:28px;height:28px;border-radius:50%;background:#22332E;color:#F1E7C9;font-style:normal;font-weight:700;font-size:17px;line-height:28px;text-align:center}
+.s b{display:block;font-family:'IM Fell English SC',serif;font-weight:400;font-size:24px;line-height:26px;color:#34302A;margin-bottom:2px}
+.s p{font-size:19.5px;line-height:22.6px}
+.s ul{margin:3px 0 0 18px;padding:0;font-size:18.5px;line-height:21.6px}
+.ferme{background:#F8E9D2;border-color:#A8662A}
+.ferme i{background:#A8662A}
+</style>
+</head>
+<body>
+<div class="page">
+ <div class="col spr" style="width:470px">
+  <div class="h">Printemps</div>
+  <div class="s"><i>1</i><b>Ordre du tour</b><p>Celui fixé à l’hiver précédent sur les ovales de Montréal, valable toute l’année.</p></div>
+  <div class="s"><i>2</i><b>Départ de La Rochelle</b><p>Chaque navire en rade de La Rochelle peut partir si son propriétaire le souhaite ; les navires non joueurs partent d’office. Chaque navire lance un dé : sur 4 ou plus, cercle 1 mois ; sinon, cercle 2 mois.</p></div>
+  <div class="s"><i>3</i><b>Lacs</b><p>Chaque tuile sèche restée au lac passe côté gras. Puis chaque lieu ouvert reçoit 1 tuile visible ; fort : +2 tuiles visibles et +1 jeton caché ; mission : +1 tuile visible. Au plus 4 tuiles visibles et 2 jetons cachés par lac.</p></div>
+  <div class="s"><i>4</i><b>Soupçon</b><p>Chaque joueur peut piocher autant de cartes Manigance que la moitié de son soupçon, arrondie au supérieur.</p></div>
+  <div class="s ferme"><i>5</i><b>Ferme du castor</b><p>Le fermier fixe le prix du castor à Québec pour l’année et choisit la politique d’achat : prix fixe, quantitatif, qualitatif ou commerce libre.</p></div>
+  <div class="s"><i>6</i><b>Partis (dès l’année II)</b><p>Chaque joueur mise des&nbsp;₶ en main fermée et annonce son parti ; les mises vont à la caisse de la colonie. Les pions se posent par mise décroissante, case 1 en tête (égalité : ordre du tour). Le fermier est Palais d’office, en dernière case.</p></div>
+ </div>
+ <div class="col hiv" style="flex:1">
+  <div class="h">Hiver</div>
+  <div class="flow">
+    <div class="s ferme"><i>1</i><b>Castors en France</b><p>On compte les castors arrivés en France et on les retire des navires. Puis la Ferme paie, dans l’ordre :</p>
+     <ul>
+      <li>Vente : peaux arrivées × Prix FR (+2 par peau grasse), à la Caisse.</li>
+      <li>Fret aux armateurs.</li>
+      <li>Lettres de change : 1&nbsp;₶ par tranche de 4&nbsp;₶ va à la caisse de la colonie (le quart), le reste au marchand.</li>
+      <li>Bail au roi.</li>
+      <li>Avance : si la Caisse ne suffit pas, la banque avance 10&nbsp;₶ (Dette +1). Remboursement d’un cran au choix, obligatoire à Dette 2.</li>
+      <li>Dividende au fermier (rien à Dette 2).</li>
+      <li>Prospérité : +1 si tout est payé sans Dette, 0 avec une Dette, −1 si la banque a avancé ; le fermier marque autant de VP.</li>
+      <li>Prix FR : tuiles sèches arrivées comparées à 4 par joueur (± 2 par joueur) : au-dessus −1, en dessous +1 ; puis ▲ +1 et ▼ −1 des cartes de la Rivière. Bornes 2 et 10.</li>
+      <li>Prospérité à 0 : faillite, la Ferme devient Compagnie.</li>
+      <li>Bail : enchère en&nbsp;₶, le plus offrant est fermier 2 ans.</li>
+     </ul></div>
+    <div class="s"><i>2</i><b>Entretien</b><p>3&nbsp;₶ par navire qui hiverne à Québec ; 1&nbsp;₶ par canot resté sur la carte.</p></div>
+    <div class="s"><i>3</i><b>Crédit</b><p>Chacun paie d’abord ses congés « à payer ». Puis il rembourse ce qu’il veut de son crédit, au prix d’une case (valeur de la case + intérêts selon le rang ; le plus soupçonné paie +1). On peut céder une distillerie ou un navire contre 1 case. Puis : zone rayée, le marqueur recule d’une case ; zone rouge, de deux.</p></div>
+    <div class="s"><i>4</i><b>Ravages</b><p>−1. Puis, pour chaque lieu ravagé, lancez un dé ; s’il est supérieur au niveau de la piste Ravages, retirez le jeton Ravagé.</p></div>
+    <div class="s"><i>5</i><b>Lacs</b><p>1 tuile de chaque mission part chez les Anglais. Les tuiles visibles et les jetons cachés retirés de la carte retournent dans leur sac.</p></div>
+    <div class="s"><i>6</i><b>Fin de partie</b><p>Année VIII : si la tuile Occasion n’est pas sortie cette année, phase de prestige ; puis la partie s’arrête.</p></div>
+    <div class="s"><i>7</i><b>Rivière</b><p>Faites avancer la rivière.</p></div>
+    <div class="s"><i>8</i><b>Capital circulant</b><p>Chacun calcule son capital ; posez les pions sur les ovales de Montréal, du plus fort au plus faible : ordre du tour de l’année suivante et rang des intérêts (égalité : ordre précédent).</p></div>
+    <div class="s"><i>9</i><b>Commande à La Rochelle</b><p>Les distilleries produisent : 1 baril gratuit par part. Puis chacun débloque des cases de crédit et commande avec leur valeur (marchandise 1&nbsp;₶, baril 2&nbsp;₶) : cases 1-2, 6&nbsp;₶ ; 3-5, 4&nbsp;₶ ; 6-8, 2&nbsp;₶. Le reste est perdu. Les joueurs s’entendent sur les navires et le fret.</p></div>
+    <div class="s"><i>10</i><b>Année et mois</b><p>Le marqueur Année avance d’une case ; le marqueur Mois revient sur Printemps.</p></div>
+  </div>
+ </div>
+</div>
+</body>
+</html>
