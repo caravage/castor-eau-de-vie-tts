@@ -1598,8 +1598,8 @@
         "scaleZ": 1.0
       },
       "Nickname": "Grands événements",
-      "Description": "",
-      "GMNotes": "{\"w\": 3.5, \"x\": 21.35, \"z\": 32.945, \"h\": 0.5, \"fz\": 180, \"d\": 4.85}",
+      "Description": "Au début de l'année, le chef du Parti du Gouverneur pioche 2 cartes, en applique 1 et défausse l'autre.",
+      "GMNotes": "{\"w\": 4.9, \"x\": 21.35, \"z\": 32.945, \"h\": 0.5, \"fz\": 180, \"d\": 3.5}",
       "ColorDiffuse": {
         "r": 1.0,
         "g": 1.0,
@@ -1612,16 +1612,19 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "DeckIDs": [
+        603,
         601,
         600,
+        605,
+        604,
         602
       ],
       "CustomDeck": {
         "6": {
-          "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand.png?v38",
-          "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_back.png?v38",
+          "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2.jpg",
+          "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2_back.jpg",
           "NumWidth": 3,
-          "NumHeight": 1,
+          "NumHeight": 2,
           "BackIsHidden": true,
           "UniqueBack": false,
           "Type": 0
@@ -1629,7 +1632,7 @@
       },
       "ContainedObjects": [
         {
-          "GUID": "2bf367",
+          "GUID": "ge3779",
           "Name": "Card",
           "Transform": {
             "posX": 0,
@@ -1642,9 +1645,51 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Une nation refuse l’alcool",
-          "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
+          "Nickname": "Ordonnance royale",
+          "Description": "Cette année, aucun congé n'est émis. Dans chaque région, un seul fort reste ouvert, au choix du joueur le plus haut sur la piste du Gouverneur ; les autres sont fermés.",
+          "GMNotes": "{\"w\": 4.9, \"fz\": 180, \"d\": 3.5}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CardID": 603,
+          "CustomDeck": {
+            "6": {
+              "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2.jpg",
+              "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2_back.jpg",
+              "NumWidth": 3,
+              "NumHeight": 2,
+              "BackIsHidden": true,
+              "UniqueBack": false,
+              "Type": 0
+            }
+          },
+          "SidewaysCard": true
+        },
+        {
+          "GUID": "ge1821",
+          "Name": "Card",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 180,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Massacre de Lachine",
+          "Description": "La Force iroquoise augmente de 3. Un raid frappe immédiatement la rivière des Outaouais.",
+          "GMNotes": "{\"w\": 4.9, \"fz\": 180, \"d\": 3.5}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1659,18 +1704,19 @@
           "CardID": 601,
           "CustomDeck": {
             "6": {
-              "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand.png?v38",
-              "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_back.png?v38",
+              "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2.jpg",
+              "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2_back.jpg",
               "NumWidth": 3,
-              "NumHeight": 1,
+              "NumHeight": 2,
               "BackIsHidden": true,
               "UniqueBack": false,
               "Type": 0
             }
-          }
+          },
+          "SidewaysCard": true
         },
         {
-          "GUID": "180ad0",
+          "GUID": "ge0957",
           "Name": "Card",
           "Transform": {
             "posX": 0,
@@ -1683,9 +1729,9 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Refus des sacrements",
-          "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
+          "Nickname": "Incendie de la basse-ville",
+          "Description": "Chaque joueur lance 1 dé et peut acheter des dés en plus, pour 2 ₶ chacun ; il garde le meilleur. Le joueur au dé le plus bas perd autant de crédit que la valeur de son dé. En cas d'égalité, tous les ex aequo perdent.",
+          "GMNotes": "{\"w\": 4.9, \"fz\": 180, \"d\": 3.5}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1700,18 +1746,19 @@
           "CardID": 600,
           "CustomDeck": {
             "6": {
-              "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand.png?v38",
-              "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_back.png?v38",
+              "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2.jpg",
+              "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2_back.jpg",
               "NumWidth": 3,
-              "NumHeight": 1,
+              "NumHeight": 2,
               "BackIsHidden": true,
               "UniqueBack": false,
               "Type": 0
             }
-          }
+          },
+          "SidewaysCard": true
         },
         {
-          "GUID": "591e9b",
+          "GUID": "ge5369",
           "Name": "Card",
           "Transform": {
             "posX": 0,
@@ -1724,9 +1771,93 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Ordonnance royale",
-          "Description": "",
-          "GMNotes": "{\"w\": 3.5, \"fz\": 180, \"d\": 4.85}",
+          "Nickname": "Amnistie des coureurs des bois",
+          "Description": "Chaque joueur retire 2 points de soupçon.",
+          "GMNotes": "{\"w\": 4.9, \"fz\": 180, \"d\": 3.5}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CardID": 605,
+          "CustomDeck": {
+            "6": {
+              "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2.jpg",
+              "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2_back.jpg",
+              "NumWidth": 3,
+              "NumHeight": 2,
+              "BackIsHidden": true,
+              "UniqueBack": false,
+              "Type": 0
+            }
+          },
+          "SidewaysCard": true
+        },
+        {
+          "GUID": "ge4246",
+          "Name": "Card",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 180,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Grande Paix de Montréal",
+          "Description": "La Force iroquoise retombe à 0.",
+          "GMNotes": "{\"w\": 4.9, \"fz\": 180, \"d\": 3.5}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CardID": 604,
+          "CustomDeck": {
+            "6": {
+              "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2.jpg",
+              "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2_back.jpg",
+              "NumWidth": 3,
+              "NumHeight": 2,
+              "BackIsHidden": true,
+              "UniqueBack": false,
+              "Type": 0
+            }
+          },
+          "SidewaysCard": true
+        },
+        {
+          "GUID": "ge2961",
+          "Name": "Card",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 180,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Guerre avec l'Angleterre",
+          "Description": "1re pioche : La Force iroquoise augmente de 2 et le Ravage de 1. Un joueur pris lors d'une vente à Albany perd 2 VP. Au lieu de traverser, un navire peut partir en course : il lance 1 dé ; sur 1, il est coulé et remis au chantier ; sur 2 ou 3, rien ne se passe ; sur 4 à 6, il rapporte 4 ₶. La carte est ensuite remélangée dans le paquet.\n2e pioche : Chaque navire qui traverse lance 1 dé ; sur 1 ou 2, il est coulé et remis au chantier.",
+          "GMNotes": "{\"w\": 4.9, \"fz\": 180, \"d\": 3.5}",
           "ColorDiffuse": {
             "r": 1.0,
             "g": 1.0,
@@ -1741,15 +1872,16 @@
           "CardID": 602,
           "CustomDeck": {
             "6": {
-              "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand.png?v38",
-              "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_back.png?v38",
+              "FaceURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2.jpg",
+              "BackURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/deck_grand_v2_back.jpg",
               "NumWidth": 3,
-              "NumHeight": 1,
+              "NumHeight": 2,
               "BackIsHidden": true,
               "UniqueBack": false,
               "Type": 0
             }
-          }
+          },
+          "SidewaysCard": true
         }
       ]
     },
