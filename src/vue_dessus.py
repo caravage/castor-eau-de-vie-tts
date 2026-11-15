@@ -1,6 +1,6 @@
 import json, os, sys
 from PIL import Image, ImageDraw, ImageFont
-R='/tmp/claude-0/-home-claude/3c5a2878-065c-5165-9c41-6d23b49bdcf8/scratchpad/repo/'
+R='/home/claude/castor-eau-de-vie-tts/'
 d=json.load(open(R+'Castor_et_eau-de-vie.json'))
 S=28; X0,X1,Z0,Z1=-36,44,-41,47
 Wp,Hp=int((X1-X0)*S),int((Z1-Z0)*S)
