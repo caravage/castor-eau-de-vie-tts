@@ -6822,7 +6822,7 @@
       "HideWhenFaceDown": false,
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_voy2_guide.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide.png",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43.png",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -6864,8 +6864,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide.png",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_used.png",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43_used.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -6905,8 +6905,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide.png",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_used.png",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43_used.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -6946,8 +6946,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide.png",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_used.png",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43_used.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -6987,8 +6987,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide.png",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_used.png",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43_used.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -7028,8 +7028,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide.png",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_used.png",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43_used.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -7069,8 +7069,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide.png",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_used.png",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/voy2_guide_v43_used.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -9477,7 +9477,7 @@
             "scaleZ": 1.0
           },
           "Nickname": "Épidémie",
-          "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. Retourne dans le sac et on rajoute une copie dans le sac.",
+          "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. +1 : ajoutez tout de suite une copie dans le sac ; la tuile tirée revient à l'hiver (↻ avec flocon).",
           "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -9518,7 +9518,7 @@
             "scaleZ": 1.0
           },
           "Nickname": "Lac épuisé",
-          "Description": "Dé de région : s'il y a une zone de traite en Ravage, elle ferme puis Ravage dans la zone de traite avec le moins de peaux dans la région. Sinon Ravage dans la zone de traite la moins fournie en peaux. Retourne dans le sac.",
+          "Description": "Dé de région : Ravage dans la zone de traite avec le moins de peaux de la région. ↻ avec flocon : retour au sac à l'hiver.",
           "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -11867,8 +11867,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_a_v40.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_b_v42.png",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_a_v43.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_b_v43.png",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -11908,8 +11908,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_b_v42.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_a_v40.png",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_b_v43.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/aide_a_v43.png",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -21131,211 +21131,6 @@
       }
     },
     {
-      "GUID": "7605c9",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": 18.5,
-        "posY": 1.1,
-        "posZ": 30.9,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Épidémie",
-      "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. Retourne dans le sac et on rajoute une copie dans le sac.",
-      "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "Locked": false,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": false,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epidemie.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "9edcc1",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": 18.5,
-        "posY": 1.35,
-        "posZ": 30.9,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Épidémie",
-      "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. Retourne dans le sac et on rajoute une copie dans le sac.",
-      "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "Locked": false,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": false,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epidemie.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "47b329",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": 18.5,
-        "posY": 1.6,
-        "posZ": 30.9,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Épidémie",
-      "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. Retourne dans le sac et on rajoute une copie dans le sac.",
-      "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "Locked": false,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": false,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epidemie.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "462918",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": 18.5,
-        "posY": 1.85,
-        "posZ": 30.9,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Épidémie",
-      "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. Retourne dans le sac et on rajoute une copie dans le sac.",
-      "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "Locked": false,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": false,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epidemie.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
-      "GUID": "d52256",
-      "Name": "Custom_Tile",
-      "Transform": {
-        "posX": 18.5,
-        "posY": 2.1,
-        "posZ": 30.9,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 1.0,
-        "scaleY": 1.0,
-        "scaleZ": 1.0
-      },
-      "Nickname": "Épidémie",
-      "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. Retourne dans le sac et on rajoute une copie dans le sac.",
-      "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-      "ColorDiffuse": {
-        "r": 1.0,
-        "g": 1.0,
-        "b": 1.0
-      },
-      "Locked": false,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": false,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epidemie.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-        "ImageScalar": 1.0,
-        "WidthScale": 0.0,
-        "CustomTile": {
-          "Type": 3,
-          "Thickness": 0.1,
-          "Stackable": false,
-          "Stretch": false
-        }
-      }
-    },
-    {
       "GUID": "940bc7",
       "Name": "Custom_Tile",
       "Transform": {
@@ -21375,6 +21170,239 @@
           "Stretch": false
         }
       }
+    },
+    {
+      "GUID": "13ca69",
+      "Name": "Custom_Model_Infinite_Bag",
+      "Transform": {
+        "posX": 18.5,
+        "posY": 2.0,
+        "posZ": 30.9,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.77,
+        "scaleY": 1.0,
+        "scaleZ": 0.77
+      },
+      "Nickname": "Réserve Épidémie",
+      "Description": "Tuiles Épidémie en nombre illimité : on en ajoute une au sac Ravage à chaque Épidémie tirée.",
+      "GMNotes": "{\"w\": 1.05, \"x\": 18.5, \"z\": 30.9, \"h\": 0.6, \"y3\": true, \"d\": 1.05, \"lock\": true, \"drop\": true}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "MaterialIndex": 3,
+      "ContainedObjects": [
+        {
+          "GUID": "7605c9",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Épidémie",
+          "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. +1 : ajoutez tout de suite une copie dans le sac ; la tuile tirée revient à l'hiver (↻ avec flocon).",
+          "GMNotes": "{\"w\": 1.05, \"d\": 1.05, \"face\": \"up\"}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": false,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epidemie.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        }
+      ],
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_ravage.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epidemie.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 7,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      }
+    },
+    {
+      "GUID": "90a674",
+      "Name": "Custom_Model_Infinite_Bag",
+      "Transform": {
+        "posX": 27.5,
+        "posY": 2.0,
+        "posZ": 20.36,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.77,
+        "scaleY": 1.0,
+        "scaleZ": 0.77
+      },
+      "Nickname": "Zones détruites",
+      "Description": "Marqueurs Zone détruite en nombre illimité : une zone ravagée qui rate son dé d'hiver est détruite et sort du jeu jusqu'à la fin.",
+      "GMNotes": "{\"w\": 1.2, \"x\": 27.5, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"d\": 1.2, \"lock\": true, \"drop\": true}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "MaterialIndex": 3,
+      "ContainedObjects": [
+        {
+          "GUID": "3e51a7",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": 0,
+            "posY": 2.0,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Zone détruite",
+          "Description": "Zone détruite : hors du jeu jusqu’à la fin de la partie.",
+          "GMNotes": "{\"w\": 0.91, \"d\": 0.91, \"face\": \"up\"}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_detruite.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_detruite.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          }
+        }
+      ],
+      "CustomMesh": {
+        "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_zone_detruite.obj",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_detruite.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 7,
+        "CastShadows": true
+      },
+      "Bag": {
+        "Order": 0
+      }
+    },
+    {
+      "GUID": "9c5cfd",
+      "Name": "Infinite_Bag",
+      "Transform": {
+        "posX": 29.0,
+        "posY": 2.0,
+        "posZ": 20.36,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 0.8,
+        "scaleY": 0.8,
+        "scaleZ": 0.8
+      },
+      "Nickname": "Milice",
+      "Description": "Cubes de milice en nombre illimité (+1 en défense d’un fort).",
+      "GMNotes": "{\"w\": 1.2, \"x\": 29.0, \"z\": 20.36, \"h\": 0.6, \"y3\": true, \"lock\": true, \"drop\": true}",
+      "ColorDiffuse": {
+        "r": 0.42,
+        "g": 0.26,
+        "b": 0.12
+      },
+      "Locked": true,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "MaterialIndex": -1,
+      "ContainedObjects": [
+        {
+          "GUID": "089cc3",
+          "Name": "BlockSquare",
+          "Transform": {
+            "posX": 0,
+            "posY": 2,
+            "posZ": 0,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 0.3,
+            "scaleY": 0.3,
+            "scaleZ": 0.3
+          },
+          "Nickname": "Milice",
+          "Description": "Milice : +1 en défense d’un fort.",
+          "GMNotes": "{\"w\": 0.42, \"y3\": true}",
+          "ColorDiffuse": {
+            "r": 0.42,
+            "g": 0.26,
+            "b": 0.12
+          },
+          "Locked": false,
+          "Grid": false,
+          "Snap": false,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false
+        }
+      ]
     }
   ]
 }

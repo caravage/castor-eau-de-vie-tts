@@ -54,6 +54,6 @@ def _wampum():
 WAMPUM = _wampum()
 
 if __name__ == '__main__':
-    jeton('guide_test', 'Guide', '#2F5E4A', GUIDE_ICON, '+1', 'au raccourci')
+    jeton('guide_v43', 'Guide', '#2F5E4A', GUIDE_ICON, '+1', "<span style='font-size:29px;line-height:1.08;display:block'>au raccourci<br>et aux traversées</span>")
     jeton('milicien', 'Milicien', '#44464C', FUSIL, '×2', 'au combat')
     jeton('interprete', 'Interprète', '#8A5A14', WAMPUM, '+1', 'dé au troc')
