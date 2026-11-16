@@ -1,4 +1,4 @@
-# Plateau HD (v3.39)
+# Plateau HD (v3.48)
 
 **Source de vérité pour les modifications : les fichiers HTML vectoriels de ce dossier** (jamais le PNG/JPEG final).
 - `carte_src.html` : carte complète (préparée par `prep_carte.py` depuis `../carte_etendue_tts.dc.html`) ; les corrections du plateau (bandeaux, symboles, rapides, encarts, rose, légende) sont appliquées par `build_map_html.py`.
@@ -16,4 +16,4 @@ Plateau 8000 × 5904 px, mêmes positions que table_v3_32 (l'objet TTS garde sa 
 5. `python3 compose.py` → table_hd.png (archive PNG) ; le module utilise la version JPEG.
 6. Module TTS : `python3 ../plateau_v3_39.py ../../` (image, points d'accroche, objets déplacés).
 
-Polices : @fontsource (IM Fell English, IM Fell English SC, Alegreya Sans) ; texte de la carte en Liberation Serif.
+Polices : @fontsource (IM Fell English, IM Fell English SC, Alegreya Sans) ; texte de la carte en Liberation Serif, sauf portages, cartouches, Pays et lacs en IM Fell (fonction polices de build_map_html.py, v3.48).

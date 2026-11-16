@@ -212,6 +212,22 @@ for i,it in enumerate(OVER):
     if 'viewBox="1773 40 367 304"' in it or ('left: 1937px; top: 19px' in it and 'Domaine du Roi' in it): OVER[i]=mv(it,-352,-8)
     elif 'left: 2447.6px; top: 780px' in it or 'left: 2447.6px; top: 1250px' in it or 'left: 2534.9px; top: 817' in it or 'left: 2534.9px; top: 1280' in it: OVER[i]=mv(it,0,30)
 OVER.append('<svg viewBox="0 0 3215 1500" style="position:absolute;left:0;top:0;width:3215px;height:1500px;overflow:visible"><path d="M1982 150 L2003 150" stroke="#4A4640" stroke-width="3.02" stroke-dasharray="9 7"/></svg>')
+# ---- typographie IM Fell (v3.48) : portages en italique, cartouches en petites capitales, Pays et lacs en italique
+import re as _re
+def polices(h):
+    h = h.replace("border-radius: 50%;  display: flex; align-items: center; justify-content: center; text-align: center; font-size: 16.4px;",
+                  "border-radius: 50%;  display: flex; align-items: center; justify-content: center; text-align: center; font-family: 'IM Fell English', serif; font-style: italic; font-size: 19px;")
+    h = h.replace('background: #F4F0E4">Saint-Laurent<', 'background: #F4F0E4"><span style="white-space:nowrap">Saint-Laurent</span><')
+    h = h.replace("font-size: 27.7px; color: #2A2418; line-height: 1.1; white-space: nowrap; text-align: center",
+                  "font-family: 'IM Fell English SC', serif; font-size: 31px; color: #2A2418; line-height: 1.0; white-space: nowrap; text-align: center")
+    for c in ('#8a5a1c', '#8A5A1C'):
+        h = h.replace(f"font-size: 26.5px; line-height: 1.2; color: {c}; font-style: italic; letter-spacing: 0.14em",
+                      f"font-family: 'IM Fell English', serif; font-size: 30px; line-height: 1.2; color: {c}; font-style: italic; letter-spacing: 0.08em")
+    h = h.replace("font-size: 23.9px; line-height: 1.2; color: #2a2418; font-style: italic; letter-spacing: 0.14em; font-weight: 400",
+                  "font-family: 'IM Fell English', serif; font-size: 27px; line-height: 1.2; color: #2a2418; font-style: italic; letter-spacing: 0.08em; font-weight: 400")
+    h = _re.sub(r"font-size: ([0-9.]+)px; line-height: 1.2; color: #2F5961; font-style: italic",
+                lambda m: f"font-family: 'IM Fell English', serif; font-size: {float(m.group(1)) * 1.12:.1f}px; line-height: 1.2; color: #2F5961; font-style: italic", h)
+    return h
 # ---- pages
 HEAD = ('<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="fonts.css"><style>'
         'html,body{margin:0;background:transparent} .root{position:relative;width:2800px;height:1510px;overflow:hidden;font-family:"Liberation Serif",serif}'
@@ -220,5 +236,5 @@ def page(parts, bg):
     return HEAD + f'<div class="root" style="background:{bg}"><div class="in">' + '\n'.join(parts) + '</div></div></body></html>'
 open('base.html', 'w').write(page(BASE, '#D8C99C'))
 open('hills.html', 'w').write(page([items[2]], 'transparent'))
-open('over.html', 'w').write(page(OVER, 'transparent'))
+open('over.html', 'w').write(polices(page(OVER, 'transparent')))
 print('base', len(BASE), 'over', len(OVER))
