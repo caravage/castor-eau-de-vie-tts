@@ -9077,9 +9077,9 @@
       "GUID": "af8e72",
       "Name": "Bag",
       "Transform": {
-        "posX": 17.5,
+        "posX": -27.193,
         "posY": 2.0,
-        "posZ": 32.945,
+        "posZ": 25.537,
         "rotX": 0,
         "rotY": 180,
         "rotZ": 0,
@@ -9089,7 +9089,7 @@
       },
       "Nickname": "Événements du mois",
       "Description": "Piochez une tuile à la fin de chaque mois. Mise en place : ajoutez-y 1 tuile du sac Raids iroquois, sans la regarder.",
-      "GMNotes": "{\"w\": 1.4, \"x\": 17.5, \"z\": 32.945, \"h\": 0.8, \"y3\": true, \"rnd\": true, \"lock\": true, \"drop\": true}",
+      "GMNotes": "{\"w\": 1.4, \"x\": -27.193, \"z\": 25.537, \"h\": 0.8, \"y3\": true, \"rnd\": true, \"lock\": true, \"drop\": true}",
       "ColorDiffuse": {
         "r": 0.24705882352941178,
         "g": 0.42745098039215684,
@@ -12019,8 +12019,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/ravage.png?v38",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/ravage.png?v38",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/ravage_v47.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/ravage_v47.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -12034,7 +12034,7 @@
       ],
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_ravage.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/ravage.png?v38",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/ravage_v47.png",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -17727,8 +17727,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_fermee.png?v39",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_fermee.png?v39",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_fermee_v47.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_fermee_v47.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -17742,7 +17742,7 @@
       ],
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_zone_fermee.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_fermee.png?v39",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_fermee_v47.png",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -21610,8 +21610,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_detruite.png",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_detruite.png",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_detruite_v47.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_detruite_v47.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -21625,7 +21625,7 @@
       ],
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_zone_detruite.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_detruite.png",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/zone_detruite_v47.png",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -21757,8 +21757,8 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/raid.png",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/raid.png",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/raid_v47.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/raid_v47.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -21772,7 +21772,7 @@
       ],
       "CustomMesh": {
         "MeshURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/sac_raid.obj",
-        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/raid.png",
+        "DiffuseURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/raid_v47.png",
         "NormalURL": "",
         "ColliderURL": "",
         "Convex": true,
@@ -21971,8 +21971,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/frasil.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/frasil.png",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/frasil_v47.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/frasil_v47.png",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -22012,8 +22012,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/frasil.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/frasil.png",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/frasil_v47.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/frasil_v47.png",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -22025,8 +22025,8 @@
       }
     },
     {
-      "GUID": "62a54c",
-      "Name": "Counter",
+      "GUID": "b663a6",
+      "Name": "Custom_Tile",
       "Transform": {
         "posX": -0.057,
         "posY": 2.0,
@@ -22038,22 +22038,115 @@
         "scaleY": 1.0,
         "scaleZ": 1.0
       },
-      "Nickname": "Force iroquoise",
-      "Description": "Force iroquoise (0 à 6, départ 1) : force des raids. Monte avec les peaux parties chez les Anglais (Hudson, Albany).",
-      "GMNotes": "{\"w\": 1.6, \"x\": -0.057, \"z\": 16.788, \"h\": 0.4, \"y3\": true, \"lock\": true}",
+      "Nickname": "Force iroquoise : 1",
+      "Description": "Force iroquoise (0 à 6, départ 1) : force des raids. +1 par 5 tuiles parties chez les Anglais ; −1 par Festin aux Lacs d'en bas. 2e Raid à 3, 3e Raid à 5.",
+      "GMNotes": "{\"w\": 1.5, \"d\": 1.5, \"x\": -0.057, \"z\": 16.788, \"h\": 0.4, \"lock\": true}",
       "ColorDiffuse": {
-        "r": 0.31,
-        "g": 0.17,
-        "b": 0.48
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
       },
       "Locked": true,
       "Grid": false,
-      "Snap": false,
+      "Snap": true,
       "Tooltip": true,
       "Hands": false,
       "HideWhenFaceDown": false,
-      "Counter": {
-        "value": 1
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v47.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v47.png",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 3,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      },
+      "LuaScript": "-- Force iroquoise : 0 à 6, départ 1. Boutons − / +.\nlocal v = 1\nlocal C = {0.96, 0.95, 0.92}\nlocal T = {0, 0, 0, 0}\nfunction onLoad(s)\n  if s and s ~= \"\" then v = tonumber(s) or 1 end\n  local function b(f, l, x, fs) self.createButton({click_function = f, function_owner = self, label = l, position = {x, 0.11, 0.62}, width = (f == \"rien\") and 0 or 380, height = 380, font_size = fs, color = T, font_color = C, hover_color = {1, 1, 1, 0.15}, press_color = {1, 1, 1, 0.3}}) end\n  b(\"moins\", \"−\", -0.62, 420); b(\"rien\", tostring(v), 0, 460); b(\"plus\", \"+\", 0.62, 420)\nend\nfunction onSave() return tostring(v) end\nfunction rien() end\nlocal function maj() self.editButton({index = 1, label = tostring(v)}) self.setName(\"Force iroquoise : \" .. v) end\nfunction moins() if v > 0 then v = v - 1 maj() end end\nfunction plus() if v < 6 then v = v + 1 maj() end end\n",
+      "LuaScriptState": "1"
+    },
+    {
+      "GUID": "a06cbe",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -27.193,
+        "posY": 2.0,
+        "posZ": 21.256,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.8,
+        "scaleY": 1.0,
+        "scaleZ": 1.8
+      },
+      "Nickname": "Alliance Tortue",
+      "Description": "Recto : alliée. Verso : neutre. Festin : retournez sur Alliée ; Affront : retournez sur Neutre.",
+      "GMNotes": "{\"w\": 1.8, \"d\": 1.8, \"x\": -27.193, \"z\": 21.256, \"h\": 0.5}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/alliance_tortue_alliee.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/alliance_tortue_neutre.png",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 2,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "9cf1c0",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": -27.193,
+        "posY": 2.0,
+        "posZ": 18.798,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 180,
+        "scaleX": 1.8,
+        "scaleY": 1.0,
+        "scaleZ": 1.8
+      },
+      "Nickname": "Alliance Lynx",
+      "Description": "Recto : alliée. Verso : neutre. Festin : retournez sur Alliée ; Affront : retournez sur Neutre.",
+      "GMNotes": "{\"w\": 1.8, \"d\": 1.8, \"x\": -27.193, \"z\": 18.798, \"h\": 0.5}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "Tooltip": true,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/alliance_lynx_alliee.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/alliance_lynx_neutre.png",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 2,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
       }
     }
   ]
