@@ -180,14 +180,14 @@ for i in range(16):
 g += f'<circle cx="{cx:.2f}" cy="{cy:.2f}" r="{R + 10 / K:.2f}" fill="none" stroke="#2A2418" stroke-width="{2 / K:.2f}"/>'
 g += f'<text x="{cx:.2f}" y="{cy - R - 16 / K:.2f}" text-anchor="middle" font-family="Alegreya Sans" font-weight="500" font-size="{30 / K:.2f}" fill="#2A2418">N</text>'
 ROSE = f'<svg viewBox="0 0 2800 1500" style="position: absolute; left: 0; top: 0; width: 2800px; height: 1500px; overflow: visible; pointer-events: none">{g}</svg>'
-X0, Y0 = css(3850, 3215); X1, Y1 = css(4740, 3495)
-lc, ly = 95 / K, 66 / K
+X0, Y0 = css(3850, 3145); X1, Y1 = css(4740, 3530)   # v3.50 : légende agrandie (ligne Frasil)
+lc, ly = 95 / K, 64 / K
 leg = (f'<div style="position: absolute; left: {X0:.1f}px; top: {Y0:.1f}px; width: {X1 - X0:.1f}px; height: {Y1 - Y0:.1f}px; box-sizing: border-box; background: #F3EFE2; '
        f'border: {3 / K:.2f}px solid #968C78; border-radius: {18 / K:.1f}px; font-family: \'Alegreya Sans\', sans-serif; color: #2A2418">')
 gl = f'<circle cx="{lc:.2f}" cy="{ly:.2f}" r="{52 / K:.2f}" fill="#F4F0E4" stroke="#2A2418" stroke-width="{3 / K:.2f}"/>'
 gl += arrow(lc, ly - 18 / K, -1, 0, 44 / K, 5 / K, 15 / K)
 gl += chevrons(lc, ly + 8 / K, rows=((3, 0), (2, 1)), sp=16 / K, w=12 / K, h=6 / K, sw=3 / K, dy=12 / K)
-y2 = 158 / K; dash = ''
+y2 = 160 / K; dash = ''
 x = 30 / K; xe = 160 / K
 while x < xe:
     dash += f'<line x1="{x:.2f}" y1="{y2:.2f}" x2="{min(x + 22 / K, xe):.2f}" y2="{y2:.2f}" stroke="#2A2418" stroke-width="{4 / K:.2f}"/>'; x += 32 / K
@@ -195,13 +195,16 @@ while x < xe:
 dash += f'<polyline points="{83 / K:.2f},{y2 - 11 / K:.2f} {97 / K:.2f},{y2:.2f} {83 / K:.2f},{y2 + 11 / K:.2f}" fill="none" stroke="#2A2418" stroke-width="{4 / K:.2f}" stroke-linejoin="round"/>'
 leg += f'<svg style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible">{gl}{dash}</svg>'
 fs, fi = 46 / K, 40 / K
-# v3.49 : Raccourci « 3 ou plus », résultats 1 et 2 sur deux lignes sous le seuil
+# v3.50 : Raccourci « 3 ou plus » puis « 1-2 : reste sur place » ; ligne Frasil (navire, canot)
 lab = lambda yy, t: f'<div style="position: absolute; left: {185 / K:.1f}px; top: {yy - fs * 0.62:.1f}px; font-size: {fs:.2f}px; font-weight: 500; line-height: 1.2; white-space: nowrap">{t}</div>'
 seuil = lambda x, yy, t: f'<div style="position: absolute; left: {x:.1f}px; top: {yy - fs * 0.62:.1f}px; font-size: {fs:.2f}px; font-weight: 500; line-height: 1.2; white-space: nowrap">{t}</div>'
 ital = lambda x, yy, t, f=fi: f'<div style="position: absolute; left: {x:.1f}px; top: {yy - f * 0.60:.1f}px; font-size: {f:.2f}px; font-style: italic; line-height: 1.2; white-space: nowrap">{t}</div>'
 leg += lab(ly, 'Rapide') + seuil(375 / K, ly, '2+') + ital(450 / K, ly, '1 : abîmé')
-leg += lab(y2, 'Raccourci') + seuil(375 / K, y2, '3 ou plus')
-leg += ital(375 / K, y2 + 50 / K, '1 : abîmé et reste sur place', 36 / K) + ital(375 / K, y2 + 92 / K, '2 : reste sur place', 36 / K)
+leg += lab(y2, 'Raccourci') + seuil(375 / K, y2, '3 ou plus') + ital(375 / K, y2 + 46 / K, '1-2 : reste sur place', 36 / K)
+y3 = 262 / K; q = 34 / K   # case hachurée comme les mois de frasil du calendrier
+leg += (f'<div style="position: absolute; left: {lc - q:.1f}px; top: {y3 - q:.1f}px; width: {2 * q:.1f}px; height: {2 * q:.1f}px; box-sizing: border-box; border-radius: {9 / K:.1f}px; '
+        f'border: {4 / K:.2f}px solid #5D8E98; background: repeating-linear-gradient(45deg,#D2DFE9 0 {9 / K:.1f}px,#A8BCD2 {9 / K:.1f}px {11 / K:.1f}px,#D2DFE9 {11 / K:.1f}px {16 / K:.1f}px,#F5F8FA {16 / K:.1f}px {18 / K:.1f}px)"></div>')
+leg += lab(y3, 'Frasil') + ital(375 / K, y3, 'Navire, 1 : coulé', 36 / K) + ital(375 / K, y3 + 42 / K, 'Canot, 1 : abîmé', 36 / K) + ital(375 / K, y3 + 84 / K, 'déjà abîmé : détruit', 36 / K)
 leg += '</div>'
 OVER += [ROSE, leg]
 

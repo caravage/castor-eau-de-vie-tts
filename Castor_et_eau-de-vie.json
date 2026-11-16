@@ -223,8 +223,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_49_hd.jpg",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_49_hd.jpg",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_50_hd.jpg",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_50_hd.jpg",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -9720,85 +9720,9 @@
               "Stretch": false
             }
           }
-        }
-      ]
-    },
-    {
-      "GUID": "e0327d",
-      "Name": "Bag",
-      "Transform": {
-        "posX": 16.6,
-        "posY": 2.0,
-        "posZ": 30.9,
-        "rotX": 0,
-        "rotY": 180,
-        "rotZ": 0,
-        "scaleX": 0.7,
-        "scaleY": 1.0,
-        "scaleZ": 0.7
-      },
-      "Nickname": "Sac Ravage",
-      "Description": "Tuiles de Ravage, ajoutées au sac Événements du mois. Les tuiles sortent face cachée.",
-      "GMNotes": "{\"w\": 1.4, \"x\": 16.6, \"z\": 30.9, \"h\": 0.8, \"y3\": true, \"lock\": true, \"drop\": true}",
-      "ColorDiffuse": {
-        "r": 0.5568627450980392,
-        "g": 0.1843137254901961,
-        "b": 0.1450980392156863
-      },
-      "Locked": true,
-      "Grid": false,
-      "Snap": false,
-      "Tooltip": true,
-      "Hands": false,
-      "HideWhenFaceDown": false,
-      "MaterialIndex": 0,
-      "Bag": {
-        "Order": 2
-      },
-      "ContainedObjects": [
-        {
-          "GUID": "bcafb8",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 180,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Épidémie",
-          "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. +1 : ajoutez tout de suite une copie dans le sac ; la tuile tirée revient à l'hiver (↻ avec flocon).",
-          "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": false,
-          "Tooltip": false,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epidemie.png",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
         },
         {
-          "GUID": "a83d86",
+          "GUID": "0be9f3",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -9811,8 +9735,8 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Lac épuisé",
-          "Description": "Dé de région : Ravage dans la zone de traite avec le moins de peaux de la région. ↻ avec flocon : retour au sac à l'hiver.",
+          "Nickname": "Tempête",
+          "Description": "Chaque navire ou bateau en traversée lance un dé : sur 1 ou 2, il coule. Si une Rivière calme sort à la fin du mois suivant, la tempête continue.",
           "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
           "ColorDiffuse": {
             "r": 1.0,
@@ -9826,7 +9750,7 @@
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epuise.png",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_tempete.png",
             "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
@@ -22053,8 +21977,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v47.png",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v47.png",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_1.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_1.png",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
@@ -22064,8 +21988,268 @@
           "Stretch": false
         }
       },
-      "LuaScript": "-- Force iroquoise : 0 à 6, départ 1. Boutons − / +.\nlocal v = 1\nlocal C = {0.96, 0.95, 0.92}\nlocal T = {0, 0, 0, 0}\nfunction onLoad(s)\n  if s and s ~= \"\" then v = tonumber(s) or 1 end\n  local function b(f, l, x, fs) self.createButton({click_function = f, function_owner = self, label = l, position = {x, 0.11, 0.62}, width = (f == \"rien\") and 0 or 380, height = 380, font_size = fs, color = T, font_color = C, hover_color = {1, 1, 1, 0.15}, press_color = {1, 1, 1, 0.3}}) end\n  b(\"moins\", \"−\", -0.62, 420); b(\"rien\", tostring(v), 0, 460); b(\"plus\", \"+\", 0.62, 420)\nend\nfunction onSave() return tostring(v) end\nfunction rien() end\nlocal function maj() self.editButton({index = 1, label = tostring(v)}) self.setName(\"Force iroquoise : \" .. v) end\nfunction moins() if v > 0 then v = v - 1 maj() end end\nfunction plus() if v < 6 then v = v + 1 maj() end end\n",
-      "LuaScriptState": "1"
+      "LuaScript": "-- Force iroquoise : 0 à 6 ; un état par valeur (chiffre imprimé sur l'image). Boutons − / +.\nlocal V = 1\nlocal C = {0.96, 0.95, 0.92}\nlocal T = {0, 0, 0, 0}\nfunction onLoad()\n  local function b(f, l, x) self.createButton({click_function = f, function_owner = self, label = l, position = {x, 0.11, 0.62}, width = 380, height = 380, font_size = 420, color = T, font_color = C, hover_color = {1, 1, 1, 0.15}, press_color = {1, 1, 1, 0.3}}) end\n  b(\"moins\", \"−\", -0.62); b(\"plus\", \"+\", 0.62)\nend\nfunction moins() if V > 0 then self.setState(V) end end\nfunction plus() if V < 6 then self.setState(V + 2) end end\n",
+      "LuaScriptState": "",
+      "States": {
+        "1": {
+          "GUID": "9fa935",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": -0.057,
+            "posY": 2.0,
+            "posZ": 16.788,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Force iroquoise : 0",
+          "Description": "Force iroquoise (0 à 6, départ 1) : force des raids. +1 par 5 tuiles parties chez les Anglais ; −1 par Festin aux Lacs d'en bas. 2e Raid à 3, 3e Raid à 5.",
+          "GMNotes": "{\"w\": 1.5, \"d\": 1.5, \"x\": -0.057, \"z\": 16.788, \"h\": 0.4, \"lock\": true}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": true,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_0.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_0.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          },
+          "LuaScript": "-- Force iroquoise : 0 à 6 ; un état par valeur (chiffre imprimé sur l'image). Boutons − / +.\nlocal V = 0\nlocal C = {0.96, 0.95, 0.92}\nlocal T = {0, 0, 0, 0}\nfunction onLoad()\n  local function b(f, l, x) self.createButton({click_function = f, function_owner = self, label = l, position = {x, 0.11, 0.62}, width = 380, height = 380, font_size = 420, color = T, font_color = C, hover_color = {1, 1, 1, 0.15}, press_color = {1, 1, 1, 0.3}}) end\n  b(\"moins\", \"−\", -0.62); b(\"plus\", \"+\", 0.62)\nend\nfunction moins() if V > 0 then self.setState(V) end end\nfunction plus() if V < 6 then self.setState(V + 2) end end\n",
+          "LuaScriptState": ""
+        },
+        "3": {
+          "GUID": "a4f7ac",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": -0.057,
+            "posY": 2.0,
+            "posZ": 16.788,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Force iroquoise : 2",
+          "Description": "Force iroquoise (0 à 6, départ 1) : force des raids. +1 par 5 tuiles parties chez les Anglais ; −1 par Festin aux Lacs d'en bas. 2e Raid à 3, 3e Raid à 5.",
+          "GMNotes": "{\"w\": 1.5, \"d\": 1.5, \"x\": -0.057, \"z\": 16.788, \"h\": 0.4, \"lock\": true}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": true,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_2.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_2.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          },
+          "LuaScript": "-- Force iroquoise : 0 à 6 ; un état par valeur (chiffre imprimé sur l'image). Boutons − / +.\nlocal V = 2\nlocal C = {0.96, 0.95, 0.92}\nlocal T = {0, 0, 0, 0}\nfunction onLoad()\n  local function b(f, l, x) self.createButton({click_function = f, function_owner = self, label = l, position = {x, 0.11, 0.62}, width = 380, height = 380, font_size = 420, color = T, font_color = C, hover_color = {1, 1, 1, 0.15}, press_color = {1, 1, 1, 0.3}}) end\n  b(\"moins\", \"−\", -0.62); b(\"plus\", \"+\", 0.62)\nend\nfunction moins() if V > 0 then self.setState(V) end end\nfunction plus() if V < 6 then self.setState(V + 2) end end\n",
+          "LuaScriptState": ""
+        },
+        "4": {
+          "GUID": "eeb5d4",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": -0.057,
+            "posY": 2.0,
+            "posZ": 16.788,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Force iroquoise : 3",
+          "Description": "Force iroquoise (0 à 6, départ 1) : force des raids. +1 par 5 tuiles parties chez les Anglais ; −1 par Festin aux Lacs d'en bas. 2e Raid à 3, 3e Raid à 5.",
+          "GMNotes": "{\"w\": 1.5, \"d\": 1.5, \"x\": -0.057, \"z\": 16.788, \"h\": 0.4, \"lock\": true}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": true,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_3.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_3.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          },
+          "LuaScript": "-- Force iroquoise : 0 à 6 ; un état par valeur (chiffre imprimé sur l'image). Boutons − / +.\nlocal V = 3\nlocal C = {0.96, 0.95, 0.92}\nlocal T = {0, 0, 0, 0}\nfunction onLoad()\n  local function b(f, l, x) self.createButton({click_function = f, function_owner = self, label = l, position = {x, 0.11, 0.62}, width = 380, height = 380, font_size = 420, color = T, font_color = C, hover_color = {1, 1, 1, 0.15}, press_color = {1, 1, 1, 0.3}}) end\n  b(\"moins\", \"−\", -0.62); b(\"plus\", \"+\", 0.62)\nend\nfunction moins() if V > 0 then self.setState(V) end end\nfunction plus() if V < 6 then self.setState(V + 2) end end\n",
+          "LuaScriptState": ""
+        },
+        "5": {
+          "GUID": "1f38a6",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": -0.057,
+            "posY": 2.0,
+            "posZ": 16.788,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Force iroquoise : 4",
+          "Description": "Force iroquoise (0 à 6, départ 1) : force des raids. +1 par 5 tuiles parties chez les Anglais ; −1 par Festin aux Lacs d'en bas. 2e Raid à 3, 3e Raid à 5.",
+          "GMNotes": "{\"w\": 1.5, \"d\": 1.5, \"x\": -0.057, \"z\": 16.788, \"h\": 0.4, \"lock\": true}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": true,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_4.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_4.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          },
+          "LuaScript": "-- Force iroquoise : 0 à 6 ; un état par valeur (chiffre imprimé sur l'image). Boutons − / +.\nlocal V = 4\nlocal C = {0.96, 0.95, 0.92}\nlocal T = {0, 0, 0, 0}\nfunction onLoad()\n  local function b(f, l, x) self.createButton({click_function = f, function_owner = self, label = l, position = {x, 0.11, 0.62}, width = 380, height = 380, font_size = 420, color = T, font_color = C, hover_color = {1, 1, 1, 0.15}, press_color = {1, 1, 1, 0.3}}) end\n  b(\"moins\", \"−\", -0.62); b(\"plus\", \"+\", 0.62)\nend\nfunction moins() if V > 0 then self.setState(V) end end\nfunction plus() if V < 6 then self.setState(V + 2) end end\n",
+          "LuaScriptState": ""
+        },
+        "6": {
+          "GUID": "edb616",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": -0.057,
+            "posY": 2.0,
+            "posZ": 16.788,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Force iroquoise : 5",
+          "Description": "Force iroquoise (0 à 6, départ 1) : force des raids. +1 par 5 tuiles parties chez les Anglais ; −1 par Festin aux Lacs d'en bas. 2e Raid à 3, 3e Raid à 5.",
+          "GMNotes": "{\"w\": 1.5, \"d\": 1.5, \"x\": -0.057, \"z\": 16.788, \"h\": 0.4, \"lock\": true}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": true,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_5.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_5.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          },
+          "LuaScript": "-- Force iroquoise : 0 à 6 ; un état par valeur (chiffre imprimé sur l'image). Boutons − / +.\nlocal V = 5\nlocal C = {0.96, 0.95, 0.92}\nlocal T = {0, 0, 0, 0}\nfunction onLoad()\n  local function b(f, l, x) self.createButton({click_function = f, function_owner = self, label = l, position = {x, 0.11, 0.62}, width = 380, height = 380, font_size = 420, color = T, font_color = C, hover_color = {1, 1, 1, 0.15}, press_color = {1, 1, 1, 0.3}}) end\n  b(\"moins\", \"−\", -0.62); b(\"plus\", \"+\", 0.62)\nend\nfunction moins() if V > 0 then self.setState(V) end end\nfunction plus() if V < 6 then self.setState(V + 2) end end\n",
+          "LuaScriptState": ""
+        },
+        "7": {
+          "GUID": "771b68",
+          "Name": "Custom_Tile",
+          "Transform": {
+            "posX": -0.057,
+            "posY": 2.0,
+            "posZ": 16.788,
+            "rotX": 0,
+            "rotY": 180,
+            "rotZ": 0,
+            "scaleX": 1.0,
+            "scaleY": 1.0,
+            "scaleZ": 1.0
+          },
+          "Nickname": "Force iroquoise : 6",
+          "Description": "Force iroquoise (0 à 6, départ 1) : force des raids. +1 par 5 tuiles parties chez les Anglais ; −1 par Festin aux Lacs d'en bas. 2e Raid à 3, 3e Raid à 5.",
+          "GMNotes": "{\"w\": 1.5, \"d\": 1.5, \"x\": -0.057, \"z\": 16.788, \"h\": 0.4, \"lock\": true}",
+          "ColorDiffuse": {
+            "r": 1.0,
+            "g": 1.0,
+            "b": 1.0
+          },
+          "Locked": true,
+          "Grid": false,
+          "Snap": true,
+          "Tooltip": true,
+          "Hands": false,
+          "HideWhenFaceDown": false,
+          "CustomImage": {
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_6.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/force_iroquoise_v50_6.png",
+            "ImageScalar": 1.0,
+            "WidthScale": 0.0,
+            "CustomTile": {
+              "Type": 3,
+              "Thickness": 0.1,
+              "Stackable": false,
+              "Stretch": false
+            }
+          },
+          "LuaScript": "-- Force iroquoise : 0 à 6 ; un état par valeur (chiffre imprimé sur l'image). Boutons − / +.\nlocal V = 6\nlocal C = {0.96, 0.95, 0.92}\nlocal T = {0, 0, 0, 0}\nfunction onLoad()\n  local function b(f, l, x) self.createButton({click_function = f, function_owner = self, label = l, position = {x, 0.11, 0.62}, width = 380, height = 380, font_size = 420, color = T, font_color = C, hover_color = {1, 1, 1, 0.15}, press_color = {1, 1, 1, 0.3}}) end\n  b(\"moins\", \"−\", -0.62); b(\"plus\", \"+\", 0.62)\nend\nfunction moins() if V > 0 then self.setState(V) end end\nfunction plus() if V < 6 then self.setState(V + 2) end end\n",
+          "LuaScriptState": ""
+        }
+      }
     },
     {
       "GUID": "a06cbe",
@@ -22143,6 +22327,88 @@
         "WidthScale": 0.0,
         "CustomTile": {
           "Type": 2,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "bcafb8",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": 16.0,
+        "posY": 2.0,
+        "posZ": 30.35,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Épidémie",
+      "Description": "On retire une peau dans chaque zone de traite de la région qui contient le plus de canots (les portages adjacents à une zone de traite comptent comme faisant partie de la région). En cas d'égalité, dé de région. +1 : ajoutez tout de suite une copie dans le sac ; la tuile tirée revient à l'hiver (↻ avec flocon).",
+      "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": false,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epidemie.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 3,
+          "Thickness": 0.1,
+          "Stackable": false,
+          "Stretch": false
+        }
+      }
+    },
+    {
+      "GUID": "a83d86",
+      "Name": "Custom_Tile",
+      "Transform": {
+        "posX": 14.75,
+        "posY": 2.0,
+        "posZ": 30.35,
+        "rotX": 0,
+        "rotY": 180,
+        "rotZ": 0,
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 1.0
+      },
+      "Nickname": "Lac épuisé",
+      "Description": "Dé de région : Ravage dans la zone de traite avec le moins de peaux de la région. ↻ avec flocon : retour au sac à l'hiver.",
+      "GMNotes": "{\"w\": 1.05, \"d\": 1.05}",
+      "ColorDiffuse": {
+        "r": 1.0,
+        "g": 1.0,
+        "b": 1.0
+      },
+      "Locked": false,
+      "Grid": false,
+      "Snap": false,
+      "Tooltip": false,
+      "Hands": false,
+      "HideWhenFaceDown": false,
+      "CustomImage": {
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt7_epuise.png",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/evt_back.png?v38",
+        "ImageScalar": 1.0,
+        "WidthScale": 0.0,
+        "CustomTile": {
+          "Type": 3,
           "Thickness": 0.1,
           "Stackable": false,
           "Stretch": false
