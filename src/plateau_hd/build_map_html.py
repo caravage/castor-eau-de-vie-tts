@@ -223,7 +223,7 @@ OVER[mi]=BLOC                                                              # rem
 mv=lambda it,dx,dy:f'<div style="position:absolute;left:0;top:0;transform:translate({dx}px,{dy}px)">{it}</div>'
 for i,it in enumerate(OVER):
     if 'viewBox="1773 40 367 304"' in it or ('left: 1937px; top: 19px' in it and 'Domaine du Roi' in it): OVER[i]=mv(it,-352,-8)
-    elif 'left: 2447.6px; top: 780px' in it or 'left: 2447.6px; top: 1250px' in it or 'left: 2534.9px; top: 817' in it or 'left: 2534.9px; top: 1280' in it: OVER[i]=mv(it,0,30)
+    elif 'left: 2447.6px; top: 780px' in it or 'left: 2447.6px; top: 1250px' in it or 'left: 2534.9px; top: 817' in it or 'left: 2534.9px; top: 1280' in it: OVER[i]=mv(it,-22,30)   # v3.53 : 22 px à gauche, hors du filet du cadre
 OVER.append('<svg viewBox="0 0 3215 1500" style="position:absolute;left:0;top:0;width:3215px;height:1500px;overflow:visible"><path d="M1982 150 L2003 150" stroke="#4A4640" stroke-width="3.02" stroke-dasharray="9 7"/></svg>')
 # ---- typographie IM Fell (v3.48) : portages en italique, cartouches en petites capitales, Pays et lacs en italique
 import re as _re
@@ -240,6 +240,12 @@ def polices(h):
                   "font-family: 'IM Fell English', serif; font-size: 27px; line-height: 1.2; color: #2a2418; font-style: italic; letter-spacing: 0.08em; font-weight: 400")
     h = _re.sub(r"font-size: ([0-9.]+)px; line-height: 1.2; color: #2F5961; font-style: italic",
                 lambda m: f"font-family: 'IM Fell English', serif; font-size: {float(m.group(1)) * 1.12:.1f}px; line-height: 1.2; color: #2F5961; font-style: italic", h)
+    # v3.53 : « Bas du fleuve » comme les autres passages, « Albany » en IM Fell petites capitales, « Baie d'Hudson » au corps des lacs
+    h = h.replace('font-size: 16.4px; line-height: 1.15; color: #2A2418; padding: 7.6px">Bas du fleuve',
+                  "font-family: 'IM Fell English', serif; font-style: italic; font-size: 19px; line-height: 1.15; color: #2A2418; padding: 7.6px\">Bas du fleuve")
+    h = h.replace("font-size: 24px; letter-spacing: 0.08em; font-variant: small-caps; color: #7A2A1D",
+                  "font-family: 'IM Fell English SC', serif; font-size: 28px; letter-spacing: 0.06em; color: #7A2A1D")
+    h = _re.sub(r"font-size: [0-9.]+px; (line-height: 1.2; color: #2F5961; font-style: italic\">Baie d’Hudson)", r"font-size: 26px; \1", h)
     return h
 # ---- pages
 HEAD = ('<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="fonts.css"><style>'

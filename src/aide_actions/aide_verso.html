@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>Aide de jeu — Printemps et hiver</title>
+<!-- v3.53 : « Castors en France » sur toute la largeur de l'hiver, liste en deux colonnes ; corps du texte agrandi. -->
 <!-- Verso de l'aide de jeu (v3.41), même style et même format que le recto (plaquette_actions.html). Texte tiré du livret. -->
 <link rel="stylesheet" href="../plateau_hd/fonts.css">
 <style>
@@ -14,13 +15,14 @@ body{background:#E6DAB6}
 .h{display:flex;align-items:center;gap:16px;font-family:'IM Fell English SC',serif;font-size:32px;line-height:35px;margin-bottom:4px}
 .h::before,.h::after{content:'';flex:1;height:1.5px;background:#B7A675}
 .spr .h{color:#4E6B2E}.hiv .h{color:#2F4E6E}
-.flow{column-count:2;column-gap:12px;column-fill:auto;height:1110px}.flow .s{break-inside:avoid;margin-bottom:9px}
+.flow{column-count:2;column-gap:12px;column-fill:balance}.flow .s{break-inside:avoid;margin-bottom:9px}
 .stack{display:flex;flex-direction:column;gap:9px;flex:1}
 .s{background:#FBF7EA;border:2px solid #34302A;border-radius:12px;padding:9px 12px 10px 50px;position:relative}
 .s i{position:absolute;left:11px;top:10px;width:28px;height:28px;border-radius:50%;background:#22332E;color:#F1E7C9;font-style:normal;font-weight:700;font-size:17px;line-height:28px;text-align:center}
-.s b{display:block;font-family:'IM Fell English SC',serif;font-weight:400;font-size:24px;line-height:26px;color:#34302A;margin-bottom:2px}
-.s p{font-size:19.5px;line-height:22.6px}
-.s ul{margin:3px 0 0 18px;padding:0;font-size:18.5px;line-height:21.6px}
+.s b{display:block;font-family:'IM Fell English SC',serif;font-weight:400;font-size:26px;line-height:29px;color:#34302A;margin-bottom:2px}
+.s p{font-size:21.5px;line-height:25.5px}
+.s ul{margin:5px 0 0 18px;padding:0;font-size:20.5px;line-height:24.5px;column-count:2;column-gap:44px}
+.s li{break-inside:avoid;margin-bottom:3px}
 .ferme{background:#F8E9D2;border-color:#A8662A}
 .ferme i{background:#A8662A}
 </style>
@@ -38,7 +40,6 @@ body{background:#E6DAB6}
  </div>
  <div class="col hiv" style="flex:1">
   <div class="h">Hiver</div>
-  <div class="flow">
     <div class="s ferme"><i>1</i><b>Castors en France</b><p>On compte les castors arrivés en France et on les retire des navires. Puis la Ferme paie, dans l’ordre :</p>
      <ul>
       <li>Vente : peaux arrivées × Prix FR (+2 par peau grasse), à la Caisse.</li>
@@ -52,6 +53,7 @@ body{background:#E6DAB6}
       <li>Prospérité à 0 : faillite, la Ferme devient Compagnie.</li>
       <li>Bail : enchère en&nbsp;₶, le plus offrant est fermier 2 ans.</li>
      </ul></div>
+  <div class="flow">
     <div class="s"><i>2</i><b>Entretien</b><p>3&nbsp;₶ par navire qui hiverne à Québec ; 1&nbsp;₶ par canot resté sur la carte. La caisse de la colonie paie l’entretien des forts et des missions ; un lieu non payé est fermé (fort et mission retirés).</p></div>
     <div class="s"><i>3</i><b>Crédit</b><p>Chacun paie d’abord ses congés « à payer ». Puis il rembourse ce qu’il veut de son crédit, au prix d’une case (valeur de la case + intérêts selon le rang ; le plus soupçonné paie +1). On peut céder une distillerie ou un navire contre 1 case. Puis : zone rayée, le marqueur recule d’une case ; zone rouge, de deux.</p></div>
     <div class="s"><i>4</i><b>Ravages</b><p>−1. Puis, pour chaque zone ravagée, lancez un dé : supérieur ou égal au ravage général, retirez le marqueur Ravagé ; inférieur, la zone est détruite (marqueur tête de mort, elle sort du jeu). Retirez les marqueurs Raid : les portages rouvrent.</p></div>

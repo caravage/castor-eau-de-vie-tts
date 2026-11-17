@@ -1,4 +1,5 @@
 import sys, json
+from polices import POL, CHROME
 from playwright.sync_api import sync_playwright
 PX=1860/16.275   # px par unité TTS
 CW,CH=round(3.5*PX),round(3.5*88/63.5*PX)   # carte Rivière / Associé
@@ -17,7 +18,7 @@ def html(name,col,dark,show):
     slot=f"<div style='width:{CW}px;height:{CH}px;box-sizing:border-box;border:2px dashed #BFAE7F;border-radius:16px;background:rgba(246,239,220,.6)'></div>"
     def box(t,inner,w=None): return f"<div style='width:{(w or CW)-14}px;margin:0 7px;box-sizing:border-box;background:#F6EFDC;border:2px solid #2A2418;box-shadow:0 0 0 5px #F4EBD6,0 0 0 6.5px #2A2418;display:flex;flex-direction:column;align-items:center;padding:8px 6px'><div style=\"font:italic 30px 'IM Fell English';color:#2A2418\">{t}</div><div style='flex:1;width:100%;display:flex;align-items:center;justify-content:space-around;padding-bottom:50px;box-sizing:border-box'>{inner}</div></div>"
     title=lambda t:f"<div style='display:flex;align-items:center;gap:20px;height:34px'><div style='flex:1;height:1.5px;background:#BFAE7F'></div><div style=\"font:400 32px 'IM Fell English';font-variant:small-caps;color:#2A2418\">{t}</div><div style='flex:1;height:1.5px;background:#BFAE7F'></div></div>"
-    return f"""<html><head><meta charset='utf-8'><link href='https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&family=IM+Fell+English:ital@0;1&display=block' rel='stylesheet'></head>
+    return f"""<html><head><meta charset='utf-8'>{POL}</head>
 <body style='margin:0'><div style='width:1860px;height:1200px;box-sizing:border-box;background:#22332F;border-radius:30px;padding:12px'>
 <div style='width:100%;height:100%;box-sizing:border-box;background:#E6DAB6;border-radius:20px;padding:16px 40px 22px;display:flex;flex-direction:column;gap:12px'>
  <div style='display:flex;align-items:center;height:100px'>
@@ -37,7 +38,7 @@ def html(name,col,dark,show):
 P=[('Famille Le Moyne','#A8322A','#6E1E18'),('Famille Gamelin','#2F5E8E','#1D3B5A'),('Famille Couagne','#4E7A2C','#2F4A1A')]
 geo={}
 with sync_playwright() as p:
-    b=p.chromium.launch(); pg=b.new_page(viewport={'width':1860,'height':1200})
+    b=p.chromium.launch(executable_path=CHROME); pg=b.new_page(viewport={'width':1860,'height':1200})
     for i,(n,c,dk) in enumerate(P):
         for show in (False,True):
             pg.set_content(html(n,c,dk,show)); pg.evaluate('document.fonts.ready'); pg.wait_for_timeout(2500)

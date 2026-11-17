@@ -1,5 +1,6 @@
 # Matériel de départ v49 (3 nov. 2026) : 9 cartes en capital seul (canots, navire, parts, ₶) + 1 Manigance (+1 soupçon) ; charges et crédit via l achat express. Usage : python3 materiel_v49.py <sortie_sans_extension>
 import base64, sys
+from polices import POL, CHROME
 from playwright.sync_api import sync_playwright
 R='../'
 def b64(p): return 'data:image/png;base64,'+base64.b64encode(open(R+p,'rb').read()).decode()
@@ -26,8 +27,8 @@ CSS=("*{box-sizing:border-box;margin:0}body{background:#F2EAD3;padding:0}.g{disp
 ".band small{display:block;font:400 15px 'IM Fell English SC',serif;letter-spacing:3px;opacity:.85;margin-top:2px}"
 ".rows{flex:1;margin:14px;border:1.5px solid #4E5B3A;border-radius:6px;display:flex;flex-direction:column;position:relative}"
 ".r{flex:1;display:flex;align-items:center;gap:14px;padding:0 16px;border-top:1.5px solid #4E5B3A}.r:first-child{border-top:none}"
-".ic{flex:none;width:120px;display:flex;justify-content:center;align-items:center}.tx{font:italic 27px/1.1 'IM Fell English',serif;color:#2A2418}"
-".r.c{justify-content:center}.tx b{font:700 30px 'Alegreya Sans',sans-serif;font-style:normal;margin-right:2px}"
+".ic{flex:none;width:120px;display:flex;justify-content:center;align-items:center}.tx{font:italic 33px/1.1 'IM Fell English',serif;color:#2A2418}"
+".r.c{justify-content:center}.tx b{font:700 36px 'Alegreya Sans',sans-serif;font-style:normal;margin-right:2px}"
 ".coin{width:78px;height:78px;border-radius:50%;background:#F7F0DC;border:5px double #2A2418;display:flex;align-items:center;justify-content:center;font:400 40px 'IM Fell English',serif;color:#2A2418}"
 ".orn{position:absolute;width:26px;height:26px}")
 ORN="<svg class='orn' style='{p}' viewBox='0 0 26 26'><path d='M2 2C10 2 14 6 14 13M2 2C2 10 6 14 13 14M8 8C10 10 10 12 8 13' fill='none' stroke='#4E5B3A' stroke-width='1.6' transform='{t}'/></svg>"
@@ -36,8 +37,8 @@ def row(k,t):
     if k=='coin': return f"<div class='r c'><div class='coin'><b style=\"font:700 38px 'Alegreya Sans',sans-serif\">{t}</b>&nbsp;₶</div></div>"
     a,b=t.split(' ',1); return f"<div class='r'><div class='ic'>{IC[k]}</div><div class='tx'><b>{a}</b> {b}</div></div>"
 cards=''.join(f"<div class='m'><div class='band'>Matériel<small>de départ</small></div><div class='rows'>{orns}{''.join(row(k,t) for k,t in c)}</div></div>" for c in C)
-html=f"<html><head><meta charset='utf-8'><link href='https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Alegreya+Sans:wght@700&display=block' rel='stylesheet'><style>{CSS}</style></head><body><div class='g'>{cards}</div></body></html>"
+html=f"<html><head><meta charset='utf-8'>{POL}<style>{CSS}</style></head><body><div class='g'>{cards}</div></body></html>"
 open(sys.argv[1]+'.html','w').write(html)
 with sync_playwright() as p:
-    b=p.chromium.launch(); pg=b.new_page(viewport={'width':1800,'height':1000},device_scale_factor=1)
+    b=p.chromium.launch(executable_path=CHROME); pg=b.new_page(viewport={'width':1800,'height':1000},device_scale_factor=1)
     pg.set_content(html); pg.wait_for_timeout(2500); pg.screenshot(path=sys.argv[1]+'.png',full_page=False); b.close()

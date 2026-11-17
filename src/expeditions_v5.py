@@ -1,12 +1,13 @@
 # Cartes Expédition v5 (9 nov. 2026) : emplacements Voyageur en rectangle arrondi (forme des tuiles spécialistes v2). Base v4 : planche 3 x 3 par famille, 1050 x 750 px par carte (200 px / unité TTS).
 # Bandeau à la couleur de la famille, case Congé / Coureur au format du jeton (1,4), médaillons Voyageur, cale Marchandises.
 import json, base64, sys
+from polices import POL, CHROME
 from playwright.sync_api import sync_playwright
 
 
 U=200; SL=round(1.4*U)+26            # case congé / coureur : jeton 1,4 + marge
 VW,VH=round(0.7*U)+34,round(1.008*U)+34
-FONT="<link href='https://fonts.googleapis.com/css2?family=Alegreya+Sans:wght@400;700&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=block' rel='stylesheet'>"
+FONT=POL
 BORD='#8A6A3A'; PARCH='#EEDFBC'
 CAISSE="<svg width='64' height='64' viewBox='0 0 200 200'><rect x='18' y='26' width='164' height='148' rx='10' fill='none' stroke='#5C3A1A' stroke-width='10'/><line x1='18' y1='76' x2='182' y2='76' stroke='#5C3A1A' stroke-width='8'/><line x1='18' y1='126' x2='182' y2='126' stroke='#5C3A1A' stroke-width='8'/><line x1='30' y1='34' x2='170' y2='166' stroke='#5C3A1A' stroke-width='8'/></svg>"
 BOUT="<svg width='54' height='64' viewBox='0 0 200 200'><path d='M84 14 L116 14 L116 56 Q150 74 150 112 L150 176 Q150 188 138 188 L62 188 Q50 188 50 176 L50 112 Q50 74 84 56 Z' fill='none' stroke='#20331E' stroke-width='10'/></svg>"
@@ -46,7 +47,7 @@ P=[('rouge','#A8322A'),('bleu','#2F5E8E'),('vert','#4E7A2C')]
 only=sys.argv[1:] or [c for c,_ in P]
 geo={}
 with sync_playwright() as p:
-    b=p.chromium.launch(); pg=b.new_page(viewport={'width':3150,'height':2250})
+    b=p.chromium.launch(executable_path=CHROME); pg=b.new_page(viewport={'width':3150,'height':2250})
     for c,col in P:
         if c not in only: continue
         cells=''.join(card(l,k,col) for l in 'ABC' for k in 'gmc')
