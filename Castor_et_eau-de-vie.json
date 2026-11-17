@@ -1,7 +1,7 @@
 {
-  "SaveName": "Castor et eau-de-vie v3.51",
+  "SaveName": "Castor et eau-de-vie v3.52",
   "EpochTime": 0,
-  "Date": "11/16/2026 7:55:00 PM",
+  "Date": "11/17/2026 9:00:00 AM",
   "VersionNumber": "v13.2.2",
   "GameMode": "Castor et eau-de-vie",
   "GameType": "",
@@ -10262,7 +10262,7 @@
       },
       "ContainedObjects": [
         {
-          "GUID": "09e878",
+          "GUID": "91961c",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10275,7 +10275,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé ordinaire",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10286,12 +10286,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_ord_m.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_ord_m.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10303,7 +10303,7 @@
           }
         },
         {
-          "GUID": "a610f7",
+          "GUID": "49616b",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10316,7 +10316,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé ordinaire",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10327,12 +10327,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_ord_m_off.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np2.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_ord_m_off.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np2.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10344,7 +10344,7 @@
           }
         },
         {
-          "GUID": "5a6469",
+          "GUID": "2076dd",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10357,7 +10357,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé ordinaire",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10368,12 +10368,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_ord_g.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np4.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_ord_g.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np4.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10385,7 +10385,7 @@
           }
         },
         {
-          "GUID": "31a3d1",
+          "GUID": "8ad4de",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10398,7 +10398,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé ordinaire",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10409,12 +10409,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_ord_g_off.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np4.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_ord_g.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np4.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10426,7 +10426,7 @@
           }
         },
         {
-          "GUID": "509f88",
+          "GUID": "472c89",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10439,7 +10439,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé de garnison",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10450,12 +10450,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_garn2.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np2.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_garn2.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np2.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10467,7 +10467,7 @@
           }
         },
         {
-          "GUID": "6e9449",
+          "GUID": "64047a",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10480,7 +10480,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé de garnison",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10491,12 +10491,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_garn3.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_garn3.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10508,7 +10508,7 @@
           }
         },
         {
-          "GUID": "6a5e80",
+          "GUID": "f04b48",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10521,7 +10521,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé de mission",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10532,12 +10532,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_mis2.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np2.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_mis2.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np2.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10549,7 +10549,7 @@
           }
         },
         {
-          "GUID": "97bf49",
+          "GUID": "242613",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10562,7 +10562,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé de mission",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10573,12 +10573,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_mis3.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_mis3.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10590,7 +10590,7 @@
           }
         },
         {
-          "GUID": "e66339",
+          "GUID": "6c92c1",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10603,7 +10603,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé libre",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10614,12 +10614,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_lib.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np5.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_lib.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np5.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10631,7 +10631,7 @@
           }
         },
         {
-          "GUID": "a46815",
+          "GUID": "959445",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10644,7 +10644,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé libre",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10655,12 +10655,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_lib.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np5.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_lib.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np5.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10672,7 +10672,7 @@
           }
         },
         {
-          "GUID": "533f25",
+          "GUID": "3a0be1",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10685,7 +10685,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé libre",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10696,12 +10696,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_lib_off.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np5.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_lib.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np5.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10713,7 +10713,7 @@
           }
         },
         {
-          "GUID": "b4083e",
+          "GUID": "22f12b",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10726,7 +10726,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé libre",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10737,12 +10737,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_lib_mis.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np5.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_lib_off.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np5.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10754,7 +10754,7 @@
           }
         },
         {
-          "GUID": "078d53",
+          "GUID": "3adfda",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10767,7 +10767,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé libre",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10778,12 +10778,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_lib3.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_lib3.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10795,7 +10795,7 @@
           }
         },
         {
-          "GUID": "b7e605",
+          "GUID": "551cd5",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10808,7 +10808,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Veuve d'officier",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10819,12 +10819,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_veuve.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np2.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_veuve.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np2.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10836,7 +10836,7 @@
           }
         },
         {
-          "GUID": "0ddbfc",
+          "GUID": "5d351a",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10849,7 +10849,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Gentilhomme",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10860,12 +10860,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_gentil.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_gentil.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_fabrique.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10877,7 +10877,7 @@
           }
         },
         {
-          "GUID": "85d728",
+          "GUID": "97bbe4",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10890,7 +10890,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Seigneur",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10901,12 +10901,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_seigneur.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np7.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_fabrique.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10918,7 +10918,7 @@
           }
         },
         {
-          "GUID": "65de6c",
+          "GUID": "d50148",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10931,7 +10931,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Fabrique Notre-Dame",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10942,12 +10942,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_fabrique.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_faveur.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_faveur.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -10959,7 +10959,7 @@
           }
         },
         {
-          "GUID": "6e3051",
+          "GUID": "1de06f",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -10972,7 +10972,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Fabrique Notre-Dame",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -10983,12 +10983,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_fabrique.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_rochelle.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_rochelle.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11000,7 +11000,7 @@
           }
         },
         {
-          "GUID": "2c8c63",
+          "GUID": "34fc38",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11013,7 +11013,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Faveur de l'intendant",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11024,12 +11024,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_faveur.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_faveur.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_haut.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11041,7 +11041,7 @@
           }
         },
         {
-          "GUID": "aef871",
+          "GUID": "9ea669",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11054,7 +11054,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Fournisseur de La Rochelle",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11065,12 +11065,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_rochelle.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_rochelle.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_haut_off.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np2.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11082,7 +11082,7 @@
           }
         },
         {
-          "GUID": "2f7210",
+          "GUID": "44efac",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11095,7 +11095,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Fournisseur de Bordeaux",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11106,12 +11106,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_bordeaux.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_bordeaux.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_haut_mis.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np2.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11123,7 +11123,7 @@
           }
         },
         {
-          "GUID": "4feb98",
+          "GUID": "1ca63e",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11136,7 +11136,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé des Outaouais",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11147,12 +11147,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_outaouais.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_sup.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11164,7 +11164,7 @@
           }
         },
         {
-          "GUID": "e74550",
+          "GUID": "e07192",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11177,7 +11177,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé du Lac Supérieur",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11188,12 +11188,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_sup.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_sup_off.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np2.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11205,7 +11205,7 @@
           }
         },
         {
-          "GUID": "604ea6",
+          "GUID": "df17d6",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11218,7 +11218,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé de l'Ouest",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11229,12 +11229,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_ouest.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np4.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_sup_mis.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11246,7 +11246,7 @@
           }
         },
         {
-          "GUID": "aa52a5",
+          "GUID": "52869b",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11259,7 +11259,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé de Pays",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11270,12 +11270,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_pays.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_bas.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11287,7 +11287,7 @@
           }
         },
         {
-          "GUID": "e77d51",
+          "GUID": "899180",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11300,7 +11300,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé du Nord",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11311,12 +11311,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_nord.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np2.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_bas_off.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11328,7 +11328,7 @@
           }
         },
         {
-          "GUID": "a54552",
+          "GUID": "1e5afb",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11341,7 +11341,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé de Dulhut",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11352,12 +11352,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_dulhut.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_bas_mis.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np2.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11369,7 +11369,7 @@
           }
         },
         {
-          "GUID": "60d8d5",
+          "GUID": "db3e56",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11382,7 +11382,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé du lac Michigan",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11393,12 +11393,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_michigan.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np2.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_pays.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
@@ -11410,7 +11410,7 @@
           }
         },
         {
-          "GUID": "f334aa",
+          "GUID": "93a74e",
           "Name": "Custom_Tile",
           "Transform": {
             "posX": 0,
@@ -11423,7 +11423,7 @@
             "scaleY": 1.0,
             "scaleZ": 1.0
           },
-          "Nickname": "Congé des missions jésuites",
+          "Nickname": "",
           "Description": "",
           "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
           "ColorDiffuse": {
@@ -11434,176 +11434,12 @@
           "Locked": false,
           "Grid": false,
           "Snap": true,
-          "Tooltip": true,
+          "Tooltip": false,
           "Hands": false,
           "HideWhenFaceDown": false,
           "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_jesuites.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np2.png?v43",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
-        },
-        {
-          "GUID": "ba7e92",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 0,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Congé du lac Ontario",
-          "Description": "",
-          "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": true,
-          "Tooltip": true,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_ontario.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
-        },
-        {
-          "GUID": "22818a",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 0,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Congé de La Salle",
-          "Description": "",
-          "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": true,
-          "Tooltip": true,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_lasalle.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
-        },
-        {
-          "GUID": "bbf4d2",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 0,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Congé du Mississippi",
-          "Description": "",
-          "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": true,
-          "Tooltip": true,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_mississippi.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
-            "ImageScalar": 1.0,
-            "WidthScale": 0.0,
-            "CustomTile": {
-              "Type": 3,
-              "Thickness": 0.1,
-              "Stackable": false,
-              "Stretch": false
-            }
-          }
-        },
-        {
-          "GUID": "4b5bb3",
-          "Name": "Custom_Tile",
-          "Transform": {
-            "posX": 0,
-            "posY": 2.0,
-            "posZ": 0,
-            "rotX": 0,
-            "rotY": 180,
-            "rotZ": 0,
-            "scaleX": 1.0,
-            "scaleY": 1.0,
-            "scaleZ": 1.0
-          },
-          "Nickname": "Congé des Prairies",
-          "Description": "",
-          "GMNotes": "{\"w\": 1.4, \"d\": 1.4}",
-          "ColorDiffuse": {
-            "r": 1.0,
-            "g": 1.0,
-            "b": 1.0
-          },
-          "Locked": false,
-          "Grid": false,
-          "Snap": true,
-          "Tooltip": true,
-          "Hands": false,
-          "HideWhenFaceDown": false,
-          "CustomImage": {
-            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_prairies.png?v43",
-            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/c41_np3.png?v43",
+            "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_pays.png",
+            "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/cg52_np3.png",
             "ImageScalar": 1.0,
             "WidthScale": 0.0,
             "CustomTile": {
