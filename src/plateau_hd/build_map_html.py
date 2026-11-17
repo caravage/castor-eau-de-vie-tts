@@ -224,7 +224,7 @@ mv=lambda it,dx,dy:f'<div style="position:absolute;left:0;top:0;transform:transl
 for i,it in enumerate(OVER):
     if 'viewBox="1773 40 367 304"' in it or ('left: 1937px; top: 19px' in it and 'Domaine du Roi' in it): OVER[i]=mv(it,-352,-8)
     elif 'left: 2447.6px; top: 780px' in it or 'left: 2447.6px; top: 1250px' in it or 'left: 2534.9px; top: 817' in it or 'left: 2534.9px; top: 1280' in it: OVER[i]=mv(it,-22,30)   # v3.53 : 22 px à gauche, hors du filet du cadre
-OVER.append('<svg viewBox="0 0 3215 1500" style="position:absolute;left:0;top:0;width:3215px;height:1500px;overflow:visible"><path d="M1982 150 L2003 150" stroke="#4A4640" stroke-width="3.02" stroke-dasharray="9 7"/></svg>')
+# v3.54 : tireté Domaine du Roi – Québec supprimé (M1982 150 L2003 150)
 # ---- typographie IM Fell (v3.48) : portages en italique, cartouches en petites capitales, Pays et lacs en italique
 import re as _re
 def polices(h):

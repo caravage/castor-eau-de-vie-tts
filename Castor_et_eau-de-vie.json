@@ -1,7 +1,7 @@
 {
-  "SaveName": "Castor et eau-de-vie v3.53",
+  "SaveName": "Castor et eau-de-vie v3.54",
   "EpochTime": 0,
-  "Date": "11/17/2026 1:00:00 AM",
+  "Date": "11/17/2026 1:20:00 AM",
   "VersionNumber": "v13.2.2",
   "GameMode": "Castor et eau-de-vie",
   "GameType": "",
@@ -223,8 +223,8 @@
       "Hands": false,
       "HideWhenFaceDown": false,
       "CustomImage": {
-        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_53_hd.jpg",
-        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_53_hd.jpg",
+        "ImageURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_54_hd.jpg",
+        "ImageSecondaryURL": "https://raw.githubusercontent.com/caravage/castor-eau-de-vie-tts/main/img/v18/table_v3_54_hd.jpg",
         "ImageScalar": 1.0,
         "WidthScale": 0.0,
         "CustomTile": {
